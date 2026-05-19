@@ -1,0 +1,405 @@
+<?php
+
+class Antecipacao extends TRecord
+{
+    const TABLENAME  = 'antecipacao';
+    const PRIMARYKEY = 'id';
+    const IDPOLICY   =  'serial'; // {max, serial}
+
+    const DELETEDAT  = 'deleted_at';
+    const CREATEDAT  = 'created_at';
+    const UPDATEDAT  = 'updated_at';
+
+    private Pessoa $pessoa;
+    private FormaPagamento $forma_pagamento;
+
+    
+
+    /**
+     * Constructor method
+     */
+    public function __construct($id = NULL, $callObjectLoad = TRUE)
+    {
+        parent::__construct($id, $callObjectLoad);
+        parent::addAttribute('pessoa_id');
+        parent::addAttribute('data_antecipacao');
+        parent::addAttribute('created_at');
+        parent::addAttribute('updated_at');
+        parent::addAttribute('deleted_at');
+        parent::addAttribute('valor_bruto_total');
+        parent::addAttribute('txadm');
+        parent::addAttribute('txcontrato');
+        parent::addAttribute('txbancaria');
+        parent::addAttribute('txantecipacao');
+        parent::addAttribute('valor_liquido');
+        parent::addAttribute('forma_pagamento_id');
+        parent::addAttribute('obs');
+            
+    }
+
+    /**
+     * Method set_pessoa
+     * Sample of usage: $var->pessoa = $object;
+     * @param $object Instance of Pessoa
+     */
+    public function set_pessoa(Pessoa $object)
+    {
+        $this->pessoa = $object;
+        $this->pessoa_id = $object->id;
+    }
+
+    /**
+     * Method get_pessoa
+     * Sample of usage: $var->pessoa->attribute;
+     * @returns Pessoa instance
+     */
+    public function get_pessoa()
+    {
+    
+        // loads the associated object
+        if (empty($this->pessoa))
+            $this->pessoa = new Pessoa($this->pessoa_id);
+    
+        // returns the associated object
+        return $this->pessoa;
+    }
+    /**
+     * Method set_forma_pagamento
+     * Sample of usage: $var->forma_pagamento = $object;
+     * @param $object Instance of FormaPagamento
+     */
+    public function set_forma_pagamento(FormaPagamento $object)
+    {
+        $this->forma_pagamento = $object;
+        $this->forma_pagamento_id = $object->id;
+    }
+
+    /**
+     * Method get_forma_pagamento
+     * Sample of usage: $var->forma_pagamento->attribute;
+     * @returns FormaPagamento instance
+     */
+    public function get_forma_pagamento()
+    {
+    
+        // loads the associated object
+        if (empty($this->forma_pagamento))
+            $this->forma_pagamento = new FormaPagamento($this->forma_pagamento_id);
+    
+        // returns the associated object
+        return $this->forma_pagamento;
+    }
+
+    /**
+     * Method getContas
+     */
+    public function getContas()
+    {
+        $criteria = new TCriteria;
+        $criteria->add(new TFilter('antecipacao_id', '=', $this->id));
+        return Conta::getObjects( $criteria );
+    }
+
+    public function set_conta_pessoa_to_string($conta_pessoa_to_string)
+    {
+        if(is_array($conta_pessoa_to_string))
+        {
+            $values = Pessoa::where('id', 'in', $conta_pessoa_to_string)->getIndexedArray('nome', 'nome');
+            $this->conta_pessoa_to_string = implode(', ', $values);
+        }
+        else
+        {
+            $this->conta_pessoa_to_string = $conta_pessoa_to_string;
+        }
+
+        $this->vdata['conta_pessoa_to_string'] = $this->conta_pessoa_to_string;
+    }
+
+    public function get_conta_pessoa_to_string()
+    {
+        if(!empty($this->conta_pessoa_to_string))
+        {
+            return $this->conta_pessoa_to_string;
+        }
+    
+        $values = Conta::where('antecipacao_id', '=', $this->id)->getIndexedArray('pessoa_id','{pessoa->nome}');
+        return implode(', ', $values);
+    }
+
+    public function set_conta_tipo_conta_to_string($conta_tipo_conta_to_string)
+    {
+        if(is_array($conta_tipo_conta_to_string))
+        {
+            $values = TipoConta::where('id', 'in', $conta_tipo_conta_to_string)->getIndexedArray('nome', 'nome');
+            $this->conta_tipo_conta_to_string = implode(', ', $values);
+        }
+        else
+        {
+            $this->conta_tipo_conta_to_string = $conta_tipo_conta_to_string;
+        }
+
+        $this->vdata['conta_tipo_conta_to_string'] = $this->conta_tipo_conta_to_string;
+    }
+
+    public function get_conta_tipo_conta_to_string()
+    {
+        if(!empty($this->conta_tipo_conta_to_string))
+        {
+            return $this->conta_tipo_conta_to_string;
+        }
+    
+        $values = Conta::where('antecipacao_id', '=', $this->id)->getIndexedArray('tipo_conta_id','{tipo_conta->nome}');
+        return implode(', ', $values);
+    }
+
+    public function set_conta_categoria_to_string($conta_categoria_to_string)
+    {
+        if(is_array($conta_categoria_to_string))
+        {
+            $values = Categoria::where('id', 'in', $conta_categoria_to_string)->getIndexedArray('nome', 'nome');
+            $this->conta_categoria_to_string = implode(', ', $values);
+        }
+        else
+        {
+            $this->conta_categoria_to_string = $conta_categoria_to_string;
+        }
+
+        $this->vdata['conta_categoria_to_string'] = $this->conta_categoria_to_string;
+    }
+
+    public function get_conta_categoria_to_string()
+    {
+        if(!empty($this->conta_categoria_to_string))
+        {
+            return $this->conta_categoria_to_string;
+        }
+    
+        $values = Conta::where('antecipacao_id', '=', $this->id)->getIndexedArray('categoria_id','{categoria->nome}');
+        return implode(', ', $values);
+    }
+
+    public function set_conta_forma_pagamento_to_string($conta_forma_pagamento_to_string)
+    {
+        if(is_array($conta_forma_pagamento_to_string))
+        {
+            $values = FormaPagamento::where('id', 'in', $conta_forma_pagamento_to_string)->getIndexedArray('nome', 'nome');
+            $this->conta_forma_pagamento_to_string = implode(', ', $values);
+        }
+        else
+        {
+            $this->conta_forma_pagamento_to_string = $conta_forma_pagamento_to_string;
+        }
+
+        $this->vdata['conta_forma_pagamento_to_string'] = $this->conta_forma_pagamento_to_string;
+    }
+
+    public function get_conta_forma_pagamento_to_string()
+    {
+        if(!empty($this->conta_forma_pagamento_to_string))
+        {
+            return $this->conta_forma_pagamento_to_string;
+        }
+    
+        $values = Conta::where('antecipacao_id', '=', $this->id)->getIndexedArray('forma_pagamento_id','{forma_pagamento->nome}');
+        return implode(', ', $values);
+    }
+
+    public function set_conta_pedido_venda_to_string($conta_pedido_venda_to_string)
+    {
+        if(is_array($conta_pedido_venda_to_string))
+        {
+            $values = Pedido::where('id', 'in', $conta_pedido_venda_to_string)->getIndexedArray('id', 'id');
+            $this->conta_pedido_venda_to_string = implode(', ', $values);
+        }
+        else
+        {
+            $this->conta_pedido_venda_to_string = $conta_pedido_venda_to_string;
+        }
+
+        $this->vdata['conta_pedido_venda_to_string'] = $this->conta_pedido_venda_to_string;
+    }
+
+    public function get_conta_pedido_venda_to_string()
+    {
+        if(!empty($this->conta_pedido_venda_to_string))
+        {
+            return $this->conta_pedido_venda_to_string;
+        }
+    
+        $values = Conta::where('antecipacao_id', '=', $this->id)->getIndexedArray('pedido_venda_id','{pedido_venda->id}');
+        return implode(', ', $values);
+    }
+
+    public function set_conta_pedido_frotas_to_string($conta_pedido_frotas_to_string)
+    {
+        if(is_array($conta_pedido_frotas_to_string))
+        {
+            $values = PedidoFrotas::where('id', 'in', $conta_pedido_frotas_to_string)->getIndexedArray('id', 'id');
+            $this->conta_pedido_frotas_to_string = implode(', ', $values);
+        }
+        else
+        {
+            $this->conta_pedido_frotas_to_string = $conta_pedido_frotas_to_string;
+        }
+
+        $this->vdata['conta_pedido_frotas_to_string'] = $this->conta_pedido_frotas_to_string;
+    }
+
+    public function get_conta_pedido_frotas_to_string()
+    {
+        if(!empty($this->conta_pedido_frotas_to_string))
+        {
+            return $this->conta_pedido_frotas_to_string;
+        }
+    
+        $values = Conta::where('antecipacao_id', '=', $this->id)->getIndexedArray('pedido_frotas_id','{pedido_frotas->id}');
+        return implode(', ', $values);
+    }
+
+    public function set_conta_entidade_to_string($conta_entidade_to_string)
+    {
+        if(is_array($conta_entidade_to_string))
+        {
+            $values = Entidade::where('id', 'in', $conta_entidade_to_string)->getIndexedArray('id', 'id');
+            $this->conta_entidade_to_string = implode(', ', $values);
+        }
+        else
+        {
+            $this->conta_entidade_to_string = $conta_entidade_to_string;
+        }
+
+        $this->vdata['conta_entidade_to_string'] = $this->conta_entidade_to_string;
+    }
+
+    public function get_conta_entidade_to_string()
+    {
+        if(!empty($this->conta_entidade_to_string))
+        {
+            return $this->conta_entidade_to_string;
+        }
+    
+        $values = Conta::where('antecipacao_id', '=', $this->id)->getIndexedArray('entidade_id','{entidade->id}');
+        return implode(', ', $values);
+    }
+
+    public function set_conta_system_unit_to_string($conta_system_unit_to_string)
+    {
+        if(is_array($conta_system_unit_to_string))
+        {
+            $values = SystemUnit::where('id', 'in', $conta_system_unit_to_string)->getIndexedArray('name', 'name');
+            $this->conta_system_unit_to_string = implode(', ', $values);
+        }
+        else
+        {
+            $this->conta_system_unit_to_string = $conta_system_unit_to_string;
+        }
+
+        $this->vdata['conta_system_unit_to_string'] = $this->conta_system_unit_to_string;
+    }
+
+    public function get_conta_system_unit_to_string()
+    {
+        if(!empty($this->conta_system_unit_to_string))
+        {
+            return $this->conta_system_unit_to_string;
+        }
+    
+        $values = Conta::where('antecipacao_id', '=', $this->id)->getIndexedArray('system_unit_id','{system_unit->name}');
+        return implode(', ', $values);
+    }
+
+    public function set_conta_departamento_unit_to_string($conta_departamento_unit_to_string)
+    {
+        if(is_array($conta_departamento_unit_to_string))
+        {
+            $values = DepartamentoUnit::where('id', 'in', $conta_departamento_unit_to_string)->getIndexedArray('name', 'name');
+            $this->conta_departamento_unit_to_string = implode(', ', $values);
+        }
+        else
+        {
+            $this->conta_departamento_unit_to_string = $conta_departamento_unit_to_string;
+        }
+
+        $this->vdata['conta_departamento_unit_to_string'] = $this->conta_departamento_unit_to_string;
+    }
+
+    public function get_conta_departamento_unit_to_string()
+    {
+        if(!empty($this->conta_departamento_unit_to_string))
+        {
+            return $this->conta_departamento_unit_to_string;
+        }
+    
+        $values = Conta::where('antecipacao_id', '=', $this->id)->getIndexedArray('departamento_unit_id','{departamento_unit->name}');
+        return implode(', ', $values);
+    }
+
+    public function set_conta_system_users_to_string($conta_system_users_to_string)
+    {
+        if(is_array($conta_system_users_to_string))
+        {
+            $values = SystemUsers::where('id', 'in', $conta_system_users_to_string)->getIndexedArray('name', 'name');
+            $this->conta_system_users_to_string = implode(', ', $values);
+        }
+        else
+        {
+            $this->conta_system_users_to_string = $conta_system_users_to_string;
+        }
+
+        $this->vdata['conta_system_users_to_string'] = $this->conta_system_users_to_string;
+    }
+
+    public function get_conta_system_users_to_string()
+    {
+        if(!empty($this->conta_system_users_to_string))
+        {
+            return $this->conta_system_users_to_string;
+        }
+    
+        $values = Conta::where('antecipacao_id', '=', $this->id)->getIndexedArray('system_users_id','{system_users->name}');
+        return implode(', ', $values);
+    }
+
+    public function set_conta_antecipacao_to_string($conta_antecipacao_to_string)
+    {
+        if(is_array($conta_antecipacao_to_string))
+        {
+            $values = Antecipacao::where('id', 'in', $conta_antecipacao_to_string)->getIndexedArray('id', 'id');
+            $this->conta_antecipacao_to_string = implode(', ', $values);
+        }
+        else
+        {
+            $this->conta_antecipacao_to_string = $conta_antecipacao_to_string;
+        }
+
+        $this->vdata['conta_antecipacao_to_string'] = $this->conta_antecipacao_to_string;
+    }
+
+    public function get_conta_antecipacao_to_string()
+    {
+        if(!empty($this->conta_antecipacao_to_string))
+        {
+            return $this->conta_antecipacao_to_string;
+        }
+    
+        $values = Conta::where('antecipacao_id', '=', $this->id)->getIndexedArray('antecipacao_id','{antecipacao->id}');
+        return implode(', ', $values);
+    }
+
+    /**
+     * Method onBeforeDelete
+     */
+    public function onBeforeDelete()
+    {
+            
+
+        if(Conta::where('antecipacao_id', '=', $this->id)->first())
+        {
+            throw new Exception("Não é possível deletar este registro pois ele está sendo utilizado em outra parte do sistema");
+        }
+    
+    }
+
+    
+}
+

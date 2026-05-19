@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html class="no-js" lang="pt-BR">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="x-ua-compatible" content="ie=edge" />
+		<title>Vagas e Oportunidades</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png" />
+		<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="assets/css/fontawesome-all.min.css" />
+		<link rel="stylesheet" href="assets/css/default.css" />
+		<style>
+			.vagas-page {
+				background: #f3f7fb;
+				color: #17324d;
+			}
+
+			.vagas-topbar {
+				background: #fff;
+				border-bottom: 5px solid #e0b301;
+				box-shadow: 0 10px 24px rgba(12, 32, 61, 0.1);
+			}
+
+			.vagas-topbar__inner {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 20px;
+				max-width: 1320px;
+				min-height: 72px;
+				margin: 0 auto;
+				padding: 0 18px;
+			}
+
+			.vagas-brand {
+				display: flex;
+				align-items: center;
+				gap: 14px;
+				min-width: 0;
+			}
+
+			.vagas-toggle {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				width: 40px;
+				height: 40px;
+				border-radius: 8px;
+				color: #5b7088;
+				font-size: 21px;
+			}
+
+			.vagas-logo img {
+				max-width: 205px;
+				height: auto;
+			}
+
+			.vagas-logo span {
+				display: block;
+				margin-top: 4px;
+				font-size: 11px;
+				font-weight: 800;
+				letter-spacing: 0.02em;
+				color: #17306f;
+				text-transform: uppercase;
+			}
+
+			.vagas-nav {
+				display: flex;
+				align-items: center;
+				flex-wrap: wrap;
+				gap: 18px;
+			}
+
+			.vagas-nav a {
+				font-size: 13px;
+				font-weight: 800;
+				color: #0f1724;
+				text-transform: uppercase;
+			}
+
+			.vagas-hero {
+				padding: 52px 0 34px;
+				background:
+					linear-gradient(180deg, rgba(23, 48, 111, 0.88), rgba(23, 48, 111, 0.72)),
+					url("assets/img/bg/breadcrumb_bg.jpg") center/cover no-repeat;
+				color: #fff;
+			}
+
+			.vagas-crumbs {
+				margin-bottom: 10px;
+				font-size: 13px;
+				font-weight: 700;
+				color: rgba(255, 255, 255, 0.9);
+			}
+
+			.vagas-crumbs a {
+				color: #fff;
+			}
+
+			.vagas-hero h1 {
+				margin: 0;
+				font-size: 42px;
+				line-height: 1.1;
+				color: #fff;
+			}
+
+			.vagas-hero p {
+				max-width: 900px;
+				margin: 12px 0 0;
+				font-size: 16px;
+				line-height: 1.6;
+				color: rgba(255, 255, 255, 0.94);
+			}
+
+			.vagas-shell {
+				padding: 34px 0 70px;
+			}
+
+			.vagas-panel {
+				padding: 34px;
+				border-radius: 14px;
+				background: #fff;
+				box-shadow: 0 22px 44px rgba(8, 19, 47, 0.12);
+			}
+
+			.vagas-panel h2 {
+				margin: 0;
+				font-size: 26px;
+				font-weight: 800;
+				color: #111827;
+			}
+
+			.vagas-panel p {
+				margin: 10px 0 0;
+				font-size: 14px;
+				line-height: 1.55;
+				color: #53657a;
+			}
+
+			.vagas-toolbar {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 10px;
+				margin-top: 22px;
+			}
+
+			.vagas-chip {
+				display: inline-flex;
+				align-items: center;
+				gap: 7px;
+				min-height: 34px;
+				padding: 7px 12px;
+				border: 1px solid #d8e2ee;
+				border-radius: 8px;
+				background: #f7fafe;
+				font-size: 13px;
+				font-weight: 700;
+				color: #17324d;
+			}
+
+			.vagas-section {
+				margin-top: 26px;
+				padding: 24px;
+				border: 1px solid #dde7f1;
+				border-radius: 12px;
+				background: #fff;
+			}
+
+			.vagas-section-title {
+				margin: 0 0 18px;
+				font-size: 18px;
+				font-weight: 800;
+				color: #17324d;
+			}
+
+			.vagas-filter-grid {
+				display: grid;
+				grid-template-columns: repeat(3, minmax(0, 1fr));
+				gap: 16px;
+			}
+
+			.vagas-field label {
+				display: block;
+				margin-bottom: 7px;
+				font-size: 13px;
+				font-weight: 700;
+				color: #314960;
+			}
+
+			.vagas-field input,
+			.vagas-field select {
+				width: 100%;
+				height: 46px;
+				border: 1px solid #cfd8e3;
+				border-radius: 8px;
+				padding: 0 12px;
+				background: #fbfdff;
+				color: #17324d;
+			}
+
+			.vagas-actions,
+			.vagas-downloads {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 10px;
+				margin-top: 18px;
+			}
+
+			.vagas-action {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				gap: 8px;
+				min-height: 42px;
+				padding: 10px 16px;
+				border: 0;
+				border-radius: 8px;
+				background: #0f6fb5;
+				color: #fff;
+				font-size: 13px;
+				font-weight: 800;
+				cursor: pointer;
+			}
+
+			.vagas-action.secondary {
+				background: #eef4fb;
+				color: #17324d;
+			}
+
+			.vagas-action.outline {
+				border: 1px solid #b8c9da;
+				background: #fff;
+				color: #17324d;
+			}
+
+			.vagas-summary {
+				display: grid;
+				grid-template-columns: repeat(4, minmax(0, 1fr));
+				gap: 14px;
+				margin-bottom: 18px;
+			}
+
+			.vagas-summary-card {
+				padding: 16px;
+				border: 1px solid #dde7f1;
+				border-radius: 10px;
+				background: #f8fbff;
+			}
+
+			.vagas-summary-card span {
+				display: block;
+				font-size: 12px;
+				font-weight: 700;
+				color: #60758c;
+			}
+
+			.vagas-summary-card strong {
+				display: block;
+				margin-top: 8px;
+				font-size: 20px;
+				color: #17324d;
+			}
+
+			.vagas-table-wrap {
+				border: 1px solid #dde7f1;
+				border-radius: 12px;
+				overflow-x: auto;
+			}
+
+			.vagas-table {
+				width: 100%;
+				min-width: 940px;
+				margin: 0;
+				border-collapse: collapse;
+			}
+
+			.vagas-table th {
+				padding: 14px 12px;
+				background: #eff6fd;
+				color: #17324d;
+				font-size: 12px;
+				font-weight: 800;
+				white-space: nowrap;
+			}
+
+			.vagas-table td {
+				padding: 14px 12px;
+				border-top: 1px solid #edf2f7;
+				color: #314960;
+				font-size: 13px;
+				vertical-align: middle;
+			}
+
+			.vagas-table tbody tr:nth-child(even) td {
+				background: #fbfdff;
+			}
+
+			.vagas-status,
+			.vagas-stage {
+				display: inline-flex;
+				align-items: center;
+				min-height: 26px;
+				padding: 4px 9px;
+				border-radius: 999px;
+				font-size: 11px;
+				font-weight: 800;
+				white-space: nowrap;
+			}
+
+			.vagas-status.aberta,
+			.vagas-stage.inscricao {
+				background: #e7f7ef;
+				color: #087443;
+			}
+
+			.vagas-status.andamento,
+			.vagas-stage.analise,
+			.vagas-stage.preliminar {
+				background: #edf1ff;
+				color: #3349a6;
+			}
+
+			.vagas-status.encerrada,
+			.vagas-stage.homologado,
+			.vagas-stage.finalizado {
+				background: #eef4fb;
+				color: #17324d;
+			}
+
+			.vagas-detail-button {
+				display: inline-flex;
+				align-items: center;
+				gap: 6px;
+				min-height: 34px;
+				padding: 7px 11px;
+				border: 0;
+				border-radius: 7px;
+				background: #17324d;
+				color: #fff;
+				font-size: 12px;
+				font-weight: 800;
+				cursor: pointer;
+			}
+
+			.vagas-details-grid {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 20px;
+			}
+
+			.vagas-detail-list,
+			.vagas-doc-list,
+			.vagas-stage-list,
+			.vagas-integration-list {
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+
+			.vagas-detail-list li,
+			.vagas-doc-list li,
+			.vagas-stage-list li,
+			.vagas-integration-list li {
+				display: flex;
+				justify-content: space-between;
+				gap: 16px;
+				padding: 11px 0;
+				border-bottom: 1px solid #edf2f7;
+				color: #314960;
+				font-size: 13px;
+			}
+
+			.vagas-detail-list strong {
+				color: #17324d;
+				text-align: right;
+			}
+
+			.vagas-doc-list li,
+			.vagas-stage-list li,
+			.vagas-integration-list li {
+				justify-content: flex-start;
+			}
+
+			.vagas-doc-list a {
+				color: #0f6fb5;
+				font-weight: 800;
+			}
+
+			.vagas-footer {
+				margin-top: 22px;
+				font-size: 13px;
+				color: #5b7088;
+			}
+
+			.vagas-footer a {
+				color: #0f4c81;
+				font-weight: 700;
+			}
+
+			@media (max-width: 991.98px) {
+				.vagas-topbar__inner {
+					flex-direction: column;
+					align-items: stretch;
+					padding-top: 12px;
+					padding-bottom: 12px;
+				}
+
+				.vagas-brand,
+				.vagas-nav {
+					justify-content: center;
+				}
+
+				.vagas-filter-grid,
+				.vagas-summary,
+				.vagas-details-grid {
+					grid-template-columns: 1fr 1fr;
+				}
+			}
+
+			@media (max-width: 767.98px) {
+				.vagas-hero h1 {
+					font-size: 32px;
+				}
+
+				.vagas-panel,
+				.vagas-section {
+					padding: 18px;
+				}
+
+				.vagas-filter-grid,
+				.vagas-summary,
+				.vagas-details-grid {
+					grid-template-columns: 1fr;
+				}
+			}
+		</style>
+	</head>
+	<body class="vagas-page">
+		<header class="vagas-topbar">
+			<div class="vagas-topbar__inner">
+				<div class="vagas-brand">
+					<a class="vagas-toggle" href="javascript:void(0)" aria-label="Abrir menu"><i class="fas fa-bars"></i></a>
+					<div class="vagas-logo">
+						<a href="index.html"><img src="assets/img/logo/logo.png" alt="Prefeitura" /></a>
+						<span>Portal da Transparencia</span>
+					</div>
+				</div>
+				<nav class="vagas-nav" aria-label="Navegacao principal">
+					<a href="index.html">Inicio</a>
+					<a href="services.html">Portal Transparencia</a>
+					<a href="services-5.html">Servicos</a>
+					<a href="funsat-empregos.html">FUNSAT</a>
+					<a href="contact.html">Fale Conosco</a>
+				</nav>
+			</div>
+		</header>
+
+		<main>
+			<section class="vagas-hero">
+				<div class="container">
+					<div class="vagas-crumbs"><a href="index.html">Inicio</a> / <a href="services.html">Portal Transparencia</a> / Vagas e Oportunidades</div>
+					<h1>Vagas e Oportunidades</h1>
+					<p>Consulta publica de concursos, processos seletivos, estagios e contratacoes temporarias divulgadas pelos orgaos municipais.</p>
+				</div>
+			</section>
+
+			<section class="vagas-shell">
+				<div class="container">
+					<div class="vagas-panel">
+						<h2>Lista Publica de Vagas</h2>
+						<p>Acompanhe oportunidades abertas, editais publicados, etapas do processo e documentos oficiais vinculados a cada selecao.</p>
+
+						<div class="vagas-toolbar" aria-label="Contexto das oportunidades">
+							<span class="vagas-chip"><i class="fas fa-users"></i> Concursos e selecoes</span>
+							<span class="vagas-chip"><i class="fas fa-file-alt"></i> Editais e resultados</span>
+							<span class="vagas-chip"><i class="fas fa-tasks"></i> Acompanhamento publico</span>
+							<span class="vagas-chip"><i class="fas fa-link"></i> Processos e documentos oficiais</span>
+						</div>
+
+						<div class="vagas-section">
+							<h3 class="vagas-section-title">Filtros</h3>
+							<div class="vagas-filter-grid">
+								<div class="vagas-field">
+									<label for="vaga-keyword">Palavra-chave</label>
+									<input id="vaga-keyword" type="text" placeholder="Nome da vaga" />
+								</div>
+								<div class="vagas-field">
+									<label for="vaga-orgao">Orgao / Secretaria</label>
+									<select id="vaga-orgao">
+										<option>Todos</option>
+										<option>Saude</option>
+										<option>Obras</option>
+										<option>Educacao</option>
+										<option>Administracao</option>
+									</select>
+								</div>
+								<div class="vagas-field">
+									<label for="vaga-type">Tipo de vaga</label>
+									<select id="vaga-type">
+										<option>Todos</option>
+										<option>Concurso publico</option>
+										<option>Processo seletivo</option>
+										<option>Estagio</option>
+										<option>Contratacao temporaria</option>
+									</select>
+								</div>
+								<div class="vagas-field">
+									<label for="vaga-status">Status</label>
+									<select id="vaga-status">
+										<option>Todos</option>
+										<option>Aberta</option>
+										<option>Encerrada</option>
+										<option>Em andamento</option>
+									</select>
+								</div>
+								<div class="vagas-field">
+									<label for="vaga-start">Data inicial</label>
+									<input id="vaga-start" type="date" />
+								</div>
+								<div class="vagas-field">
+									<label for="vaga-end">Data final</label>
+									<input id="vaga-end" type="date" />
+								</div>
+							</div>
+							<div class="vagas-actions">
+								<button class="vagas-action" type="button"><i class="fas fa-search"></i> Consultar</button>
+								<button class="vagas-action secondary" type="button"><i class="fas fa-eraser"></i> Limpar</button>
+							</div>
+						</div>
+
+						<div class="vagas-section">
+							<h3 class="vagas-section-title">Lista principal de vagas</h3>
+							<div class="vagas-summary">
+								<div class="vagas-summary-card">
+									<span>Total publicado</span>
+									<strong>4</strong>
+								</div>
+								<div class="vagas-summary-card">
+									<span>Inscricoes abertas</span>
+									<strong>2</strong>
+								</div>
+								<div class="vagas-summary-card">
+									<span>Em andamento</span>
+									<strong>1</strong>
+								</div>
+								<div class="vagas-summary-card">
+									<span>Finalizados</span>
+									<strong>1</strong>
+								</div>
+							</div>
+							<div class="vagas-table-wrap">
+								<table class="vagas-table">
+									<thead>
+										<tr>
+											<th>Vaga</th>
+											<th>Orgao</th>
+											<th>Tipo</th>
+											<th>Publicacao</th>
+											<th>Status</th>
+											<th>Acompanhamento</th>
+											<th>Acao</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>Auxiliar Administrativo</td>
+											<td>Saude</td>
+											<td>Processo seletivo</td>
+											<td>20/04/2026</td>
+											<td><span class="vagas-status aberta">Aberta</span></td>
+											<td><span class="vagas-stage inscricao">Em inscricao</span></td>
+											<td><button class="vagas-detail-button" type="button" data-record="0"><i class="fas fa-eye"></i> Ver detalhes</button></td>
+										</tr>
+										<tr>
+											<td>Engenheiro Civil</td>
+											<td>Obras</td>
+											<td>Concurso publico</td>
+											<td>15/03/2026</td>
+											<td><span class="vagas-status encerrada">Encerrada</span></td>
+											<td><span class="vagas-stage finalizado">Finalizado</span></td>
+											<td><button class="vagas-detail-button" type="button" data-record="1"><i class="fas fa-file-alt"></i> Ver edital</button></td>
+										</tr>
+										<tr>
+											<td>Estagiario de Pedagogia</td>
+											<td>Educacao</td>
+											<td>Estagio</td>
+											<td>08/04/2026</td>
+											<td><span class="vagas-status andamento">Em andamento</span></td>
+											<td><span class="vagas-stage preliminar">Resultado preliminar</span></td>
+											<td><button class="vagas-detail-button" type="button" data-record="2"><i class="fas fa-eye"></i> Ver detalhes</button></td>
+										</tr>
+										<tr>
+											<td>Agente de Apoio Temporario</td>
+											<td>Administracao</td>
+											<td>Contratacao temporaria</td>
+											<td>25/04/2026</td>
+											<td><span class="vagas-status aberta">Aberta</span></td>
+											<td><span class="vagas-stage analise">Em analise</span></td>
+											<td><button class="vagas-detail-button" type="button" data-record="3"><i class="fas fa-eye"></i> Ver detalhes</button></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+
+						<div class="vagas-section" id="vaga-details">
+							<h3 class="vagas-section-title">Detalhes da vaga</h3>
+							<div class="vagas-details-grid">
+								<div>
+									<ul class="vagas-detail-list" id="vaga-detail-list"></ul>
+								</div>
+								<div>
+									<h3 class="vagas-section-title">Anexos</h3>
+									<ul class="vagas-doc-list" id="vaga-doc-list"></ul>
+								</div>
+							</div>
+
+							<h3 class="vagas-section-title" style="margin-top: 24px;">Status e acompanhamento</h3>
+							<ul class="vagas-stage-list" id="vaga-stage-list"></ul>
+
+							<h3 class="vagas-section-title" style="margin-top: 24px;">Integracao com outros modulos</h3>
+							<ul class="vagas-integration-list">
+								<li><i class="fas fa-folder-open"></i><span>Processo Administrativo: cada vaga pode estar vinculada a um processo interno.</span></li>
+								<li><i class="fas fa-file-signature"></i><span>Documentos Oficiais: editais, retificacoes e resultados podem ser publicados automaticamente.</span></li>
+								<li><i class="fas fa-globe"></i><span>Portal publico: informacoes aprovadas no administrativo sao espelhadas para consulta cidada.</span></li>
+							</ul>
+						</div>
+
+						<div class="vagas-footer"><a href="services.html">Voltar</a> para o Portal da Transparencia</div>
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<script>
+			(function () {
+				var records = [
+					{
+						details: [
+							["Titulo da vaga", "Auxiliar Administrativo"],
+							["Descricao", "Atendimento ao publico, apoio documental e organizacao de fluxos administrativos da unidade."],
+							["Requisitos", "Ensino medio completo, conhecimento basico em informatica e disponibilidade para atendimento presencial."],
+							["Carga horaria", "40 horas semanais"],
+							["Remuneracao", "R$ 2.180,00"],
+							["Quantidade de vagas", "12"],
+							["Local de atuacao", "Unidades da Secretaria Municipal de Saude"],
+							["Prazo de inscricao", "20/04/2026 a 05/05/2026"],
+							["Forma de inscricao", "Inscricao online pelo portal de selecoes"],
+							["Processo administrativo", "PA 2026.004521-8"]
+						],
+						docs: ["Edital completo (PDF)", "Formulario de inscricao", "Cronograma oficial"],
+						stages: ["Em inscricao", "Em analise", "Resultado preliminar", "Homologado", "Finalizado"]
+					},
+					{
+						details: [
+							["Titulo da vaga", "Engenheiro Civil"],
+							["Descricao", "Planejamento, fiscalizacao e acompanhamento tecnico de obras publicas municipais."],
+							["Requisitos", "Ensino superior em Engenharia Civil, registro ativo no conselho profissional e experiencia comprovada."],
+							["Carga horaria", "30 horas semanais"],
+							["Remuneracao", "R$ 6.950,00"],
+							["Quantidade de vagas", "3"],
+							["Local de atuacao", "Secretaria Municipal de Obras"],
+							["Prazo de inscricao", "15/03/2026 a 31/03/2026"],
+							["Forma de inscricao", "Inscricoes encerradas"],
+							["Processo administrativo", "PA 2026.002880-4"]
+						],
+						docs: ["Edital completo (PDF)", "Retificacao 01", "Resultado final", "Homologacao", "Convocacao 01"],
+						stages: ["Em inscricao", "Em analise", "Resultado preliminar", "Homologado", "Finalizado"]
+					},
+					{
+						details: [
+							["Titulo da vaga", "Estagiario de Pedagogia"],
+							["Descricao", "Apoio pedagogico em unidades educacionais e suporte a atividades de contraturno."],
+							["Requisitos", "Cursando Pedagogia a partir do 3o semestre."],
+							["Carga horaria", "20 horas semanais"],
+							["Remuneracao", "Bolsa de R$ 980,00"],
+							["Quantidade de vagas", "25"],
+							["Local de atuacao", "Escolas municipais"],
+							["Prazo de inscricao", "08/04/2026 a 22/04/2026"],
+							["Forma de inscricao", "Cadastro pela central de estagios"],
+							["Processo administrativo", "PA 2026.003914-1"]
+						],
+						docs: ["Edital completo (PDF)", "Resultado preliminar", "Lista de recursos"],
+						stages: ["Em inscricao", "Em analise", "Resultado preliminar", "Homologado", "Finalizado"]
+					},
+					{
+						details: [
+							["Titulo da vaga", "Agente de Apoio Temporario"],
+							["Descricao", "Apoio operacional em frentes de atendimento temporario e atividades administrativas de curta duracao."],
+							["Requisitos", "Ensino fundamental completo e disponibilidade para escala conforme necessidade do orgao."],
+							["Carga horaria", "36 horas semanais"],
+							["Remuneracao", "R$ 1.780,00"],
+							["Quantidade de vagas", "40"],
+							["Local de atuacao", "Secretaria Municipal de Administracao"],
+							["Prazo de inscricao", "25/04/2026 a 10/05/2026"],
+							["Forma de inscricao", "Inscricao presencial ou online conforme edital"],
+							["Processo administrativo", "PA 2026.004988-3"]
+						],
+						docs: ["Edital completo (PDF)", "Retificacao 01", "Comunicado de analise documental"],
+						stages: ["Em inscricao", "Em analise", "Resultado preliminar", "Homologado", "Finalizado"]
+					}
+				];
+
+				var detailList = document.getElementById("vaga-detail-list");
+				var docList = document.getElementById("vaga-doc-list");
+				var stageList = document.getElementById("vaga-stage-list");
+				var buttons = document.querySelectorAll(".vagas-detail-button");
+
+				function renderDetails(items) {
+					detailList.innerHTML = items
+						.map(function (item) {
+							return "<li><span>" + item[0] + "</span><strong>" + item[1] + "</strong></li>";
+						})
+						.join("");
+				}
+
+				function renderDocs(items) {
+					docList.innerHTML = items
+						.map(function (item) {
+							return '<li><i class="fas fa-paperclip"></i><a href="javascript:void(0)">' + item + "</a></li>";
+						})
+						.join("");
+				}
+
+				function renderStages(items) {
+					stageList.innerHTML = items
+						.map(function (item) {
+							return '<li><i class="fas fa-check-circle"></i><span>' + item + "</span></li>";
+						})
+						.join("");
+				}
+
+				function showRecord(index) {
+					var record = records[index] || records[0];
+					renderDetails(record.details);
+					renderDocs(record.docs);
+					renderStages(record.stages);
+				}
+
+				buttons.forEach(function (button) {
+					button.addEventListener("click", function () {
+						showRecord(Number(button.getAttribute("data-record")));
+						document.getElementById("vaga-details").scrollIntoView({ behavior: "smooth", block: "start" });
+					});
+				});
+
+				showRecord(0);
+			})();
+		</script>
+	</body>
+</html>

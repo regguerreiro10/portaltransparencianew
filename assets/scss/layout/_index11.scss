@@ -1,0 +1,108 @@
+.blog__details-inner-thumb {
+    &.home-11 {
+        &::before {
+            position: absolute;
+            content: "";
+            right: -10px;
+            bottom: -10px;
+            border-radius: 12px;
+            z-index: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--tg-theme-primary);
+        }
+        img {
+            position: relative;
+        }
+        .play-btn {
+            & .fa-play {
+                color: var(--tg-theme-primary);
+            }
+            &:hover {
+                & .fa-play {
+                    color: var(--tg-color-white-default);
+                }
+            }
+        }
+    }
+}
+// nav-tabs
+.nav-tabs {
+    gap: 24px;
+    justify-content: center;
+    .triangle {
+        width: 17px;
+        height: 17px;
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        right: 0;
+        margin: auto;
+        opacity: 0;
+        transition: 0.2s ease-in-out;
+        @media (max-width: 767.98px) {
+            display: none;
+        }
+    }
+}
+.nav-link {
+    display: flex;
+    padding: 33px 26px;
+    align-items: center;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--tg-theme-secondary);
+    border-radius: 12px !important;
+    border-color: var(--tg-border-1) !important;
+    &:hover {
+        border-color: var(--tg-theme-secondary) !important;
+        color: var(--tg-color-white-default);
+        background-color: var(--tg-theme-secondary);
+    }
+    @media (max-width: 991.98px) {
+        padding: 14px 10px;
+        font-size: 16px;
+    }
+    @media (max-width: 767.98px) {
+        padding: 8px 6px;
+        font-size: 12px;
+    }
+}
+.nav-tabs .nav-item.show .nav-link,
+.nav-tabs .nav-link.active {
+    color: var(--tg-color-white-default);
+    background-color: var(--tg-theme-secondary);
+    border-color: var(--tg-theme-secondary) !important;
+    .triangle {
+        opacity: 1;
+        transition: 0.2s ease-in-out;
+    }
+}
+.testimonials__area-home-11 {
+    .tag {
+        width: 252px;
+        height: 114px;
+        border-radius: 17px;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        background: var(--tg-theme-primary);
+        span {
+            color: var(--white, #fff);
+            font-family: Outfit;
+            font-size: 74px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 51px; /* 70.833% */
+            text-transform: capitalize;
+        }
+        p {
+            color: var(--white, #fff);
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 19px; /* 118.75% */
+            text-transform: capitalize;
+        }
+    }
+}

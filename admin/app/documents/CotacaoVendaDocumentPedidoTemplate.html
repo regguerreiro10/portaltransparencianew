@@ -1,0 +1,127 @@
+<html>
+<head>
+    
+    <style>
+        @page { 
+            margin-top: 50px; 
+            margin-bottom: 50px; 
+            margin-left: 50px;
+            margin-right: 50px;
+        }
+        .header {   
+            position: fixed;
+            left: 0px; 
+            margin-top: 0px;
+            right: 0px; 
+            height: 60px; 
+            text-align: center; 
+            width: 100%;
+        }
+        .footer {   
+            position: fixed; 
+            left: 0px; 
+            bottom: 0px; 
+            right: 0px; 
+            height: 30px; 
+            font-size: 12px;
+            width: 100%;
+        }
+    
+    </style>
+    
+</head>
+<body>
+<div class="header">
+<table style="border-collapse: collapse; width: 100%;" border="0">
+<tbody>
+<tr>
+<td style="width: 50%;"><img style="float: left;" src="app/images/logo.png" alt="" width="160" height="52" /></td>
+<td style="width: 50%;">
+<p style="margin: 1px 0px; text-align: right;"><strong>Cotação de Venda:</strong> #{$id}</p>
+<p style="margin: 1px 0px; text-align: right;"><strong>Data da Cotação:</strong> {$data_pedido}</p>
+</td>
+</tr>
+</tbody>
+</table>
+<br /><hr />
+<p style="margin: 1px 0;"> </p>
+<table style="border-collapse: collapse; width: 100%; height: 167px;" border="0">
+<tbody>
+<tr style="background-color: #ecf0f1;">
+<td style="width: 100%; text-align: left; height: 22px;"><strong>Dados da Cotação - <strong>{$unidade}</strong></strong></td>
+</tr>
+<tr style="height: 145px;">
+<td style="width: 100%; height: 145px;">
+<table style="border-collapse: collapse; width: 100%; height: 132px;" border="0">
+<tbody>
+<tr style="height: 22px;">
+<td style="width: 50%; text-align: left; height: 22px;"><strong>Descrição do Pedido</strong></td>
+<td style="width: 50%; text-align: left; height: 22px;"><strong>Unidade gestora</strong></td>
+</tr>
+<tr style="height: 22px;">
+<td style="width: 50%; text-align: left; height: 22px;">{$pedido->descricaopedido}</td>
+<td style="width: 50%; text-align: left; height: 22px;">{$departamento}</td>
+</tr>
+<tr style="height: 22px;">
+<td style="width: 50%; text-align: left; height: 22px;"><strong>Fornecedor</strong></td>
+<td style="width: 50%; text-align: left; height: 22px;"><strong>Autorizado por:</strong></td>
+</tr>
+<tr style="height: 22px;">
+<td style="width: 50%; text-align: left; height: 22px;">{$cnpj} - {$pessoa->nome} - {$municipio}</td>
+<td style="width: 50%; text-align: left; height: 22px;">{$usuarioaprovou}</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<p style="margin: 1px 0;"> </p>
+<table style="border-collapse: collapse; width: 100%; height: 202px;">
+<tbody>
+<tr style="background-color: #ecf0f1;">
+<td style="width: 100%; text-align: left; height: 22px;"><strong>Itens da cotação</strong></td>
+</tr>
+<tr style="height: 180px;">
+<td style="width: 100%; height: 180px;">
+<p style="margin: 1px 0;"> </p>
+<table class="mce-table" style="border-collapse: collapse; border: 1px solid #929292; height: 110px; width: 100%;" border="1" width="100%" cellspacing="0" cellpadding="3" data-detailmodel="ItensCotacao.cotacao_id">
+<thead>
+<tr style="background-color: #96c0e6;">
+<th style="width: 30%; text-align: left; height: 22px;">Produto</th>
+<th style="width: 15%; text-align: center; height: 22px;">Quantidade</th>
+<th style="width: 20%; height: 22px;">Valor</th>
+<th style="width: 15%; height: 22px;">Desconto</th>
+<th style="width: 20%; height: 22px;">Valor total</th>
+</tr>
+</thead>
+<tbody>
+<tr style="background-color: #f0f0f0;">
+<td style="width: 30%; text-align: left; height: 44px;">{$produto->nome}</td>
+<td style="width: 15%; text-align: center; height: 44px;">{$qtde}</td>
+<td style="width: 20%; text-align: right; height: 44px;">R$ number_format({$valor},2,',','.')</td>
+<td style="width: 15%; text-align: right; height: 44px;">R$ number_format(0,2,',','.')</td>
+<td style="width: 20%; text-align: right; height: 44px;">R$ number_format({$valor_total},2,',','.')</td>
+</tr>
+</tbody>
+<tfoot>
+<tr style="background-color: #cce3fb;">
+<td style="width: 30%; text-align: left; height: 44px;"> </td>
+<td style="width: 15%; text-align: center; height: 44px;">sum({$qtde})</td>
+<td style="width: 20%; height: 44px;"> </td>
+<td style="width: 15%; text-align: right; height: 44px;"> </td>
+<td style="width: 20%; text-align: right; height: 44px;">R$ number_format(sum({$valor_total}),2,',','.')</td>
+</tr>
+</tfoot>
+</table>
+<p style="margin: 1px 0;"> </p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="footer" style="margin-bottom: 160px; text-align: center;" ><img src="app/documents/{$id}.png" alt="" width="160" height="160" /></div>
+<div class="footer"><hr />NP3 - Frotas ERP</div>
+<div class="footer"> </div>
+</body>
+</html>

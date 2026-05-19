@@ -1,0 +1,487 @@
+<?php
+
+class ClientePedidoFrotasList extends TPage
+{
+    private $form; // form
+    private $datagrid; // listing
+    private $pageNavigation;
+    private $loaded;
+    private $filter_criteria;
+    private static $database = 'minierp';
+    private static $activeRecord = 'Propostas';
+    private static $primaryKey = 'id';
+    private static $formName = 'form_PedidoFrotasList';
+    private $showMethods = ['onReload', 'onSearch', 'onRefresh', 'onClearFilters'];
+    private $limit = 20;
+
+    /**
+     * Class constructor
+     * Creates the page, the form and the listing
+     */
+    public function __construct($param = null)
+    {
+        parent::__construct();
+
+        if(!empty($param['target_container']))
+        {
+            $this->adianti_target_container = $param['target_container'];
+        }
+
+        // creates the form
+        $this->form = new BootstrapFormBuilder(self::$formName);
+
+        // define the form title
+        $this->form->setFormTitle("Listagem de pedidos de frotas");
+        $this->limit = 20;
+
+        $criteria_estado_pedido_frotas_id = new TCriteria();
+
+        $estado_pedido_frotas_id = new TDBCombo('estado_pedido_frotas_id', 'minierp', 'EstadoPedidoFrotas', 'id', '{nome}','nome asc' , $criteria_estado_pedido_frotas_id );
+        $dt_pedido = new TDate('dt_pedido');
+        $data_fina_pedido = new TDate('data_fina_pedido');
+
+
+        $estado_pedido_frotas_id->enableSearch();
+        $dt_pedido->setMask('dd/mm/yyyy');
+        $data_fina_pedido->setMask('dd/mm/yyyy');
+
+        $dt_pedido->setDatabaseMask('yyyy-mm-dd');
+        $data_fina_pedido->setDatabaseMask('yyyy-mm-dd');
+
+        $dt_pedido->setSize(110);
+        $data_fina_pedido->setSize(110);
+        $estado_pedido_frotas_id->setSize('100%');
+
+        $row1 = $this->form->addFields([new TLabel("Estado de pedido:", null, '14px', null, '100%'),$estado_pedido_frotas_id],[new TLabel("Data do pedido:", null, '14px', null, '100%'),$dt_pedido,new TLabel("até", null, '14px', null),$data_fina_pedido]);
+        $row1->layout = ['col-sm-6','col-sm-6'];
+
+        // keep the form filled during navigation with session data
+        $this->form->setData( TSession::getValue(__CLASS__.'_filter_data') );
+
+        $btn_onsearch = $this->form->addAction("Buscar", new TAction([$this, 'onSearch']), 'fas:search #ffffff');
+        $this->btn_onsearch = $btn_onsearch;
+        $btn_onsearch->addStyleClass('btn-primary'); 
+
+        // creates a Datagrid
+        $this->datagrid = new TDataGrid;
+        $this->datagrid->disableHtmlConversion();
+        $this->datagrid->setId(__CLASS__.'_datagrid');
+
+        $this->datagrid_form = new TForm('datagrid_'.self::$formName);
+        $this->datagrid_form->onsubmit = 'return false';
+
+        $this->datagrid = new BootstrapDatagridWrapper($this->datagrid);
+        $this->filter_criteria = new TCriteria;
+
+        if(!empty($param['estabelecimento_id']))
+        {
+            TSession::setValue(__CLASS__.'load_filter_estabelecimento_id', $param['estabelecimento_id']);
+        }
+        $filterVar = TSession::getValue(__CLASS__.'load_filter_estabelecimento_id');
+        $this->filter_criteria->add(new TFilter('pessoa_id', '=', $filterVar));
+
+        $this->datagrid->style = 'width: 100%';
+        $this->datagrid->setHeight(250);
+
+        $column_id = new TDataGridColumn('id', "Id", 'center' , '70px');
+        $column_cliente_nome = new TDataGridColumn('pessoa->nome', "Fornecedor", 'left');
+        $column_dt_pedido_transformed = new TDataGridColumn('data_cotacao', "Data da Proposta", 'left');
+        $column_valor_total_transformed = new TDataGridColumn('valor_liquido', "Valor total", 'left');
+        $column_estado_pedido_frotas_nome_transformed = new TDataGridColumn('estado_pedido_frotas->nome', "Estado de pedido", 'left');
+
+        $column_dt_pedido_transformed->setTransformer(function($value, $object, $row, $cell = null, $last_row = null)
+        {
+            if(!empty(trim($value)))
+            {
+                try
+                {
+                    $date = new DateTime($value);
+                    return $date->format('d/m/Y');
+                }
+                catch (Exception $e)
+                {
+                    return $value;
+                }
+            }
+        });
+
+        $column_valor_total_transformed->setTransformer(function($value, $object, $row, $cell = null, $last_row = null)
+        {
+            if(!$value)
+            {
+                $value = 0;
+            }
+
+            if(is_numeric($value))
+            {
+                return "R$ " . number_format($value, 2, ",", ".");
+            }
+            else
+            {
+                return $value;
+            }
+        });
+
+        $column_estado_pedido_frotas_nome_transformed->setTransformer(function($value, $object, $row, $cell = null, $last_row = null)
+        {
+            //code here
+            $temnotafiscal = false;
+
+            if ($object->estado_pedido_frotas::FINALIZADO || $object->estado_pedido_frotas::APROVADO || $object->estado_pedido_frotas::PGTOAPROVADO || $object->estado_pedido_frotas::ENTREGUE) {
+                // var_dump($object);
+            //die();  
+                TTransaction::open('minierp');
+
+                $cot = Propostas::where('pedido_frotas_id','=',$object->id)
+                                ->where('pessoa_id','=',$object->estabelecimento_id)
+                                ->load();
+
+                if ($cot)
+                {
+                    foreach ($cot as $cots) {
+                        $doccot = DocumentosPropostas::where('propostas_id','=',$cots->id)
+                                                     ->load();
+                        if ($doccot){
+                            $temnotafiscal = true;
+                        }
+                        break;
+                    }
+                }
+
+                TTransaction::close();
+            }
+            if ($temnotafiscal) {
+               $anexo = $object->estado_pedido_frotas->nome.' <i class="fa fa-paperclip" aria-hidden="true"></i>';
+                return "<span class='label label-default' style='width:240px; background-color:{$object->estado_pedido_frotas->cor}'> {$anexo} <span>";
+            } else {
+                return "<span class='label label-default' style='width:240px; background-color:{$object->estado_pedido_frotas->cor}'> {$object->estado_pedido_frotas->nome} <span>";
+            }
+
+        });        
+
+        $order_id = new TAction(array($this, 'onReload'));
+        $order_id->setParameter('order', 'id');
+        $column_id->setAction($order_id);
+
+        $this->datagrid->addColumn($column_id);
+        $this->datagrid->addColumn($column_cliente_nome);
+        $this->datagrid->addColumn($column_dt_pedido_transformed);
+        $this->datagrid->addColumn($column_valor_total_transformed);
+        $this->datagrid->addColumn($column_estado_pedido_frotas_nome_transformed);
+
+        /*$action_onShow = new TDataGridAction(array('PedidoFrotasFormView', 'onShow'));
+        $action_onShow->setUseButton(false);
+        $action_onShow->setButtonClass('btn btn-default btn-sm');
+        $action_onShow->setLabel("Visualizar Pedido");
+        $action_onShow->setImage('fas:search-plus #673AB7');
+        $action_onShow->setField(self::$primaryKey);
+
+        $this->datagrid->addAction($action_onShow);
+
+        $action_onGenerate = new TDataGridAction(array('PedidoFrotasList', 'onImprimir'));
+        $action_onGenerate->setUseButton(false);
+        $action_onGenerate->setButtonClass('btn btn-default btn-sm');
+        $action_onGenerate->setLabel("Documento");
+        $action_onGenerate->setImage('far:file-pdf #000000');
+        $action_onGenerate->setField(self::$primaryKey);
+
+        $this->datagrid->addAction($action_onGenerate);*/
+
+        // create the datagrid model
+        $this->datagrid->createModel();
+
+        // creates the page navigation
+        $this->pageNavigation = new TPageNavigation;
+        $this->pageNavigation->enableCounters();
+        $this->pageNavigation->setAction(new TAction(array($this, 'onReload')));
+        $this->pageNavigation->setWidth($this->datagrid->getWidth());
+
+        $panel = new TPanelGroup();
+        $panel->datagrid = 'datagrid-container';
+        $this->datagridPanel = $panel;
+        $this->datagrid_form->add($this->datagrid);
+        $panel->add($this->datagrid_form);
+
+        $panel->getBody()->class .= ' table-responsive';
+
+        $panel->addFooter($this->pageNavigation);
+
+        $headerActions = new TElement('div');
+        $headerActions->class = ' datagrid-header-actions ';
+        $headerActions->style = 'justify-content: space-between;';
+
+        $head_left_actions = new TElement('div');
+        $head_left_actions->class = ' datagrid-header-actions-left-actions ';
+
+        $head_right_actions = new TElement('div');
+        $head_right_actions->class = ' datagrid-header-actions-left-actions ';
+
+        $headerActions->add($head_left_actions);
+        $headerActions->add($head_right_actions);
+
+        $panel->getBody()->insert(0, $headerActions);
+
+       /* $btnShowCurtainFilters = new TButton('button_btnShowCurtainFilters');
+        $btnShowCurtainFilters->setAction(new TAction(['ClientePedidoFrotasList', 'onShowCurtainFilters']), "Filtros");
+        $btnShowCurtainFilters->addStyleClass('btn-default');
+        $btnShowCurtainFilters->setImage('fas:filter #000000');
+
+        $this->datagrid_form->addField($btnShowCurtainFilters);
+
+        $button_limpar_filtros = new TButton('button_button_limpar_filtros');
+        $button_limpar_filtros->setAction(new TAction(['ClientePedidoFrotasList', 'onClearFilters']), "Limpar filtros");
+        $button_limpar_filtros->addStyleClass('btn-default');
+        $button_limpar_filtros->setImage('fas:eraser #f44336');
+
+        $this->datagrid_form->addField($button_limpar_filtros);
+
+        $button_atualizar = new TButton('button_button_atualizar');
+        $button_atualizar->setAction(new TAction(['ClientePedidoFrotasList', 'onRefresh']), "Atualizar");
+        $button_atualizar->addStyleClass('btn-default');
+        $button_atualizar->setImage('fas:sync-alt #03a9f4');
+
+        $this->datagrid_form->addField($button_atualizar);
+
+        $head_left_actions->add($btnShowCurtainFilters);
+        $head_left_actions->add($button_limpar_filtros);
+        $head_left_actions->add($button_atualizar);
+
+        $this->btnShowCurtainFilters = $btnShowCurtainFilters;*/
+
+        // vertical box container
+        $container = new TVBox;
+        $container->style = 'width: 100%';
+        if(empty($param['target_container']))
+        {
+            $container->add(TBreadCrumb::create(["Frotas","Pedidos de venda do cliente"]));
+        }
+
+        $container->add($panel);
+
+        parent::add($container);
+
+    }
+
+    public static function onShowCurtainFilters($param = null) 
+    {
+        try 
+        {
+            //code here
+
+                        $filter = new self([]);
+
+            $btnClose = new TButton('closeCurtain');
+            $btnClose->class = 'btn btn-sm btn-default';
+            $btnClose->style = 'margin-right:10px;';
+            $btnClose->onClick = "Template.closeRightPanel();";
+            $btnClose->setLabel("Fechar");
+            $btnClose->setImage('fas:times');
+
+            $filter->form->addHeaderWidget($btnClose);
+
+            $page = new TPage();
+            $page->setTargetContainer('adianti_right_panel');
+            $page->setProperty('page-name', 'ClientePedidoVendaListSearch');
+            $page->setProperty('page_name', 'ClientePedidoVendaListSearch');
+            $page->adianti_target_container = 'adianti_right_panel';
+            $page->target_container = 'adianti_right_panel';
+            $page->add($filter->form);
+            $page->setIsWrapped(true);
+            $page->show();
+
+            //</autoCode>
+        }
+        catch (Exception $e) 
+        {
+            new TMessage('error', $e->getMessage());    
+        }
+    }
+    public function onClearFilters($param = null) 
+    {
+        TSession::setValue(__CLASS__.'_filter_data', NULL);
+        TSession::setValue(__CLASS__.'_filters', NULL);
+
+        $this->onReload(['offset' => 0, 'first_page' => 1]);
+    }
+    public function onRefresh($param = null) 
+    {
+        $this->onReload([]);
+    }
+
+    /**
+     * Register the filter in the session
+     */
+    public function onSearch($param = null)
+    {
+        $data = $this->form->getData();
+        $filters = [];
+
+        TSession::setValue(__CLASS__.'_filter_data', NULL);
+        TSession::setValue(__CLASS__.'_filters', NULL);
+
+        if (isset($data->estado_pedido_frotas_id) AND ( (is_scalar($data->estado_pedido_frotas_id) AND $data->estado_pedido_frotas_id !== '') OR (is_array($data->estado_pedido_frotas_id) AND (!empty($data->estado_pedido_frotas_id)) )) )
+        {
+
+            $filters[] = new TFilter('estado_pedido_frotas_id', '=', $data->estado_pedido_frotas_id);// create the filter 
+        }
+
+        if (isset($data->dt_pedido) AND ( (is_scalar($data->dt_pedido) AND $data->dt_pedido !== '') OR (is_array($data->dt_pedido) AND (!empty($data->dt_pedido)) )) )
+        {
+
+            $filters[] = new TFilter('dt_pedido', '>=', $data->dt_pedido);// create the filter 
+        }
+
+        if (isset($data->data_fina_pedido) AND ( (is_scalar($data->data_fina_pedido) AND $data->data_fina_pedido !== '') OR (is_array($data->data_fina_pedido) AND (!empty($data->data_fina_pedido)) )) )
+        {
+
+            $filters[] = new TFilter('dt_pedido', '<=', $data->data_fina_pedido);// create the filter 
+        }
+
+        // fill the form with data again
+        $this->form->setData($data);
+
+        // keep the search data in the session
+        TSession::setValue(__CLASS__.'_filter_data', $data);
+        TSession::setValue(__CLASS__.'_filters', $filters);
+
+        $this->onReload(['offset' => 0, 'first_page' => 1]);
+    }
+
+    /**
+     * Load the datagrid with data
+     */
+    public function onReload($param = NULL)
+    {
+        try
+        {
+            // open a transaction with database 'minierp'
+            TTransaction::open(self::$database);
+
+            // creates a repository for Pedido
+            $repository = new TRepository(self::$activeRecord);
+
+            $criteria = clone $this->filter_criteria;
+
+            if (empty($param['order']))
+            {
+                $param['order'] = 'id';    
+            }
+
+            if (empty($param['direction']))
+            {
+                $param['direction'] = 'desc';
+            }
+
+            $criteria->setProperties($param); // order, offset
+            $criteria->setProperty('limit', $this->limit);
+
+            if($filters = TSession::getValue(__CLASS__.'_filters'))
+            {
+                foreach ($filters as $filter) 
+                {
+                    $criteria->add($filter);       
+                }
+            }
+
+            //</blockLine><btnShowCurtainFiltersAutoCode>
+            if(!empty($this->btnShowCurtainFilters) && empty($this->btnShowCurtainFiltersAdjusted))
+            {
+                $this->btnShowCurtainFiltersAdjusted = true;
+                $this->btnShowCurtainFilters->style = 'position: relative';
+                $countFilters = count($filters ?? []);
+                $this->btnShowCurtainFilters->setLabel($this->btnShowCurtainFilters->getLabel(). "<span class='badge badge-success' style='position: absolute'>{$countFilters}<span>");
+            }
+            //</blockLine></btnShowCurtainFiltersAutoCode>
+             $criteria->add(new TFilter('system_unit_id', '=', TSession::getValue('idunit')));
+
+            // load the objects according to criteria
+            $objects = $repository->load($criteria, FALSE);
+
+            $this->datagrid->clear();
+            if ($objects)
+            {
+                // iterate the collection of active records
+                foreach ($objects as $object)
+                {
+
+                    $row = $this->datagrid->addItem($object);
+                    $row->id = "row_{$object->id}";
+
+                }
+            }
+
+            // reset the criteria for record count
+            $criteria->resetProperties();
+            $count= $repository->count($criteria);
+
+            $this->pageNavigation->setCount($count); // count of records
+            $this->pageNavigation->setProperties($param); // order, page
+            $this->pageNavigation->setLimit($this->limit); // limit
+
+            // close the transaction
+            TTransaction::close();
+            $this->loaded = true;
+
+            return $objects;
+        }
+        catch (Exception $e) // in case of exception
+        {
+            // shows the exception error message
+            new TMessage('error', $e->getMessage());
+            // undo all pending operations
+            TTransaction::rollback();
+        }
+    }
+
+    public function onShow($param = null)
+    {
+
+    }
+
+    /**
+     * method show()
+     * Shows the page
+     */
+    public function show()
+    {
+        // check if the datagrid is already loaded
+        if (!$this->loaded AND (!isset($_GET['method']) OR !(in_array($_GET['method'],  $this->showMethods))) )
+        {
+            if (func_num_args() > 0)
+            {
+                $this->onReload( func_get_arg(0) );
+            }
+            else
+            {
+                $this->onReload();
+            }
+        }
+        parent::show();
+    }
+
+    public static function manageRow($id)
+    {
+        $list = new self([]);
+
+        $openTransaction = TTransaction::getDatabase() != self::$database ? true : false;
+
+        if($openTransaction)
+        {
+            TTransaction::open(self::$database);    
+        }
+
+        $object = new PedidoFrotas($id);
+
+        $row = $list->datagrid->addItem($object);
+        $row->id = "row_{$object->id}";
+
+        if($openTransaction)
+        {
+            TTransaction::close();    
+        }
+
+        TDataGrid::replaceRowById(__CLASS__.'_datagrid', $row->id, $row);
+    }
+
+}
+

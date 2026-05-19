@@ -1,0 +1,793 @@
+<?php
+
+class OuvidoriaList extends TPage
+{
+    
+    use BuilderDatagridTrait;
+private $form; // form
+    private $datagrid; // listing
+    private $pageNavigation;
+    private $loaded;
+    private $filter_criteria;
+    private static $database = 'minierp';
+    private static $activeRecord = 'Ouvidoria';
+    private static $primaryKey = 'id';
+    private static $formName = 'formList_Ouvidoria';
+    private $showMethods = ['onReload', 'onSearch'];
+    private $limit = 20;
+
+    /**
+     * Class constructor
+     * Creates the page, the form and the listing
+     * 
+    
+     */
+    public function __construct($param = null)
+    {
+        parent::__construct();
+        // creates the form
+
+        if(!empty($param['target_container']))
+        {
+            $this->adianti_target_container = $param['target_container'];
+        }
+        $basename   = urlencode('ouvidoria-list.pdf');
+        $download   = "download.php?file=app/manual/ouvidoria-list.pdf&basename={$basename}";
+
+        $manual = "
+            <span style='float:right;'>
+                <a href='{$download}'
+                target='_blank'
+                style='text-decoration:none;margin-left:10px;'>
+                    <i class='fa fa-question-circle'> </i>
+                </a>
+            </span>
+        "; 
+        $this->limit = 20;
+
+        $criteria_tipo_ouvidoria_id = new TCriteria();
+        $criteria_pessoa_id = new TCriteria();
+        $criteria_pessoa_id->add(new TFilter('id', 'not in', '(select pessoa_id from pessoa_grupo where grupo_pessoa_id = 5)'));
+        $criteria_system_unit = new TCriteria();
+        // $criteria_system_unit->add(new TFilter('id', '=', TSession::getValue('idunit')));
+        $criteria_system_unit->add(new TFilter('id', '=', TSession::getValue('idunit')));
+        $unitId = TSession::getValue('idunit');
+        $criteria_departamento_unit = new TCriteria();
+        $criteria_departamento_unit->add(new TFilter('system_unit_id', '=', $unitId));
+        
+
+        $id = new TEntry('id');
+        $tipo_ouvidoria_id = new TDBCombo('tipo_ouvidoria_id', 'minierp', 'TipoOuvidoria', 'id', '{nome}','nome asc' , $criteria_tipo_ouvidoria_id );
+        $nome = new TEntry('nome');
+        $telefone = new TEntry('telefone');
+        $email = new TEntry('email');
+        $mensagem = new TEntry('mensagem');
+        $system_unit = new TDBCombo('system_unit_id', 'minierp', 'SystemUnit', 'id', '{name}', 'name asc', $criteria_system_unit);
+        $pessoa_id = new TDBCombo('pessoa_id', 'minierp', 'Pessoa', 'id', '{nome}', 'nome asc', $criteria_pessoa_id);
+        $departamento_unit_id = new TDBCombo('departamento_unit_id', 'minierp', 'DepartamentoUnit', 'id', '{name}', 'name asc', $criteria_departamento_unit);
+
+        $id->exitOnEnter();
+        $nome->exitOnEnter();
+        $telefone->exitOnEnter();
+        $email->exitOnEnter();
+        $mensagem->exitOnEnter();
+        // $pessoa_id->exitOnEnter();
+        // $system_unit->exitOnEnter();
+        // $departamento_unit_id->exitOnEnter();
+
+        $id->setExitAction(new TAction([$this, 'onSearch'], ['static'=>'1', 'target_container' => $param['target_container'] ?? null]));
+        $nome->setExitAction(new TAction([$this, 'onSearch'], ['static'=>'1', 'target_container' => $param['target_container'] ?? null]));
+        $telefone->setExitAction(new TAction([$this, 'onSearch'], ['static'=>'1', 'target_container' => $param['target_container'] ?? null]));
+        $email->setExitAction(new TAction([$this, 'onSearch'], ['static'=>'1', 'target_container' => $param['target_container'] ?? null]));
+        $mensagem->setExitAction(new TAction([$this, 'onSearch'], ['static'=>'1', 'target_container' => $param['target_container'] ?? null]));
+
+        $tipo_ouvidoria_id->setChangeAction(new TAction([$this, 'onSearch'], ['static'=>'1', 'target_container' => $param['target_container'] ?? null]));
+        $pessoa_id->setChangeAction(new TAction([$this, 'onSearch'], ['static'=>'1', 'target_container' => $param['target_container'] ?? null]));
+        $system_unit->setChangeAction(new TAction([$this, 'onSearch'], ['static'=>'1', 'target_container' => $param['target_container'] ?? null]));
+        $departamento_unit_id->setChangeAction(new TAction([$this, 'onSearch'], ['static'=>'1', 'target_container' => $param['target_container'] ?? null]));
+
+        $system_unit->setValue(TSession::getValue('idunit'));
+        $system_unit->setEditable(false);
+
+        // $departamento_unit_id->setValue(TSession::getValue('idunit'));
+
+        $tipo_ouvidoria_id->enableSearch();
+        $departamento_unit_id->enableSearch();
+        $pessoa_id->enableSearch();
+        $system_unit->enableSearch();
+        $id->setSize('100%');
+        $nome->setSize('100%');
+        $email->setSize('100%');
+        $telefone->setSize('100%');
+        $mensagem->setSize('100%');
+        $tipo_ouvidoria_id->setSize('100%');
+        $system_unit->setSize('100%');
+        $pessoa_id->setSize('100%');
+        $departamento_unit_id->setSize('100%');
+
+        // creates a Datagrid
+        $this->datagrid = new TDataGrid;
+        $this->datagrid->enableUserProperties('fa fa-cog', 'btn btn-default', new TAction([$this, 'setDatagridProperties']));
+        $this->datagrid->setId(__CLASS__.'_datagrid');
+
+        $this->datagrid_form = new TForm(self::$formName);
+        $this->datagrid_form->onsubmit = 'return false';
+
+        $this->datagrid = new BootstrapDatagridWrapper($this->datagrid);
+        $this->filter_criteria = new TCriteria;
+
+        // no __construct, depois de $this->filter_criteria = new TCriteria;
+        $this->filter_criteria->add(new TFilter('system_unit_id', '=', TSession::getValue('idunit')));
+        // $this->filter_criteria->add(new TFilter('departamento_unit_id', '=', TSession::getValue('depunitid')));
+
+        $this->datagrid->style = 'width: 100%';
+        $this->datagrid->setHeight(320);
+
+        $column_id = new TDataGridColumn('id', "Id", 'center' , '70px');
+        $column_tipo_ouvidoria_nome = new TDataGridColumn('tipo_ouvidoria->nome', "Tipo ouvidoria id", 'left');
+        $column_nome = new TDataGridColumn('nome', "Nome", 'left');
+        $column_telefone = new TDataGridColumn('telefone', "Telefone", 'left');
+        $column_email = new TDataGridColumn('email', "Email", 'left');
+        $column_mensagem = new TDataGridColumn('mensagem', "Mensagem", 'left');
+        $column_pessoa_id = new TDataGridColumn('pessoa->nome', "Fornecedor", 'left');
+        $column_system_unit_name = new TDataGridColumn('system_unit->name', "Unidade", 'left');
+        $column_departamento_unit_id = new TDataGridColumn('departamento_unit->name', "Departamento", 'left');
+
+        $order_id = new TAction(array($this, 'onReload'));
+        $order_id->setParameter('order', 'id');
+        $column_id->setAction($order_id);
+
+        $this->datagrid->addColumn($column_id);
+        $this->datagrid->addColumn($column_tipo_ouvidoria_nome);
+        $this->datagrid->addColumn($column_nome);
+        $this->datagrid->addColumn($column_telefone);
+        $this->datagrid->addColumn($column_email);
+        $this->datagrid->addColumn($column_mensagem);
+        $this->datagrid->addColumn($column_pessoa_id);
+        $this->datagrid->addColumn($column_system_unit_name);
+        $this->datagrid->addColumn($column_departamento_unit_id);
+
+        $action_onEdit = new TDataGridAction(array('OuvidoriaForm', 'onEdit'));
+        $action_onEdit->setUseButton(false);
+        $action_onEdit->setButtonClass('btn btn-default btn-sm');
+        $action_onEdit->setLabel("Editar");
+        $action_onEdit->setImage('far:edit #478fca');
+        $action_onEdit->setField(self::$primaryKey);
+
+        $this->datagrid->addAction($action_onEdit);
+
+        $action_onDelete = new TDataGridAction(array('OuvidoriaList', 'onDelete'));
+        $action_onDelete->setUseButton(false);
+        $action_onDelete->setButtonClass('btn btn-default btn-sm');
+        $action_onDelete->setLabel("Excluir");
+        $action_onDelete->setImage('fas:trash-alt #dd5a43');
+        $action_onDelete->setField(self::$primaryKey);
+
+        $this->datagrid->addAction($action_onDelete);
+
+        // create the datagrid model
+        $this->applyDatagridProperties();
+
+        $this->datagrid->createModel();
+
+        $tr = new TElement('tr');
+        $this->datagrid->prependRow($tr);
+
+        if(!$action_onEdit->isHidden())
+        {
+            $tr->add(TElement::tag('td', ''));
+        }
+        if(!$action_onDelete->isHidden())
+        {
+            $tr->add(TElement::tag('td', ''));
+        }
+        $td_id = TElement::tag('td', $id);
+        $tr->add($td_id);
+        $td_tipo_ouvidoria_id = TElement::tag('td', $tipo_ouvidoria_id);
+        $tr->add($td_tipo_ouvidoria_id);
+        $td_nome = TElement::tag('td', $nome);
+        $tr->add($td_nome);
+        $td_telefone = TElement::tag('td', $telefone);
+        $tr->add($td_telefone);
+        $td_email = TElement::tag('td', $email);
+        $tr->add($td_email);
+        $td_mensagem = TElement::tag('td', $mensagem);
+        $tr->add($td_mensagem);
+        $td_pessoa_id = TElement::tag('td', $pessoa_id);
+        $tr->add($td_pessoa_id);
+        $td_system_unit = TElement::tag('td', $system_unit);
+        $tr->add($td_system_unit);
+        $td_departamento_unit_id = TElement::tag('td', $departamento_unit_id);
+        $tr->add($td_departamento_unit_id);
+
+        $this->datagrid_form->addField($id);
+        $this->datagrid_form->addField($tipo_ouvidoria_id);
+        $this->datagrid_form->addField($nome);
+        $this->datagrid_form->addField($telefone);
+        $this->datagrid_form->addField($email);
+        $this->datagrid_form->addField($mensagem);
+        $this->datagrid_form->addField($pessoa_id);
+        $this->datagrid_form->addField($system_unit);
+        $this->datagrid_form->addField($departamento_unit_id);
+
+        $this->datagrid_form->setData( TSession::getValue(__CLASS__.'_filter_data') );
+
+        // creates the page navigation
+        $this->pageNavigation = new TPageNavigation;
+        $this->pageNavigation->enableCounters();
+        $this->pageNavigation->setAction(new TAction(array($this, 'onReload')));
+        $this->pageNavigation->setWidth($this->datagrid->getWidth());
+
+        $panel = new TPanelGroup("Listagem de ouvidorias {$manual}");
+        $panel->datagrid = 'datagrid-container';
+        $this->datagridPanel = $panel;
+        $panel->getBody()->class .= ' table-responsive';
+
+        $panel->addFooter($this->pageNavigation);
+
+        $headerActions = new TElement('div');
+        $headerActions->class = ' datagrid-header-actions ';
+
+        $head_left_actions = new TElement('div');
+        $head_left_actions->class = ' datagrid-header-actions-left-actions ';
+
+        $head_right_actions = new TElement('div');
+        $head_right_actions->class = ' datagrid-header-actions-left-actions ';
+
+        $headerActions->add($head_left_actions);
+        $headerActions->add($head_right_actions);
+
+        $this->datagrid_form->add($this->datagrid);
+        $panel->add($headerActions);
+        $panel->add($this->datagrid_form);
+
+        $button_cadastrar = new TButton('button_button_cadastrar');
+        $button_cadastrar->setAction(new TAction(['OuvidoriaForm', 'onShow']), "Cadastrar");
+        $button_cadastrar->addStyleClass('btn-default');
+        $button_cadastrar->setImage('fas:plus #69aa46');
+
+        $this->datagrid_form->addField($button_cadastrar);
+
+        $dropdown_button_exportar = new TDropDown("Exportar", 'fas:file-export #2d3436');
+        $dropdown_button_exportar->setPullSide('right');
+        $dropdown_button_exportar->setButtonClass('btn btn-default waves-effect dropdown-toggle');
+        $dropdown_button_exportar->addPostAction( "CSV", new TAction(['OuvidoriaList', 'onExportCsv'],['static' => 1]), self::$formName, 'fas:file-csv #00b894' );
+        $dropdown_button_exportar->addPostAction( "XLS", new TAction(['OuvidoriaList', 'onExportXls'],['static' => 1]), self::$formName, 'fas:file-excel #4CAF50' );
+        $dropdown_button_exportar->addPostAction( "PDF", new TAction(['OuvidoriaList', 'onExportPdf'],['static' => 1]), self::$formName, 'far:file-pdf #e74c3c' );
+        $dropdown_button_exportar->addPostAction( "XML", new TAction(['OuvidoriaList', 'onExportXml'],['static' => 1]), self::$formName, 'far:file-code #95a5a6' );
+
+        $head_left_actions->add($button_cadastrar);
+
+        $head_right_actions->add($dropdown_button_exportar);
+
+        // vertical box container
+        $container = new TVBox;
+        $container->style = 'width: 100%';
+        if(empty($param['target_container']))
+        {
+         //   $container->add(TBreadCrumb::create(["SAC","Ouvidorias"]));
+        }
+
+        $container->add($panel);
+
+        parent::add($container);
+
+    }
+
+    public function onDelete($param = null) 
+    { 
+        if(isset($param['delete']) && $param['delete'] == 1)
+        {
+            try
+            {
+                // get the paramseter $key
+                $key = $param['key'];
+                // open a transaction with database
+                TTransaction::open(self::$database);
+
+                // instantiates object
+                $object = new Ouvidoria($key, FALSE); 
+
+                // deletes the object from the database
+                $object->delete();
+
+                // close the transaction
+                TTransaction::close();
+
+                // reload the listing
+                $this->onReload( $param );
+                // shows the success message
+                TToast::show('success', AdiantiCoreTranslator::translate('Record deleted'), 'topRight', 'far:check-circle');
+            }
+            catch (Exception $e) // in case of exception
+            {
+                // shows the exception error message
+                new TMessage('error', $e->getMessage());
+                // undo all pending operations
+                TTransaction::rollback();
+            }
+        }
+        else
+        {
+            // define the delete action
+            $action = new TAction(array($this, 'onDelete'));
+            $action->setParameters($param); // pass the key paramseter ahead
+            $action->setParameter('delete', 1);
+            // shows a dialog to the user
+            new TQuestion(AdiantiCoreTranslator::translate('Do you really want to delete ?'), $action);   
+        }
+    }
+    public function onExportCsv($param = null) 
+    {
+        try
+        {
+            $output = 'app/output/'.uniqid().'.csv';
+
+            if ( (!file_exists($output) && is_writable(dirname($output))) OR is_writable($output))
+            {
+                $this->limit = 0;
+                $objects = $this->onReload();
+
+                if ($objects)
+                {
+                    $handler = fopen($output, 'w');
+                    TTransaction::open(self::$database);
+
+                    foreach ($objects as $object)
+                    {
+                        $row = [];
+                        foreach ($this->datagrid->getColumns() as $column)
+                        {
+                            $column_name = $column->getName();
+
+                            if (isset($object->$column_name))
+                            {
+                                $row[] = is_scalar($object->$column_name) ? $object->$column_name : '';
+                            }
+                            else if (method_exists($object, 'render'))
+                            {
+                                $column_name = (strpos($column_name, '{') === FALSE) ? ( '{' . $column_name . '}') : $column_name;
+                                $row[] = $object->render($column_name);
+                            }
+                        }
+
+                        fputcsv($handler, $row);
+                    }
+
+                    fclose($handler);
+                    TTransaction::close();
+                }
+                else
+                {
+                    throw new Exception(_t('No records found'));
+                }
+
+                TPage::openFile($output);
+            }
+            else
+            {
+                throw new Exception(_t('Permission denied') . ': ' . $output);
+            }
+        }
+        catch (Exception $e) // in case of exception
+        {
+            new TMessage('error', $e->getMessage()); // shows the exception error message
+        }
+    }
+    public function onExportXls($param = null) 
+    {
+        try
+        {
+            $output = 'app/output/'.uniqid().'.xls';
+
+            if ( (!file_exists($output) && is_writable(dirname($output))) OR is_writable($output))
+            {
+                $widths = [];
+                $titles = [];
+
+                foreach ($this->datagrid->getColumns() as $column)
+                {
+                    $titles[] = $column->getLabel();
+                    $width    = 100;
+
+                    if (is_null($column->getWidth()))
+                    {
+                        $width = 100;
+                    }
+                    else if (strpos($column->getWidth(), '%') !== false)
+                    {
+                        $width = ((int) $column->getWidth()) * 5;
+                    }
+                    else if (is_numeric($column->getWidth()))
+                    {
+                        $width = $column->getWidth();
+                    }
+
+                    $widths[] = $width;
+                }
+
+                $table = new \TTableWriterXLS($widths);
+                $table->addStyle('title',  'Helvetica', '10', 'B', '#ffffff', '#617FC3');
+                $table->addStyle('data',   'Helvetica', '10', '',  '#000000', '#FFFFFF', 'LR');
+
+                $table->addRow();
+
+                foreach ($titles as $title)
+                {
+                    $table->addCell($title, 'center', 'title');
+                }
+
+                $this->limit = 0;
+                $objects = $this->onReload();
+
+                TTransaction::open(self::$database);
+                if ($objects)
+                {
+                    foreach ($objects as $object)
+                    {
+                        $table->addRow();
+                        foreach ($this->datagrid->getColumns() as $column)
+                        {
+                            $column_name = $column->getName();
+                            $value = '';
+                            if (isset($object->$column_name))
+                            {
+                                $value = is_scalar($object->$column_name) ? $object->$column_name : '';
+                            }
+                            else if (method_exists($object, 'render'))
+                            {
+                                $column_name = (strpos($column_name, '{') === FALSE) ? ( '{' . $column_name . '}') : $column_name;
+                                $value = $object->render($column_name);
+                            }
+
+                            $transformer = $column->getTransformer();
+                            if ($transformer)
+                            {
+                                $value = strip_tags(call_user_func($transformer, $value, $object, null));
+                            }
+
+                            $table->addCell($value, 'center', 'data');
+                        }
+                    }
+                }
+                $table->save($output);
+                TTransaction::close();
+
+                TPage::openFile($output);
+            }
+            else
+            {
+                throw new Exception(_t('Permission denied') . ': ' . $output);
+            }
+        }
+        catch (Exception $e) // in case of exception
+        {
+            new TMessage('error', $e->getMessage()); // shows the exception error message
+        }
+    }
+    public function onExportPdf($param = null) 
+    {
+        try
+        {
+            $output = 'app/output/'.uniqid().'.pdf';
+
+            if ( (!file_exists($output) && is_writable(dirname($output))) OR is_writable($output))
+            {
+                $this->limit = 0;
+                $this->datagrid->prepareForPrinting();
+                $this->onReload();
+
+                $html = clone $this->datagrid;
+                $contents = file_get_contents('app/resources/styles-print.html') . file_get_contents('app/resources/styles-print-list.html') . PdfListHeader::render(__CLASS__) . $html->getContents();
+
+                $dompdf = new \Dompdf\Dompdf;
+                $dompdf->loadHtml($contents);
+                $dompdf->setPaper('A4', 'landscape');
+                $dompdf->render();
+
+                file_put_contents($output, $dompdf->output());
+
+                $window = TWindow::create('PDF', 0.8, 0.8);
+                $object = new TElement('iframe');
+                $object->src  = $output;
+                $object->type  = 'application/pdf';
+                $object->style = "width: 100%; height:calc(100% - 10px)";
+
+                $window->add($object);
+                $window->show();
+            }
+            else
+            {
+                throw new Exception(_t('Permission denied') . ': ' . $output);
+            }
+        }
+        catch (Exception $e) // in case of exception
+        {
+            new TMessage('error', $e->getMessage()); // shows the exception error message
+        }
+    }
+    public function onExportXml($param = null) 
+    {
+        try
+        {
+            $output = 'app/output/'.uniqid().'.xml';
+
+            if ( (!file_exists($output) && is_writable(dirname($output))) OR is_writable($output))
+            {
+                $this->limit = 0;
+                $objects = $this->onReload();
+
+                if ($objects)
+                {
+                    TTransaction::open(self::$database);
+
+                    $dom = new DOMDocument('1.0', 'UTF-8');
+                    $dom->{'formatOutput'} = true;
+                    $dataset = $dom->appendChild( $dom->createElement('dataset') );
+
+                    foreach ($objects as $object)
+                    {
+                        $row = $dataset->appendChild( $dom->createElement( self::$activeRecord ) );
+
+                        foreach ($this->datagrid->getColumns() as $column)
+                        {
+                            $column_name = $column->getName();
+                            $column_name_raw = str_replace(['(','{','->', '-','>','}',')', ' '], ['','','_','','','','','_'], $column_name);
+
+                            if (isset($object->$column_name))
+                            {
+                                $value = is_scalar($object->$column_name) ? $object->$column_name : '';
+                                $row->appendChild($dom->createElement($column_name_raw, $value)); 
+                            }
+                            else if (method_exists($object, 'render'))
+                            {
+                                $column_name = (strpos($column_name, '{') === FALSE) ? ( '{' . $column_name . '}') : $column_name;
+                                $value = $object->render($column_name);
+                                $row->appendChild($dom->createElement($column_name_raw, $value));
+                            }
+                        }
+                    }
+
+                    $dom->save($output);
+
+                    TTransaction::close();
+                }
+                else
+                {
+                    throw new Exception(_t('No records found'));
+                }
+
+                TPage::openFile($output);
+            }
+            else
+            {
+                throw new Exception(_t('Permission denied') . ': ' . $output);
+            }
+        }
+        catch (Exception $e) // in case of exception
+        {
+            new TMessage('error', $e->getMessage()); // shows the exception error message
+            TTransaction::rollback(); // undo all pending operations
+        }
+    }
+
+    /**
+     * Register the filter in the session
+     */
+    public function onSearch($param = null)
+    {
+        // get the search form data
+        $data = $this->datagrid_form->getData();
+        $filters = [];
+
+        TSession::setValue(__CLASS__.'_filter_data', NULL);
+        TSession::setValue(__CLASS__.'_filters', NULL);
+
+        if (isset($data->id) AND ( (is_scalar($data->id) AND $data->id !== '') OR (is_array($data->id) AND (!empty($data->id)) )) )
+        {
+
+            $filters[] = new TFilter('id', '=', $data->id);// create the filter 
+        }
+
+        if (isset($data->tipo_ouvidoria_id) AND ( (is_scalar($data->tipo_ouvidoria_id) AND $data->tipo_ouvidoria_id !== '') OR (is_array($data->tipo_ouvidoria_id) AND (!empty($data->tipo_ouvidoria_id)) )) )
+        {
+
+            $filters[] = new TFilter('tipo_ouvidoria_id', '=', $data->tipo_ouvidoria_id);// create the filter 
+        }
+
+        if (isset($data->nome) AND ( (is_scalar($data->nome) AND $data->nome !== '') OR (is_array($data->nome) AND (!empty($data->nome)) )) )
+        {
+
+            $filters[] = new TFilter('nome', 'like', "%{$data->nome}%");// create the filter 
+        }
+
+        if (isset($data->telefone) AND ( (is_scalar($data->telefone) AND $data->telefone !== '') OR (is_array($data->telefone) AND (!empty($data->telefone)) )) )
+        {
+
+            $filters[] = new TFilter('telefone', 'like', "%{$data->telefone}%");// create the filter 
+        }
+
+        if (isset($data->email) AND ( (is_scalar($data->email) AND $data->email !== '') OR (is_array($data->email) AND (!empty($data->email)) )) )
+        {
+
+            $filters[] = new TFilter('email', 'like', "%{$data->email}%");// create the filter 
+        }
+
+        if (isset($data->mensagem) AND ( (is_scalar($data->mensagem) AND $data->mensagem !== '') OR (is_array($data->mensagem) AND (!empty($data->mensagem)) )) )
+        {
+
+            $filters[] = new TFilter('mensagem', 'like', "%{$data->mensagem}%");// create the filter 
+        }
+
+        // if (isset($data->pessoa_id) AND ( (is_scalar($data->pessoa_id) AND $data->pessoa_id !== '') OR (is_array($data->pessoa_id) AND (!empty($data->pessoa_id)) )) )
+        // {
+
+        //     $filters[] = new TFilter('pessoa_id', '=', $data->pessoa_id);// create the filter 
+        // }
+
+        // if (isset($data->system_unit_id) AND ( (is_scalar($data->system_unit_id) AND $data->system_unit_id !== '') OR (is_array($data->system_unit_id) AND (!empty($data->system_unit_id)) )) )
+        // {
+
+        //     $filters[] = new TFilter('system_unit_id', '=', "%{$data->system_unit_id}%");// create the filter 
+        // }
+
+        // if (isset($data->departamento_unit_id) AND ( (is_scalar($data->departamento_unit_id) AND $data->departamento_unit_id !== '') OR (is_array($data->departamento_unit_id) AND (!empty($data->departamento_unit_id)) )) )
+        // {
+
+        //     $filters[] = new TFilter('departamento_unit_id', '=', "%{$data->departamento_unit_id}%");// create the filter 
+        // }
+
+        // fill the form with data again
+        $this->datagrid_form->setData($data);
+
+        // keep the search data in the session
+        TSession::setValue(__CLASS__.'_filter_data', $data);
+        TSession::setValue(__CLASS__.'_filters', $filters);
+
+        if (isset($param['static']) && ($param['static'] == '1') )
+        {
+            $class = get_class($this);
+            $onReloadParam = ['offset' => 0, 'first_page' => 1, 'target_container' => $param['target_container'] ?? null];
+            AdiantiCoreApplication::loadPage($class, 'onReload', $onReloadParam);
+            TScript::create('$(".select2").prev().select2("close");');
+        }
+        else
+        {
+            $this->onReload(['offset' => 0, 'first_page' => 1]);
+        }
+    }
+
+    /**
+     * Load the datagrid with data
+     */
+    public function onReload($param = NULL)
+    {
+        try
+        {
+            // open a transaction with database 'minierp'
+            TTransaction::open(self::$database);
+
+            // creates a repository for Ouvidoria
+            $repository = new TRepository(self::$activeRecord);
+
+            $criteria = clone $this->filter_criteria;
+
+            if (empty($param['order']))
+            {
+                $param['order'] = 'id';    
+            }
+            if (empty($param['direction']))
+            {
+                $param['direction'] = 'desc';
+            }
+
+            $criteria->setProperties($param); // order, offset
+            $criteria->setProperty('limit', $this->limit);
+
+            if($filters = TSession::getValue(__CLASS__.'_filters'))
+            {
+                foreach ($filters as $filter) 
+                {
+                    $criteria->add($filter);       
+                }
+            }
+
+            // $criteria->add(new TFilter('system_unit_id', '=', TSession::getValue('idunit')));
+
+            // load the objects according to criteria
+            $objects = $repository->load($criteria, FALSE);
+
+            $this->datagrid->clear();
+            if ($objects)
+            {
+                // iterate the collection of active records
+                foreach ($objects as $object)
+                {
+
+                    //$objects->system_user_id verificar se ele pertence a unidade que logou e addItem
+                    // if ($object->departamento_unit_id == TSession::getValue('depunitid'))
+                    // {                           
+
+                    $row = $this->datagrid->addItem($object);
+                    $row->id = "row_{$object->id}";
+
+                    // }
+                }
+            }
+
+            // reset the criteria for record count
+            $criteria->resetProperties();
+            $count= $repository->count($criteria);
+
+            $this->pageNavigation->setCount($count); // count of records
+            $this->pageNavigation->setProperties($param); // order, page
+            $this->pageNavigation->setLimit($this->limit); // limit
+
+            // close the transaction
+            TTransaction::close();
+            $this->loaded = true;
+
+            return $objects;
+        }
+        catch (Exception $e) // in case of exception
+        {
+            // shows the exception error message
+            new TMessage('error', $e->getMessage());
+            // undo all pending operations
+            TTransaction::rollback();
+        }
+    }
+
+    public function onShow($param = null)
+    {
+
+    }
+
+    /**
+     * method show()
+     * Shows the page
+     */
+    public function show()
+    {
+        // check if the datagrid is already loaded
+        if (!$this->loaded AND (!isset($_GET['method']) OR !(in_array($_GET['method'],  $this->showMethods))) )
+        {
+            if (func_num_args() > 0)
+            {
+                $this->onReload( func_get_arg(0) );
+            }
+            else
+            {
+                $this->onReload();
+            }
+        }
+        parent::show();
+    }
+
+    public static function manageRow($id, $param = [])
+    {
+        $list = new self($param);
+
+        $openTransaction = TTransaction::getDatabase() != self::$database ? true : false;
+
+        if($openTransaction)
+        {
+            TTransaction::open(self::$database);    
+        }
+
+        $object = new Ouvidoria($id);
+
+        $row = $list->datagrid->addItem($object);
+        $row->id = "row_{$object->id}";
+
+        if($openTransaction)
+        {
+            TTransaction::close();    
+        }
+
+        TDataGrid::replaceRowById(__CLASS__.'_datagrid', $row->id, $row);
+    }
+    
+
+}
+

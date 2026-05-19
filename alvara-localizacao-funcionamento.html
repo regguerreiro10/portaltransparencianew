@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html class="no-js" lang="pt-BR">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="x-ua-compatible" content="ie=edge" />
+		<title>Alvara de localizacao e funcionamento</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png" />
+		<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="assets/css/fontawesome-all.min.css" />
+		<link rel="stylesheet" href="assets/css/default.css" />
+		<style>
+			.csu-page { background: #f7f8fb; color: #17324d; }
+			.csu-topbar {
+				background: #005f96;
+				border-bottom: 4px solid #f1d232;
+				color: #fff;
+			}
+			.csu-topbar__inner,
+			.csu-brand__inner,
+			.csu-nav__inner,
+			.csu-search-wrap,
+			.csu-main {
+				max-width: 1280px;
+				margin: 0 auto;
+				padding-left: 20px;
+				padding-right: 20px;
+			}
+			.csu-topbar__inner {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 20px;
+				min-height: 42px;
+			}
+			.csu-city {
+				font-size: 24px;
+				font-weight: 900;
+				letter-spacing: 0.02em;
+				color: #fff;
+			}
+			.csu-toplinks {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 16px;
+			}
+			.csu-toplinks a {
+				font-size: 11px;
+				font-weight: 700;
+				color: rgba(255, 255, 255, 0.95);
+				text-transform: uppercase;
+			}
+			.csu-brand {
+				background: #0b6297;
+				color: #fff;
+			}
+			.csu-brand__inner {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 20px;
+				padding-top: 14px;
+				padding-bottom: 14px;
+			}
+			.csu-brand__title {
+				display: flex;
+				align-items: center;
+				gap: 12px;
+				font-size: 28px;
+				font-weight: 900;
+				line-height: 1.05;
+				text-transform: uppercase;
+			}
+			.csu-brand__title i {
+				font-size: 34px;
+			}
+			.csu-brand__right {
+				font-size: 18px;
+				font-weight: 900;
+				text-transform: uppercase;
+			}
+			.csu-nav {
+				background: #f5dd53;
+			}
+			.csu-nav__inner {
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: center;
+				gap: 18px;
+				padding-top: 8px;
+				padding-bottom: 8px;
+			}
+			.csu-nav__inner a {
+				font-size: 12px;
+				color: #61748b;
+			}
+			.csu-search-area {
+				background: linear-gradient(180deg, rgba(109, 164, 207, 0.32) 0%, rgba(109, 164, 207, 0.48) 100%), url("assets/img/bg/breadcrumb_bg.jpg") center/cover no-repeat;
+				padding: 16px 0;
+			}
+			.csu-search-wrap {
+				display: flex;
+				align-items: center;
+				gap: 12px;
+			}
+			.csu-search {
+				display: flex;
+				align-items: center;
+				max-width: 420px;
+				width: 100%;
+				border-radius: 4px;
+				overflow: hidden;
+				box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
+			}
+			.csu-search input {
+				flex: 1;
+				height: 44px;
+				padding: 0 14px;
+				border: 0;
+				background: #fff;
+				font-size: 13px;
+				color: #6b7280;
+			}
+			.csu-search button {
+				width: 52px;
+				height: 44px;
+				border: 0;
+				background: #f5dd53;
+				color: #0b6297;
+				font-size: 18px;
+			}
+			.csu-titleband {
+				background: #f5dd53;
+				padding: 18px 0;
+			}
+			.csu-titleband__inner {
+				max-width: 1280px;
+				margin: 0 auto;
+				padding: 0 20px;
+				display: flex;
+				align-items: center;
+				gap: 16px;
+			}
+			.csu-titleband__icon {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				width: 44px;
+				height: 44px;
+				border-radius: 8px;
+				background: #0b6297;
+				color: #fff;
+				font-size: 22px;
+			}
+			.csu-titleband__title {
+				margin: 0;
+				font-size: 28px;
+				font-weight: 300;
+				color: #0076c9;
+				text-transform: uppercase;
+			}
+			.csu-titleband__meta {
+				font-size: 14px;
+				color: #6f7b8c;
+			}
+			.csu-breadcrumbs {
+				max-width: 1280px;
+				margin: 0 auto;
+				padding: 8px 20px 0;
+				font-size: 11px;
+				color: #98a4b5;
+			}
+			.csu-main {
+				display: grid;
+				grid-template-columns: minmax(0, 1.7fr) 300px;
+				gap: 26px;
+				padding-top: 18px;
+				padding-bottom: 48px;
+			}
+			.csu-section {
+				margin-bottom: 24px;
+				padding-bottom: 22px;
+				border-bottom: 1px solid #d7dde7;
+			}
+			.csu-section__title {
+				display: flex;
+				align-items: center;
+				gap: 10px;
+				margin: 0 0 16px;
+				font-size: 18px;
+				font-weight: 400;
+				color: #3a83c4;
+			}
+			.csu-section__title i {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				width: 18px;
+				height: 18px;
+				border-radius: 50%;
+				background: #3a83c4;
+				font-size: 10px;
+				color: #fff;
+			}
+			.csu-section p {
+				margin: 0 0 14px;
+				font-size: 14px;
+				line-height: 1.8;
+				color: #44566c;
+			}
+			.csu-section p:last-child {
+				margin-bottom: 0;
+			}
+			.csu-linkline {
+				display: flex;
+				align-items: center;
+				gap: 8px;
+				font-size: 14px;
+				color: #3a83c4;
+			}
+			.csu-linkline i {
+				font-size: 12px;
+			}
+			.csu-audience {
+				display: flex;
+				gap: 14px;
+				flex-wrap: wrap;
+				font-size: 14px;
+				color: #44566c;
+			}
+			.csu-audience span i {
+				margin-right: 6px;
+				color: #3a83c4;
+			}
+			.csu-access {
+				background: #fff;
+				border-radius: 3px;
+				box-shadow: 0 14px 28px rgba(15, 23, 42, 0.08);
+				overflow: hidden;
+			}
+			.csu-access__head {
+				padding: 12px 14px;
+				background: #6b9dbd;
+				font-size: 13px;
+				font-weight: 800;
+				color: #fff;
+				text-transform: uppercase;
+			}
+			.csu-access__body {
+				padding: 20px 18px;
+				text-align: center;
+			}
+			.csu-access__body i {
+				font-size: 22px;
+				color: #0076c9;
+			}
+			.csu-access__body h3 {
+				margin: 8px 0 10px;
+				font-size: 16px;
+				color: #17324d;
+			}
+			.csu-access__body p {
+				margin: 0;
+				font-size: 11px;
+				line-height: 1.6;
+				color: #6b7280;
+				word-break: break-word;
+			}
+			@media (max-width: 991.98px) {
+				.csu-main { grid-template-columns: 1fr; }
+				.csu-brand__inner,
+				.csu-topbar__inner { flex-direction: column; align-items: flex-start; }
+			}
+			@media (max-width: 767.98px) {
+				.csu-brand__title { font-size: 22px; }
+				.csu-titleband__title { font-size: 22px; }
+				.csu-titleband__inner { align-items: flex-start; }
+			}
+		</style>
+	</head>
+	<body class="csu-page">
+		<header>
+			<div class="csu-topbar">
+				<div class="csu-topbar__inner">
+					<div class="csu-city">CAMPOGRANDE</div>
+					<nav class="csu-toplinks">
+						<a href="services-3.html">Sites Municipais</a>
+						<a href="blog.html">Diario Oficial</a>
+						<a href="services.html">Transparencia</a>
+						<a href="services-5.html">Carta de Servicos</a>
+						<a href="javascript:void(0)">Cerimonial</a>
+						<a href="contact.html">Ouvidoria</a>
+					</nav>
+				</div>
+			</div>
+			<div class="csu-brand">
+				<div class="csu-brand__inner">
+					<div class="csu-brand__title">
+						<i class="fas fa-cogs"></i>
+						<span>Carta de Servicos<br />ao Usuario</span>
+					</div>
+					<div class="csu-brand__right">Campo Grande Prefeitura</div>
+				</div>
+			</div>
+			<div class="csu-nav">
+				<div class="csu-nav__inner">
+					<a href="services-5.html">Inicio</a>
+					<a href="javascript:void(0)">Conheca a Carta de Servicos</a>
+					<a href="javascript:void(0)">Orgaos</a>
+					<a href="contact.html">Ouvidoria</a>
+					<a href="index.html">Portal PMCG</a>
+				</div>
+			</div>
+		</header>
+
+		<main>
+			<section class="csu-search-area">
+				<div class="csu-search-wrap">
+					<form class="csu-search" action="#">
+						<input type="text" placeholder="BUSCA POR SERVICOS" />
+						<button type="submit" aria-label="Buscar">
+							<i class="fas fa-search"></i>
+						</button>
+					</form>
+				</div>
+			</section>
+
+			<section class="csu-titleband">
+				<div class="csu-titleband__inner">
+					<div class="csu-titleband__icon"><i class="fas fa-calculator"></i></div>
+					<div>
+						<h1 class="csu-titleband__title">Alvara de localizacao e funcionamento</h1>
+						<div class="csu-titleband__meta">Financas, Tributos e Planejamento</div>
+					</div>
+				</div>
+			</section>
+
+			<div class="csu-breadcrumbs">
+				Prefeitura de Campo Grande &gt; Carta de Servicos ao Usuario &gt; Servicos &gt; Financas, Tributos e Planejamento &gt; Alvara de localizacao e funcionamento
+			</div>
+
+			<section class="csu-main">
+				<div>
+					<div class="csu-section">
+						<h2 class="csu-section__title"><i class="fas fa-info"></i>Descricao do servico</h2>
+						<p>E uma autorizacao ou licenca de Localizacao e Funcionamento Provisorio / Temporario.</p>
+						<p>A Secretaria Municipal de Financas e Planejamento - SEFIN</p>
+						<p>E o orgao de atuacao instrumental, nos termos da alinea "b", inciso I, do art. 8º da Lei n. 5.793, de 3 de janeiro de 2017, integrante da administracao direta de Campo Grande, tem por finalidade o planejamento, a supervisao tecnica, o controle e a coordenacao das atividades tributarias municipais, controle e coordenacao do Sistema de Gestao Financeira e de Planejamento, a fixacao e execucao das diretrizes orcamentarias e a garantia da plena gestao das acoes economico-financeiras e contabeis do Municipio.</p>
+						<p>Secretaria Municipal de Financas e Planejamento: Marcia Helena Hokama.</p>
+						<p>Secretario-Adjunto: Sergio Antonio Parron Padovan.</p>
+					</div>
+
+					<div class="csu-section">
+						<h2 class="csu-section__title"><i class="fas fa-building"></i>Orgao Responsavel:</h2>
+						<a class="csu-linkline" href="secretaria-municipal-fazenda.html"><i class="fas fa-landmark"></i>Secretaria Municipal de Financas e Planejamento - SEFIN</a>
+					</div>
+
+					<div class="csu-section">
+						<h2 class="csu-section__title"><i class="fas fa-user"></i>Publico alvo</h2>
+						<div class="csu-audience">
+							<span><i class="fas fa-user"></i>Cidadao</span>
+						</div>
+					</div>
+				</div>
+
+				<aside>
+					<div class="csu-access">
+						<div class="csu-access__head">Canais de acesso</div>
+						<div class="csu-access__body">
+							<i class="fas fa-link"></i>
+							<h3>Online</h3>
+							<p>http://sisportal.campogrande.ms.gov.br/bidaf_cgr_portal/Inicio.do?evento=menuMEsAberturaMEI#INCLUINDO</p>
+						</div>
+					</div>
+				</aside>
+			</section>
+		</main>
+	</body>
+</html>

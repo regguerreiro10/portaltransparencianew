@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html class="no-js" lang="pt-BR">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="x-ua-compatible" content="ie=edge" />
+		<title>CMRI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png" />
+		<link rel="stylesheet" href="assets/css/fontawesome-all.min.css" />
+		<style>
+			* {
+				box-sizing: border-box;
+			}
+
+			body {
+				margin: 0;
+				background: #ffffff;
+				color: #000000;
+				font-family: "Arial Narrow", Arial, Helvetica, sans-serif;
+			}
+
+			a {
+				text-decoration: none;
+			}
+
+			.rf-shell {
+				max-width: 1280px;
+				margin: 0 auto;
+				padding: 0 22px;
+			}
+
+			.rf-topbar {
+				border-bottom: 1px solid #dde5ee;
+				background: #fff;
+			}
+
+			.rf-brand {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 20px;
+				padding: 10px 0;
+			}
+
+			.rf-brand__title {
+				margin: 0;
+				font-family: Arial, Helvetica, sans-serif;
+				font-size: 18px;
+				font-weight: 300;
+				letter-spacing: 0.01em;
+				text-transform: uppercase;
+				color: #1f5e9c;
+			}
+
+			.rf-brand__title strong {
+				font-weight: 800;
+			}
+
+			.rf-brand__logo img {
+				max-width: 176px;
+				height: auto;
+			}
+
+			.rf-nav {
+				border-top: 1px solid #f1f3f6;
+				border-bottom: 1px dashed #cfd8e3;
+				background: #fff;
+			}
+
+			.rf-nav__inner {
+				display: grid;
+				grid-template-columns: auto 230px 150px 56px;
+				align-items: stretch;
+			}
+
+			.rf-nav__menu {
+				display: flex;
+				flex-wrap: wrap;
+				align-items: center;
+				gap: 0;
+				background: #ffe300;
+			}
+
+			.rf-nav__menu a {
+				display: inline-flex;
+				align-items: center;
+				min-height: 44px;
+				padding: 0 18px;
+				font-family: Arial, Helvetica, sans-serif;
+				font-size: 11px;
+				font-weight: 700;
+				text-transform: uppercase;
+				color: #1c4274;
+				border-right: 1px solid rgba(28, 66, 116, 0.14);
+			}
+
+			.rf-nav__search input {
+				width: 100%;
+				height: 44px;
+				padding: 0 14px;
+				border: 0;
+				border-left: 1px solid #e3e8ef;
+				font-family: Arial, Helvetica, sans-serif;
+				font-size: 11px;
+				color: #8190a4;
+				text-transform: uppercase;
+			}
+
+			.rf-nav__icon,
+			.rf-nav__help,
+			.rf-nav__access {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				min-height: 44px;
+				font-size: 18px;
+			}
+
+			.rf-nav__icon {
+				color: #7e91a7;
+				border-left: 1px solid #e3e8ef;
+				background: #fff;
+			}
+
+			.rf-nav__help {
+				gap: 8px;
+				background: #47c4d4;
+				font-family: Arial, Helvetica, sans-serif;
+				font-size: 12px;
+				font-weight: 800;
+				text-transform: uppercase;
+				color: #fff;
+			}
+
+			.rf-nav__access {
+				background: #1aa0df;
+				color: #ffe300;
+			}
+
+			.rf-breadcrumb {
+				padding: 10px 0 14px;
+				font-family: Arial, Helvetica, sans-serif;
+				font-size: 13px;
+				color: #4d6481;
+			}
+
+			.rf-shortcuts {
+				display: grid;
+				grid-template-columns: repeat(8, minmax(0, 1fr));
+				gap: 0;
+				margin-bottom: 48px;
+				background: #f1f3f5;
+				border: 1px solid #e4eaf0;
+			}
+
+			.rf-shortcut {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+				gap: 8px;
+				min-height: 74px;
+				padding: 10px 8px;
+				font-family: Arial, Helvetica, sans-serif;
+				font-size: 11px;
+				font-weight: 700;
+				text-transform: uppercase;
+				text-align: center;
+				color: #1e5f9b;
+			}
+
+			.rf-shortcut i {
+				font-size: 14px;
+			}
+
+			.rf-shortcut:hover,
+			.rf-shortcut:focus,
+			.rf-nav__menu a:hover,
+			.rf-nav__menu a:focus {
+				color: #0d4776;
+			}
+
+			.cmri-content {
+				width: 766px;
+				padding-top: 16px;
+				padding-bottom: 80px;
+			}
+
+			.cmri-logo {
+				display: flex;
+				align-items: center;
+				margin-left: 14px;
+				width: 694px;
+				height: 133px;
+			}
+
+			.cmri-logo__block {
+				display: flex;
+				align-items: center;
+				width: 333px;
+				height: 133px;
+				padding-left: 14px;
+				background: #00588e;
+				border-radius: 4px 0 0 4px;
+				color: #ffffff;
+				font-family: Arial, Helvetica, sans-serif;
+				font-size: 117px;
+				font-weight: 900;
+				letter-spacing: -12px;
+				line-height: 0.86;
+			}
+
+			.cmri-logo__text {
+				margin-left: 9px;
+				color: #00588e;
+				font-family: Arial, Helvetica, sans-serif;
+				font-size: 29px;
+				font-weight: 900;
+				letter-spacing: 3px;
+				line-height: 1.48;
+				text-transform: uppercase;
+			}
+
+			.cmri-about {
+				display: grid;
+				grid-template-columns: 371px 1fr;
+				gap: 19px;
+				align-items: start;
+				margin: 97px 0 0 6px;
+				width: 760px;
+			}
+
+			.cmri-about__image {
+				width: 371px;
+				height: 208px;
+				overflow: hidden;
+			}
+
+			.cmri-about__image img {
+				width: 100%;
+				height: 100%;
+				display: block;
+				object-fit: cover;
+				object-position: center;
+			}
+
+			.cmri-about__text {
+				padding: 1px 22px 0 0;
+			}
+
+			.cmri-about__text h1 {
+				margin: 0 0 28px;
+				color: #00588e;
+				font-family: "Courier New", Courier, monospace;
+				font-size: 19px;
+				font-weight: 700;
+				letter-spacing: 0;
+				line-height: 1;
+				text-transform: uppercase;
+			}
+
+			.cmri-about__text p {
+				margin: 0;
+				color: #000000;
+				font-family: Arial, Helvetica, sans-serif;
+				font-size: 10.5px;
+				line-height: 1.45;
+			}
+
+			@media (max-width: 780px) {
+				.cmri-content,
+				.cmri-about {
+					width: 100%;
+				}
+
+				.rf-nav__inner {
+					grid-template-columns: 1fr;
+				}
+
+				.rf-nav__menu,
+				.rf-shortcuts {
+					grid-template-columns: repeat(2, minmax(0, 1fr));
+				}
+
+				.rf-nav__menu {
+					display: grid;
+				}
+
+				.rf-nav__menu a {
+					justify-content: center;
+					min-height: 42px;
+				}
+
+				.cmri-content {
+					padding: 28px 12px 40px;
+				}
+
+				.cmri-logo {
+					width: 100%;
+					height: auto;
+					margin-left: 0;
+				}
+
+				.cmri-logo__block {
+					width: 44%;
+					height: auto;
+					aspect-ratio: 333 / 133;
+					font-size: clamp(48px, 14vw, 117px);
+					letter-spacing: -0.08em;
+				}
+
+				.cmri-logo__text {
+					font-size: clamp(18px, 4vw, 29px);
+					line-height: 1.35;
+				}
+
+				.cmri-about {
+					grid-template-columns: 1fr;
+					margin: 70px 0 0;
+				}
+
+				.cmri-about__image {
+					width: 100%;
+				}
+
+				.cmri-about__text {
+					padding-right: 0;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<header class="rf-topbar">
+			<div class="rf-shell">
+				<div class="rf-brand">
+					<h1 class="rf-brand__title">Portal da <strong>Transparência</strong></h1>
+					<a class="rf-brand__logo" href="index.html"><img src="assets/img/logo/logo.png" alt="Campo Grande" /></a>
+				</div>
+			</div>
+			<div class="rf-nav">
+				<div class="rf-shell">
+					<div class="rf-nav__inner">
+						<nav class="rf-nav__menu" aria-label="Menu do Portal da Transparência">
+							<a href="services.html">O Portal</a>
+							<a href="services.html">Contas Públicas</a>
+							<a href="prestacao-contas.html">Prestação de Contas</a>
+							<a href="services.html">Dados Abertos</a>
+							<a href="services.html">Boas Práticas</a>
+						</nav>
+						<div class="rf-nav__search"><input type="text" placeholder="O que você procura?" /></div>
+						<a class="rf-nav__icon" href="javascript:void(0)" aria-label="Buscar"><i class="fas fa-search"></i></a>
+						<a class="rf-nav__help" href="contact.html">Ajuda <i class="fas fa-question-circle"></i></a>
+					</div>
+				</div>
+			</div>
+		</header>
+
+		<main class="rf-shell">
+			<div class="rf-breadcrumb">Prefeitura de Campo Grande &gt; Transparência &gt; CMRI</div>
+
+			<section class="rf-shortcuts" aria-label="Atalhos">
+				<a class="rf-shortcut" href="lgpd-portal.html"><i class="fas fa-book"></i><span>LGPD</span></a>
+				<a class="rf-shortcut" href="obras-portal.html"><i class="fas fa-landmark"></i><span>Obras</span></a>
+				<a class="rf-shortcut" href="contratos-portal.html"><i class="fas fa-file-contract"></i><span>Contratos</span></a>
+				<a class="rf-shortcut" href="perguntas-frequentes.html"><i class="fas fa-question-circle"></i><span>Perguntas Frequentes</span></a>
+				<a class="rf-shortcut" href="prestacao-contas.html"><i class="fas fa-briefcase"></i><span>Prestação de Contas</span></a>
+				<a class="rf-shortcut" href="convenios-portal.html"><i class="fas fa-handshake"></i><span>Convênios</span></a>
+				<a class="rf-shortcut" href="orcamento.html"><i class="fas fa-calculator"></i><span>Orçamento</span></a>
+				<a class="rf-shortcut" href="diarias-passagens-consulta.html"><i class="fas fa-plane"></i><span>Ver Diárias e Passagens</span></a>
+			</section>
+
+			<div class="cmri-content">
+			<section class="cmri-logo" aria-label="Comissão Mista de Reavaliação de Informações">
+				<div class="cmri-logo__block">CMRI</div>
+				<div class="cmri-logo__text">
+					Comissão Mista de<br />
+					Reavaliação de<br />
+					Informações
+				</div>
+			</section>
+
+			<section class="cmri-about">
+				<div class="cmri-about__image">
+					<img src="assets/img/services/services_img01.jpg" alt="Reunião de trabalho" />
+				</div>
+				<div class="cmri-about__text">
+					<h1>O que é a CMRI?</h1>
+					<p>A Comissão Mista de Reavaliação de Informações (CMRI) é um órgão colegiado composto por quatro órgãos da Administração Pública Municipal da Prefeitura de Campo Grande. A Comissão atua como última instância recursal administrativa na análise de negativas de acesso à informação.</p>
+					<p>Suas atribuições estão ligadas ao tratamento e à classificação de informações sigilosas. A CMRI também tem a competência de recomendar ao órgão Central do Sistema de Transparência Pública medidas para aperfeiçoar as normas e procedimentos pertinentes às suas atribuições.</p>
+				</div>
+			</section>
+			</div>
+		</main>
+	</body>
+</html>

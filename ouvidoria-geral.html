@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html class="no-js" lang="pt-BR">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="x-ua-compatible" content="ie=edge" />
+		<title>Ouvidoria Geral</title>
+		<meta name="description" content="Ouvidoria Geral do Munic&iacute;pio" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png" />
+		<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="assets/css/animate.min.css" />
+		<link rel="stylesheet" href="assets/css/magnific-popup.css" />
+		<link rel="stylesheet" href="assets/css/fontawesome-all.min.css" />
+		<link rel="stylesheet" href="assets/css/flaticon.css" />
+		<link rel="stylesheet" href="assets/css/odometer.css" />
+		<link rel="stylesheet" href="assets/css/swiper-bundle.css" />
+		<link rel="stylesheet" href="assets/css/aos.css" />
+		<link rel="stylesheet" href="assets/css/default.css" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<style>
+			.ouvidoria-page {
+				background: #f4f7fb;
+				color: #1f2d3d;
+			}
+
+			.ouvidoria-hero {
+				padding: 154px 0 82px;
+				background:
+					linear-gradient(90deg, rgba(12, 45, 88, 0.92), rgba(21, 102, 126, 0.78)),
+					url("assets/img/bg/breadcrumb_bg.jpg") center/cover no-repeat;
+				color: #fff;
+			}
+
+			.ouvidoria-hero__eyebrow {
+				display: inline-flex;
+				align-items: center;
+				gap: 10px;
+				margin-bottom: 18px;
+				font-size: 14px;
+				font-weight: 800;
+				text-transform: uppercase;
+				color: #ffd452;
+			}
+
+			.ouvidoria-hero__title {
+				margin: 0 0 18px;
+				max-width: 760px;
+				font-size: 52px;
+				font-weight: 800;
+				line-height: 1.04;
+				color: #fff;
+			}
+
+			.ouvidoria-hero__text {
+				max-width: 730px;
+				margin: 0;
+				font-size: 18px;
+				line-height: 1.7;
+				color: rgba(255, 255, 255, 0.88);
+			}
+
+			.ouvidoria-quick {
+				display: grid;
+				grid-template-columns: repeat(3, minmax(0, 1fr));
+				gap: 18px;
+				margin-top: 34px;
+			}
+
+			.ouvidoria-quick__item {
+				display: flex;
+				align-items: center;
+				gap: 14px;
+				padding: 18px;
+				border: 1px solid rgba(255, 255, 255, 0.22);
+				border-radius: 8px;
+				background: rgba(255, 255, 255, 0.1);
+				color: #fff;
+			}
+
+			.ouvidoria-quick__item i {
+				width: 44px;
+				height: 44px;
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				border-radius: 50%;
+				background: #ffd452;
+				color: #17306f;
+			}
+
+			.ouvidoria-section {
+				padding: 74px 0;
+			}
+
+			.ouvidoria-section--white {
+				background: #fff;
+			}
+
+			.ouvidoria-title {
+				margin-bottom: 32px;
+			}
+
+			.ouvidoria-title span {
+				display: inline-block;
+				margin-bottom: 8px;
+				font-size: 13px;
+				font-weight: 800;
+				text-transform: uppercase;
+				color: #0f6f91;
+			}
+
+			.ouvidoria-title h2 {
+				margin: 0;
+				font-size: 34px;
+				font-weight: 800;
+				color: #17324d;
+			}
+
+			.ouvidoria-types {
+				display: grid;
+				grid-template-columns: repeat(6, minmax(0, 1fr));
+				gap: 14px;
+			}
+
+			.ouvidoria-type {
+				min-height: 150px;
+				padding: 22px 14px;
+				border-radius: 8px;
+				background: #fff;
+				box-shadow: 0 10px 28px rgba(21, 45, 72, 0.08);
+				text-align: center;
+			}
+
+			.ouvidoria-type i {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				width: 52px;
+				height: 52px;
+				margin-bottom: 14px;
+				border-radius: 50%;
+				background: #e8f4f7;
+				color: #0f6f91;
+				font-size: 22px;
+			}
+
+			.ouvidoria-type strong {
+				display: block;
+				font-size: 15px;
+				color: #17324d;
+			}
+
+			.ouvidoria-form-wrap {
+				display: grid;
+				grid-template-columns: minmax(0, 1.4fr) minmax(320px, 0.6fr);
+				gap: 28px;
+				align-items: start;
+			}
+
+			.ouvidoria-form,
+			.ouvidoria-sidebox,
+			.ouvidoria-card {
+				border-radius: 8px;
+				background: #fff;
+				box-shadow: 0 12px 34px rgba(21, 45, 72, 0.09);
+			}
+
+			.ouvidoria-form {
+				padding: 30px;
+			}
+
+			.ouvidoria-grid {
+				display: grid;
+				grid-template-columns: repeat(2, minmax(0, 1fr));
+				gap: 18px;
+			}
+
+			.ouvidoria-field--full {
+				grid-column: 1 / -1;
+			}
+
+			.ouvidoria-field label {
+				display: block;
+				margin-bottom: 7px;
+				font-size: 14px;
+				font-weight: 700;
+				color: #17324d;
+			}
+
+			.ouvidoria-field input,
+			.ouvidoria-field select,
+			.ouvidoria-field textarea {
+				width: 100%;
+				min-height: 50px;
+				padding: 12px 14px;
+				border: 1px solid #d9e1ea;
+				border-radius: 6px;
+				background: #fbfdff;
+				color: #1f2d3d;
+			}
+
+			.ouvidoria-field textarea {
+				min-height: 140px;
+				resize: vertical;
+			}
+
+			.ouvidoria-check {
+				display: flex;
+				gap: 10px;
+				align-items: flex-start;
+				margin-top: 2px;
+				font-size: 14px;
+				color: #485767;
+			}
+
+			.ouvidoria-check input {
+				width: 18px;
+				height: 18px;
+				margin-top: 2px;
+				accent-color: #0f6f91;
+			}
+
+			.ouvidoria-actions {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 12px;
+				align-items: center;
+				margin-top: 24px;
+			}
+
+			.ouvidoria-btn {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				gap: 10px;
+				min-height: 50px;
+				padding: 0 22px;
+				border: 0;
+				border-radius: 6px;
+				background: #17306f;
+				color: #fff;
+				font-weight: 800;
+				cursor: pointer;
+			}
+
+			.ouvidoria-btn--light {
+				background: #e8f4f7;
+				color: #17306f;
+			}
+
+			.ouvidoria-sidebox {
+				padding: 26px;
+			}
+
+			.ouvidoria-sidebox h3 {
+				margin: 0 0 18px;
+				font-size: 22px;
+				font-weight: 800;
+				color: #17324d;
+			}
+
+			.ouvidoria-protocol {
+				display: none;
+				margin-top: 22px;
+				padding: 18px;
+				border-radius: 8px;
+				background: #eaf8f0;
+				border: 1px solid #b9e7c8;
+			}
+
+			.ouvidoria-protocol.is-visible {
+				display: block;
+			}
+
+			.ouvidoria-protocol strong,
+			.ouvidoria-protocol span {
+				display: block;
+			}
+
+			.ouvidoria-protocol strong {
+				color: #126c32;
+				font-size: 15px;
+				text-transform: uppercase;
+			}
+
+			.ouvidoria-protocol span {
+				margin-top: 8px;
+				color: #17324d;
+				font-weight: 700;
+			}
+
+			.ouvidoria-status-list {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 8px;
+				margin-top: 18px;
+			}
+
+			.ouvidoria-status-list span {
+				padding: 8px 10px;
+				border-radius: 999px;
+				background: #eef3f8;
+				font-size: 13px;
+				font-weight: 700;
+				color: #425466;
+			}
+
+			.ouvidoria-cards {
+				display: grid;
+				grid-template-columns: repeat(3, minmax(0, 1fr));
+				gap: 20px;
+			}
+
+			.ouvidoria-card {
+				padding: 26px;
+			}
+
+			.ouvidoria-card i {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				width: 48px;
+				height: 48px;
+				margin-bottom: 18px;
+				border-radius: 50%;
+				background: #17306f;
+				color: #fff;
+			}
+
+			.ouvidoria-card h3 {
+				margin: 0 0 12px;
+				font-size: 20px;
+				font-weight: 800;
+				color: #17324d;
+			}
+
+			.ouvidoria-card ul {
+				margin: 0;
+				padding-left: 18px;
+			}
+
+			.ouvidoria-card li {
+				margin-bottom: 8px;
+				color: #526173;
+			}
+
+			@media (max-width: 1199.98px) {
+				.ouvidoria-types {
+					grid-template-columns: repeat(3, minmax(0, 1fr));
+				}
+
+				.ouvidoria-form-wrap {
+					grid-template-columns: 1fr;
+				}
+			}
+
+			@media (max-width: 991.98px) {
+				.ouvidoria-hero {
+					padding-top: 120px;
+				}
+
+				.ouvidoria-hero__title {
+					font-size: 40px;
+				}
+
+				.ouvidoria-quick,
+				.ouvidoria-cards {
+					grid-template-columns: 1fr;
+				}
+			}
+
+			@media (max-width: 767.98px) {
+				.ouvidoria-hero {
+					padding: 104px 0 58px;
+				}
+
+				.ouvidoria-hero__title {
+					font-size: 34px;
+				}
+
+				.ouvidoria-section {
+					padding: 52px 0;
+				}
+
+				.ouvidoria-types,
+				.ouvidoria-grid {
+					grid-template-columns: 1fr;
+				}
+
+				.ouvidoria-form {
+					padding: 22px;
+				}
+			}
+		</style>
+	</head>
+	<body class="ouvidoria-page">
+		<div id="preloader">
+			<div id="loader" class="loader">
+				<div class="loader-container">
+					<div class="loader-icon"><img src="assets/img/logo/preloader.png" alt="Preloader" /></div>
+				</div>
+			</div>
+		</div>
+
+		<button class="scroll__top scroll-to-target" data-target="html">
+			<i class="fas fa-angle-up"></i>
+		</button>
+
+		<header>
+			<div id="header-fixed-height"></div>
+			<div id="sticky-header" class="tg-header__area">
+				<div class="container custom-container">
+					<div class="row">
+						<div class="col-12">
+							<div class="tgmenu__wrap">
+								<nav class="tgmenu__nav">
+									<div class="logo">
+										<a href="index.html"><img src="assets/img/logo/logo.png" alt="Logo" /></a>
+									</div>
+									<div class="tgmenu__navbar-wrap tgmenu__main-menu d-none d-lg-flex">
+										<ul class="navigation">
+											<li><a href="index.html">In&iacute;cio</a></li>
+											<li><a href="services-3.html">Sites Municipais</a></li>
+											<li><a href="services.html">Portal Transpar&ecirc;ncia</a></li>
+											<li><a href="services-5.html">Servi&ccedil;os</a></li>
+											<li><a href="galeria.html">Galeria</a></li>
+											<li><a href="blog.html">Not&iacute;cias</a></li>
+											<li><a href="contact.html">Fale Conosco</a></li>
+										</ul>
+									</div>
+									<div class="tgmenu__action d-none d-md-block">
+										<ul class="list-wrap">
+											<li class="header-btn"><a href="#registrar" class="btn">Registrar manifesta&ccedil;&atilde;o</a></li>
+										</ul>
+									</div>
+									<div class="mobile-nav-toggler">
+										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18" fill="none">
+											<path d="M0 2C0 0.895431 0.895431 0 2 0C3.10457 0 4 0.895431 4 2C4 3.10457 3.10457 4 2 4C0.895431 4 0 3.10457 0 2Z" fill="currentcolor" />
+											<path d="M0 9C0 7.89543 0.895431 7 2 7C3.10457 7 4 7.89543 4 9C4 10.1046 3.10457 11 2 11C0.895431 11 0 10.1046 0 9Z" fill="currentcolor" />
+											<path d="M0 16C0 14.8954 0.895431 14 2 14C3.10457 14 4 14.8954 4 16C4 17.1046 3.10457 18 2 18C0.895431 18 0 17.1046 0 16Z" fill="currentcolor" />
+											<path d="M7 2C7 0.895431 7.89543 0 9 0C10.1046 0 11 0.895431 11 2C11 3.10457 10.1046 4 9 4C7.89543 4 7 3.10457 7 2Z" fill="currentcolor" />
+											<path d="M7 9C7 7.89543 7.89543 7 9 7C10.1046 7 11 7.89543 11 9C11 10.1046 10.1046 11 9 11C7.89543 11 7 10.1046 7 9Z" fill="currentcolor" />
+											<path d="M7 16C7 14.8954 7.89543 14 9 14C10.1046 14 11 14.8954 11 16C11 17.1046 10.1046 18 9 18C7.89543 18 7 17.1046 7 16Z" fill="currentcolor" />
+											<path d="M14 2C14 0.895431 14.8954 0 16 0C17.1046 0 18 0.895431 18 2C18 3.10457 17.1046 4 16 4C14.8954 4 14 3.10457 14 2Z" fill="currentcolor" />
+											<path d="M14 9C14 7.89543 14.8954 7 16 7C17.1046 7 18 7.89543 18 9C18 10.1046 17.1046 11 16 11C14.8954 11 14 10.1046 14 9Z" fill="currentcolor" />
+											<path d="M14 16C14 14.8954 14.8954 14 16 14C17.1046 14 18 14.8954 18 16C18 17.1046 17.1046 18 16 18C14.8954 18 14 17.1046 14 16Z" fill="currentcolor" />
+										</svg>
+									</div>
+								</nav>
+							</div>
+							<div class="tgmobile__menu">
+								<nav class="tgmobile__menu-box">
+									<div class="close-btn"><i class="fas fa-times"></i></div>
+									<div class="nav-logo">
+										<a href="index.html"><img src="assets/img/logo/logo.png" alt="Logo" /></a>
+									</div>
+									<div class="tgmobile__menu-outer"></div>
+								</nav>
+							</div>
+							<div class="tgmobile__menu-backdrop"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</header>
+
+		<main class="fix">
+			<section class="ouvidoria-hero">
+				<div class="container">
+					<div class="ouvidoria-hero__eyebrow"><i class="fas fa-comments"></i> Canal oficial de atendimento ao cidad&atilde;o</div>
+					<h1 class="ouvidoria-hero__title">Ouvidoria Geral do Munic&iacute;pio</h1>
+					<p class="ouvidoria-hero__text">Registre reclama&ccedil;&otilde;es, den&uacute;ncias, sugest&otilde;es, elogios, solicita&ccedil;&otilde;es e pedidos de informa&ccedil;&atilde;o. Ao enviar sua manifesta&ccedil;&atilde;o, o sistema gera protocolo, data, hora e c&oacute;digo para acompanhamento.</p>
+					<div class="ouvidoria-quick">
+						<div class="ouvidoria-quick__item"><i class="fas fa-file-signature"></i><strong>Registro p&uacute;blico com op&ccedil;&atilde;o de sigilo</strong></div>
+						<div class="ouvidoria-quick__item"><i class="fas fa-ticket-alt"></i><strong>Protocolo autom&aacute;tico para acompanhamento</strong></div>
+						<div class="ouvidoria-quick__item"><i class="fas fa-user-shield"></i><strong>Controle de acesso no painel administrativo</strong></div>
+					</div>
+				</div>
+			</section>
+
+			<section class="ouvidoria-section">
+				<div class="container">
+					<div class="ouvidoria-title">
+						<span>Tipos de manifesta&ccedil;&atilde;o</span>
+						<h2>Escolha o assunto que melhor representa sua demanda</h2>
+					</div>
+					<div class="ouvidoria-types">
+						<div class="ouvidoria-type"><i class="fas fa-bullhorn"></i><strong>Reclama&ccedil;&atilde;o</strong></div>
+						<div class="ouvidoria-type"><i class="fas fa-exclamation-triangle"></i><strong>Den&uacute;ncia</strong></div>
+						<div class="ouvidoria-type"><i class="fas fa-lightbulb"></i><strong>Sugest&atilde;o</strong></div>
+						<div class="ouvidoria-type"><i class="fas fa-thumbs-up"></i><strong>Elogio</strong></div>
+						<div class="ouvidoria-type"><i class="fas fa-clipboard-list"></i><strong>Solicita&ccedil;&atilde;o</strong></div>
+						<div class="ouvidoria-type"><i class="fas fa-info-circle"></i><strong>Pedido de informa&ccedil;&atilde;o</strong></div>
+					</div>
+				</div>
+			</section>
+
+			<section class="ouvidoria-section ouvidoria-section--white" id="registrar">
+				<div class="container">
+					<div class="ouvidoria-title">
+						<span>&Aacute;rea p&uacute;blica</span>
+						<h2>Registrar manifesta&ccedil;&atilde;o</h2>
+					</div>
+					<div class="ouvidoria-form-wrap">
+						<form class="ouvidoria-form" id="ouvidoriaForm">
+							<div class="ouvidoria-grid">
+								<div class="ouvidoria-field">
+									<label for="tipo">Tipo da manifesta&ccedil;&atilde;o</label>
+									<select id="tipo" name="tipo" required>
+										<option value="">Selecione</option>
+										<option>Reclama&ccedil;&atilde;o</option>
+										<option>Den&uacute;ncia</option>
+										<option>Sugest&atilde;o</option>
+										<option>Elogio</option>
+										<option>Solicita&ccedil;&atilde;o</option>
+										<option>Pedido de informa&ccedil;&atilde;o</option>
+									</select>
+								</div>
+								<div class="ouvidoria-field">
+									<label for="destino">Departamento ou contato de destino</label>
+									<select id="destino" name="destino" required>
+										<option value="">Selecione</option>
+										<option>Ouvidoria Geral</option>
+										<option>Controladoria Geral</option>
+										<option>Secretaria de Saude</option>
+										<option>Secretaria de Fazenda</option>
+										<option>Secretaria de Governo</option>
+										<option>Outro setor</option>
+									</select>
+								</div>
+								<div class="ouvidoria-field">
+									<label for="nome">Nome do cidad&atilde;o</label>
+									<input id="nome" name="nome" type="text" placeholder="Informe seu nome" required />
+								</div>
+								<div class="ouvidoria-field">
+									<label for="cpf">CPF, se necessario</label>
+									<input id="cpf" name="cpf" type="text" placeholder="000.000.000-00" />
+								</div>
+								<div class="ouvidoria-field">
+									<label for="email">E-mail</label>
+									<input id="email" name="email" type="email" placeholder="seuemail@exemplo.com" required />
+								</div>
+								<div class="ouvidoria-field">
+									<label for="telefone">Telefone</label>
+									<input id="telefone" name="telefone" type="tel" placeholder="(67) 00000-0000" />
+								</div>
+								<div class="ouvidoria-field ouvidoria-field--full">
+									<label for="assunto">Assunto</label>
+									<input id="assunto" name="assunto" type="text" placeholder="Resumo da manifesta&ccedil;&atilde;o" required />
+								</div>
+								<div class="ouvidoria-field ouvidoria-field--full">
+									<label for="descricao">Descri&ccedil;&atilde;o da manifesta&ccedil;&atilde;o</label>
+									<textarea id="descricao" name="descricao" placeholder="Descreva sua manifesta&ccedil;&atilde;o com o m&aacute;ximo de informa&ccedil;&otilde;es relevantes." required></textarea>
+								</div>
+								<div class="ouvidoria-field">
+									<label for="anexos">Anexos</label>
+									<input id="anexos" name="anexos" type="file" multiple />
+								</div>
+								<div class="ouvidoria-field">
+									<label for="sigilo">Sigilo</label>
+									<select id="sigilo" name="sigilo">
+										<option>Sem sigilo</option>
+										<option>Solicitar sigilo dos dados pessoais</option>
+										<option>Manifesta&ccedil;&atilde;o an&ocirc;nima</option>
+									</select>
+								</div>
+								<div class="ouvidoria-field ouvidoria-field--full">
+									<label class="ouvidoria-check">
+										<input type="checkbox" required />
+										<span>Confirmo que as informa&ccedil;&otilde;es prestadas s&atilde;o verdadeiras e autorizo o tratamento dos dados para atendimento da manifesta&ccedil;&atilde;o.</span>
+									</label>
+								</div>
+							</div>
+							<div class="ouvidoria-actions">
+								<button class="ouvidoria-btn" type="submit"><i class="fas fa-paper-plane"></i> Enviar manifesta&ccedil;&atilde;o</button>
+								<button class="ouvidoria-btn ouvidoria-btn--light" type="reset"><i class="fas fa-eraser"></i> Limpar</button>
+							</div>
+							<div class="ouvidoria-protocol" id="protocolResult" aria-live="polite"></div>
+						</form>
+
+						<aside class="ouvidoria-sidebox">
+							<h3>Acompanhar protocolo</h3>
+							<div class="ouvidoria-field">
+								<label for="consultaProtocolo">N&uacute;mero de protocolo ou c&oacute;digo</label>
+								<input id="consultaProtocolo" type="text" placeholder="Ex.: OUV-20260506-1234" />
+							</div>
+							<div class="ouvidoria-actions">
+								<button class="ouvidoria-btn ouvidoria-btn--light" type="button" id="consultarBtn"><i class="fas fa-search"></i> Consultar</button>
+							</div>
+							<div class="ouvidoria-protocol" id="consultaResult" aria-live="polite"></div>
+							<div class="ouvidoria-status-list">
+								<span>Aberta</span>
+								<span>Em an&aacute;lise</span>
+								<span>Encaminhada</span>
+								<span>Respondida</span>
+								<span>Finalizada</span>
+								<span>Arquivada</span>
+							</div>
+						</aside>
+					</div>
+				</div>
+			</section>
+
+			<section class="ouvidoria-section">
+				<div class="container">
+					<div class="ouvidoria-title">
+						<span>Gest&atilde;o interna</span>
+						<h2>Painel administrativo, permiss&otilde;es e relat&oacute;rios</h2>
+					</div>
+					<div class="ouvidoria-cards">
+						<div class="ouvidoria-card">
+							<i class="fas fa-tasks"></i>
+							<h3>Painel administrativo</h3>
+							<ul>
+								<li>Visualiza&ccedil;&atilde;o das manifesta&ccedil;&otilde;es recebidas.</li>
+								<li>Filtros por data, tipo, status, departamento e cidad&atilde;o.</li>
+								<li>Encaminhamento, resposta ao cidad&atilde;o e anexos.</li>
+								<li>Altera&ccedil;&atilde;o da situa&ccedil;&atilde;o da manifesta&ccedil;&atilde;o.</li>
+							</ul>
+						</div>
+						<div class="ouvidoria-card">
+							<i class="fas fa-user-lock"></i>
+							<h3>Permiss&otilde;es</h3>
+							<ul>
+								<li>Permiss&atilde;o geral de ouvidoria no cadastro de usu&aacute;rios.</li>
+								<li>Controle de quem pode acessar, responder ou gerenciar.</li>
+								<li>Restri&ccedil;&atilde;o por perfil ou setor respons&aacute;vel.</li>
+							</ul>
+						</div>
+						<div class="ouvidoria-card">
+							<i class="fas fa-chart-bar"></i>
+							<h3>Relat&oacute;rios</h3>
+							<ul>
+								<li>Quantidade por periodo e tipos mais registrados.</li>
+								<li>Departamentos mais acionados.</li>
+								<li>Situa&ccedil;&otilde;es pendentes e finalizadas.</li>
+								<li>Tempo m&eacute;dio de resposta.</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<footer>
+			<div class="footer-area">
+				<div class="footer-bottom">
+					<div class="container">
+						<div class="row align-items-center">
+							<div class="col-lg-6">
+								<div class="copyright-text">
+									<p>Copyright &copy; <a href="index.html">Ti-Genesis</a> | Todos os direitos reservados</p>
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div class="footer-link-list text-lg-end">
+									<a href="contact.html">Fale Conosco</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+		<script src="assets/js/vendor/jquery-3.6.0.min.js"></script>
+		<script src="assets/js/bootstrap.bundle.min.js"></script>
+		<script src="assets/js/jquery.magnific-popup.min.js"></script>
+		<script src="assets/js/jquery.odometer.min.js"></script>
+		<script src="assets/js/jquery.appear.js"></script>
+		<script src="assets/js/gsap.js"></script>
+		<script src="assets/js/ScrollTrigger.js"></script>
+		<script src="assets/js/SplitText.js"></script>
+		<script src="assets/js/gsap-animation.js"></script>
+		<script src="assets/js/jquery.parallaxScroll.min.js"></script>
+		<script src="assets/js/swiper-bundle.js"></script>
+		<script src="assets/js/ajax-form.js"></script>
+		<script src="assets/js/wow.min.js"></script>
+		<script src="assets/js/aos.js"></script>
+		<script src="assets/js/main.js"></script>
+		<script>
+			(function () {
+				var form = document.getElementById("ouvidoriaForm");
+				var result = document.getElementById("protocolResult");
+				var consultarBtn = document.getElementById("consultarBtn");
+				var consultaInput = document.getElementById("consultaProtocolo");
+				var consultaResult = document.getElementById("consultaResult");
+
+				function pad(value) {
+					return String(value).padStart(2, "0");
+				}
+
+				function formatDate(date) {
+					return pad(date.getDate()) + "/" + pad(date.getMonth() + 1) + "/" + date.getFullYear() + " " + pad(date.getHours()) + ":" + pad(date.getMinutes());
+				}
+
+				function makeProtocol(date) {
+					var random = Math.floor(1000 + Math.random() * 9000);
+					return "OUV-" + date.getFullYear() + pad(date.getMonth() + 1) + pad(date.getDate()) + "-" + random;
+				}
+
+				if (form && result) {
+					form.addEventListener("submit", function (event) {
+						event.preventDefault();
+						var now = new Date();
+						var protocol = makeProtocol(now);
+						var code = "ACOMP-" + Math.random().toString(36).slice(2, 8).toUpperCase();
+
+						result.classList.add("is-visible");
+						result.innerHTML = "<strong>Manifesta&ccedil;&atilde;o registrada com sucesso</strong><span>Protocolo: " + protocol + "</span><span>Data e hora: " + formatDate(now) + "</span><span>C&oacute;digo para acompanhamento: " + code + "</span><span>A confirma&ccedil;&atilde;o tamb&eacute;m pode ser enviada por e-mail quando o servi&ccedil;o estiver integrado ao painel administrativo.</span>";
+						result.scrollIntoView({ behavior: "smooth", block: "center" });
+					});
+				}
+
+				if (consultarBtn && consultaInput && consultaResult) {
+					consultarBtn.addEventListener("click", function () {
+						var value = consultaInput.value.trim();
+						consultaResult.classList.add("is-visible");
+
+						if (!value) {
+							consultaResult.innerHTML = "<strong>Informe um protocolo</strong><span>Digite o n&uacute;mero de protocolo ou c&oacute;digo de acompanhamento.</span>";
+							return;
+						}
+
+						consultaResult.innerHTML = "<strong>Status da manifesta&ccedil;&atilde;o</strong><span>Protocolo: " + value + "</span><span>Situa&ccedil;&atilde;o: Em an&aacute;lise</span><span>&Uacute;ltima atualiza&ccedil;&atilde;o: aguardando resposta do setor respons&aacute;vel.</span>";
+					});
+				}
+			})();
+		</script>
+	</body>
+</html>

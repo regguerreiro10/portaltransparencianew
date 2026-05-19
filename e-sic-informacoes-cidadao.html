@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html class="no-js" lang="pt-BR">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="x-ua-compatible" content="ie=edge" />
+		<title>E-SIC Informações ao Cidadão</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png" />
+		<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="assets/css/fontawesome-all.min.css" />
+		<link rel="stylesheet" href="assets/css/default.css" />
+		<style>
+			.esic-page {
+				margin: 0;
+				background: #f5f7f9;
+				color: #ffffff;
+				font-family: "Inter", "Segoe UI", Arial, sans-serif;
+			}
+
+			.esic-hero {
+				display: grid;
+				grid-template-columns: minmax(0, 58%) minmax(360px, 42%);
+				min-height: 278px;
+				background: #005f8f;
+			}
+
+			.esic-info {
+				position: relative;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				overflow: hidden;
+				padding: 38px 28px 26px;
+				text-align: center;
+				background:
+					linear-gradient(90deg, rgba(0, 88, 137, 0.96), rgba(0, 116, 159, 0.84)),
+					url("assets/img/bg/breadcrumb_bg.jpg") center/cover no-repeat;
+			}
+
+			.esic-info::after {
+				content: "";
+				position: absolute;
+				right: 10%;
+				top: 6px;
+				width: 238px;
+				height: 238px;
+				border: 2px solid rgba(1, 67, 102, 0.42);
+				border-radius: 50%;
+				box-shadow: inset 0 0 35px rgba(0, 0, 0, 0.12);
+			}
+
+			.esic-info__content {
+				position: relative;
+				z-index: 1;
+				max-width: 750px;
+			}
+
+			.esic-brand-icon {
+				position: relative;
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				width: 70px;
+				height: 70px;
+				margin-bottom: 8px;
+				border-radius: 50%;
+				background: #ffd519;
+				box-shadow: inset 0 0 0 4px rgba(255, 255, 255, 0.25);
+			}
+
+			.esic-brand-icon::after {
+				content: "";
+				position: absolute;
+				right: -7px;
+				bottom: 1px;
+				width: 22px;
+				height: 20px;
+				background: #ffd519;
+				clip-path: polygon(0 0, 100% 100%, 0 72%);
+			}
+
+			.esic-brand-icon i {
+				position: relative;
+				z-index: 1;
+				font-size: 38px;
+				color: #078539;
+			}
+
+			.esic-title {
+				margin: 0 0 10px;
+				font-size: 29px;
+				font-weight: 400;
+				letter-spacing: 0.08em;
+				line-height: 1.22;
+				color: #ffffff;
+				text-transform: uppercase;
+			}
+
+			.esic-text {
+				margin: 0;
+				font-size: 15.5px;
+				font-weight: 600;
+				line-height: 1.35;
+				color: #ffffff;
+			}
+
+			.esic-login {
+				padding: 10px 47px 24px;
+				background: #005184;
+			}
+
+			.esic-login__title {
+				display: flex;
+				align-items: center;
+				gap: 16px;
+				justify-content: center;
+				margin-bottom: 8px;
+				font-size: 20px;
+				font-weight: 800;
+				letter-spacing: 0.03em;
+				color: #ffffff;
+				text-transform: uppercase;
+			}
+
+			.esic-login__title i {
+				font-size: 22px;
+			}
+
+			.esic-login__title span {
+				display: inline-block;
+				width: 1px;
+				height: 38px;
+				background: rgba(255, 255, 255, 0.42);
+			}
+
+			.esic-accessibility {
+				position: absolute;
+				right: 10px;
+				top: 10px;
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				width: 40px;
+				height: 40px;
+				border: 2px solid #1f71ff;
+				border-radius: 50%;
+				color: #ffffff;
+				font-size: 24px;
+			}
+
+			.esic-form {
+				position: relative;
+			}
+
+			.esic-input {
+				width: 100%;
+				height: 48px;
+				margin-bottom: 14px;
+				padding: 0 44px 0 13px;
+				border: 1px solid rgba(255, 255, 255, 0.45);
+				border-radius: 4px;
+				background: #ffffff;
+				color: #26323c;
+				font-size: 15.5px;
+			}
+
+			.esic-input::placeholder {
+				color: #75808a;
+			}
+
+			.esic-password-wrap {
+				position: relative;
+			}
+
+			.esic-password-wrap i {
+				position: absolute;
+				right: 30px;
+				top: 17px;
+				color: #3c3c3c;
+				font-size: 16px;
+			}
+
+			.esic-forgot {
+				display: block;
+				margin: -7px 0 13px;
+				text-align: right;
+				color: #fff47a;
+				font-size: 13.5px;
+				font-weight: 600;
+			}
+
+			.esic-actions {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 30px;
+				align-items: center;
+			}
+
+			.esic-button {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				min-height: 50px;
+				border-radius: 4px;
+				font-size: 18px;
+				font-weight: 500;
+				letter-spacing: 0.04em;
+			}
+
+			.esic-button--enter {
+				border: 1px solid #4eae47;
+				background: #4eae47;
+				color: #ffffff;
+			}
+
+			.esic-button--outline {
+				border: 1px solid rgba(31, 113, 255, 0.48);
+				background: transparent;
+				color: #fff47a;
+			}
+
+			.esic-helpbar {
+				position: relative;
+				background: #ffe875;
+				color: #005184;
+			}
+
+			.esic-helpbar::after {
+				content: "";
+				position: absolute;
+				left: 15%;
+				right: 15%;
+				bottom: -72px;
+				height: 72px;
+				background: #ffe875;
+				clip-path: polygon(0 0, 50% 100%, 100% 0);
+				filter: drop-shadow(0 12px 12px rgba(0, 0, 0, 0.18));
+			}
+
+			.esic-helpbar__inner {
+				position: relative;
+				z-index: 1;
+				max-width: 700px;
+				margin: 0 auto;
+				padding: 12px 20px 8px;
+				text-align: center;
+			}
+
+			.esic-helpbar__nav {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				gap: 18px;
+				margin-bottom: 7px;
+				font-size: 14px;
+			}
+
+			.esic-helpbar__nav a,
+			.esic-helpbar__contact a {
+				color: #005184;
+			}
+
+			.esic-helpbar__contact h2 {
+				margin: 0 0 3px;
+				font-size: 14px;
+				font-weight: 800;
+				letter-spacing: 0.07em;
+				color: #005184;
+				text-transform: uppercase;
+			}
+
+			.esic-helpbar__contact p {
+				display: flex;
+				flex-wrap: wrap;
+				align-items: center;
+				justify-content: center;
+				gap: 12px;
+				margin: 0;
+				font-size: 12.5px;
+				color: #8f8237;
+			}
+
+			.esic-floating-help {
+				position: absolute;
+				right: 12px;
+				top: 7px;
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				width: 40px;
+				height: 40px;
+				border-radius: 8px;
+				background: #2f80ed;
+				color: #ffffff;
+				font-size: 20px;
+			}
+
+			.esic-main {
+				position: relative;
+				padding: 136px 20px 80px;
+				background: #f7f8fa;
+			}
+
+			.esic-request {
+				max-width: 1075px;
+				margin: 0 auto;
+				padding: 34px 36px 28px;
+				background: #138143;
+				color: #ffffff;
+				text-align: center;
+				box-shadow: 0 16px 42px rgba(0, 0, 0, 0.16);
+			}
+
+			.esic-request h2 {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				gap: 12px;
+				margin: 0 0 7px;
+				font-size: 29px;
+				font-weight: 800;
+				letter-spacing: 0.04em;
+				color: #ffffff;
+				text-transform: uppercase;
+			}
+
+			.esic-request h2 i {
+				font-size: 28px;
+				color: rgba(255, 255, 255, 0.9);
+			}
+
+			.esic-request p {
+				margin: 0;
+				font-size: 15px;
+				font-weight: 600;
+				color: #ffffff;
+			}
+
+			.esic-request strong {
+				font-weight: 800;
+			}
+
+			@media (max-width: 991.98px) {
+				.esic-hero {
+					grid-template-columns: 1fr;
+				}
+
+				.esic-login {
+					padding: 22px 20px 28px;
+				}
+
+				.esic-accessibility {
+					top: 286px;
+				}
+			}
+
+			@media (max-width: 767.98px) {
+				.esic-info {
+					padding: 32px 18px 28px;
+				}
+
+				.esic-title {
+					font-size: 22px;
+				}
+
+				.esic-text {
+					font-size: 14px;
+				}
+
+				.esic-actions {
+					grid-template-columns: 1fr;
+					gap: 12px;
+				}
+
+				.esic-helpbar::after {
+					left: 4%;
+					right: 4%;
+				}
+
+				.esic-main {
+					padding-top: 118px;
+				}
+
+				.esic-request {
+					padding: 28px 18px 24px;
+				}
+
+				.esic-request h2 {
+					flex-direction: column;
+					font-size: 22px;
+				}
+			}
+		</style>
+	</head>
+	<body class="esic-page">
+		<header class="esic-hero">
+			<section class="esic-info" aria-labelledby="esic-title">
+				<div class="esic-info__content">
+					<div class="esic-brand-icon" aria-hidden="true"><i class="fas fa-info"></i></div>
+					<h1 class="esic-title" id="esic-title">Serviço de Informação ao Cidadão</h1>
+					<p class="esic-text">A Lei Federal n° 12.527/2011, regulamentada no âmbito do Município de Campo Grande através do Decreto n. 15.177 de 2022, garante a qualquer pessoa física ou jurídica o direito constitucional de acesso às informações públicas. Prazos de resposta ao cidadão: O prazo para resposta é de 20 dias, a contar da data em que o pedido foi registrado. O prazo para a resposta da reclamação é de 10 dias. Prazo Recursal: 10 (dez dias) contados da ciência da decisão. Autoridade competente para o exame dos pedidos: Arley de Queiroz Sandim</p>
+				</div>
+			</section>
+
+			<section class="esic-login" aria-labelledby="esic-login-title">
+				<a class="esic-accessibility" href="javascript:void(0)" aria-label="Acessibilidade"><i class="fas fa-universal-access"></i></a>
+				<h2 class="esic-login__title" id="esic-login-title"><i class="fas fa-lock"></i><span aria-hidden="true"></span>Acesso ao Sistema</h2>
+				<form class="esic-form" action="#" method="post">
+					<input class="esic-input" type="text" name="cpf_cnpj" placeholder="Digite seu CPF ou CNPJ" aria-label="Digite seu CPF ou CNPJ" />
+					<div class="esic-password-wrap">
+						<input class="esic-input" type="password" name="senha" placeholder="Senha" aria-label="Senha" />
+						<i class="fas fa-eye" aria-hidden="true"></i>
+					</div>
+					<a class="esic-forgot" href="javascript:void(0)">Esqueceu sua senha?</a>
+					<div class="esic-actions">
+						<button class="esic-button esic-button--enter" type="submit">Entrar</button>
+						<a class="esic-button esic-button--outline" href="javascript:void(0)">Crie sua conta</a>
+					</div>
+				</form>
+			</section>
+		</header>
+
+		<section class="esic-helpbar" aria-label="Contato">
+			<a class="esic-floating-help" href="javascript:void(0)" aria-label="Ajuda"><i class="fas fa-hands-helping"></i></a>
+			<div class="esic-helpbar__inner">
+				<nav class="esic-helpbar__nav" aria-label="Links de ajuda">
+					<a href="index.html"><i class="fas fa-home"></i></a>
+					<a href="javascript:void(0)">Dúvidas <i class="fas fa-caret-down"></i></a>
+					<a href="contact.html">Contato</a>
+				</nav>
+				<div class="esic-helpbar__contact">
+					<h2>Controladoria-Geral do Município - CGM</h2>
+					<p>
+						<span><i class="fas fa-map-marker-alt"></i> Rua Sophia Melke, 453</span>
+						<span><i class="fas fa-phone"></i> (67) 4042-0499</span>
+						<span><i class="fas fa-envelope"></i> E-mail: transparencia@cgm.campogrande.ms.gov.br</span>
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<main class="esic-main">
+			<section class="esic-request" aria-labelledby="esic-request-title">
+				<h2 id="esic-request-title"><i class="fas fa-info-circle"></i>Criar Pedido de Informações</h2>
+				<p>Crie um pedido detalhando a informação que deseja receber. Você pode ver as dicas de consulta, caso precise de ajuda.</p>
+				<p><strong>Para criar novo pedido de informações, você deve estar logado no sistema.</strong></p>
+			</section>
+			<div style="max-width: 1180px; margin: 24px auto 0; padding: 0 20px 30px;">
+				<a href="services.html" style="display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 0 20px; border-radius: 10px; background: #005184; color: #fff; font-size: 14px; font-weight: 700; text-transform: uppercase;">Voltar ao Portal Transparencia</a>
+			</div>
+		</main>
+	</body>
+</html>

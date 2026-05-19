@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html class="no-js" lang="pt-BR">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="x-ua-compatible" content="ie=edge" />
+		<title>Galeria</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png" />
+		<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="assets/css/animate.min.css" />
+		<link rel="stylesheet" href="assets/css/magnific-popup.css" />
+		<link rel="stylesheet" href="assets/css/fontawesome-all.min.css" />
+		<link rel="stylesheet" href="assets/css/flaticon.css" />
+		<link rel="stylesheet" href="assets/css/odometer.css" />
+		<link rel="stylesheet" href="assets/css/swiper-bundle.css" />
+		<link rel="stylesheet" href="assets/css/aos.css" />
+		<link rel="stylesheet" href="assets/css/default.css" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<style>
+			.gallery-page { background: #f6f8fb; color: #17324d; }
+			.gallery-hero {
+				padding: 72px 0 54px;
+				background: linear-gradient(180deg, rgba(10, 40, 82, 0.74), rgba(0, 118, 201, 0.66)), url("assets/img/bg/breadcrumb_bg.jpg") center/cover no-repeat;
+				color: #fff;
+			}
+			.gallery-hero h1 {
+				margin: 0 0 10px;
+				font-size: 48px;
+				line-height: 1;
+				color: #fff;
+			}
+			.gallery-hero p {
+				max-width: 760px;
+				margin: 0;
+				color: rgba(255,255,255,.92);
+				font-size: 17px;
+				line-height: 1.7;
+			}
+			.gallery-section { padding: 54px 0 64px; }
+			.gallery-tabs {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 10px;
+				margin-bottom: 28px;
+			}
+			.gallery-tab {
+				min-height: 42px;
+				padding: 10px 16px;
+				border: 1px solid #d6e1ee;
+				border-radius: 6px;
+				background: #fff;
+				color: #17324d;
+				font-weight: 800;
+			}
+			.gallery-tab.is-active {
+				border-color: #0076c9;
+				background: #0076c9;
+				color: #fff;
+			}
+			.gallery-panel { display: none; }
+			.gallery-panel.is-active { display: block; }
+			.gallery-grid {
+				display: grid;
+				grid-template-columns: repeat(3, minmax(0, 1fr));
+				gap: 18px;
+			}
+			.gallery-card {
+				overflow: hidden;
+				border-radius: 8px;
+				background: #fff;
+				box-shadow: 0 16px 36px rgba(15, 23, 42, .08);
+			}
+			.gallery-card img,
+			.gallery-video video {
+				display: block;
+				width: 100%;
+			}
+			.gallery-card img {
+				aspect-ratio: 4 / 3;
+				object-fit: cover;
+			}
+			.gallery-card__body { padding: 16px; }
+			.gallery-card__body h2,
+			.gallery-video h2,
+			.gallery-audio h2 {
+				margin: 0 0 8px;
+				font-size: 20px;
+				color: #17324d;
+			}
+			.gallery-card__body p,
+			.gallery-video p,
+			.gallery-audio p {
+				margin: 0;
+				color: #65758a;
+				line-height: 1.6;
+			}
+			.gallery-video,
+			.gallery-audio {
+				padding: 22px;
+				border-radius: 8px;
+				background: #fff;
+				box-shadow: 0 16px 36px rgba(15, 23, 42, .08);
+			}
+			.gallery-video video {
+				max-height: 520px;
+				margin-bottom: 18px;
+				border-radius: 6px;
+				background: #0b1624;
+			}
+			.gallery-audio__empty {
+				display: flex;
+				align-items: center;
+				gap: 12px;
+				padding: 18px;
+				border: 1px dashed #c6d5e5;
+				border-radius: 8px;
+				background: #f8fbff;
+				color: #42566e;
+				font-weight: 700;
+			}
+			.gallery-audio__empty i { color: #0076c9; }
+			.gallery-empty {
+				padding: 24px;
+				border: 1px dashed #c6d5e5;
+				border-radius: 8px;
+				background: #fff;
+				color: #42566e;
+				font-weight: 700;
+			}
+			.gallery-audio audio {
+				width: 100%;
+				margin-top: 12px;
+			}
+			@media (max-width: 991.98px) {
+				.gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+			}
+			@media (max-width: 767.98px) {
+				.gallery-hero h1 { font-size: 36px; }
+				.gallery-grid { grid-template-columns: 1fr; }
+				.gallery-tab { width: 100%; }
+			}
+		</style>
+	</head>
+	<body class="gallery-page">
+		<button class="scroll__top scroll-to-target" data-target="html">
+			<i class="fas fa-angle-up"></i>
+		</button>
+
+		<header>
+			<div id="header-fixed-height"></div>
+			<div id="sticky-header" class="tg-header__area">
+				<div class="container custom-container">
+					<div class="row">
+						<div class="col-12">
+							<div class="tgmenu__wrap">
+								<nav class="tgmenu__nav">
+									<div class="logo">
+										<a href="index.html"><img src="assets/img/logo/logo.png" alt="Logo" /></a>
+									</div>
+									<div class="tgmenu__navbar-wrap tgmenu__main-menu d-none d-lg-flex">
+										<ul class="navigation">
+											<li><a href="index.html">Início</a></li>
+											<li><a href="services-3.html">Sites Municipais</a></li>
+											<li><a href="services.html">Portal Transparência</a></li>
+											<li><a href="services-5.html">Serviços</a></li>
+											<li><a href="galeria.html">Galeria</a></li>
+											<li><a href="blog.html">Notícias</a></li>
+											<li><a href="contact.html">Fale Conosco</a></li>
+										</ul>
+									</div>
+									<div class="tgmenu__action d-none d-md-block">
+										<ul class="list-wrap">
+											<li class="header-search">
+												<a href="javascript:void(0)" class="search-open-btn" aria-label="Abrir pesquisa">
+													<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none">
+														<path d="M19 19.0002L14.657 14.6572M14.657 14.6572C15.3999 13.9143 15.9892 13.0324 16.3912 12.0618C16.7933 11.0911 17.0002 10.0508 17.0002 9.00021C17.0002 7.9496 16.7933 6.90929 16.3913 5.93866C15.9892 4.96803 15.3999 4.08609 14.657 3.34321C13.9141 2.60032 13.0322 2.01103 12.0616 1.60898C11.0909 1.20693 10.0506 1 9.00002 1C7.94942 1 6.90911 1.20693 5.93848 1.60898C4.96785 2.01103 4.08591 2.60032 3.34302 3.34321C1.84269 4.84354 0.999817 6.87842 0.999817 9.00021C0.999817 11.122 1.84269 13.1569 3.34302 14.6572C4.84335 16.1575 6.87824 17.0004 9.00002 17.0004C11.1218 17.0004 13.1567 16.1575 14.657 14.6572Z" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+													</svg>
+												</a>
+											</li>
+										</ul>
+									</div>									<div class="mobile-nav-toggler">
+										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18" fill="none">
+											<path d="M0 2C0 0.895431 0.895431 0 2 0C3.10457 0 4 0.895431 4 2C4 3.10457 3.10457 4 2 4C0.895431 4 0 3.10457 0 2Z" fill="currentcolor" />
+											<path d="M0 9C0 7.89543 0.895431 7 2 7C3.10457 7 4 7.89543 4 9C4 10.1046 3.10457 11 2 11C0.895431 11 0 10.1046 0 9Z" fill="currentcolor" />
+											<path d="M0 16C0 14.8954 0.895431 14 2 14C3.10457 14 4 14.8954 4 16C4 17.1046 3.10457 18 2 18C0.895431 18 0 17.1046 0 16Z" fill="currentcolor" />
+											<path d="M7 2C7 0.895431 7.89543 0 9 0C10.1046 0 11 0.895431 11 2C11 3.10457 10.1046 4 9 4C7.89543 4 7 3.10457 7 2Z" fill="currentcolor" />
+											<path d="M7 9C7 7.89543 7.89543 7 9 7C10.1046 7 11 7.89543 11 9C11 10.1046 10.1046 11 9 11C7.89543 11 7 10.1046 7 9Z" fill="currentcolor" />
+											<path d="M7 16C7 14.8954 7.89543 14 9 14C10.1046 14 11 14.8954 11 16C11 17.1046 10.1046 18 9 18C7.89543 18 7 17.1046 7 16Z" fill="currentcolor" />
+											<path d="M14 2C14 0.895431 14.8954 0 16 0C17.1046 0 18 0.895431 18 2C18 3.10457 17.1046 4 16 4C14.8954 4 14 3.10457 14 2Z" fill="currentcolor" />
+											<path d="M14 9C14 7.89543 14.8954 7 16 7C17.1046 7 18 7.89543 18 9C18 10.1046 17.1046 11 16 11C14.8954 11 14 10.1046 14 9Z" fill="currentcolor" />
+											<path d="M14 16C14 14.8954 14.8954 14 16 14C17.1046 14 18 14.8954 18 16C18 17.1046 17.1046 18 16 18C14.8954 18 14 17.1046 14 16Z" fill="currentcolor" />
+										</svg>
+									</div>
+								</nav>
+							</div>
+							<div class="tgmobile__menu">
+								<nav class="tgmobile__menu-box">
+									<div class="close-btn"><i class="fas fa-times"></i></div>
+									<div class="nav-logo">
+										<a href="index.html"><img src="assets/img/logo/logo.png" alt="Logo" /></a>
+									</div>
+									<div class="tgmobile__menu-outer"></div>
+								</nav>
+							</div>
+							<div class="tgmobile__menu-backdrop"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- header-search -->
+			<div class="search__popup">
+				<div class="container">
+					<div class="row">
+						<div class="col-12">
+							<div class="search__wrapper">
+								<div class="search__close">
+									<button type="button" class="search-close-btn" aria-label="Fechar pesquisa">
+										<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M17 1L1 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+											<path d="M1 1L17 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+										</svg>
+									</button>
+								</div>
+								<div class="search__form">
+									<form action="formulario.php" method="get">
+										<h2 class="search-advanced__title">Busca no portal</h2>
+										<div class="search__input">
+											<input class="search-input-field" type="text" name="q" placeholder="Digite o termo da consulta" />
+											<span class="search-focus-border"></span>
+											<button type="submit" aria-label="Pesquisar">
+												<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+													<path d="M9.55 18.1C14.272 18.1 18.1 14.272 18.1 9.55C18.1 4.82797 14.272 1 9.55 1C4.82797 1 1 4.82797 1 9.55C1 14.272 4.82797 18.1 9.55 18.1Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+													<path d="M19.0002 19.0002L17.2002 17.2002" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+												</svg>
+											</button>
+										</div>
+										<div class="search-advanced__message" aria-live="polite"></div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="search-popup-overlay"></div>
+			<!-- header-search-end -->		</header>
+
+		<main class="fix">
+			<section class="gallery-hero">
+				<div class="container">
+					<h1>Galeria</h1>
+					<p>Fotos, vídeos e áudios institucionais reunidos em um só espaço para consulta pública.</p>
+				</div>
+			</section>
+
+			<section class="gallery-section">
+				<div class="container">
+					<div class="gallery-tabs" role="tablist" aria-label="Categorias da galeria">
+						<button class="gallery-tab is-active" type="button" data-gallery-tab="fotos">Fotos</button>
+						<button class="gallery-tab" type="button" data-gallery-tab="videos">Vídeos</button>
+						<button class="gallery-tab" type="button" data-gallery-tab="audios">Áudios</button>
+					</div>
+
+					<div class="gallery-panel is-active" id="gallery-panel-fotos">
+						<div class="gallery-grid" id="gallery-photos">
+							<article class="gallery-card">
+								<img src="assets/img/project/foto-1.png" alt="Parque das Nações Indígenas" />
+								<div class="gallery-card__body">
+									<h2>Espaços públicos</h2>
+									<p>Registros de locais de interesse e equipamentos públicos.</p>
+								</div>
+							</article>
+							<article class="gallery-card">
+								<img src="assets/img/project/foto-2.png" alt="Bioparque Pantanal" />
+								<div class="gallery-card__body">
+									<h2>Cultura e lazer</h2>
+									<p>Imagens de ações, paisagens urbanas e pontos de visitação.</p>
+								</div>
+							</article>
+							<article class="gallery-card">
+								<img src="assets/img/services/foto-1.png" alt="Serviços públicos municipais" />
+								<div class="gallery-card__body">
+									<h2>Serviços municipais</h2>
+									<p>Materiais visuais de apoio à divulgação de serviços ao cidadão.</p>
+								</div>
+							</article>
+						</div>
+					</div>
+
+					<div class="gallery-panel" id="gallery-panel-videos">
+						<div class="gallery-video" id="gallery-videos">
+							<video controls preload="metadata" poster="assets/img/bg/breadcrumb_bg.jpg">
+								<source src="video/avenida.mp4" type="video/mp4" />
+							</video>
+							<h2>Vídeo institucional</h2>
+							<p>Registro audiovisual disponível para consulta na galeria do portal.</p>
+						</div>
+					</div>
+
+					<div class="gallery-panel" id="gallery-panel-audios">
+						<div class="gallery-audio" id="gallery-audios">
+							<h2>Áudios</h2>
+							<div class="gallery-audio__empty">
+								<i class="fas fa-volume-up"></i>
+								<span>Nenhum áudio publicado no momento.</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<script src="assets/js/vendor/jquery-3.6.0.min.js"></script>
+		<script src="assets/js/bootstrap.bundle.min.js"></script>
+		<script src="assets/js/jquery.magnific-popup.min.js"></script>
+		<script src="assets/js/jquery.odometer.min.js"></script>
+		<script src="assets/js/jquery.appear.js"></script>
+		<script src="assets/js/gsap.js"></script>
+		<script src="assets/js/ScrollTrigger.js"></script>
+		<script src="assets/js/SplitText.js"></script>
+		<script src="assets/js/gsap-animation.js"></script>
+		<script src="assets/js/jquery.parallaxScroll.min.js"></script>
+		<script src="assets/js/swiper-bundle.js"></script>
+		<script src="assets/js/ajax-form.js"></script>
+		<script src="assets/js/wow.min.js"></script>
+		<script src="assets/js/aos.js"></script>
+		<script src="assets/js/main.js"></script>
+		<script>
+			(function () {
+				var tabs = Array.prototype.slice.call(document.querySelectorAll(".gallery-tab"));
+				var panels = Array.prototype.slice.call(document.querySelectorAll(".gallery-panel"));
+				var photosEl = document.getElementById("gallery-photos");
+				var videosEl = document.getElementById("gallery-videos");
+				var audiosEl = document.getElementById("gallery-audios");
+
+				function escapeHtml(value) {
+					return String(value || "")
+						.replace(/&/g, "&amp;")
+						.replace(/</g, "&lt;")
+						.replace(/>/g, "&gt;")
+						.replace(/"/g, "&quot;")
+						.replace(/'/g, "&#39;");
+				}
+
+				function emptyMessage(message) {
+					return '<div class="gallery-empty">' + escapeHtml(message) + '</div>';
+				}
+
+				tabs.forEach(function (tab) {
+					tab.addEventListener("click", function () {
+						var target = tab.getAttribute("data-gallery-tab");
+
+						tabs.forEach(function (item) {
+							item.classList.toggle("is-active", item === tab);
+						});
+
+						panels.forEach(function (panel) {
+							panel.classList.toggle("is-active", panel.id === "gallery-panel-" + target);
+						});
+					});
+				});
+
+				function renderPhotos(items) {
+					var photos = items.filter(function (item) { return item.tipo === "foto"; });
+					if (!photos.length) {
+						photosEl.innerHTML = emptyMessage("Nenhuma foto publicada no momento.");
+						return;
+					}
+
+					photosEl.innerHTML = photos.map(function (item) {
+						var image = item.arquivo || item.imagem_capa || "assets/img/bg/breadcrumb_bg.jpg";
+						return "" +
+							'<article class="gallery-card">' +
+								'<img src="' + escapeHtml(image) + '" alt="' + escapeHtml(item.texto_alternativo || item.titulo) + '" />' +
+								'<div class="gallery-card__body">' +
+									'<h2>' + escapeHtml(item.titulo) + '</h2>' +
+									'<p>' + escapeHtml(item.descricao) + '</p>' +
+								'</div>' +
+							'</article>';
+					}).join("");
+				}
+
+				function renderVideos(items) {
+					var videos = items.filter(function (item) { return item.tipo === "video"; });
+					if (!videos.length) {
+						videosEl.innerHTML = emptyMessage("Nenhum video publicado no momento.");
+						return;
+					}
+
+					videosEl.innerHTML = videos.map(function (item) {
+						var source = item.arquivo || "";
+						if (!source) {
+							return emptyMessage("Video sem midia cadastrada.");
+						}
+						return "" +
+							'<video controls preload="metadata" poster="assets/img/bg/breadcrumb_bg.jpg">' +
+								'<source src="' + escapeHtml(source) + '" />' +
+							'</video>' +
+							'<h2>' + escapeHtml(item.titulo) + '</h2>' +
+							'<p>' + escapeHtml(item.descricao) + '</p>';
+					}).join("");
+				}
+
+				function renderAudios(items) {
+					var audios = items.filter(function (item) { return item.tipo === "audio"; });
+					if (!audios.length) {
+						audiosEl.innerHTML = "" +
+							'<h2>Audios</h2>' +
+							'<div class="gallery-audio__empty">' +
+								'<i class="fas fa-volume-up"></i>' +
+								'<span>Nenhum audio publicado no momento.</span>' +
+							'</div>';
+						return;
+					}
+
+					audiosEl.innerHTML = audios.map(function (item) {
+						var source = item.arquivo || "";
+						if (!source) {
+							return emptyMessage("Audio sem midia cadastrada.");
+						}
+						return "" +
+							'<h2>' + escapeHtml(item.titulo) + '</h2>' +
+							'<p>' + escapeHtml(item.descricao) + '</p>' +
+							'<audio controls preload="metadata" src="' + escapeHtml(source) + '"></audio>';
+					}).join("");
+				}
+
+				fetch("galeria-data.php")
+					.then(function (response) { return response.json(); })
+					.then(function (data) {
+						var items = Array.isArray(data.items) ? data.items : [];
+						if (!items.length) {
+							return;
+						}
+						renderPhotos(items);
+						renderVideos(items);
+						renderAudios(items);
+					})
+					.catch(function () {
+						photosEl.innerHTML = emptyMessage("Nao foi possivel carregar a galeria.");
+						videosEl.innerHTML = emptyMessage("Nao foi possivel carregar os videos.");
+						audiosEl.innerHTML = emptyMessage("Nao foi possivel carregar os audios.");
+					});
+			})();
+		</script>
+	</body>
+</html>

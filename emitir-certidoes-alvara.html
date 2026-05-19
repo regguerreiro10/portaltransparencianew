@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html class="no-js" lang="pt-BR">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="x-ua-compatible" content="ie=edge" />
+		<title>Emitir Certidao Portal</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png" />
+		<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="assets/css/fontawesome-all.min.css" />
+		<style>
+			.cert-page {
+				margin: 0;
+				background: #eef2f7;
+				font-family: Arial, sans-serif;
+				color: #2d3748;
+			}
+
+			.cert-top {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 18px;
+				padding: 2px 16px 0;
+				background: #fff;
+				border-bottom: 1px solid #d7dde7;
+			}
+
+			.cert-top__left,
+			.cert-top__right {
+				display: flex;
+				align-items: center;
+				gap: 14px;
+			}
+
+			.cert-badge {
+				display: flex;
+				align-items: center;
+				gap: 8px;
+				padding: 2px 8px;
+				background: #1c3f7b;
+				color: #ffd54a;
+				font-weight: 700;
+				font-size: 16px;
+			}
+
+			.cert-badge i {
+				color: #fff;
+			}
+
+			.cert-title {
+				font-size: 17px;
+				font-weight: 700;
+				color: #0f2d5c;
+			}
+
+			.cert-siat {
+				font-size: 34px;
+				font-weight: 800;
+				color: #214f58;
+				letter-spacing: 0.02em;
+			}
+
+			.cert-subbar {
+				display: flex;
+				align-items: flex-end;
+				gap: 14px;
+				padding: 0 20px;
+				background: linear-gradient(180deg, #cde0f8 0%, #dce9fb 100%);
+				border-bottom: 1px solid #c1d0e8;
+			}
+
+			.cert-menu {
+				margin-top: 10px;
+				padding: 6px 14px 4px;
+				border-radius: 10px 10px 0 0;
+				background: linear-gradient(180deg, #7aa6d4 0%, #5e86b8 100%);
+				box-shadow: inset 0 1px 0 rgba(255,255,255,0.5);
+				color: #fff;
+				text-align: center;
+			}
+
+			.cert-menu strong {
+				display: block;
+				font-size: 18px;
+				line-height: 1;
+			}
+
+			.cert-menu span {
+				display: block;
+				margin-top: 4px;
+				font-size: 11px;
+				opacity: 0.95;
+			}
+
+			.cert-wrap {
+				padding: 14px 18px 18px;
+			}
+
+			.cert-card {
+				background: #fff;
+				border: 1px solid #d0d8e4;
+			}
+
+			.cert-card__title {
+				padding: 8px 14px;
+				font-size: 13px;
+				font-weight: 700;
+				color: #4b5563;
+				text-transform: uppercase;
+			}
+
+			.cert-toolbar {
+				display: flex;
+				gap: 8px;
+				padding: 0 10px 12px;
+			}
+
+			.cert-toolbar button {
+				height: 24px;
+				padding: 0 12px;
+				border: 1px solid #c7d0dc;
+				border-radius: 2px;
+				background: #fff;
+				font-size: 12px;
+				color: #4b5563;
+			}
+
+			.cert-form {
+				margin: 0 8px 8px;
+				padding: 8px 10px 10px;
+				border: 1px solid #d0d8e4;
+			}
+
+			.cert-row {
+				display: grid;
+				grid-template-columns: 170px 110px 1fr 240px;
+				gap: 10px;
+				align-items: end;
+				margin-bottom: 8px;
+			}
+
+			.cert-field label {
+				display: block;
+				margin-bottom: 2px;
+				font-size: 12px;
+				font-weight: 700;
+				color: #374151;
+			}
+
+			.cert-field input,
+			.cert-field select {
+				width: 100%;
+				height: 20px;
+				border: 1px solid #b7c2d1;
+				padding: 0 6px;
+				font-size: 12px;
+				background: #fff;
+			}
+
+			.cert-help {
+				padding: 8px 10px;
+				border: 1px solid #d0d8e4;
+				font-size: 11px;
+				color: #2563eb;
+			}
+
+			.cert-help div:first-child {
+				color: #f97316;
+			}
+
+			.cert-bottom {
+				display: flex;
+				justify-content: flex-end;
+				padding: 10px 0 0;
+				font-size: 12px;
+			}
+
+			.cert-bottom a {
+				color: #1d4ed8;
+				font-weight: 700;
+			}
+
+			@media (max-width: 991.98px) {
+				.cert-top {
+					flex-direction: column;
+					align-items: stretch;
+				}
+
+				.cert-top__left,
+				.cert-top__right {
+					justify-content: center;
+				}
+
+				.cert-row {
+					grid-template-columns: 1fr;
+				}
+			}
+		</style>
+	</head>
+	<body class="cert-page">
+		<div class="cert-top">
+			<div class="cert-top__left">
+				<div class="cert-badge"><i class="fas fa-landmark"></i><span>PREFCG</span></div>
+				<div class="cert-title">PORTAL DE SERVIÇOS CERTIDÃO EMPRESA/AUTÔNOMO</div>
+			</div>
+			<div class="cert-top__right">
+				<div class="cert-siat">SIAT</div>
+			</div>
+		</div>
+
+		<div class="cert-subbar">
+			<div class="cert-menu">
+				<strong>SERVIÇOS</strong>
+				<span>Prestações de Serviços para a População</span>
+			</div>
+		</div>
+
+		<div class="cert-wrap">
+			<div class="cert-card">
+				<div class="cert-card__title">Emitir Certidão Portal</div>
+
+				<div class="cert-toolbar">
+					<button type="button">Limpar</button>
+					<button type="button">Emitir Certidão</button>
+				</div>
+
+				<div class="cert-form">
+					<div class="cert-row">
+						<div class="cert-field">
+							<label>Cadastro</label>
+							<select>
+								<option>Mobiliário - Empresa/Autônomo</option>
+							</select>
+						</div>
+						<div class="cert-field">
+							<label>Inscrição Municipal</label>
+							<input type="text" />
+						</div>
+						<div class="cert-field">
+							<label>Nome/razão social</label>
+							<input type="text" />
+						</div>
+						<div class="cert-help">
+							<div>* Itens Obrigatórios</div>
+							<div>● Pelo menos um destes itens deve ser preenchido</div>
+						</div>
+					</div>
+
+					<div class="cert-row" style="grid-template-columns: 300px 160px auto;">
+						<div class="cert-field">
+							<label>Tipo Certidão</label>
+							<select>
+								<option>ALVARA DE LOCALIZACAO E FUNCIONAMENTO</option>
+							</select>
+						</div>
+						<div class="cert-field">
+							<label>Data hora lavratura</label>
+							<input type="text" value="06/04/2026 16:59:05" />
+						</div>
+						<div></div>
+					</div>
+				</div>
+			</div>
+
+			<div class="cert-bottom"><a href="secretaria-municipal-fazenda.html">VOLTAR PARA PÁGINA INICIAL</a></div>
+		</div>
+	</body>
+</html>

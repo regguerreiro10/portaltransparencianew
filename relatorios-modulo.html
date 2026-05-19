@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html class="no-js" lang="pt-BR">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="x-ua-compatible" content="ie=edge" />
+		<title>Modulo de Relatorios | Transparencia</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png" />
+		<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="assets/css/animate.min.css" />
+		<link rel="stylesheet" href="assets/css/magnific-popup.css" />
+		<link rel="stylesheet" href="assets/css/fontawesome-all.min.css" />
+		<link rel="stylesheet" href="assets/css/flaticon.css" />
+		<link rel="stylesheet" href="assets/css/odometer.css" />
+		<link rel="stylesheet" href="assets/css/swiper-bundle.css" />
+		<link rel="stylesheet" href="assets/css/aos.css" />
+		<link rel="stylesheet" href="assets/css/default.css" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<style>
+			.relatorios-area {
+				padding: 110px 0 120px;
+				background:
+					linear-gradient(180deg, rgba(255, 212, 0, 0.14) 0%, rgba(255, 255, 255, 0) 180px),
+					#f8fbff;
+			}
+
+			.relatorios-shell {
+				background: #fff;
+				border-radius: 22px;
+				border: 1px solid rgba(15, 23, 42, 0.08);
+				box-shadow: 0 24px 60px rgba(15, 23, 42, 0.1);
+				overflow: hidden;
+			}
+
+			.relatorios-shell__top {
+				padding: 34px 36px 22px;
+				border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+				background: linear-gradient(90deg, #0f4c81 0%, #1f6aa5 100%);
+				color: #fff;
+			}
+
+			.relatorios-shell__top h1 {
+				margin: 0 0 10px;
+				font-size: 36px;
+				color: #fff;
+			}
+
+			.relatorios-shell__top p {
+				margin: 0;
+				max-width: 920px;
+				color: rgba(255, 255, 255, 0.88);
+				line-height: 1.7;
+			}
+
+			.relatorios-toolbar {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 12px;
+				padding: 18px 36px;
+				background: #ffd400;
+			}
+
+			.relatorios-chip {
+				padding: 8px 14px;
+				background: rgba(255, 255, 255, 0.9);
+				border-radius: 999px;
+				font-size: 13px;
+				font-weight: 600;
+				color: #17324d;
+			}
+
+			.relatorios-admin-btn {
+				display: inline-flex;
+				align-items: center;
+				gap: 8px;
+				padding: 9px 16px;
+				background: #0f4c81;
+				border-radius: 999px;
+				font-size: 13px;
+				font-weight: 700;
+				color: #fff;
+				transition: 0.2s ease;
+			}
+
+			.relatorios-admin-btn:hover,
+			.relatorios-admin-btn:focus {
+				background: #17324d;
+				color: #fff;
+			}
+
+			.relatorios-module {
+				padding: 26px 36px 12px;
+				background: #f3f6fa;
+				border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+			}
+
+			.relatorios-module__grid {
+				display: grid;
+				grid-template-columns: repeat(6, minmax(0, 1fr));
+				gap: 18px 14px;
+			}
+
+			.relatorios-module__item {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+				min-height: 96px;
+				padding: 16px 12px;
+				border-radius: 16px;
+				text-align: center;
+				color: #5b7088;
+				background: transparent;
+				border: 1px solid transparent;
+				transition: 0.25s ease;
+			}
+
+			.relatorios-module__item:hover,
+			.relatorios-module__item:focus,
+			.relatorios-module__item.is-active {
+				color: #17324d;
+				background: #fff;
+				border-color: #d8e2ee;
+				transform: translateY(-2px);
+				box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
+			}
+
+			.relatorios-module__item i {
+				margin-bottom: 10px;
+				font-size: 19px;
+				color: #6e7f93;
+			}
+
+			.relatorios-module__item.is-active i {
+				color: #0f4c81;
+			}
+
+			.relatorios-module__item span {
+				display: block;
+				font-size: 14px;
+				font-weight: 500;
+				line-height: 1.35;
+			}
+
+			.relatorios-content {
+				padding: 34px 36px 40px;
+			}
+
+			.relatorios-header {
+				display: flex;
+				flex-wrap: wrap;
+				align-items: center;
+				justify-content: space-between;
+				gap: 14px;
+				margin-bottom: 22px;
+			}
+
+			.relatorios-section-title {
+				margin: 0;
+				font-size: 30px;
+				color: #17324d;
+			}
+
+			.relatorios-advanced-toggle {
+				display: inline-flex;
+				align-items: center;
+				gap: 8px;
+				padding: 12px 16px;
+				border-radius: 10px;
+				border: 1px solid #d6e1ed;
+				background: #f5f9ff;
+				color: #17324d;
+				font-weight: 600;
+			}
+
+			.relatorios-filter-grid {
+				display: grid;
+				grid-template-columns: repeat(3, minmax(0, 1fr));
+				gap: 18px;
+				margin-bottom: 20px;
+			}
+
+			.relatorios-filter-group label {
+				display: block;
+				margin-bottom: 8px;
+				font-size: 14px;
+				font-weight: 600;
+				color: #17324d;
+			}
+
+			.relatorios-filter-group input,
+			.relatorios-filter-group select {
+				width: 100%;
+				height: 48px;
+				border: 1px solid #cfd8e3;
+				border-radius: 10px;
+				padding: 0 14px;
+				background: #fff;
+				color: #17324d;
+			}
+
+			.relatorios-advanced-panel {
+				display: none;
+				margin-bottom: 22px;
+				padding: 22px;
+				border: 1px solid #dbe8f5;
+				border-radius: 16px;
+				background: #f7fbff;
+			}
+
+			.relatorios-advanced-panel.is-open {
+				display: block;
+			}
+
+			.relatorios-actions {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 12px;
+				margin-bottom: 20px;
+			}
+
+			.relatorios-actions .btn {
+				min-width: 138px;
+			}
+
+			.relatorios-resume {
+				display: grid;
+				grid-template-columns: repeat(4, minmax(0, 1fr));
+				gap: 16px;
+				margin-bottom: 26px;
+			}
+
+			.relatorios-kpi {
+				padding: 18px 20px;
+				border-radius: 14px;
+				background: #f5f9ff;
+				border: 1px solid #dbe8f5;
+			}
+
+			.relatorios-kpi span {
+				display: block;
+				margin-bottom: 6px;
+				font-size: 13px;
+				text-transform: uppercase;
+				letter-spacing: 0.04em;
+				color: #6a7c8f;
+			}
+
+			.relatorios-kpi strong {
+				font-size: 28px;
+				color: #17324d;
+			}
+
+			.relatorios-overview {
+				display: grid;
+				grid-template-columns: repeat(2, minmax(0, 1fr));
+				gap: 18px;
+				margin-bottom: 26px;
+			}
+
+			.relatorios-card {
+				padding: 24px;
+				border-radius: 18px;
+				border: 1px solid #dbe8f5;
+				background: linear-gradient(180deg, #ffffff 0%, #f7fbff 100%);
+			}
+
+			.relatorios-card--downloads {
+				border-color: rgba(15, 76, 129, 0.18);
+				box-shadow: 0 18px 40px rgba(15, 76, 129, 0.08);
+			}
+
+			.relatorios-card--auditoria {
+				border-color: rgba(211, 84, 0, 0.18);
+				box-shadow: 0 18px 40px rgba(211, 84, 0, 0.08);
+			}
+
+			.relatorios-card__eyebrow {
+				display: inline-flex;
+				align-items: center;
+				gap: 8px;
+				margin-bottom: 12px;
+				font-size: 12px;
+				font-weight: 700;
+				letter-spacing: 0.06em;
+				text-transform: uppercase;
+			}
+
+			.relatorios-card--downloads .relatorios-card__eyebrow {
+				color: #0f4c81;
+			}
+
+			.relatorios-card--auditoria .relatorios-card__eyebrow {
+				color: #b45309;
+			}
+
+			.relatorios-card h3 {
+				margin: 0 0 10px;
+				font-size: 24px;
+				color: #17324d;
+			}
+
+			.relatorios-card p {
+				margin: 0 0 18px;
+				color: #5b7088;
+				line-height: 1.7;
+			}
+
+			.relatorios-card__total {
+				display: block;
+				margin-bottom: 14px;
+				font-size: 30px;
+				font-weight: 800;
+				color: #17324d;
+			}
+
+			.relatorios-card__meta {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 10px;
+			}
+
+			.relatorios-card__meta span {
+				padding: 7px 12px;
+				border-radius: 999px;
+				background: #eef5fc;
+				font-size: 13px;
+				font-weight: 600;
+				color: #17324d;
+			}
+
+			.relatorios-table-wrap {
+				border: 1px solid #dde7f1;
+				border-radius: 16px;
+				overflow: hidden;
+				background: #fff;
+			}
+
+			.relatorios-table {
+				width: 100%;
+				margin: 0;
+			}
+
+			.relatorios-table thead th {
+				background: #eff6fd;
+				color: #17324d;
+				font-size: 13px;
+				text-transform: uppercase;
+				letter-spacing: 0.04em;
+				vertical-align: middle;
+			}
+
+			.relatorios-table tbody td {
+				color: #314960;
+				vertical-align: middle;
+			}
+
+			.relatorios-table tbody tr:nth-child(even) td {
+				background: #fbfdff;
+			}
+
+			.relatorios-item-title {
+				margin-bottom: 4px;
+				font-weight: 700;
+				color: #17324d;
+			}
+
+			.relatorios-small {
+				font-size: 13px;
+				color: #6a7c8f;
+			}
+
+			.relatorios-pill {
+				display: inline-flex;
+				align-items: center;
+				padding: 6px 12px;
+				border-radius: 999px;
+				font-size: 12px;
+				font-weight: 800;
+				text-transform: uppercase;
+				letter-spacing: 0.04em;
+			}
+
+			.relatorios-pill--download {
+				background: rgba(15, 76, 129, 0.12);
+				color: #0f4c81;
+			}
+
+			.relatorios-pill--acesso {
+				background: rgba(22, 160, 133, 0.12);
+				color: #12806a;
+			}
+
+			.relatorios-pill--atividade {
+				background: rgba(211, 84, 0, 0.12);
+				color: #b45309;
+			}
+
+			.relatorios-view-btn {
+				display: inline-flex;
+				align-items: center;
+				gap: 8px;
+				padding: 8px 12px;
+				border-radius: 10px;
+				border: 1px solid #d6e1ed;
+				background: #fff;
+				color: #17324d;
+				font-size: 13px;
+				font-weight: 600;
+			}
+
+			.relatorios-view-btn:hover,
+			.relatorios-view-btn:focus {
+				background: #f5f9ff;
+				color: #0f4c81;
+				border-color: #0f4c81;
+			}
+
+			.relatorios-empty-state {
+				padding: 42px 20px;
+				text-align: center;
+				color: #5a6f86;
+			}
+
+			@media (max-width: 991.98px) {
+				.relatorios-module__grid,
+				.relatorios-filter-grid,
+				.relatorios-resume,
+				.relatorios-overview {
+					grid-template-columns: repeat(2, minmax(0, 1fr));
+				}
+			}
+
+			@media (max-width: 767.98px) {
+				.relatorios-area {
+					padding: 90px 0;
+				}
+
+				.relatorios-shell__top,
+				.relatorios-toolbar,
+				.relatorios-module,
+				.relatorios-content {
+					padding-left: 20px;
+					padding-right: 20px;
+				}
+
+				.relatorios-shell__top h1 {
+					font-size: 28px;
+				}
+
+				.relatorios-module__grid,
+				.relatorios-filter-grid,
+				.relatorios-resume,
+				.relatorios-overview {
+					grid-template-columns: 1fr;
+				}
+
+				.relatorios-header {
+					align-items: flex-start;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<button class="scroll__top scroll-to-target" data-target="html">
+			<i class="fas fa-angle-up"></i>
+		</button>
+
+		<header>
+			<div id="header-fixed-height"></div>
+			<div id="sticky-header" class="tg-header__area">
+				<div class="container custom-container">
+					<div class="row">
+						<div class="col-12">
+							<div class="tgmenu__wrap">
+								<nav class="tgmenu__nav">
+									<div class="logo">
+										<a href="index.html"><img src="assets/img/logo/logo.png" alt="Logo" /></a>
+									</div>
+									<div class="tgmenu__navbar-wrap tgmenu__main-menu d-none d-lg-flex">
+										<ul class="navigation">
+											<li><a href="index.html">In&iacute;cio</a></li>
+											<li><a href="services-3.html">Sites Municipais</a></li>
+											<li><a href="services.html">Portal Transpar&ecirc;ncia</a></li>
+											<li><a href="services-5.html">Servi&ccedil;os</a></li>
+											<li><a href="blog.html">Not&iacute;cias</a></li>
+											<li><a href="contact.html">Fale Conosco</a></li>
+										</ul>
+									</div>
+									<div class="tgmenu__action d-none d-md-block">
+										<ul class="list-wrap">
+											<li class="header-search">
+												<a href="javascript:void(0)" class="search-open-btn" aria-label="Abrir pesquisa">
+													<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none">
+														<path d="M19 19.0002L14.657 14.6572M14.657 14.6572C15.3999 13.9143 15.9892 13.0324 16.3912 12.0618C16.7933 11.0911 17.0002 10.0508 17.0002 9.00021C17.0002 7.9496 16.7933 6.90929 16.3913 5.93866C15.9892 4.96803 15.3999 4.08609 14.657 3.34321C13.9141 2.60032 13.0322 2.01103 12.0616 1.60898C11.0909 1.20693 10.0506 1 9.00002 1C7.94942 1 6.90911 1.20693 5.93848 1.60898C4.96785 2.01103 4.08591 2.60032 3.34302 3.34321C1.84269 4.84354 0.999817 6.87842 0.999817 9.00021C0.999817 11.122 1.84269 13.1569 3.34302 14.6572C4.84335 16.1575 6.87824 17.0004 9.00002 17.0004C11.1218 17.0004 13.1567 16.1575 14.657 14.6572Z" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+													</svg>
+												</a>
+											</li>
+										</ul>
+									</div>									<div class="mobile-nav-toggler">
+										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18" fill="none">
+											<path d="M0 2C0 0.895431 0.895431 0 2 0C3.10457 0 4 0.895431 4 2C4 3.10457 3.10457 4 2 4C0.895431 4 0 3.10457 0 2Z" fill="currentcolor" />
+											<path d="M0 9C0 7.89543 0.895431 7 2 7C3.10457 7 4 7.89543 4 9C4 10.1046 3.10457 11 2 11C0.895431 11 0 10.1046 0 9Z" fill="currentcolor" />
+											<path d="M0 16C0 14.8954 0.895431 14 2 14C3.10457 14 4 14.8954 4 16C4 17.1046 3.10457 18 2 18C0.895431 18 0 17.1046 0 16Z" fill="currentcolor" />
+											<path d="M7 2C7 0.895431 7.89543 0 9 0C10.1046 0 11 0.895431 11 2C11 3.10457 10.1046 4 9 4C7.89543 4 7 3.10457 7 2Z" fill="currentcolor" />
+											<path d="M7 9C7 7.89543 7.89543 7 9 7C10.1046 7 11 7.89543 11 9C11 10.1046 10.1046 11 9 11C7.89543 11 7 10.1046 7 9Z" fill="currentcolor" />
+											<path d="M7 16C7 14.8954 7.89543 14 9 14C10.1046 14 11 14.8954 11 16C11 17.1046 10.1046 18 9 18C7.89543 18 7 17.1046 7 16Z" fill="currentcolor" />
+											<path d="M14 2C14 0.895431 14.8954 0 16 0C17.1046 0 18 0.895431 18 2C18 3.10457 17.1046 4 16 4C14.8954 4 14 3.10457 14 2Z" fill="currentcolor" />
+											<path d="M14 9C14 7.89543 14.8954 7 16 7C17.1046 7 18 7.89543 18 9C18 10.1046 17.1046 11 16 11C14.8954 11 14 10.1046 14 9Z" fill="currentcolor" />
+											<path d="M14 16C14 14.8954 14.8954 14 16 14C17.1046 14 18 14.8954 18 16C18 17.1046 17.1046 18 16 18C14.8954 18 14 17.1046 14 16Z" fill="currentcolor" />
+										</svg>
+									</div>
+								</nav>
+							</div>
+							<div class="tgmobile__menu">
+								<nav class="tgmobile__menu-box">
+									<div class="close-btn"><i class="fas fa-times"></i></div>
+									<div class="nav-logo">
+										<a href="index.html"><img src="assets/img/logo/logo.png" alt="Logo" /></a>
+									</div>
+									<div class="tgmobile__menu-outer"></div>
+								</nav>
+							</div>
+							<div class="tgmobile__menu-backdrop"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- header-search -->
+			<div class="search__popup">
+				<div class="container">
+					<div class="row">
+						<div class="col-12">
+							<div class="search__wrapper">
+								<div class="search__close">
+									<button type="button" class="search-close-btn" aria-label="Fechar pesquisa">
+										<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M17 1L1 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+											<path d="M1 1L17 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+										</svg>
+									</button>
+								</div>
+								<div class="search__form">
+									<form action="formulario.php" method="get">
+										<h2 class="search-advanced__title">Busca no portal</h2>
+										<div class="search__input">
+											<input class="search-input-field" type="text" name="q" placeholder="Digite o termo da consulta" />
+											<span class="search-focus-border"></span>
+											<button type="submit" aria-label="Pesquisar">
+												<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+													<path d="M9.55 18.1C14.272 18.1 18.1 14.272 18.1 9.55C18.1 4.82797 14.272 1 9.55 1C4.82797 1 1 4.82797 1 9.55C1 14.272 4.82797 18.1 9.55 18.1Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+													<path d="M19.0002 19.0002L17.2002 17.2002" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+												</svg>
+											</button>
+										</div>
+										<div class="search-advanced__message" aria-live="polite"></div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="search-popup-overlay"></div>
+			<!-- header-search-end -->		</header>
+
+		<main class="fix">
+			<section class="relatorios-area">
+				<div class="container">
+					<div class="relatorios-shell">
+						<div class="relatorios-shell__top">
+							<h1>Modulo de Relatorios</h1>
+							<p>
+								Consulte relatorios de downloads, acessos e atividades, acompanhe estatisticas de uso do sistema,
+								aplique filtros por data, tipo e usuario e exporte dados para auditoria e controle.
+							</p>
+						</div>
+						<div class="relatorios-toolbar">
+							<span class="relatorios-chip">Relatorios de downloads</span>
+							<span class="relatorios-chip">Relatorios de acessos</span>
+							<span class="relatorios-chip">Relatorios de atividades</span>
+							<span class="relatorios-chip">Estatisticas de uso</span>
+							<span class="relatorios-chip">Exportacao de dados</span>
+							<a class="relatorios-admin-btn" href="admin/index.php">
+								<i class="fas fa-chart-line"></i>
+								<span>Painel de Auditoria</span>
+							</a>
+						</div>
+						<div class="relatorios-module">
+							<div class="relatorios-module__grid">
+								<a class="relatorios-module__item" href="gestao-documentos.html">
+									<i class="fas fa-file-alt"></i>
+									<span>Gestao de Documentos</span>
+								</a>
+								<a class="relatorios-module__item" href="modulo-financeiro.html">
+									<i class="fas fa-wallet"></i>
+									<span>Modulo Financeiro</span>
+								</a>
+								<a class="relatorios-module__item is-active" href="relatorios-modulo.html" aria-current="page">
+									<i class="fas fa-chart-bar"></i>
+									<span>Modulo de Relatorios</span>
+								</a>
+								<a class="relatorios-module__item" href="legislacao-portal.html">
+									<i class="fas fa-balance-scale"></i>
+									<span>Legislacao</span>
+								</a>
+								<a class="relatorios-module__item" href="editais-licitacao-lista.html">
+									<i class="fas fa-file-signature"></i>
+									<span>Editais</span>
+								</a>
+								<a class="relatorios-module__item" href="licitacoes-portal.html">
+									<i class="fas fa-gavel"></i>
+									<span>Licitacoes</span>
+								</a>
+								<a class="relatorios-module__item" href="dados-abertos-portal.html">
+									<i class="fas fa-database"></i>
+									<span>Dados Abertos</span>
+								</a>
+								<a class="relatorios-module__item" href="e-sic-informacoes-cidadao.html">
+									<i class="fas fa-info-circle"></i>
+									<span>e-SIC</span>
+								</a>
+								<a class="relatorios-module__item" href="contratos-portal.html">
+									<i class="fas fa-file-contract"></i>
+									<span>Contratos</span>
+								</a>
+								<a class="relatorios-module__item" href="convenios-portal.html">
+									<i class="fas fa-handshake"></i>
+									<span>Convenios</span>
+								</a>
+								<a class="relatorios-module__item" href="prestacao-contas.html">
+									<i class="fas fa-clipboard-check"></i>
+									<span>Prestacao de Contas</span>
+								</a>
+								<a class="relatorios-module__item" href="legislacao-portal.html">
+									<i class="fas fa-book"></i>
+									<span>Biblioteca Legal</span>
+								</a>
+								<a class="relatorios-module__item" href="consulta-processo-proprietario.html">
+									<i class="fas fa-search"></i>
+									<span>Consulta Publica</span>
+								</a>
+								<a class="relatorios-module__item" href="services.html">
+									<i class="fas fa-arrow-left"></i>
+									<span>Voltar</span>
+								</a>
+							</div>
+						</div>
+						<div class="relatorios-content">
+							<div class="relatorios-header">
+								<h2 class="relatorios-section-title">Relatorios e Estatisticas</h2>
+								<button class="relatorios-advanced-toggle" id="relatorios-advanced-toggle" type="button">
+									<i class="fas fa-sliders-h"></i>
+									Filtros avancados
+								</button>
+							</div>
+							<div class="relatorios-filter-grid">
+								<div class="relatorios-filter-group">
+									<label for="relatorios-data-inicial">Data inicial</label>
+									<input type="date" id="relatorios-data-inicial" />
+								</div>
+								<div class="relatorios-filter-group">
+									<label for="relatorios-tipo">Tipo</label>
+									<select id="relatorios-tipo">
+										<option value="">Todos</option>
+										<option value="download">Downloads</option>
+										<option value="acesso">Acessos</option>
+										<option value="atividade">Atividades</option>
+									</select>
+								</div>
+								<div class="relatorios-filter-group">
+									<label for="relatorios-usuario">Usuario</label>
+									<select id="relatorios-usuario">
+										<option value="">Todos</option>
+									</select>
+								</div>
+							</div>
+							<div class="relatorios-advanced-panel" id="relatorios-advanced-panel">
+								<div class="relatorios-filter-grid">
+									<div class="relatorios-filter-group">
+										<label for="relatorios-data-final">Data final</label>
+										<input type="date" id="relatorios-data-final" />
+									</div>
+									<div class="relatorios-filter-group">
+										<label for="relatorios-exportacao">Exportacao</label>
+										<select id="relatorios-exportacao">
+											<option value="csv">CSV</option>
+											<option value="json">JSON</option>
+										</select>
+									</div>
+									<div class="relatorios-filter-group">
+										<label for="relatorios-busca">Descricao</label>
+										<input type="text" id="relatorios-busca" placeholder="Buscar termo do relatorio" />
+									</div>
+								</div>
+							</div>
+							<div class="relatorios-actions">
+								<button class="btn" id="relatorios-consultar" type="button">Consultar</button>
+								<button class="btn btn-two" id="relatorios-exportar" type="button">Exportar dados</button>
+								<button class="btn btn-three" id="relatorios-limpar" type="button">Limpar filtros</button>
+							</div>
+							<div class="relatorios-resume">
+								<div class="relatorios-kpi">
+									<span>Total de downloads</span>
+									<strong id="relatorios-total-downloads">0</strong>
+								</div>
+								<div class="relatorios-kpi">
+									<span>Total de acessos</span>
+									<strong id="relatorios-total-acessos">0</strong>
+								</div>
+								<div class="relatorios-kpi">
+									<span>Total de atividades</span>
+									<strong id="relatorios-total-atividades">0</strong>
+								</div>
+								<div class="relatorios-kpi">
+									<span>Usuarios unicos</span>
+									<strong id="relatorios-total-usuarios">0</strong>
+								</div>
+							</div>
+							<div class="relatorios-overview">
+								<div class="relatorios-card relatorios-card--downloads">
+									<div class="relatorios-card__eyebrow">
+										<i class="fas fa-download"></i>
+										<span>Auditoria</span>
+									</div>
+									<h3>Downloads e acessos</h3>
+									<p>Consolide o volume de downloads e acessos para identificar uso do portal e documentos com maior demanda.</p>
+									<strong class="relatorios-card__total" id="relatorios-card-downloads-total">0 eventos</strong>
+									<div class="relatorios-card__meta">
+										<span id="relatorios-card-downloads-top">Maior volume: --</span>
+										<span id="relatorios-card-downloads-usuarios">0 usuarios</span>
+									</div>
+								</div>
+								<div class="relatorios-card relatorios-card--auditoria">
+									<div class="relatorios-card__eyebrow">
+										<i class="fas fa-user-shield"></i>
+										<span>Controle</span>
+									</div>
+									<h3>Atividades do sistema</h3>
+									<p>Monitore as acoes executadas pelos usuarios para apoiar auditoria, rastreabilidade e governanca.</p>
+									<strong class="relatorios-card__total" id="relatorios-card-atividades-total">0 registros</strong>
+									<div class="relatorios-card__meta">
+										<span id="relatorios-card-atividades-top">Acao principal: --</span>
+										<span id="relatorios-card-atividades-filtro">Filtro ativo: Todos</span>
+									</div>
+								</div>
+							</div>
+							<div class="relatorios-table-wrap">
+								<table class="table relatorios-table">
+									<thead>
+										<tr>
+											<th>Tipo</th>
+											<th>Relatorio</th>
+											<th>Usuario</th>
+											<th>Data</th>
+											<th>Resultado</th>
+											<th>Acoes</th>
+										</tr>
+									</thead>
+									<tbody id="relatorios-table-body">
+										<tr><td colspan="6" class="relatorios-empty-state">Carregando relatorios...</td></tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<footer>
+			<div class="footer__area-three">
+				<div class="footer__bottom-three">
+					<div class="container">
+						<div class="row align-items-center">
+							<div class="col-lg-6">
+								<div class="copyright-text-two">
+									<p>Copyright &copy; <a href="index.html">Ti-Genesis</a> | Todos os direitos reservados</p>
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div class="footer__social-three">
+									<ul class="list-wrap justify-content-center justify-content-lg-end">
+										<li><a href="javascript:void(0)"><i class="fab fa-facebook-f"></i></a></li>
+										<li><a href="javascript:void(0)"><i class="fab fa-twitter"></i></a></li>
+										<li><a href="javascript:void(0)"><i class="fab fa-instagram"></i></a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+		<script src="assets/js/vendor/jquery-3.6.0.min.js"></script>
+		<script src="assets/js/bootstrap.bundle.min.js"></script>
+		<script src="assets/js/jquery.magnific-popup.min.js"></script>
+		<script src="assets/js/jquery.odometer.min.js"></script>
+		<script src="assets/js/jquery.appear.js"></script>
+		<script src="assets/js/gsap.js"></script>
+		<script src="assets/js/ScrollTrigger.js"></script>
+		<script src="assets/js/SplitText.js"></script>
+		<script src="assets/js/gsap-animation.js"></script>
+		<script src="assets/js/jquery.parallaxScroll.min.js"></script>
+		<script src="assets/js/swiper-bundle.js"></script>
+		<script src="assets/js/ajax-form.js"></script>
+		<script src="assets/js/wow.min.js"></script>
+		<script src="assets/js/aos.js"></script>
+		<script src="assets/js/main.js"></script>
+		<script>
+			(function () {
+				const advancedToggle = document.getElementById('relatorios-advanced-toggle');
+				const advancedPanel = document.getElementById('relatorios-advanced-panel');
+				const consultarButton = document.getElementById('relatorios-consultar');
+				const exportarButton = document.getElementById('relatorios-exportar');
+				const limparButton = document.getElementById('relatorios-limpar');
+				const dataInicialInput = document.getElementById('relatorios-data-inicial');
+				const dataFinalInput = document.getElementById('relatorios-data-final');
+				const tipoSelect = document.getElementById('relatorios-tipo');
+				const usuarioSelect = document.getElementById('relatorios-usuario');
+				const exportacaoSelect = document.getElementById('relatorios-exportacao');
+				const buscaInput = document.getElementById('relatorios-busca');
+				const tableBody = document.getElementById('relatorios-table-body');
+				const totalDownloads = document.getElementById('relatorios-total-downloads');
+				const totalAcessos = document.getElementById('relatorios-total-acessos');
+				const totalAtividades = document.getElementById('relatorios-total-atividades');
+				const totalUsuarios = document.getElementById('relatorios-total-usuarios');
+				const cardDownloadsTotal = document.getElementById('relatorios-card-downloads-total');
+				const cardDownloadsTop = document.getElementById('relatorios-card-downloads-top');
+				const cardDownloadsUsuarios = document.getElementById('relatorios-card-downloads-usuarios');
+				const cardAtividadesTotal = document.getElementById('relatorios-card-atividades-total');
+				const cardAtividadesTop = document.getElementById('relatorios-card-atividades-top');
+				const cardAtividadesFiltro = document.getElementById('relatorios-card-atividades-filtro');
+				const fields = [dataInicialInput, dataFinalInput, tipoSelect, usuarioSelect, buscaInput];
+
+				const reportData = [
+					{ id: 1, type: 'download', title: 'Downloads de documentos publicos', detail: 'Relatorio de download por documento', user: 'Auditoria Interna', date: '2026-04-18', result: '184 downloads', actionLabel: 'Exportar CSV' },
+					{ id: 2, type: 'acesso', title: 'Acessos ao portal financeiro', detail: 'Mapa de acessos por modulo', user: 'Controladoria', date: '2026-04-17', result: '932 acessos', actionLabel: 'Abrir relatorio' },
+					{ id: 3, type: 'atividade', title: 'Atividades administrativas', detail: 'Acoes executadas no sistema', user: 'Administrador', date: '2026-04-16', result: '57 atividades', actionLabel: 'Exportar JSON' },
+					{ id: 4, type: 'download', title: 'Downloads de contratos', detail: 'Arquivos mais baixados no periodo', user: 'Controladoria', date: '2026-04-14', result: '76 downloads', actionLabel: 'Exportar CSV' },
+					{ id: 5, type: 'acesso', title: 'Acessos por usuario', detail: 'Estatistica consolidada de uso', user: 'TI', date: '2026-04-12', result: '41 usuarios ativos', actionLabel: 'Abrir relatorio' },
+					{ id: 6, type: 'atividade', title: 'Auditoria de atualizacoes', detail: 'Mudancas realizadas em registros publicos', user: 'Gabinete', date: '2026-04-10', result: '23 alteracoes', actionLabel: 'Exportar JSON' }
+				];
+
+				function populateUsers(rows) {
+					const currentValue = usuarioSelect.value;
+					const users = Array.from(new Set(rows.map(function (item) {
+						return item.user;
+					}))).sort();
+
+					usuarioSelect.innerHTML = ['<option value="">Todos</option>'].concat(users.map(function (user) {
+						return '<option value="' + user + '">' + user + '</option>';
+					})).join('');
+
+					if (currentValue && users.indexOf(currentValue) !== -1) {
+						usuarioSelect.value = currentValue;
+					}
+				}
+
+				function typeLabel(type) {
+					if (type === 'download') return 'Download';
+					if (type === 'acesso') return 'Acesso';
+					return 'Atividade';
+				}
+
+				function typeClass(type) {
+					if (type === 'download') return 'relatorios-pill relatorios-pill--download';
+					if (type === 'acesso') return 'relatorios-pill relatorios-pill--acesso';
+					return 'relatorios-pill relatorios-pill--atividade';
+				}
+
+				function formatDate(value) {
+					if (!value) return '--';
+					const parts = value.split('-');
+					return parts[2] + '/' + parts[1] + '/' + parts[0];
+				}
+
+				function updateSummary(rows) {
+					const downloads = rows.filter(function (item) { return item.type === 'download'; }).length;
+					const acessos = rows.filter(function (item) { return item.type === 'acesso'; }).length;
+					const atividades = rows.filter(function (item) { return item.type === 'atividade'; }).length;
+					const usuarios = new Set(rows.map(function (item) { return item.user; })).size;
+					const topDownloads = rows.filter(function (item) { return item.type === 'download'; })[0];
+					const topAtividades = rows.filter(function (item) { return item.type === 'atividade'; })[0];
+
+					totalDownloads.textContent = downloads;
+					totalAcessos.textContent = acessos;
+					totalAtividades.textContent = atividades;
+					totalUsuarios.textContent = usuarios;
+					cardDownloadsTotal.textContent = (downloads + acessos) + ' eventos';
+					cardDownloadsTop.textContent = 'Maior volume: ' + (topDownloads ? topDownloads.title : '--');
+					cardDownloadsUsuarios.textContent = usuarios + ' usuarios';
+					cardAtividadesTotal.textContent = atividades + ' registros';
+					cardAtividadesTop.textContent = 'Acao principal: ' + (topAtividades ? topAtividades.title : '--');
+					cardAtividadesFiltro.textContent = 'Filtro ativo: ' + (tipoSelect.value ? typeLabel(tipoSelect.value) : 'Todos');
+				}
+
+				function renderTable(rows) {
+					if (!rows.length) {
+						tableBody.innerHTML = '<tr><td colspan="6" class="relatorios-empty-state">Nenhum relatorio encontrado para os filtros selecionados.</td></tr>';
+						return;
+					}
+
+					tableBody.innerHTML = rows.map(function (item) {
+						return [
+							'<tr>',
+								'<td><span class="' + typeClass(item.type) + '">' + typeLabel(item.type) + '</span></td>',
+								'<td><div class="relatorios-item-title">' + item.title + '</div><div class="relatorios-small">' + item.detail + '</div></td>',
+								'<td>' + item.user + '</td>',
+								'<td>' + formatDate(item.date) + '</td>',
+								'<td><strong>' + item.result + '</strong></td>',
+								'<td><button class="relatorios-view-btn" type="button"><i class="fas fa-file-export"></i> ' + item.actionLabel + '</button></td>',
+							'</tr>'
+						].join('');
+					}).join('');
+				}
+
+				function filterRows() {
+					return reportData.filter(function (item) {
+						if (tipoSelect.value && item.type !== tipoSelect.value) {
+							return false;
+						}
+						if (usuarioSelect.value && item.user !== usuarioSelect.value) {
+							return false;
+						}
+						if (dataInicialInput.value && item.date < dataInicialInput.value) {
+							return false;
+						}
+						if (dataFinalInput.value && item.date > dataFinalInput.value) {
+							return false;
+						}
+						if (buscaInput.value.trim()) {
+							const text = (item.title + ' ' + item.detail + ' ' + item.result).toLowerCase();
+							if (text.indexOf(buscaInput.value.trim().toLowerCase()) === -1) {
+								return false;
+							}
+						}
+						return true;
+					}).sort(function (a, b) {
+						return a.date < b.date ? 1 : -1;
+					});
+				}
+
+				function render() {
+					populateUsers(reportData);
+					const filteredRows = filterRows();
+					updateSummary(filteredRows);
+					renderTable(filteredRows);
+				}
+
+				function exportRows() {
+					const filteredRows = filterRows();
+					if (!filteredRows.length) {
+						return;
+					}
+
+					if (exportacaoSelect.value === 'json') {
+						const blob = new Blob([JSON.stringify(filteredRows, null, 2)], { type: 'application/json;charset=utf-8;' });
+						const url = URL.createObjectURL(blob);
+						const link = document.createElement('a');
+						link.href = url;
+						link.download = 'relatorios-estatisticas.json';
+						link.click();
+						URL.revokeObjectURL(url);
+						return;
+					}
+
+					const header = ['Tipo', 'Relatorio', 'Usuario', 'Data', 'Resultado'];
+					const rows = filteredRows.map(function (item) {
+						return [typeLabel(item.type), item.title, item.user, item.date, item.result];
+					});
+					const csv = [header].concat(rows).map(function (row) {
+						return row.map(function (value) {
+							return '"' + String(value).replace(/"/g, '""') + '"';
+						}).join(',');
+					}).join('\n');
+
+					const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+					const url = URL.createObjectURL(blob);
+					const link = document.createElement('a');
+					link.href = url;
+					link.download = 'relatorios-estatisticas.csv';
+					link.click();
+					URL.revokeObjectURL(url);
+				}
+
+				advancedToggle.addEventListener('click', function () {
+					advancedPanel.classList.toggle('is-open');
+				});
+
+				consultarButton.addEventListener('click', render);
+				exportarButton.addEventListener('click', exportRows);
+				limparButton.addEventListener('click', function () {
+					fields.forEach(function (field) {
+						field.value = '';
+					});
+					exportacaoSelect.value = 'csv';
+					render();
+				});
+
+				render();
+			})();
+		</script>
+	</body>
+</html>

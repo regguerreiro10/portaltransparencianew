@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html class="no-js" lang="pt-BR">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="x-ua-compatible" content="ie=edge" />
+		<title>Atas de Registro de Precos</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png" />
+		<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="assets/css/fontawesome-all.min.css" />
+		<style>
+			.siga-page {
+				margin: 0;
+				background: #efefef;
+				font-family: Arial, sans-serif;
+				color: #1f2937;
+			}
+
+			.siga-top {
+				display: grid;
+				grid-template-columns: 263px 1fr;
+				background: #fff;
+				border-top: 3px solid #222;
+				box-shadow: 0 1px 6px rgba(0, 0, 0, 0.18);
+			}
+
+			.siga-brand {
+				display: flex;
+				align-items: center;
+				gap: 12px;
+				padding: 8px 12px;
+				background: #3a6ea5;
+				color: #fff;
+			}
+
+			.siga-brand__crest {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				width: 44px;
+				height: 44px;
+				border-radius: 6px;
+				background: rgba(255, 255, 255, 0.92);
+				color: #3a6ea5;
+				font-size: 20px;
+			}
+
+			.siga-brand__text {
+				font-size: 11px;
+				font-weight: 700;
+				line-height: 1.25;
+			}
+
+			.siga-top__title {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				padding: 18px;
+				font-size: 15px;
+				color: #111827;
+			}
+
+			.siga-layout {
+				display: grid;
+				grid-template-columns: 263px 1fr;
+				min-height: calc(100vh - 65px);
+			}
+
+			.siga-sidebar {
+				padding: 18px 18px 24px;
+				background: #fff;
+				border-right: 1px solid #d1d5db;
+				box-shadow: 2px 0 6px rgba(0, 0, 0, 0.08);
+			}
+
+			.siga-nav-group {
+				margin-bottom: 22px;
+			}
+
+			.siga-nav-group h2 {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				margin: 0 0 10px;
+				font-size: 16px;
+				font-weight: 700;
+				color: #111827;
+			}
+
+			.siga-nav-group ul {
+				margin: 0;
+				padding: 0 0 0 12px;
+				list-style: none;
+			}
+
+			.siga-nav-group li {
+				position: relative;
+				margin-bottom: 10px;
+				font-size: 13px;
+				font-weight: 700;
+				color: #4b5563;
+			}
+
+			.siga-nav-group li::before {
+				content: "";
+				position: absolute;
+				left: -12px;
+				top: 7px;
+				width: 4px;
+				height: 4px;
+				border-radius: 50%;
+				background: #9ca3af;
+			}
+
+			.siga-main {
+				padding: 16px 22px 30px;
+			}
+
+			.siga-heading {
+				margin: 0 0 18px;
+				padding: 10px 12px 14px;
+				background: #fff;
+				font-size: 16px;
+				font-weight: 700;
+				color: #1f8b41;
+			}
+
+			.siga-card {
+				background: #fff;
+				border: 1px solid #d1d5db;
+			}
+
+			.siga-card__title {
+				display: inline-block;
+				margin: -1px 0 0 20px;
+				padding: 10px 16px 8px;
+				border: 1px solid #d1d5db;
+				background: #f6f6f6;
+				font-size: 14px;
+				color: #6b7280;
+			}
+
+			.siga-form {
+				padding: 22px 22px 12px;
+			}
+
+			.siga-form__grid {
+				display: grid;
+				grid-template-columns: 220px 1fr 220px 1fr;
+				gap: 10px 20px;
+				align-items: center;
+			}
+
+			.siga-form label {
+				font-size: 13px;
+				font-weight: 700;
+				color: #111827;
+				text-align: right;
+			}
+
+			.siga-form input,
+			.siga-form select {
+				height: 20px;
+				border: 1px solid #9ca3af;
+				padding: 0 6px;
+				font-size: 13px;
+				color: #374151;
+				background: #fff;
+			}
+
+			.siga-actions {
+				display: flex;
+				gap: 10px;
+				margin-top: 18px;
+			}
+
+			.siga-actions button {
+				height: 28px;
+				padding: 0 16px;
+				border: 0;
+				border-radius: 10px;
+				background: #3399dd;
+				font-size: 13px;
+				font-weight: 700;
+				color: #fff;
+			}
+
+			.siga-empty {
+				padding: 0 0 14px 0;
+				font-size: 13px;
+				color: #4b5563;
+			}
+
+			.siga-footer {
+				margin-top: 16px;
+				font-size: 13px;
+				color: #4b5563;
+			}
+
+			.siga-footer a {
+				color: #1d4ed8;
+				font-weight: 700;
+			}
+
+			@media (max-width: 991.98px) {
+				.siga-top,
+				.siga-layout {
+					grid-template-columns: 1fr;
+				}
+
+				.siga-form__grid {
+					grid-template-columns: 1fr;
+				}
+
+				.siga-form label {
+					text-align: left;
+				}
+			}
+		</style>
+	</head>
+	<body class="siga-page">
+		<div class="siga-top">
+			<div class="siga-brand">
+				<div class="siga-brand__crest"><i class="fas fa-landmark"></i></div>
+				<div class="siga-brand__text">SIGA - Sistema Integrado de<br />Gestao Administrativa</div>
+			</div>
+			<div class="siga-top__title">Prefeitura Municipal de Campo Grande</div>
+		</div>
+
+		<div class="siga-layout">
+			<aside class="siga-sidebar">
+				<div class="siga-nav-group">
+					<h2>Acesso a Participacao <span><i class="fas fa-caret-down"></i></span></h2>
+					<ul>
+						<li>Editais de Licitacao</li>
+						<li>Compra Direta</li>
+						<li>Fornecedores</li>
+					</ul>
+				</div>
+				<div class="siga-nav-group">
+					<h2>Consultas <span><i class="fas fa-caret-down"></i></span></h2>
+					<ul>
+						<li>Licitacoes</li>
+						<li>Resultados Licitacao</li>
+						<li>Atas de Registro de Preco</li>
+						<li>Proposta Pregao Presencial</li>
+					</ul>
+				</div>
+				<div class="siga-nav-group">
+					<h2>Acesso aos Servidores <span><i class="fas fa-caret-down"></i></span></h2>
+					<ul>
+						<li>Sistema de Aquisicao</li>
+					</ul>
+				</div>
+			</aside>
+
+			<main class="siga-main">
+				<h1 class="siga-heading">Registro de Preco</h1>
+				<div class="siga-card">
+					<div class="siga-card__title">Pesquisar Por</div>
+					<div class="siga-form">
+						<div class="siga-form__grid">
+							<label for="ata-numero">Numero da Ata:</label>
+							<input id="ata-numero" type="text" />
+							<label for="ata-item">Descricao do Item da Ata:</label>
+							<input id="ata-item" type="text" />
+							<label for="ata-desc">Descricao da Ata:</label>
+							<input id="ata-desc" type="text" />
+							<label for="ata-status">Status:</label>
+							<select id="ata-status">
+								<option>Vigentes</option>
+								<option>Encerradas</option>
+								<option>Todas</option>
+							</select>
+						</div>
+						<div class="siga-actions">
+							<button type="button">Pesquisar</button>
+							<button type="button">Limpar</button>
+						</div>
+						<div class="siga-empty">Nenhum registro encontrado</div>
+					</div>
+				</div>
+				<div class="siga-footer"><a href="secretaria-licitacoes-contratos.html">Voltar</a> para a pagina da SELC</div>
+			</main>
+		</div>
+	</body>
+</html>

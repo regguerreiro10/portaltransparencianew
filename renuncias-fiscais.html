@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html class="no-js" lang="pt-BR">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="x-ua-compatible" content="ie=edge" />
+		<title>Renúncias Fiscais</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png" />
+		<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="assets/css/fontawesome-all.min.css" />
+		<link rel="stylesheet" href="assets/css/default.css" />
+		<style>
+			.rf-page {
+				background: #fff;
+				color: #17324d;
+			}
+
+			.rf-shell {
+				max-width: 1280px;
+				margin: 0 auto;
+				padding: 0 22px;
+			}
+
+			.rf-topbar {
+				border-bottom: 1px solid #dde5ee;
+				background: #fff;
+			}
+
+			.rf-brand {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 20px;
+				padding: 10px 0;
+			}
+
+			.rf-brand__title {
+				margin: 0;
+				font-size: 18px;
+				font-weight: 300;
+				letter-spacing: 0.01em;
+				text-transform: uppercase;
+				color: #1f5e9c;
+			}
+
+			.rf-brand__title strong {
+				font-weight: 800;
+			}
+
+			.rf-brand__logo img {
+				max-width: 176px;
+				height: auto;
+			}
+
+			.rf-nav {
+				border-top: 1px solid #f1f3f6;
+				border-bottom: 1px dashed #cfd8e3;
+				background: #fff;
+			}
+
+			.rf-nav__inner {
+				display: grid;
+				grid-template-columns: auto 230px 150px 56px;
+				align-items: stretch;
+			}
+
+			.rf-nav__menu {
+				display: flex;
+				flex-wrap: wrap;
+				align-items: center;
+				gap: 0;
+				background: #ffe300;
+			}
+
+			.rf-nav__menu a {
+				display: inline-flex;
+				align-items: center;
+				min-height: 44px;
+				padding: 0 18px;
+				font-size: 11px;
+				font-weight: 700;
+				text-transform: uppercase;
+				color: #1c4274;
+				border-right: 1px solid rgba(28, 66, 116, 0.14);
+			}
+
+			.rf-nav__search input {
+				width: 100%;
+				height: 44px;
+				padding: 0 14px;
+				border: 0;
+				border-left: 1px solid #e3e8ef;
+				font-size: 11px;
+				color: #8190a4;
+				text-transform: uppercase;
+			}
+
+			.rf-nav__icon,
+			.rf-nav__help,
+			.rf-nav__access {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				min-height: 44px;
+				font-size: 18px;
+			}
+
+			.rf-nav__icon {
+				color: #7e91a7;
+				border-left: 1px solid #e3e8ef;
+				background: #fff;
+			}
+
+			.rf-nav__help {
+				gap: 8px;
+				background: #47c4d4;
+				font-size: 12px;
+				font-weight: 800;
+				text-transform: uppercase;
+				color: #fff;
+			}
+
+			.rf-nav__access {
+				background: #1aa0df;
+				color: #ffe300;
+			}
+
+			.rf-breadcrumb {
+				padding: 10px 0 14px;
+				font-size: 13px;
+				color: #4d6481;
+			}
+
+			.rf-shortcuts {
+				display: grid;
+				grid-template-columns: repeat(8, minmax(0, 1fr));
+				gap: 0;
+				margin-bottom: 48px;
+				background: #f1f3f5;
+				border: 1px solid #e4eaf0;
+			}
+
+			.rf-shortcut {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+				gap: 8px;
+				min-height: 74px;
+				padding: 10px 8px;
+				font-size: 11px;
+				font-weight: 700;
+				text-transform: uppercase;
+				text-align: center;
+				color: #1e5f9b;
+			}
+
+			.rf-shortcut i {
+				font-size: 14px;
+			}
+
+			.rf-title {
+				margin: 0 0 40px;
+				font-size: 54px;
+				font-weight: 800;
+				line-height: 1.05;
+				text-align: center;
+				text-transform: uppercase;
+				color: #005a98;
+			}
+
+			.rf-years {
+				display: flex;
+				align-items: center;
+				gap: 2px;
+				margin-bottom: 0;
+			}
+
+			.rf-years a {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				min-width: 38px;
+				height: 28px;
+				padding: 0 10px;
+				background: #cfe1f4;
+				font-size: 14px;
+				color: #2f6298;
+			}
+
+			.rf-years a.is-active {
+				background: #ffe300;
+				color: #17324d;
+				font-weight: 800;
+			}
+
+			.rf-table-wrap {
+				border-top: 4px solid #ffe300;
+				overflow-x: auto;
+			}
+
+			.rf-table {
+				width: 100%;
+				min-width: 1120px;
+				border-collapse: collapse;
+				font-size: 13px;
+				color: #314861;
+			}
+
+			.rf-table th,
+			.rf-table td {
+				padding: 7px 8px;
+				border: 1px solid #7e8a97;
+				vertical-align: top;
+				background: #fff;
+			}
+
+			.rf-table thead th {
+				font-weight: 400;
+				text-transform: uppercase;
+				background: #fff;
+			}
+
+			.rf-table__subhead {
+				font-size: 12px;
+				text-align: left;
+			}
+
+			.rf-table td:last-child,
+			.rf-table th:last-child {
+				min-width: 220px;
+			}
+
+			.rf-table td:nth-last-child(2),
+			.rf-table th:nth-last-child(2) {
+				text-align: center;
+				min-width: 92px;
+			}
+
+			@media (max-width: 991.98px) {
+				.rf-nav__inner {
+					grid-template-columns: 1fr;
+				}
+
+				.rf-shortcuts {
+					grid-template-columns: repeat(4, minmax(0, 1fr));
+				}
+			}
+
+			@media (max-width: 767.98px) {
+				.rf-shell {
+					padding: 0 14px;
+				}
+
+				.rf-brand {
+					flex-direction: column;
+					align-items: flex-start;
+				}
+
+				.rf-shortcuts {
+					grid-template-columns: repeat(2, minmax(0, 1fr));
+				}
+
+				.rf-title {
+					font-size: 34px;
+					margin-bottom: 28px;
+				}
+			}
+		</style>
+	</head>
+	<body class="rf-page">
+		<header class="rf-topbar">
+			<div class="rf-shell">
+				<div class="rf-brand">
+					<h1 class="rf-brand__title">Portal da <strong>Transparência</strong></h1>
+					<a class="rf-brand__logo" href="index.html"><img src="assets/img/logo/logo.png" alt="Campo Grande" /></a>
+				</div>
+			</div>
+			<div class="rf-nav">
+				<div class="rf-shell">
+					<div class="rf-nav__inner">
+						<nav class="rf-nav__menu" aria-label="Menu do Portal da Transparencia">
+							<a href="services.html">O Portal</a>
+							<a href="services.html">Contas Públicas</a>
+							<a href="services.html">Prestação de Contas</a>
+							<a href="services.html">Dados Abertos</a>
+							<a href="services.html">Boas Práticas</a>
+						</nav>
+						<div class="rf-nav__search"><input type="text" placeholder="O que você procura?" /></div>
+						<a class="rf-nav__icon" href="javascript:void(0)" aria-label="Buscar"><i class="fas fa-search"></i></a>
+						<a class="rf-nav__help" href="contact.html">Ajuda <i class="fas fa-question-circle"></i></a>
+					</div>
+				</div>
+			</div>
+		</header>
+
+		<main class="rf-shell">
+			<div class="rf-breadcrumb">Prefeitura de Campo Grande &gt; Transparência &gt; Renúncias Fiscais</div>
+
+			<section class="rf-shortcuts" aria-label="Atalhos">
+				<a class="rf-shortcut" href="lgpd-portal.html"><i class="fas fa-book"></i><span>LGPD</span></a>
+				<a class="rf-shortcut" href="obras-portal.html"><i class="fas fa-landmark"></i><span>Obras</span></a>
+				<a class="rf-shortcut" href="contratos-portal.html"><i class="fas fa-file-contract"></i><span>Contratos</span></a>
+				<a class="rf-shortcut" href="perguntas-frequentes.html"><i class="fas fa-question-circle"></i><span>Perguntas Frequentes</span></a>
+				<a class="rf-shortcut" href="prestacao-contas.html"><i class="fas fa-briefcase"></i><span>Prestação de Contas</span></a>
+				<a class="rf-shortcut" href="convenios-portal.html"><i class="fas fa-handshake"></i><span>Convênios</span></a>
+				<a class="rf-shortcut" href="orcamento.html"><i class="fas fa-calculator"></i><span>Orçamento</span></a>
+				<a class="rf-shortcut" href="diarias-passagens-consulta.html"><i class="fas fa-plane"></i><span>Ver Diárias e Passagens</span></a>
+			</section>
+
+			<h2 class="rf-title">Renúncias Fiscais</h2>
+
+			<div class="rf-years" aria-label="Anos">
+				<a href="javascript:void(0)">2022</a>
+				<a href="javascript:void(0)">2023</a>
+				<a href="javascript:void(0)">2024</a>
+				<a class="is-active" href="javascript:void(0)">2025</a>
+			</div>
+
+			<div class="rf-table-wrap">
+				<table class="rf-table">
+					<thead>
+						<tr>
+							<th class="rf-table__subhead" colspan="8">AMF - Demonstrativo 7 (LRF, art. 4º, §2º, inciso V)</th>
+						</tr>
+						<tr>
+							<th rowspan="2">Tributo</th>
+							<th rowspan="2">Modalidade</th>
+							<th rowspan="2">Setores/Programas/Beneficiário</th>
+							<th colspan="3">Renúncia de Receita Prevista</th>
+							<th colspan="1">Renúncia de Receita Realizada</th>
+							<th rowspan="2">Compensação</th>
+						</tr>
+						<tr>
+							<th>2025</th>
+							<th>2026</th>
+							<th>2027</th>
+							<th>2025</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>IPTU</td>
+							<td>Isenção</td>
+							<td>Comércio</td>
+							<td>461.213,48</td>
+							<td>499.032,99</td>
+							<td>541.450,79</td>
+							<td>12.159,03</td>
+							<td rowspan="2">Os valores das renúncias dos programas (comércio, indústria e serviços) referem-se a novos empreendimentos. Como tais recursos nunca foram arrecadados, deixamos de apresentar medidas de compensação prevista no inciso II, do art. 14, da LC n. 101/2000.</td>
+						</tr>
+						<tr>
+							<td>ISSQN</td>
+							<td>Isenção</td>
+							<td></td>
+							<td>32.341,09</td>
+							<td>34.993,06</td>
+							<td>37.967,47</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>IPTU</td>
+							<td>Isenção</td>
+							<td>Indústria</td>
+							<td>2.648.689,71</td>
+							<td>2.865.882,27</td>
+							<td>3.109.482,26</td>
+							<td>58.201,47</td>
+							<td rowspan="2"></td>
+						</tr>
+						<tr>
+							<td>ISSQN</td>
+							<td>Isenção</td>
+							<td></td>
+							<td>43.129,94</td>
+							<td>46.666,59</td>
+							<td>50.633,25</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>IPTU</td>
+							<td>Isenção</td>
+							<td>Serviço</td>
+							<td>60.857,58</td>
+							<td>65.847,90</td>
+							<td>71.444,97</td>
+							<td>32.590,40</td>
+							<td rowspan="2"></td>
+						</tr>
+						<tr>
+							<td>ISSQN</td>
+							<td>Isenção</td>
+							<td></td>
+							<td>89.402,76</td>
+							<td>96.733,78</td>
+							<td>104.956,15</td>
+							<td>1.290.327,72</td>
+						</tr>
+						<tr>
+							<td>ITBI</td>
+							<td>Remissão</td>
+							<td>Habitação de Interesse Social</td>
+							<td>518.400,00</td>
+							<td>534.900,00</td>
+							<td>552.100,00</td>
+							<td>74.350,00</td>
+							<td>Compensação mediante previsão em orçamento e equilíbrio de arrecadação global.</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</main>
+	</body>
+</html>

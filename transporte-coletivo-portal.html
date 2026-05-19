@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html class="no-js" lang="pt-BR">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="x-ua-compatible" content="ie=edge" />
+		<title>Transporte Coletivo | Portal da Transparencia</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png" />
+		<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="assets/css/animate.min.css" />
+		<link rel="stylesheet" href="assets/css/magnific-popup.css" />
+		<link rel="stylesheet" href="assets/css/fontawesome-all.min.css" />
+		<link rel="stylesheet" href="assets/css/flaticon.css" />
+		<link rel="stylesheet" href="assets/css/odometer.css" />
+		<link rel="stylesheet" href="assets/css/swiper-bundle.css" />
+		<link rel="stylesheet" href="assets/css/aos.css" />
+		<link rel="stylesheet" href="assets/css/default.css" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<style>
+			.transporte-page {
+				padding: 92px 0 110px;
+				background:
+					linear-gradient(180deg, rgba(12, 37, 85, 0.24) 0%, rgba(12, 37, 85, 0.78) 180px, rgba(11, 31, 69, 0.96) 100%),
+					radial-gradient(circle at 12% 12%, rgba(255,255,255,0.12) 0 2px, transparent 2px),
+					radial-gradient(circle at 25% 30%, rgba(255,255,255,0.08) 0 1.5px, transparent 1.5px),
+					radial-gradient(circle at 78% 18%, rgba(255,255,255,0.1) 0 2px, transparent 2px),
+					#0c2556;
+				color: #fff;
+			}
+
+			.transporte-shell {
+				max-width: 1360px;
+				margin: 0 auto;
+			}
+
+			.transporte-crumbs {
+				margin-bottom: 4px;
+				font-size: 11px;
+				font-weight: 700;
+				color: #ffffff;
+			}
+
+			.transporte-crumbs a {
+				color: #ffffff;
+			}
+
+			.transporte-title {
+				margin: 0 0 12px;
+				font-size: 54px;
+				line-height: 1;
+				color: #ffffff;
+				text-shadow: 0 3px 10px rgba(0, 0, 0, 0.18);
+			}
+
+			.transporte-nav {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0;
+				margin-bottom: 28px;
+				border-radius: 12px;
+				overflow: hidden;
+				background: rgba(255, 255, 255, 0.18);
+				box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+			}
+
+			.transporte-nav a {
+				display: inline-flex;
+				align-items: center;
+				gap: 6px;
+				min-height: 54px;
+				padding: 14px 20px;
+				font-size: 13px;
+				font-weight: 700;
+				color: #ffffff;
+				border-right: 1px solid rgba(255, 255, 255, 0.08);
+			}
+
+			.transporte-nav a:last-child {
+				border-right: 0;
+			}
+
+			.transporte-panel {
+				padding: 34px 34px 40px;
+				border-radius: 18px;
+				background: #ffffff;
+				color: #334155;
+				box-shadow: 0 24px 54px rgba(1, 12, 35, 0.3);
+			}
+
+			.transporte-panel p {
+				margin: 0 0 16px;
+				font-size: 14px;
+				line-height: 1.55;
+				color: #425466;
+			}
+
+			.transporte-panel strong {
+				color: #344054;
+			}
+
+			.transporte-panel a {
+				color: #f0a018;
+				font-weight: 700;
+			}
+
+			.transporte-panel h2 {
+				margin: 22px 0 12px;
+				font-size: 22px;
+				line-height: 1.15;
+				color: #24364a;
+			}
+
+			.transporte-panel h3 {
+				margin: 22px 0 12px;
+				font-size: 20px;
+				line-height: 1.18;
+				color: #24364a;
+				text-transform: uppercase;
+			}
+
+			.transporte-section {
+				margin-bottom: 8px;
+			}
+
+			.transporte-list {
+				margin: 0 0 12px;
+				padding-left: 0;
+				list-style: none;
+			}
+
+			.transporte-list li {
+				margin: 0 0 4px;
+				font-size: 14px;
+				line-height: 1.55;
+				color: #425466;
+			}
+
+			.transporte-note {
+				color: #f0a018;
+				font-weight: 700;
+			}
+
+			@media (max-width: 991.98px) {
+				.transporte-title {
+					font-size: 42px;
+				}
+
+				.transporte-nav a {
+					min-height: 48px;
+					padding: 12px 16px;
+					font-size: 12px;
+				}
+			}
+
+			@media (max-width: 767.98px) {
+				.transporte-page {
+					padding: 82px 0 90px;
+				}
+
+				.transporte-title {
+					font-size: 34px;
+				}
+
+				.transporte-nav {
+					border-radius: 10px;
+				}
+
+				.transporte-nav a {
+					width: 100%;
+					border-right: 0;
+					border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+				}
+
+				.transporte-nav a:last-child {
+					border-bottom: 0;
+				}
+
+				.transporte-panel {
+					padding: 22px 18px 26px;
+					border-radius: 14px;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<button class="scroll__top scroll-to-target" data-target="html"><i class="fas fa-angle-up"></i></button>
+		<main class="fix">
+			<section class="transporte-page">
+				<div class="container">
+					<div class="transporte-shell">
+						<div class="transporte-crumbs"><a href="index.html">Inicio</a> / <a href="services.html">AGETRAN</a> / Transporte Coletivo</div>
+						<h1 class="transporte-title">Transporte Coletivo</h1>
+						<nav class="transporte-nav">
+							<a href="index.html">Inicio</a>
+							<a href="javascript:void(0)">Institucional <i class="fas fa-caret-down"></i></a>
+							<a href="javascript:void(0)">Recursos <i class="fas fa-caret-down"></i></a>
+							<a href="javascript:void(0)">Formularios</a>
+							<a href="javascript:void(0)">Estatisticas</a>
+							<a href="javascript:void(0)">Educacao</a>
+							<a href="javascript:void(0)">Chamamento Publico</a>
+							<a href="javascript:void(0)">Telefones Uteis</a>
+							<a href="contact.html">Fale Conosco</a>
+						</nav>
+						<div class="transporte-panel">
+							<div class="transporte-section">
+								<p><strong>Informacoes referentes a linhas de onibus</strong><br />- Av. Guy Marques, 2395 - Bairro Universitario<br />- Tel.: (67) 3314-3400<br />- Horario de atendimento: das 8h as 11h e das 13h as 16h</p>
+								<p><strong>Solicitacao de novas linhas de onibus</strong><br />- Atraves de requerimento dirigido a AGETRAN</p>
+								<p><strong>Tabelas Horarias do Transporte Coletivo</strong><br /><a href="javascript:void(0)">Clique aqui para ver a tabela de horarios do transporte coletivo</a></p>
+								<p><strong>Passe do Estudante</strong><br /><a href="javascript:void(0)">Clique aqui para mais informacoes sobre o passe de estudante</a></p>
+							</div>
+
+							<h2>Isencoes de Tarifas do Transporte Coletivo</h2>
+
+							<div class="transporte-section">
+								<p><strong>Carteira de Passageiro Especial, Idoso e Pessoas com Deficiencia</strong><br />Solicitar pessoalmente na Associacao de Empresas do Transporte Coletivo Urbano de Campo Grande - ASSETUR no seguintes enderecos:</p>
+								<p><strong>- Central de Atendimento ao Cliente:</strong><br />Rua 25 de Dezembro, 924, 2&deg; andar, Bairro Jardim dos Estados<br />Telefones: 3316-6600<br />E-mail: passe.agetran@gmail.com</p>
+								<p><strong>- Sede Administrativa:</strong><br />Rua Alexandre Fleming, 1407<br />Vila Bandeirantes CEP 79006-570</p>
+								<p><strong>- Idosos</strong><br />Devem ter idade igual ou superior a 65 anos, com gratuidade conforme o Artigo 230 da Constituicao Federal e o Capitulo X, art. 39, do Estatuto do Idoso. Os interessados devem comparecer a ASSETUR, de 2&ordf; a 6&ordf; feira, das 07 horas as 17 horas, munido do seguinte documento:</p>
+								<p><strong>- Documento oficial com foto que faca prova de sua idade.</strong><br />Lei n. 10.741, de 1&deg; de outubro de 2003 - Dispoe sobre o Estatuto do Idoso e da outras providencias.<br /><a href="javascript:void(0)">Clique Aqui</a></p>
+							</div>
+
+							<h3>Obtencao ou Renovacao do Beneficio de Isencao Tarifaria Solicitada por Pessoa com Deficiencia:</h3>
+							<p>Para obtencao ou renovacao do beneficio de isencao tarifaria, no Transporte Coletivo de Campo Grande a Pessoa com Deficiencia, o interessado devera PRIMEIRAMENTE encaminhar a documentacao necessaria (relacao abaixo) a Central de Atendimento ao Cliente - CAC - do Consorcio Guaicurus (Rua Visconde de Taunay, 318 - Bairro Amambai) de segunda a sexta-feira, das 7:00 as 17:00 hs.</p>
+							<p>Estando toda a documentacao correta, sera AGENDADA sua pericia medica, conforme disponibilidade de datas e horarios.</p>
+							<p>Em caso de duvida, ligar para o telefone 0800 647 0060.</p>
+
+							<h3>Relacao de Documentos Necessarios para Apreciacao da Isencao Tarifaria (Passe-Livre) Solicitada por Pessoa com Deficiencia (Portaria Agetran N.032/2017 de 15 de maio de 2017).</h3>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+		<script src="assets/js/vendor/jquery-3.6.0.min.js"></script>
+		<script src="assets/js/bootstrap.bundle.min.js"></script>
+		<script src="assets/js/jquery.magnific-popup.min.js"></script>
+		<script src="assets/js/jquery.odometer.min.js"></script>
+		<script src="assets/js/jquery.appear.js"></script>
+		<script src="assets/js/gsap.js"></script>
+		<script src="assets/js/ScrollTrigger.js"></script>
+		<script src="assets/js/SplitText.js"></script>
+		<script src="assets/js/gsap-animation.js"></script>
+		<script src="assets/js/jquery.parallaxScroll.min.js"></script>
+		<script src="assets/js/swiper-bundle.js"></script>
+		<script src="assets/js/ajax-form.js"></script>
+		<script src="assets/js/wow.min.js"></script>
+		<script src="assets/js/aos.js"></script>
+		<script src="assets/js/main.js"></script>
+	</body>
+</html>

@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html class="no-js" lang="pt-BR">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="x-ua-compatible" content="ie=edge" />
+		<title>Consultar Empresa/Autonomo</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png" />
+		<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="assets/css/fontawesome-all.min.css" />
+		<style>
+			.consulta-page {
+				margin: 0;
+				background: #eef2f7;
+				font-family: Arial, sans-serif;
+				color: #2d3748;
+			}
+
+			.consulta-top {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 18px;
+				padding: 2px 16px 0;
+				background: #fff;
+				border-bottom: 1px solid #d7dde7;
+			}
+
+			.consulta-top__left,
+			.consulta-top__right {
+				display: flex;
+				align-items: center;
+				gap: 14px;
+			}
+
+			.consulta-badge {
+				display: flex;
+				align-items: center;
+				gap: 8px;
+				padding: 2px 8px;
+				background: #1c3f7b;
+				color: #ffd54a;
+				font-weight: 700;
+				font-size: 16px;
+			}
+
+			.consulta-badge i {
+				color: #fff;
+			}
+
+			.consulta-title {
+				font-size: 17px;
+				font-weight: 700;
+				color: #0f2d5c;
+			}
+
+			.consulta-siat {
+				font-size: 34px;
+				font-weight: 800;
+				color: #214f58;
+				letter-spacing: 0.02em;
+			}
+
+			.consulta-subbar {
+				display: flex;
+				align-items: flex-end;
+				gap: 14px;
+				padding: 0 20px;
+				background: linear-gradient(180deg, #cde0f8 0%, #dce9fb 100%);
+				border-bottom: 1px solid #c1d0e8;
+			}
+
+			.consulta-menu {
+				margin-top: 10px;
+				padding: 6px 14px 4px;
+				border-radius: 10px 10px 0 0;
+				background: linear-gradient(180deg, #7aa6d4 0%, #5e86b8 100%);
+				box-shadow: inset 0 1px 0 rgba(255,255,255,0.5);
+				color: #fff;
+				text-align: center;
+			}
+
+			.consulta-menu strong {
+				display: block;
+				font-size: 18px;
+				line-height: 1;
+			}
+
+			.consulta-menu span {
+				display: block;
+				margin-top: 4px;
+				font-size: 11px;
+				opacity: 0.95;
+			}
+
+			.consulta-wrap {
+				padding: 14px 18px 18px;
+			}
+
+			.consulta-card {
+				background: #fff;
+				border: 1px solid #d0d8e4;
+			}
+
+			.consulta-card__title {
+				padding: 8px 14px;
+				font-size: 13px;
+				font-weight: 700;
+				color: #4b5563;
+				text-transform: uppercase;
+			}
+
+			.consulta-alert {
+				margin: 0 8px 12px;
+				padding: 10px 14px;
+				border: 1px solid #3b82f6;
+				background: #dfe7ff;
+				font-size: 12px;
+				color: #1d4ed8;
+			}
+
+			.consulta-toolbar {
+				display: flex;
+				gap: 8px;
+				padding: 0 14px 12px;
+			}
+
+			.consulta-toolbar button {
+				height: 24px;
+				padding: 0 12px;
+				border: 1px solid #c7d0dc;
+				border-radius: 2px;
+				background: #fff;
+				font-size: 12px;
+				color: #4b5563;
+			}
+
+			.consulta-toolbar .primary {
+				background: #4c9ae0;
+				border-color: #4c9ae0;
+				color: #fff;
+			}
+
+			.consulta-form {
+				margin: 0 8px 8px;
+				padding: 0 0 8px;
+				border: 1px solid #d0d8e4;
+			}
+
+			.consulta-form__header {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				padding: 8px 10px 0;
+				font-size: 12px;
+				font-weight: 700;
+				color: #374151;
+			}
+
+			.consulta-help {
+				font-size: 11px;
+				font-weight: 400;
+				color: #2563eb;
+			}
+
+			.consulta-help div:first-child {
+				color: #f97316;
+			}
+
+			.consulta-section {
+				padding: 4px 10px 0;
+			}
+
+			.consulta-row {
+				display: grid;
+				grid-template-columns: 180px 180px auto;
+				gap: 10px;
+				align-items: end;
+				margin-bottom: 8px;
+			}
+
+			.consulta-row--wide {
+				grid-template-columns: 170px 170px 210px;
+			}
+
+			.consulta-field label {
+				display: block;
+				margin-bottom: 2px;
+				font-size: 12px;
+				font-weight: 700;
+				color: #374151;
+			}
+
+			.consulta-field input,
+			.consulta-field textarea {
+				width: 100%;
+				border: 1px solid #b7c2d1;
+				padding: 0 6px;
+				font-size: 12px;
+				background: #fff;
+			}
+
+			.consulta-field input {
+				height: 20px;
+			}
+
+			.consulta-field textarea {
+				height: 58px;
+				resize: none;
+				padding-top: 4px;
+			}
+
+			.consulta-block {
+				margin: 10px 8px 8px;
+				border: 1px solid #d0d8e4;
+				padding: 8px 10px;
+			}
+
+			.consulta-block__title {
+				margin-bottom: 8px;
+				font-size: 12px;
+				font-weight: 700;
+				color: #374151;
+			}
+
+			.consulta-bottom {
+				display: flex;
+				justify-content: flex-end;
+				padding: 10px 0 0;
+				font-size: 12px;
+			}
+
+			.consulta-bottom a {
+				color: #1d4ed8;
+				font-weight: 700;
+			}
+
+			@media (max-width: 991.98px) {
+				.consulta-top {
+					flex-direction: column;
+					align-items: stretch;
+				}
+
+				.consulta-top__left,
+				.consulta-top__right {
+					justify-content: center;
+				}
+
+				.consulta-row,
+				.consulta-row--wide {
+					grid-template-columns: 1fr;
+				}
+			}
+		</style>
+	</head>
+	<body class="consulta-page">
+		<div class="consulta-top">
+			<div class="consulta-top__left">
+				<div class="consulta-badge"><i class="fas fa-landmark"></i><span>PREFCG</span></div>
+				<div class="consulta-title">PORTAL DE SERVIÇOS CONSULTAR EMPRESA/AUTÔNOMO</div>
+			</div>
+			<div class="consulta-top__right">
+				<div class="consulta-siat">SIAT</div>
+			</div>
+		</div>
+
+		<div class="consulta-subbar">
+			<div class="consulta-menu">
+				<strong>SERVIÇOS</strong>
+				<span>Prestações de Serviços para a População</span>
+			</div>
+		</div>
+
+		<div class="consulta-wrap">
+			<div class="consulta-card">
+				<div class="consulta-card__title">Consulta Cadastro Econômico</div>
+				<div class="consulta-alert"><i class="fas fa-info-circle"></i> Informe a inscrição municipal e/ou o CPF/CNPJ.</div>
+
+				<div class="consulta-toolbar">
+					<button type="button">Limpar</button>
+					<button class="primary" type="button">F9-Pesquisar</button>
+				</div>
+
+				<div class="consulta-form">
+					<div class="consulta-form__header">
+						<div>Referência cadastral</div>
+						<div class="consulta-help">
+							<div>* Itens Obrigatórios</div>
+							<div>● Pelo menos um destes itens deve ser preenchido</div>
+						</div>
+					</div>
+
+					<div class="consulta-section">
+						<div class="consulta-row">
+							<div class="consulta-field">
+								<label>Inscrição Municipal</label>
+								<input type="text" />
+							</div>
+							<div class="consulta-field">
+								<label>CPF/CNPJ</label>
+								<input type="text" />
+							</div>
+							<div></div>
+						</div>
+
+						<div class="consulta-row consulta-row--wide">
+							<div class="consulta-field">
+								<label>Contribuinte</label>
+								<input type="text" />
+							</div>
+							<div class="consulta-field">
+								<label>&nbsp;</label>
+								<input type="text" />
+							</div>
+							<div class="consulta-field">
+								<label>&nbsp;</label>
+								<input type="text" />
+							</div>
+						</div>
+
+						<div class="consulta-row" style="grid-template-columns: 1fr;">
+							<div class="consulta-field">
+								<label>Endereço Localização</label>
+								<textarea></textarea>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="consulta-block">
+					<div class="consulta-block__title">Dados do cadastro econômico</div>
+					<div class="consulta-row" style="grid-template-columns: 80px 210px 80px 80px 1fr;">
+						<div class="consulta-field">
+							<label>Situação Siat</label>
+							<input type="text" />
+						</div>
+						<div class="consulta-field">
+							<label>Nome fantasia</label>
+							<input type="text" />
+						</div>
+						<div class="consulta-field">
+							<label>Inscrição Estadual</label>
+							<input type="text" />
+						</div>
+						<div class="consulta-field">
+							<label>Número Registro</label>
+							<input type="text" />
+						</div>
+						<div class="consulta-field">
+							<label>Data Registro Órgão</label>
+							<input type="text" />
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="consulta-bottom"><a href="secretaria-municipal-fazenda.html">VOLTAR PARA PÁGINA INICIAL</a></div>
+		</div>
+	</body>
+</html>

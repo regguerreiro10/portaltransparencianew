@@ -1,0 +1,545 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "ClienteAPIRest",
+    "version": "1.0.0",
+    "description": "API de exportação de pedidos/propostas finalizadas da PREFEITURA DO MUNICÍPIO DE JI-PARANÁ, com dados de estabelecimento, veículo, condutor, dotações, faturas, documentos e itens."
+  },
+  "servers": [
+    {
+      "url": "https://gestao.np3beneficios.com.br"
+    }
+  ],
+  "paths": {
+    "/rest.php": {
+      "get": {
+        "summary": "Listar pedidos/propostas finalizadas",
+        "description": "Retorna pedidos/propostas finalizados (estado_pedido_frotas_id = FINALIZADO) da PREFEITURA DO MUNICÍPIO DE JI-PARANÁ.",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "class",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "ClienteAPIRest"
+            },
+            "description": "Nome da classe de serviço."
+          },
+          {
+            "in": "query",
+            "name": "method",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "myCliente"
+            },
+            "description": "Nome do método público exposto pela classe."
+          }
+        ],
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resposta de sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClienteApiResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Erro na chamada",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    },
+    "schemas": {
+      "ClienteApiResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "total": {
+            "type": "integer",
+            "example": 2
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PedidoPropostaBundle"
+            }
+          }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "error"
+          },
+          "erro": {
+            "type": "string",
+            "example": "Mensagem de erro da Exception"
+          }
+        }
+      },
+      "PedidoPropostaBundle": {
+        "type": "object",
+        "properties": {
+          "pedido_proposta": {
+            "$ref": "#/components/schemas/PedidoProposta"
+          },
+          "unidade": {
+            "$ref": "#/components/schemas/Unidade"
+          },
+          "condutor": {
+            "$ref": "#/components/schemas/Condutor"
+          },
+          "estabelecimento": {
+            "$ref": "#/components/schemas/Estabelecimento"
+          },
+          "veiculo": {
+            "$ref": "#/components/schemas/Veiculo"
+          },
+          "dotacao_orcamentaria": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DotacaoOrcamentaria"
+            }
+          },
+          "faturas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Fatura"
+            }
+          },
+          "nfs_consumo": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "nfsdocumentos_credenciado": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DocumentoCredenciado"
+            }
+          },
+          "itens": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ItemProposta"
+            }
+          }
+        }
+      },
+      "PedidoProposta": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 16962
+          },
+          "pedido_id": {
+            "type": "integer",
+            "example": 2269
+          },
+          "id_status": {
+            "type": "integer",
+            "example": 8
+          },
+          "categoriaOS": {
+            "type": "string",
+            "example": "MANUTENÇÃO CORRETIVA"
+          },
+          "dt_abertura": {
+            "type": "string",
+            "format": "date",
+            "example": "2025-11-18"
+          },
+          "dt_orcamento": {
+            "type": "string",
+            "format": "date",
+            "example": "2025-11-18"
+          },
+          "dt_entrega": {
+            "type": "string",
+            "example": "2025-11-21 09:15:00"
+          },
+          "dt_finalizacao": {
+            "type": "string",
+            "example": "2025-11-21 10:00:00"
+          },
+          "dt_cancelamento": {
+            "type": "string",
+            "nullable": true
+          },
+          "dt_rejeita": {
+            "type": "string",
+            "nullable": true
+          },
+          "data_atualizacao_km": {
+            "type": "string",
+            "nullable": true
+          },
+          "km_veiculos_os": {
+            "type": "number",
+            "example": 2
+          },
+          "dc_observacao": {
+            "type": "string",
+            "example": "bateria"
+          },
+          "id_orgao": {
+            "type": "integer",
+            "example": 26
+          },
+          "id_sub_unidade": {
+            "type": "integer",
+            "example": 98
+          }
+        }
+      },
+      "Unidade": {
+        "type": "object",
+        "properties": {
+          "id_unidade": {
+            "type": "integer",
+            "example": 26
+          },
+          "dc_unidade": {
+            "type": "string",
+            "example": "PREFEITURA DO MUNICÍPIO DE JI-PARANÁ"
+          },
+          "id_sub_unidade": {
+            "type": "integer",
+            "example": 98
+          },
+          "dc_sub_unidade": {
+            "type": "string",
+            "example": "SECRETARIA DE OBRAS"
+          }
+        }
+      },
+      "Condutor": {
+        "type": "object",
+        "properties": {
+          "registrocondutor_retirou": {
+            "type": "integer",
+            "example": 1725
+          },
+          "condutor_retirou": {
+            "type": "string",
+            "example": "Tarcísio Gomes"
+          },
+          "cpfcondutor_retirou": {
+            "type": "string",
+            "example": "00000000000"
+          },
+          "cnhcondutor_retirou": {
+            "type": "string",
+            "example": "1234567890"
+          }
+        }
+      },
+      "Estabelecimento": {
+        "type": "object",
+        "properties": {
+          "cod": {
+            "type": "integer",
+            "example": 862
+          },
+          "cnpj": {
+            "type": "string",
+            "example": "00.000.000/0000-00"
+          },
+          "inscricao_estadual": {
+            "type": "string",
+            "nullable": true
+          },
+          "dc_estabelecimento": {
+            "type": "string",
+            "example": "OFICINA MECÂNICA LTDA"
+          },
+          "rz_estabelecimento": {
+            "type": "string",
+            "nullable": true
+          },
+          "endereco": {
+            "type": "string",
+            "nullable": true
+          },
+          "numero": {
+            "type": "string",
+            "nullable": true
+          },
+          "bairro": {
+            "type": "string",
+            "nullable": true
+          },
+          "cidade": {
+            "type": "string",
+            "nullable": true
+          },
+          "estado": {
+            "type": "string",
+            "nullable": true
+          },
+          "cep": {
+            "type": "string",
+            "nullable": true
+          },
+          "telefone": {
+            "type": "string",
+            "nullable": true
+          },
+          "fax": {
+            "type": "string",
+            "nullable": true
+          },
+          "contato": {
+            "type": "string",
+            "nullable": true
+          },
+          "cpf": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "longitude": {
+            "type": "number",
+            "nullable": true
+          },
+          "latitude": {
+            "type": "number",
+            "nullable": true
+          }
+        }
+      },
+      "Veiculo": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 2207
+          },
+          "prefixo": {
+            "type": "string",
+            "example": "V-01"
+          },
+          "placa": {
+            "type": "string",
+            "example": "ABC1D23"
+          },
+          "km": {
+            "type": "number",
+            "example": 12345
+          },
+          "id_marca": {
+            "type": "integer",
+            "example": 5
+          },
+          "dc_marca": {
+            "type": "string",
+            "example": "FIAT"
+          },
+          "id_modelo": {
+            "type": "integer",
+            "example": 12
+          },
+          "dc_modelo": {
+            "type": "string",
+            "example": "STRADA"
+          },
+          "ano_fabricacao": {
+            "type": "integer",
+            "example": 2022
+          }
+        }
+      },
+      "DotacaoOrcamentaria": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 555
+          },
+          "pedido_id": {
+            "type": "integer",
+            "example": 2269
+          },
+          "sub_unidade": {
+            "type": "string",
+            "example": "SECRETARIA DE OBRAS"
+          },
+          "valor": {
+            "type": "string",
+            "example": "1500.00"
+          }
+        }
+      },
+      "Fatura": {
+        "type": "object",
+        "properties": {
+          "id_fatura": {
+            "type": "integer",
+            "example": 10
+          },
+          "mes_ano": {
+            "type": "string",
+            "example": "11/2025"
+          },
+          "link": {
+            "type": "string",
+            "example": "/path/fatura_11_2025.pdf"
+          },
+          "numero": {
+            "type": "string",
+            "example": "NF-12345"
+          },
+          "valor": {
+            "type": "string",
+            "example": "928.78"
+          },
+          "sub_unidade": {
+            "type": "string",
+            "example": "SECRETARIA DE OBRAS"
+          }
+        }
+      },
+      "DocumentoCredenciado": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 77
+          },
+          "num_documento": {
+            "type": "string",
+            "example": "NF-456789"
+          },
+          "link_documento": {
+            "type": "string",
+            "example": "/path/nf_456789.pdf"
+          },
+          "tipo_documento": {
+            "type": "string",
+            "example": "NF SERVIÇO"
+          },
+          "valor": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "ItemProposta": {
+        "type": "object",
+        "properties": {
+          "id_item": {
+            "type": "integer",
+            "example": 16414
+          },
+          "id_tipo": {
+            "type": "integer",
+            "example": 1
+          },
+          "id_categoria": {
+            "type": "integer",
+            "nullable": true,
+            "example": 81
+          },
+          "dc_categoria": {
+            "type": "string",
+            "nullable": true,
+            "example": "PEÇAS ELÉTRICAS"
+          },
+          "dc_item": {
+            "type": "string",
+            "example": "THINNER LITRO"
+          },
+          "qtd": {
+            "type": "number",
+            "example": 3
+          },
+          "vl_unitario": {
+            "type": "string",
+            "example": "40.00"
+          },
+          "vl_desconto": {
+            "type": "string",
+            "example": "34.20"
+          },
+          "vl_total_item": {
+            "type": "string",
+            "example": "85.80"
+          },
+          "dt_garantia": {
+            "type": "string",
+            "nullable": true,
+            "example": "2025-12-10"
+          },
+          "tipo_peca": {
+            "type": "string",
+            "example": "Original"
+          },
+          "qtd_percorrer": {
+            "type": "string",
+            "nullable": true
+          },
+          "garantia": {
+            "type": "integer",
+            "nullable": true,
+            "example": 30
+          },
+          "dc_marca": {
+            "type": "string",
+            "nullable": true
+          },
+          "id_num_serie": {
+            "type": "string",
+            "nullable": true
+          },
+          "dc_pos_aplicacao": {
+            "type": "string",
+            "nullable": true
+          },
+          "cod_os_unico": {
+            "type": "integer",
+            "example": 57290
+          },
+          "valor_referencia": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      }
+    }
+  }
+}

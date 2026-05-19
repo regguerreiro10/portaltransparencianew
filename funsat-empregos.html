@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html class="no-js" lang="pt-BR">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="x-ua-compatible" content="ie=edge" />
+		<title>Fundacao Social do Trabalho de Campo Grande</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png" />
+		<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="assets/css/fontawesome-all.min.css" />
+		<link rel="stylesheet" href="assets/css/default.css" />
+		<style>
+			.funsat-page {
+				background: linear-gradient(180deg, #08275d 0%, #061a42 100%);
+				color: #fff;
+			}
+
+			.funsat-shell {
+				max-width: 1380px;
+				margin: 0 auto;
+				padding: 0 10px 48px;
+			}
+
+			.funsat-hero {
+				position: relative;
+				padding: 14px 0 22px;
+				background:
+					linear-gradient(180deg, rgba(4, 19, 49, 0.56) 0%, rgba(4, 19, 49, 0.88) 100%),
+					url("assets/img/bg/breadcrumb_bg.jpg") center/cover no-repeat;
+				box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.08);
+			}
+
+			.funsat-breadcrumb {
+				margin-bottom: 6px;
+				font-size: 12px;
+				font-weight: 700;
+				color: rgba(255, 255, 255, 0.9);
+			}
+
+			.funsat-breadcrumb a {
+				color: #fff;
+			}
+
+			.funsat-breadcrumb span {
+				margin: 0 6px;
+				color: rgba(255, 255, 255, 0.55);
+			}
+
+			.funsat-title {
+				margin: 0;
+				font-size: 23px;
+				font-weight: 800;
+				line-height: 1.2;
+				color: #fff;
+			}
+
+			.funsat-tabs {
+				display: flex;
+				flex-wrap: wrap;
+				align-items: center;
+				gap: 4px;
+				margin-top: 18px;
+				padding: 8px;
+				border-radius: 14px;
+				background: rgba(34, 78, 161, 0.9);
+				box-shadow: 0 14px 32px rgba(3, 15, 40, 0.24);
+			}
+
+			.funsat-tabs a {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				padding: 10px 14px;
+				border-radius: 10px;
+				font-size: 11px;
+				font-weight: 700;
+				color: #fff;
+				transition: 0.25s ease;
+			}
+
+			.funsat-tabs a:hover,
+			.funsat-tabs a:focus,
+			.funsat-tabs a.is-active {
+				background: rgba(255, 255, 255, 0.14);
+			}
+
+			.funsat-tabs .funsat-social {
+				margin-left: auto;
+				width: 32px;
+				height: 32px;
+				padding: 0;
+				border-radius: 50%;
+				background: rgba(255, 255, 255, 0.14);
+				font-size: 13px;
+			}
+
+			.funsat-main {
+				display: grid;
+				grid-template-columns: 290px minmax(0, 1fr);
+				gap: 16px;
+				margin-top: 18px;
+			}
+
+			.funsat-card {
+				border-radius: 14px;
+				background: #234a99;
+				box-shadow: 0 18px 40px rgba(4, 15, 40, 0.22);
+			}
+
+			.funsat-card--sidebar {
+				padding: 18px 18px 16px;
+			}
+
+			.funsat-card--content {
+				padding: 12px 14px 14px;
+			}
+
+			.funsat-side-title,
+			.funsat-block-title,
+			.funsat-jobs__title {
+				margin: 0 0 12px;
+				font-size: 18px;
+				font-weight: 800;
+				color: #fff;
+			}
+
+			.funsat-side-text,
+			.funsat-block-text,
+			.funsat-jobs__text {
+				margin: 0;
+				font-size: 14px;
+				line-height: 1.5;
+				color: rgba(255, 255, 255, 0.96);
+			}
+
+			.funsat-side-actions {
+				display: grid;
+				gap: 10px;
+				margin-top: 18px;
+			}
+
+			.funsat-side-link {
+				display: flex;
+				align-items: center;
+				gap: 10px;
+				min-height: 38px;
+				padding: 0 12px;
+				border-radius: 8px;
+				background: rgba(6, 26, 66, 0.22);
+				font-size: 13px;
+				font-weight: 700;
+				color: #fff;
+			}
+
+			.funsat-side-link i {
+				font-size: 12px;
+			}
+
+			.funsat-side-link:hover,
+			.funsat-side-link:focus {
+				background: rgba(6, 26, 66, 0.34);
+			}
+
+			.funsat-content-frame {
+				padding: 18px 18px 16px;
+				border-radius: 12px;
+				background: rgba(8, 35, 92, 0.44);
+			}
+
+			.funsat-content-frame p + p {
+				margin-top: 12px;
+			}
+
+			.funsat-shortcuts {
+				display: grid;
+				grid-template-columns: repeat(5, minmax(0, 1fr));
+				margin-top: 16px;
+				border-radius: 14px;
+				background: #e3ac00;
+				box-shadow: 0 18px 40px rgba(4, 15, 40, 0.22);
+				overflow: hidden;
+			}
+
+			.funsat-shortcut {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+				gap: 10px;
+				min-height: 100px;
+				padding: 12px 10px;
+				text-align: center;
+				color: #fff;
+				border-right: 1px solid rgba(255, 255, 255, 0.48);
+			}
+
+			.funsat-shortcut:last-child {
+				border-right: 0;
+			}
+
+			.funsat-shortcut__icon {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				width: 38px;
+				height: 38px;
+				border-radius: 8px;
+				background: #fff;
+				color: #cc9a00;
+				font-size: 18px;
+			}
+
+			.funsat-shortcut span {
+				font-size: 11px;
+				font-weight: 700;
+				line-height: 1.35;
+			}
+
+			.funsat-jobs {
+				display: grid;
+				grid-template-columns: minmax(0, 1.45fr) 280px;
+				gap: 18px;
+				align-items: center;
+				margin-top: 16px;
+				padding: 20px;
+			}
+
+			.funsat-jobs__cta {
+				padding: 16px 18px;
+				border-radius: 12px;
+				background: rgba(31, 84, 184, 0.78);
+			}
+
+			.funsat-jobs__cta p {
+				margin: 0 0 18px;
+				font-size: 14px;
+				line-height: 1.45;
+				font-weight: 700;
+				color: #fff;
+			}
+
+			.funsat-jobs__button {
+				display: inline-flex;
+				align-items: center;
+				gap: 10px;
+				padding: 12px 18px;
+				border-radius: 10px;
+				background: #f0b700;
+				font-size: 14px;
+				font-weight: 800;
+				color: #fff;
+			}
+
+			.funsat-jobs__button:hover,
+			.funsat-jobs__button:focus {
+				filter: brightness(1.04);
+			}
+
+			@media (max-width: 991.98px) {
+				.funsat-main,
+				.funsat-jobs {
+					grid-template-columns: 1fr;
+				}
+
+				.funsat-shortcuts {
+					grid-template-columns: repeat(2, minmax(0, 1fr));
+				}
+
+				.funsat-shortcut:nth-child(2n) {
+					border-right: 0;
+				}
+			}
+
+			@media (max-width: 767.98px) {
+				.funsat-shell {
+					padding-left: 14px;
+					padding-right: 14px;
+				}
+
+				.funsat-title {
+					font-size: 30px;
+				}
+
+				.funsat-tabs {
+					border-radius: 12px;
+				}
+
+				.funsat-tabs .funsat-social {
+					margin-left: 0;
+				}
+
+				.funsat-shortcuts {
+					grid-template-columns: 1fr;
+				}
+
+				.funsat-shortcut {
+					border-right: 0;
+					border-bottom: 1px solid rgba(255, 255, 255, 0.48);
+				}
+
+				.funsat-shortcut:last-child {
+					border-bottom: 0;
+				}
+			}
+		</style>
+	</head>
+	<body class="funsat-page">
+		<main>
+			<section class="funsat-hero">
+				<div class="funsat-shell">
+					<div class="funsat-breadcrumb">
+						<a href="index.html">Inicio</a><span>/</span><a href="services-3.html">Sites Municipais</a><span>/</span><strong>FUNSAT</strong>
+					</div>
+					<h1 class="funsat-title">Fundação Social do Trabalho</h1>
+					<nav class="funsat-tabs" aria-label="Navegacao FUNSAT">
+						<a class="is-active" href="index.html">Inicio</a>
+						<a href="javascript:void(0)">Institucional <i class="fas fa-caret-down"></i></a>
+						<a href="javascript:void(0)">Serviços</a>
+						<a href="javascript:void(0)">Destaques</a>
+						<a href="javascript:void(0)">Programa de Microcrédito</a>
+						<a href="javascript:void(0)">Chamamento Público</a>
+						<a href="javascript:void(0)">Vagas de Emprego</a>
+						<a href="contact.html">Fale Conosco</a>
+						<a class="funsat-social" href="javascript:void(0)" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+					</nav>
+				</div>
+			</section>
+
+			<section class="funsat-shell">
+				<div class="funsat-main">
+					<aside class="funsat-card funsat-card--sidebar">
+						<h2 class="funsat-side-title">Acompanhe os Mutirões Emprega</h2>
+						<p class="funsat-side-text">Veja as ações realizadas pela FUNSAT para fomentar o mercado de trabalho.</p>
+						<div class="funsat-side-actions">
+							<a class="funsat-side-link" href="javascript:void(0)"><i class="fas fa-handshake"></i>Emprega +50</a>
+							<a class="funsat-side-link" href="javascript:void(0)"><i class="fas fa-user"></i>Emprega Mulher</a>
+							<a class="funsat-side-link" href="javascript:void(0)"><i class="fas fa-map-marker-alt"></i>Emprega Aero Rancho</a>
+							<a class="funsat-side-link" href="javascript:void(0)"><i class="fas fa-users"></i>Seleção Emprega</a>
+						</div>
+					</aside>
+
+					<div class="funsat-card funsat-card--content">
+						<h2 class="funsat-block-title">Conheça a FUNSAT</h2>
+						<div class="funsat-content-frame">
+							<p class="funsat-block-text">A Fundação Social do Trabalho tem como responsabilidades principais a formulação de diretrizes e metas para a Política Municipal do Trabalho, incluindo a proposição de ações para identificar problemas relacionados ao emprego e renda, além da realização de pesquisas estatísticas para identificar oportunidades de emprego e avaliar o desempenho.</p>
+							<p class="funsat-block-text">A FUNSAT também é encarregada de promover a colocação e recolocação de trabalhadores, modernizar procedimentos de atendimento, estabelecer parcerias com entidades públicas e privadas, promover qualificação profissional, fomentar atividades produtivas geradoras de emprego e renda, e garantir o cumprimento das diretrizes do Ministério do Trabalho para assegurar a unidade e princípios do Sistema Nacional de Emprego.</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="funsat-shortcuts">
+					<a class="funsat-shortcut" href="javascript:void(0)">
+						<span class="funsat-shortcut__icon"><i class="fas fa-university"></i></span>
+						<span>Programa de Microcrédito</span>
+					</a>
+					<a class="funsat-shortcut" href="javascript:void(0)">
+						<span class="funsat-shortcut__icon"><i class="fas fa-search-plus"></i></span>
+						<span>Observatório do Mercado</span>
+					</a>
+					<a class="funsat-shortcut" href="javascript:void(0)">
+						<span class="funsat-shortcut__icon"><i class="fas fa-phone-volume"></i></span>
+						<span>Anuncie sua Vaga de Emprego</span>
+					</a>
+					<a class="funsat-shortcut" href="javascript:void(0)">
+						<span class="funsat-shortcut__icon"><i class="fas fa-dollar-sign"></i></span>
+						<span>Seguro Desemprego</span>
+					</a>
+					<a class="funsat-shortcut" href="javascript:void(0)">
+						<span class="funsat-shortcut__icon"><i class="fas fa-book-open"></i></span>
+						<span>Carteira de Trabalho</span>
+					</a>
+				</div>
+
+				<div class="funsat-card funsat-jobs">
+					<div>
+						<h2 class="funsat-jobs__title">Vagas de Emprego</h2>
+						<p class="funsat-jobs__text">Para participar dos processos seletivos, os candidatos deverão comparecer na FUNSAT, na Rua 14 de Julho, 992 - Vila Glória, munidos com documentos pessoais como foto e Carteira de Trabalho, no caso de Carteira de Trabalho Digital, traga o celular com bateria e recarga, para acesso dos dados.</p>
+					</div>
+					<div class="funsat-jobs__cta">
+						<p>Venha à FUNSAT, atualize o cadastro-se e fique por dentro das oportunidades que se enquadram em seu perfil.</p>
+						<a class="funsat-jobs__button" href="javascript:void(0)">Acessar vagas em aberto <i class="fas fa-external-link-alt"></i></a>
+					</div>
+				</div>
+			</section>
+		</main>
+	</body>
+</html>

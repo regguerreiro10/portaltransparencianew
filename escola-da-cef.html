@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html class="no-js" lang="pt-BR">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="x-ua-compatible" content="ie=edge" />
+		<title>Escala de Plantonistas - Abril 2026</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png" />
+		<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="assets/css/fontawesome-all.min.css" />
+		<style>
+			body { margin: 0; background: #f4f5f7; color: #111827; font-family: Arial, Helvetica, sans-serif; }
+			.cef-page { padding: 18px 32px 42px; }
+			.cef-title { margin: 0 0 24px; text-align: center; font-size: 40px; font-weight: 800; color: #111827; }
+			.cef-filter { display: flex; align-items: center; gap: 16px; margin: 0 auto 26px; padding: 16px; border: 1px solid #d1d5db; border-radius: 5px; background: #fff; box-shadow: 0 2px 5px rgba(17, 24, 39, 0.08); }
+			.cef-filter label { display: flex; align-items: center; gap: 10px; margin: 0; font-size: 16px; font-weight: 700; color: #111827; }
+			.cef-filter select { min-width: 120px; height: 38px; padding: 6px 34px 6px 12px; border: 1px solid #d1d5db; border-radius: 5px; background: #fff; color: #111827; font-size: 16px; }
+			.cef-filter button { display: inline-flex; align-items: center; gap: 8px; min-height: 38px; padding: 8px 14px; border: 0; border-radius: 5px; background: #087db3; color: #fff; font-size: 16px; cursor: pointer; }
+			.cef-calendar { overflow: hidden; border: 1px solid #cbd5e1; border-radius: 5px 5px 0 0; background: #fff; }
+			.cef-calendar__heading { padding: 9px 16px; background: #087db3; color: #fff; font-size: 20px; font-weight: 800; }
+			.cef-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+			.cef-table th { padding: 10px 8px; border: 2px solid #d6dde5; background: #087db3; color: #fff; font-size: 16px; font-weight: 800; text-align: center; }
+			.cef-table td { height: 194px; padding: 14px 7px 8px; border: 2px solid #d6dde5; vertical-align: top; background: #fff; }
+			.cef-table td.is-muted { background: #f8fafc; color: #4b5563; }
+			.cef-day { display: block; margin-bottom: 6px; font-size: 16px; font-weight: 800; color: #111827; }
+			.cef-duty { margin: 5px 0; padding: 5px 6px 7px; border: 3px solid #087db3; border-radius: 6px; background: #fff; color: #111827; }
+			.cef-duty__type { display: block; font-size: 16px; line-height: 1.1; }
+			.cef-duty__time { display: block; margin: 2px 0 4px; font-size: 14px; color: #374151; }
+			.cef-duty__name { display: block; margin: 0 -2px -2px; padding: 2px 4px; background: #e7f1ff; font-size: 16px; font-weight: 800; color: #111827; }
+			@media (max-width: 991.98px) {
+				.cef-page { padding: 16px; }
+				.cef-title { font-size: 30px; }
+				.cef-filter { flex-wrap: wrap; }
+				.cef-table { min-width: 900px; }
+				.cef-calendar { overflow-x: auto; }
+			}
+		</style>
+	</head>
+	<body>
+		<main class="cef-page">
+			<h1 class="cef-title">Escala de Plantonistas - Abril 2026</h1>
+			<form class="cef-filter" action="javascript:void(0)">
+				<label>Mes:
+					<select aria-label="Mes">
+						<option selected>Abril</option>
+					</select>
+				</label>
+				<label>Ano:
+					<select aria-label="Ano">
+						<option selected>2026</option>
+					</select>
+				</label>
+				<button type="submit"><i class="fas fa-filter"></i> Filtrar</button>
+			</form>
+			<section class="cef-calendar">
+				<div class="cef-calendar__heading">Calendario</div>
+				<table class="cef-table">
+					<thead>
+						<tr>
+							<th>Domingo</th>
+							<th>Segunda</th>
+							<th>Terca</th>
+							<th>Quarta</th>
+							<th>Quinta</th>
+							<th>Sexta</th>
+							<th>Sabado</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td class="is-muted"><span class="cef-day">29</span></td>
+							<td class="is-muted"><span class="cef-day">30</span></td>
+							<td class="is-muted"><span class="cef-day">31</span></td>
+							<td>
+								<span class="cef-day">1</span>
+								<div class="cef-duty"><span class="cef-duty__type">Alvara</span><span class="cef-duty__time">08:00</span><span class="cef-duty__name">Maisa</span></div>
+								<div class="cef-duty"><span class="cef-duty__type">Regularizacao</span><span class="cef-duty__time">08:00</span><span class="cef-duty__name">Felipe</span></div>
+							</td>
+							<td>
+								<span class="cef-day">2</span>
+								<div class="cef-duty"><span class="cef-duty__type">Regularizacao</span><span class="cef-duty__time">08:00</span><span class="cef-duty__name">Jessica</span></div>
+							</td>
+							<td><span class="cef-day">3</span></td>
+							<td><span class="cef-day">4</span></td>
+						</tr>
+						<tr>
+							<td><span class="cef-day">5</span></td>
+							<td><span class="cef-day">6</span></td>
+							<td>
+								<span class="cef-day">7</span>
+								<div class="cef-duty"><span class="cef-duty__type">Regularizacao</span><span class="cef-duty__time">08:00</span><span class="cef-duty__name">Fernanda</span></div>
+							</td>
+							<td>
+								<span class="cef-day">8</span>
+								<div class="cef-duty"><span class="cef-duty__type">Alvara</span><span class="cef-duty__time">08:00</span><span class="cef-duty__name">Maisa</span></div>
+							</td>
+							<td>
+								<span class="cef-day">9</span>
+								<div class="cef-duty"><span class="cef-duty__type">Alvara</span><span class="cef-duty__time">08:00</span><span class="cef-duty__name">Cynara</span></div>
+							</td>
+							<td>
+								<span class="cef-day">10</span>
+								<div class="cef-duty"><span class="cef-duty__type">Regularizacao</span><span class="cef-duty__time">08:00</span><span class="cef-duty__name">Felipe</span></div>
+							</td>
+							<td><span class="cef-day">11</span></td>
+						</tr>
+					</tbody>
+				</table>
+			</section>
+		</main>
+	</body>
+</html>

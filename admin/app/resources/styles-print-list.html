@@ -1,0 +1,114 @@
+<style>
+    .pdf-list-header {
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 28px;
+        margin: 0;
+        padding-bottom: 5px;
+        border-bottom: 1px solid #8c96a5;
+        font-family: Arial, Helvetica, sans-serif;
+        color: #111827;
+    }
+
+    body {
+        padding-top: 34px;
+    }
+
+    .pdf-list-header table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .pdf-list-header td {
+        border: 0 !important;
+        background: #ffffff !important;
+        padding: 0 !important;
+        vertical-align: middle;
+    }
+
+    .pdf-list-logo {
+        width: 26px;
+        height: auto;
+        display: block;
+    }
+
+    .pdf-list-title {
+        font-size: 11px;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .pdf-list-unit {
+        font-size: 10px;
+        font-weight: bold;
+        line-height: 1.25;
+    }
+
+    .pdf-list-document {
+        font-size: 9px;
+        font-weight: bold;
+        line-height: 1.25;
+    }
+
+    .pdf-list-meta {
+        font-size: 8px;
+        font-weight: bold;
+        text-align: right;
+        line-height: 1.35;
+    }
+
+    table {
+        border-collapse: collapse !important;
+    }
+
+    table thead tr,
+    table tr:first-child {
+        background: #464e5c !important;
+        color: #ffffff !important;
+    }
+
+    table th,
+    table thead td {
+        background: #464e5c !important;
+        color: #ffffff !important;
+        font-weight: bold !important;
+        border-color: #464e5c !important;
+    }
+
+    table tbody tr:nth-child(even) td,
+    table tr:nth-child(even) td {
+        background: #e8ebf0 !important;
+    }
+
+    table tbody tr:nth-child(odd) td,
+    table tr:nth-child(odd) td {
+        background: #ffffff !important;
+    }
+
+    .pdf-list-header,
+    .pdf-list-header table,
+    .pdf-list-header tr,
+    .pdf-list-header td {
+        background: #ffffff !important;
+        color: #111827 !important;
+    }
+
+    .pdf-list-header .pdf-list-title {
+        color: #111827 !important;
+        font-size: 12px !important;
+        font-weight: bold !important;
+    }
+
+    .pdf-list-header .pdf-list-meta {
+        color: #111827 !important;
+        font-size: 8px !important;
+        font-weight: bold !important;
+    }
+
+    .pdf-page-number:before {
+        content: counter(page);
+    }
+</style>

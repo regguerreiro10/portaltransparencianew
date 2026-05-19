@@ -1,0 +1,15 @@
+[17:44:43] Transação aberta
+[17:45:10] ARQ: F:\wamp64\www\gestaofrotas\GestaoFrotas\app\documentos\redes\4385\6945a589bd0d0_nfs_4.pdf
+[17:45:16] ARQ: F:\wamp64\www\gestaofrotas\GestaoFrotas\app\documentos\redes\4385\6945a589bfd35_xml_ret_normal_aeret_31062002236771959000178000000000000425128969779446.xml
+[17:45:18] ARQ: F:\wamp64\www\gestaofrotas\GestaoFrotas\app\documentos\redes\3988\69370ee7315df_orcamento_auto_center_fausto_rocha_iphan.pdf
+[17:45:18] ARQ: F:\wamp64\www\gestaofrotas\GestaoFrotas\app\documentos\redes\4206\693bf528098bd_nfs2.pdf
+[17:45:18] ARQ: F:\wamp64\www\gestaofrotas\GestaoFrotas\app\documentos\redes\4206\693bf5280a5f5_xml_ret_normal_aeret_31062002236771959000178000000000000225126009690910.xml
+[17:45:18] Transação fechada
+[17:45:18] Formato não suportado: F:\wamp64\www\gestaofrotas\GestaoFrotas\app\documentos\redes\4385\6945a589bfd35_xml_ret_normal_aeret_31062002236771959000178000000000000425128969779446.xml
+[17:45:18] Falha na conversão: F:\wamp64\www\gestaofrotas\GestaoFrotas\app\documentos\redes\4385\6945a589bfd35_xml_ret_normal_aeret_31062002236771959000178000000000000425128969779446.xml
+[17:45:18] Formato não suportado: F:\wamp64\www\gestaofrotas\GestaoFrotas\app\documentos\redes\4206\693bf5280a5f5_xml_ret_normal_aeret_31062002236771959000178000000000000225126009690910.xml
+[17:45:18] Falha na conversão: F:\wamp64\www\gestaofrotas\GestaoFrotas\app\documentos\redes\4206\693bf5280a5f5_xml_ret_normal_aeret_31062002236771959000178000000000000225126009690910.xml
+[17:45:18] Autoload (Composer): F:\wamp64\www\gestaofrotas\GestaoFrotas/vendor/autoload.php
+[17:45:22] Abrindo F:\wamp64\www\gestaofrotas\GestaoFrotas\app\documentos\redes\4385\6945a589bd0d0_nfs_4.pdf -> 1 páginas
+[17:45:24] Abrindo F:\wamp64\www\gestaofrotas\GestaoFrotas\app\documentos\redes\3988\69370ee7315df_orcamento_auto_center_fausto_rocha_iphan.pdf -> 1 páginas
+[17:45:25] Abrindo F:\wamp64\www\gestaofrotas\GestaoFrotas\app\documentos\redes\4206\693bf528098bd_nfs2.pdf -> 1 páginas

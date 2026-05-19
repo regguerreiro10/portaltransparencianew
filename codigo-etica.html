@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html class="no-js" lang="pt-BR">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="x-ua-compatible" content="ie=edge" />
+		<title>Código de Ética</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png" />
+		<link rel="stylesheet" href="assets/css/fontawesome-all.min.css" />
+		<style>
+			* {
+				box-sizing: border-box;
+			}
+
+			body {
+				margin: 0;
+				background: #ffffff;
+				color: #153a61;
+				font-family: Arial, Helvetica, sans-serif;
+			}
+
+			a {
+				text-decoration: none;
+			}
+
+			.ce-shell {
+				max-width: 1280px;
+				margin: 0 auto;
+			}
+
+			.ce-topbar {
+				background: #005e98;
+				color: #ffffff;
+			}
+
+			.ce-topbar__inner {
+				display: grid;
+				grid-template-columns: 210px 1fr 110px;
+				align-items: center;
+				min-height: 48px;
+				padding: 0 18px;
+				gap: 14px;
+			}
+
+			.ce-brand {
+				display: flex;
+				align-items: center;
+				gap: 10px;
+				color: #ffffff;
+			}
+
+			.ce-brand img {
+				width: 28px;
+				height: 28px;
+				object-fit: contain;
+			}
+
+			.ce-brand__text {
+				font-size: 11px;
+				font-weight: 700;
+				line-height: 1.1;
+				text-transform: uppercase;
+			}
+
+			.ce-toplinks {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				gap: 22px;
+				flex-wrap: wrap;
+			}
+
+			.ce-toplinks a,
+			.ce-access {
+				font-size: 10px;
+				font-weight: 700;
+				color: #ffffff;
+				text-transform: uppercase;
+			}
+
+			.ce-access {
+				display: flex;
+				align-items: center;
+				justify-content: flex-end;
+				gap: 7px;
+			}
+
+			.ce-access i {
+				font-size: 18px;
+			}
+
+			.ce-subbar {
+				background: #166a9d;
+				border-top: 4px solid #f2cb00;
+			}
+
+			.ce-subbar__inner {
+				display: grid;
+				grid-template-columns: 250px 1fr;
+				align-items: center;
+				min-height: 22px;
+			}
+
+			.ce-city {
+				position: relative;
+				padding-left: 8px;
+				color: #ffffff;
+				font-size: 11px;
+				font-weight: 700;
+				line-height: 22px;
+				text-transform: uppercase;
+				background: linear-gradient(90deg, #15669a 0, #15669a 64%, #f0d000 64%, #f0d000 67%, #d81f26 67%, #d81f26 70%, transparent 70%);
+			}
+
+			.ce-city span {
+				font-weight: 400;
+				text-transform: none;
+			}
+
+			.ce-subnav {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				gap: 28px;
+				flex-wrap: wrap;
+			}
+
+			.ce-subnav a {
+				color: #ffffff;
+				font-size: 9px;
+				font-weight: 700;
+				text-transform: uppercase;
+			}
+
+			.ce-heading {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				padding: 14px 8px 10px;
+			}
+
+			.ce-heading__title {
+				margin: 0;
+				font-size: 20px;
+				font-weight: 300;
+				letter-spacing: 0.01em;
+				color: #2e6ea0;
+				text-transform: uppercase;
+			}
+
+			.ce-heading__title strong {
+				font-weight: 800;
+			}
+
+			.ce-heading__logo {
+				display: flex;
+				align-items: center;
+				gap: 10px;
+				color: #2e6ea0;
+				font-size: 15px;
+				font-weight: 800;
+				text-transform: uppercase;
+			}
+
+			.ce-heading__logo img {
+				width: 36px;
+				height: 36px;
+				object-fit: contain;
+			}
+
+			.ce-menu-row {
+				display: grid;
+				grid-template-columns: minmax(0, 1fr) 133px 94px 47px;
+				align-items: stretch;
+				margin: 0 8px;
+			}
+
+			.ce-menu {
+				display: flex;
+				flex-wrap: wrap;
+				align-items: center;
+				background: #f2dd00;
+			}
+
+			.ce-menu a {
+				padding: 0 18px;
+				min-height: 35px;
+				display: inline-flex;
+				align-items: center;
+				color: #28496f;
+				font-size: 11px;
+				font-weight: 400;
+				text-transform: uppercase;
+			}
+
+			.ce-search input {
+				width: 100%;
+				height: 35px;
+				border: 0;
+				padding: 0 10px;
+				font-size: 9px;
+				text-transform: uppercase;
+				color: #9aa9b7;
+				background: #ffffff;
+			}
+
+			.ce-search-icon,
+			.ce-help,
+			.ce-accessibility {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				min-height: 35px;
+			}
+
+			.ce-search-icon {
+				background: #f3f5f7;
+				color: #7c9ab4;
+				font-size: 15px;
+			}
+
+			.ce-help {
+				gap: 8px;
+				background: #48c4d4;
+				color: #ffffff;
+				font-size: 11px;
+				font-weight: 800;
+				text-transform: uppercase;
+			}
+
+			.ce-accessibility {
+				background: #ffe300;
+				color: #197fbe;
+				font-size: 23px;
+			}
+
+			.ce-breadcrumb {
+				padding: 7px 8px 7px;
+				border-top: 3px dotted #d9d9d9;
+				color: #1d3552;
+				font-size: 11px;
+			}
+
+			.ce-shortcuts {
+				display: grid;
+				grid-template-columns: repeat(8, minmax(0, 1fr));
+				margin: 7px 8px 40px;
+				background: #f1f3f5;
+				border: 1px solid #e1e8ee;
+			}
+
+			.ce-shortcut {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+				gap: 8px;
+				min-height: 74px;
+				color: #1d5f99;
+				font-size: 11px;
+				font-weight: 400;
+				text-transform: uppercase;
+				text-align: center;
+			}
+
+			.ce-shortcut i {
+				font-size: 14px;
+			}
+
+			.ce-pagepath {
+				margin: 0 8px;
+				padding-bottom: 4px;
+				border-bottom: 1px solid #d6dde5;
+				color: #5f7f9d;
+				font-size: 9px;
+				text-transform: uppercase;
+			}
+
+			.ce-title {
+				margin: 22px 8px 0;
+				color: #2d6ea1;
+				font-size: 27px;
+				font-weight: 400;
+				line-height: 1.16;
+				text-align: center;
+				text-transform: uppercase;
+			}
+
+			.ce-subtitle {
+				margin: 17px 8px 0;
+				color: #9aa0a5;
+				font-size: 19px;
+				font-weight: 300;
+				text-align: center;
+			}
+
+			.ce-body {
+				display: grid;
+				grid-template-columns: 1fr 300px;
+				gap: 30px;
+				margin: 22px 8px 0;
+				padding-top: 12px;
+				border-top: 3px dotted #dadada;
+				min-height: 150px;
+			}
+
+			.ce-text p {
+				margin: 0 0 28px;
+				color: #161616;
+				font-size: 12px;
+				line-height: 1.6;
+			}
+
+			.ce-download {
+				padding-top: 2px;
+			}
+
+			.ce-download__inner {
+				display: grid;
+				grid-template-columns: 64px 1fr;
+				gap: 14px;
+				align-items: start;
+			}
+
+			.ce-download__button {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				width: 34px;
+				height: 34px;
+				margin: 11px auto 0;
+				border-radius: 50%;
+				background: #3278bc;
+				color: #ffffff;
+				font-size: 18px;
+			}
+
+			.ce-download__content h2 {
+				margin: 0;
+				color: #5d7b98;
+				font-size: 17px;
+				font-weight: 400;
+				text-transform: uppercase;
+			}
+
+			.ce-download__content p {
+				margin: 5px 0 0;
+				color: #959ea6;
+				font-size: 12px;
+				line-height: 1.45;
+			}
+
+			.ce-download__content {
+				padding-bottom: 20px;
+				border-bottom: 1px solid #e3e7ea;
+			}
+
+			.ce-footerline {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				margin: 46px 8px 0;
+				padding: 20px 0 14px;
+				border-top: 1px solid #eceeef;
+				color: #4c79a6;
+				font-size: 11px;
+			}
+
+			.ce-footerline__social {
+				display: flex;
+				align-items: center;
+				gap: 14px;
+			}
+
+			.ce-footerline__social span {
+				color: #8094ad;
+			}
+
+			@media (max-width: 980px) {
+				.ce-topbar__inner,
+				.ce-subbar__inner,
+				.ce-menu-row,
+				.ce-body {
+					grid-template-columns: 1fr;
+				}
+
+				.ce-toplinks,
+				.ce-subnav {
+					justify-content: flex-start;
+				}
+
+				.ce-heading,
+				.ce-footerline {
+					flex-direction: column;
+					align-items: flex-start;
+					gap: 14px;
+				}
+
+				.ce-shortcuts {
+					grid-template-columns: repeat(2, minmax(0, 1fr));
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			<div class="ce-topbar">
+				<div class="ce-shell ce-topbar__inner">
+					<a class="ce-brand" href="index.html">
+						<img src="assets/img/logo/logo.png" alt="Campo Grande" />
+						<div class="ce-brand__text">Campo Grande<br />Prefeitura</div>
+					</a>
+					<nav class="ce-toplinks" aria-label="Links institucionais">
+						<a href="javascript:void(0)">Sites Municipais</a>
+						<a href="javascript:void(0)">Diário Oficial</a>
+						<a href="services.html">Transparência</a>
+						<a href="javascript:void(0)">Portal do Cidadão</a>
+						<a href="javascript:void(0)">Carta de Serviços</a>
+						<a href="javascript:void(0)">Cerimonial</a>
+						<a href="javascript:void(0)">Ouvidoria</a>
+					</nav>
+					<div class="ce-access"><i class="fas fa-user-circle"></i><span>Acesso à Informação</span></div>
+				</div>
+			</div>
+			<div class="ce-subbar">
+				<div class="ce-shell ce-subbar__inner">
+					<div class="ce-city">Campo Grande <span>- Sites Municipais</span></div>
+					<nav class="ce-subnav" aria-label="Links rápidos">
+						<a href="index.html">Home</a>
+						<a href="javascript:void(0)">Portal da Prefeitura</a>
+						<a href="javascript:void(0)">Transparência Covid-19</a>
+						<a href="e-sic-informacoes-cidadao.html">E-SIC</a>
+						<a href="javascript:void(0)">Portal da Privacidade</a>
+						<a href="contact.html">Fale Conosco</a>
+					</nav>
+				</div>
+			</div>
+		</header>
+
+		<main class="ce-shell">
+			<div class="ce-heading">
+				<h1 class="ce-heading__title">Portal da <strong>Transparência</strong></h1>
+				<div class="ce-heading__logo"><img src="assets/img/logo/logo.png" alt="Campo Grande" />Campo Grande</div>
+			</div>
+
+			<div class="ce-menu-row">
+				<nav class="ce-menu" aria-label="Menu do portal">
+					<a href="services.html">O Portal</a>
+					<a href="services.html">Contas Públicas</a>
+					<a href="prestacao-contas.html">Prestação de Contas</a>
+					<a href="services.html">Dados Abertos</a>
+					<a href="services.html">Boas Práticas</a>
+				</nav>
+				<div class="ce-search"><input type="text" placeholder="O que você procura?" /></div>
+				<a class="ce-search-icon" href="javascript:void(0)" aria-label="Buscar"><i class="fas fa-search"></i></a>
+				<a class="ce-help" href="contact.html">Ajuda <i class="fas fa-question-circle"></i></a>
+			</div>
+
+			<div class="ce-breadcrumb">Prefeitura de Campo Grande &gt; TRANSPARÊNCIA &gt; Downloads &gt; Código de Ética dos agentes públicos do município de Campo Grande</div>
+
+			<section class="ce-shortcuts" aria-label="Atalhos">
+				<a class="ce-shortcut" href="lgpd-portal.html"><i class="fas fa-book"></i><span>LGPD</span></a>
+				<a class="ce-shortcut" href="obras-portal.html"><i class="fas fa-landmark"></i><span>Obras</span></a>
+				<a class="ce-shortcut" href="contratos-portal.html"><i class="fas fa-file-contract"></i><span>Contratos</span></a>
+				<a class="ce-shortcut" href="perguntas-frequentes.html"><i class="fas fa-question-circle"></i><span>Perguntas Frequentes</span></a>
+				<a class="ce-shortcut" href="prestacao-contas.html"><i class="fas fa-briefcase"></i><span>Prestação de Contas</span></a>
+				<a class="ce-shortcut" href="convenios-portal.html"><i class="fas fa-handshake"></i><span>Convênios</span></a>
+				<a class="ce-shortcut" href="orcamento.html"><i class="fas fa-calculator"></i><span>Orçamento</span></a>
+				<a class="ce-shortcut" href="diarias-passagens-consulta.html"><i class="fas fa-plane"></i><span>Ver Diárias e Passagens</span></a>
+			</section>
+
+			<div class="ce-pagepath">Prefeitura de Campo Grande &gt; Transparência &gt; Downloads &gt; Código de Ética dos agentes públicos do município de Campo Grande</div>
+
+			<h2 class="ce-title">Código de Ética dos Agentes Públicos do Município de Campo Grande</h2>
+			<div class="ce-subtitle">Clique e faça download do conteúdo</div>
+
+			<section class="ce-body">
+				<div class="ce-text">
+					<p>Faça o download do PDF com o Código de Ética dos agentes públicos do município de Campo Grande.</p>
+					<p>Para baixar, clique ao lado.</p>
+				</div>
+				<aside class="ce-download" aria-label="Baixar arquivo">
+					<div class="ce-download__inner">
+						<a class="ce-download__button" href="javascript:void(0)" aria-label="Baixar arquivo"><i class="fas fa-arrow-down"></i></a>
+						<div class="ce-download__content">
+							<h2>Baixar Arquivo</h2>
+							<p>Clique aqui para fazer o download.</p>
+						</div>
+					</div>
+				</aside>
+			</section>
+
+			<div class="ce-footerline">
+				<a href="index.html"><i class="fas fa-angle-left"></i> Voltar à Página Inicial</a>
+				<div class="ce-footerline__social">
+					<span>Não imprima, compartilhe!</span>
+					<a href="javascript:void(0)"><i class="fab fa-facebook-f"></i></a>
+					<a href="javascript:void(0)"><i class="fab fa-twitter"></i></a>
+				</div>
+			</div>
+		</main>
+	</body>
+</html>

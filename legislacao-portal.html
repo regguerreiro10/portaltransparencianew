@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html class="no-js" lang="pt-BR">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="x-ua-compatible" content="ie=edge" />
+		<title>Legislacao</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png" />
+		<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="assets/css/animate.min.css" />
+		<link rel="stylesheet" href="assets/css/magnific-popup.css" />
+		<link rel="stylesheet" href="assets/css/fontawesome-all.min.css" />
+		<link rel="stylesheet" href="assets/css/flaticon.css" />
+		<link rel="stylesheet" href="assets/css/odometer.css" />
+		<link rel="stylesheet" href="assets/css/swiper-bundle.css" />
+		<link rel="stylesheet" href="assets/css/aos.css" />
+		<link rel="stylesheet" href="assets/css/default.css" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<style>
+			.legislacao-portal-area { padding: 110px 0 120px; background: linear-gradient(180deg, rgba(255, 209, 0, 0.08) 0%, rgba(255, 255, 255, 0) 220px), #f7f9fc; }
+			.legislacao-portal-shell { background: #fff; border: 1px solid rgba(15, 23, 42, 0.08); border-radius: 22px; box-shadow: 0 24px 60px rgba(15, 23, 42, 0.1); overflow: hidden; }
+			.legislacao-portal-topbar { padding: 18px 36px; background: #ffd400; border-bottom: 1px solid rgba(15, 23, 42, 0.08); }
+			.legislacao-portal-topbar__nav { display: flex; flex-wrap: wrap; gap: 18px; font-size: 13px; font-weight: 600; color: #17324d; }
+			.legislacao-portal-breadcrumb { padding: 10px 36px; font-size: 13px; color: #5b7088; background: #fff; border-bottom: 1px solid rgba(15, 23, 42, 0.08); }
+			.legislacao-portal-shortcuts { padding: 20px 36px; background: #f3f6fa; border-bottom: 1px solid rgba(15, 23, 42, 0.08); }
+			.legislacao-portal-shortcuts__grid { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 14px 10px; }
+			.legislacao-portal-shortcuts__item { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 86px; padding: 12px 10px; border-radius: 14px; background: transparent; border: 1px solid transparent; text-align: center; color: #5b7088; transition: 0.25s ease; }
+			.legislacao-portal-shortcuts__item:hover, .legislacao-portal-shortcuts__item:focus, .legislacao-portal-shortcuts__item.is-active { background: #fff; border-color: #d8e2ee; color: #17324d; }
+			.legislacao-portal-shortcuts__item i { margin-bottom: 10px; font-size: 18px; color: #0f4c81; }
+			.legislacao-portal-shortcuts__item span { font-size: 12px; font-weight: 600; line-height: 1.35; text-transform: uppercase; }
+			.legislacao-portal-content { padding: 34px 36px 40px; }
+			.legislacao-portal-search { margin-bottom: 36px; padding: 28px 28px 22px; border-radius: 22px; background: linear-gradient(135deg, #2c7bb1 0%, #3f8bc0 100%); color: #fff; box-shadow: 0 20px 45px rgba(44, 123, 177, 0.18); }
+			.legislacao-portal-search__top { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; margin-bottom: 24px; padding-bottom: 18px; border-bottom: 1px solid rgba(255, 255, 255, 0.22); }
+			.legislacao-portal-search__title { margin: 0; font-size: 40px; line-height: 1; text-transform: uppercase; color: #fff; }
+			.legislacao-portal-search__title strong { font-weight: 800; }
+			.legislacao-portal-search__subtitle { margin: 10px 0 0; max-width: 560px; font-size: 18px; line-height: 1.45; color: rgba(255, 255, 255, 0.9); }
+			.legislacao-portal-search__body { display: grid; grid-template-columns: minmax(0, 2.1fr) minmax(260px, 0.9fr); gap: 28px 40px; align-items: start; }
+			.legislacao-portal-search__section-title { margin: 0 0 18px; font-size: 18px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #fff; }
+			.legislacao-portal-search__form { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 16px 22px; }
+			.legislacao-portal-search__field { display: flex; flex-direction: column; gap: 8px; }
+			.legislacao-portal-search__field--span-2 { grid-column: span 2; }
+			.legislacao-portal-search__field--span-3 { grid-column: span 3; }
+			.legislacao-portal-search__field label { margin: 0; font-size: 12px; font-weight: 700; text-transform: uppercase; color: #fff; letter-spacing: 0.02em; }
+			.legislacao-portal-search__field input, .legislacao-portal-search__field select { height: 44px; padding: 0 14px; border: 0; border-radius: 4px; background: #fff; font-size: 14px; color: #17324d; box-shadow: inset 0 0 0 1px rgba(23, 50, 77, 0.08); }
+			.legislacao-portal-search__field input::placeholder { color: #8ea1b5; }
+			.legislacao-portal-search__field input:focus, .legislacao-portal-search__field select:focus { outline: 2px solid rgba(255, 212, 0, 0.45); outline-offset: 2px; }
+			.legislacao-portal-search__aside { padding-top: 46px; }
+			.legislacao-portal-search__aside-title { margin: 0 0 10px; font-size: 18px; font-weight: 800; text-transform: uppercase; color: #fff; }
+			.legislacao-portal-search__aside-title span { font-weight: 400; }
+			.legislacao-portal-search__aside p { margin: 0 0 12px; font-size: 15px; line-height: 1.6; color: rgba(255, 255, 255, 0.92); }
+			.legislacao-portal-search__actions { display: flex; justify-content: flex-end; gap: 12px; margin-top: 20px; }
+			.legislacao-portal-search__btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-width: 136px; height: 44px; padding: 0 18px; border: 0; border-radius: 4px; font-size: 14px; font-weight: 700; text-transform: uppercase; transition: 0.25s ease; }
+			.legislacao-portal-search__btn i { font-size: 13px; }
+			.legislacao-portal-search__btn--ghost { background: #73afda; color: #fff; }
+			.legislacao-portal-search__btn--submit { background: #52b44c; color: #fff; }
+			.legislacao-portal-search__btn:hover, .legislacao-portal-search__btn:focus { transform: translateY(-1px); filter: brightness(1.03); }
+			.legislacao-portal-title { margin: 0 0 28px; padding-bottom: 12px; font-size: 30px; text-transform: uppercase; color: #0f4c81; border-bottom: 2px solid #f0db37; }
+			.legislacao-portal-eyebrow { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 12px; padding: 8px 12px; border-radius: 999px; background: #e8f1fb; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #0f4c81; }
+			.legislacao-portal-lead { margin: -10px 0 28px; max-width: 920px; font-size: 16px; line-height: 1.7; color: #4d657d; }
+			.legislacao-portal-actions-panel { margin-bottom: 28px; padding: 24px; border-radius: 22px; background: linear-gradient(135deg, #17324d 0%, #214d74 100%); box-shadow: 0 20px 45px rgba(23, 50, 77, 0.16); }
+			.legislacao-portal-actions-panel__title { margin: 0 0 10px; font-size: 22px; font-weight: 800; text-transform: uppercase; color: #fff; }
+			.legislacao-portal-actions-panel__text { margin: 0 0 18px; max-width: 840px; font-size: 15px; line-height: 1.65; color: rgba(255, 255, 255, 0.88); }
+			.legislacao-portal-actions-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+			.legislacao-portal-action-btn { display: flex; align-items: center; gap: 12px; min-height: 58px; padding: 14px 16px; border-radius: 16px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.12); color: #fff; font-size: 13px; font-weight: 700; line-height: 1.4; text-transform: uppercase; transition: 0.25s ease; }
+			.legislacao-portal-action-btn:hover, .legislacao-portal-action-btn:focus { background: rgba(255, 255, 255, 0.16); color: #fff; transform: translateY(-2px); }
+			.legislacao-portal-action-btn i { width: 18px; text-align: center; color: #ffd400; }
+			.legislacao-portal-mode-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin-bottom: 30px; }
+			.legislacao-portal-mode-card { padding: 24px; border: 1px solid #dde7f1; border-radius: 20px; background: #fff; box-shadow: 0 14px 36px rgba(15, 23, 42, 0.06); }
+			.legislacao-portal-mode-card__tag { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 12px; padding: 6px 10px; border-radius: 999px; background: #eef6ff; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #0f4c81; }
+			.legislacao-portal-mode-card__title { margin: 0 0 8px; font-size: 20px; font-weight: 800; color: #17324d; text-transform: uppercase; }
+			.legislacao-portal-mode-card__text { margin: 0 0 14px; font-size: 14px; line-height: 1.65; color: #5b7088; }
+			.legislacao-portal-mode-card__list { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+			.legislacao-portal-mode-card__list li { position: relative; padding-left: 18px; font-size: 14px; line-height: 1.55; color: #17324d; }
+			.legislacao-portal-mode-card__list li::before { content: ""; position: absolute; left: 0; top: 9px; width: 8px; height: 8px; border-radius: 50%; background: #ffd400; }
+			.legislacao-portal-results { margin-bottom: 30px; padding: 24px; border: 1px solid #dde7f1; border-radius: 22px; background: #fff; box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08); }
+			.legislacao-portal-results__top { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 18px; }
+			.legislacao-portal-results__title { margin: 0; font-size: 24px; font-weight: 800; color: #17324d; text-transform: uppercase; }
+			.legislacao-portal-results__subtitle { margin: 6px 0 0; font-size: 14px; line-height: 1.6; color: #5b7088; }
+			.legislacao-portal-kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; min-width: 420px; }
+			.legislacao-portal-kpi { padding: 16px 14px; border-radius: 16px; background: #f5f8fc; border: 1px solid #e0e8f1; }
+			.legislacao-portal-kpi strong { display: block; margin-bottom: 4px; font-size: 28px; line-height: 1; color: #0f4c81; }
+			.legislacao-portal-kpi span { font-size: 12px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: #5b7088; }
+			.legislacao-portal-table-wrap { overflow-x: auto; }
+			.legislacao-portal-table { width: 100%; min-width: 1480px; border-collapse: separate; border-spacing: 0; }
+			.legislacao-portal-table th { padding: 14px 14px; background: #eef4fb; border-bottom: 1px solid #d7e2ef; font-size: 12px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: #17324d; }
+			.legislacao-portal-table td { padding: 18px 14px; border-bottom: 1px solid #e6edf5; vertical-align: top; font-size: 14px; color: #17324d; }
+			.legislacao-portal-table tr:last-child td { border-bottom: 0; }
+			.legislacao-portal-process strong { display: block; margin-bottom: 6px; font-size: 20px; color: #0f4c81; }
+			.legislacao-portal-process small { display: block; margin-top: 6px; font-size: 12px; color: #6f8498; }
+			.legislacao-portal-muted { display: block; margin-top: 6px; font-size: 12px; line-height: 1.5; color: #6f8498; }
+			.legislacao-portal-badge { display: inline-flex; align-items: center; justify-content: center; min-height: 30px; padding: 5px 12px; border-radius: 999px; font-size: 11px; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; }
+			.legislacao-portal-badge--blue { background: #deecfb; color: #0f4c81; }
+			.legislacao-portal-badge--green { background: #e4f5e2; color: #1f7a35; }
+			.legislacao-portal-badge--amber { background: #fff1d2; color: #9d6200; }
+			.legislacao-portal-badge--red { background: #fde4e2; color: #b43a2c; }
+			.legislacao-portal-badge--slate { background: #edf1f5; color: #4d657d; }
+			.legislacao-portal-author-list, .legislacao-portal-flow-list, .legislacao-portal-session-list, .legislacao-portal-id-list { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+			.legislacao-portal-author-list li, .legislacao-portal-flow-list li, .legislacao-portal-session-list li, .legislacao-portal-id-list li { font-size: 13px; line-height: 1.55; color: #17324d; }
+			.legislacao-portal-author-role { display: inline-flex; margin-top: 5px; padding: 4px 8px; border-radius: 999px; background: #f2f6fb; font-size: 11px; font-weight: 700; color: #4d657d; text-transform: uppercase; }
+			.legislacao-portal-row-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+			.legislacao-portal-row-actions a { display: inline-flex; align-items: center; justify-content: center; min-height: 34px; padding: 0 12px; border-radius: 999px; background: #0f4c81; color: #fff; font-size: 12px; font-weight: 700; transition: 0.25s ease; }
+			.legislacao-portal-row-actions a.alt { background: #edf4fb; color: #0f4c81; }
+			.legislacao-portal-row-actions a:hover, .legislacao-portal-row-actions a:focus { transform: translateY(-1px); color: inherit; }
+			.legislacao-portal-message { margin: 0 0 16px; padding: 14px 16px; border-radius: 14px; background: #eef4fb; color: #17324d; font-size: 14px; display: none; }
+			.legislacao-portal-detail { padding: 28px; border-radius: 22px; background: linear-gradient(180deg, #fff 0%, #f6f9fd 100%); border: 1px solid #dde7f1; box-shadow: 0 18px 42px rgba(15, 23, 42, 0.08); }
+			.legislacao-portal-detail__top { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; margin-bottom: 20px; }
+			.legislacao-portal-detail__title { margin: 0; font-size: 26px; font-weight: 800; color: #17324d; text-transform: uppercase; }
+			.legislacao-portal-detail__text { margin: 8px 0 0; max-width: 820px; font-size: 15px; line-height: 1.65; color: #5b7088; }
+			.legislacao-portal-detail__header-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+			.legislacao-portal-detail__header-actions a { display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 14px; border-radius: 999px; background: #17324d; color: #fff; font-size: 12px; font-weight: 700; text-transform: uppercase; }
+			.legislacao-portal-detail__meta { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-bottom: 20px; }
+			.legislacao-portal-detail__meta-card { padding: 16px; border-radius: 16px; background: #fff; border: 1px solid #dce7f2; }
+			.legislacao-portal-detail__meta-card span { display: block; margin-bottom: 6px; font-size: 11px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: #6f8498; }
+			.legislacao-portal-detail__meta-card strong { display: block; font-size: 18px; color: #17324d; }
+			.legislacao-portal-detail__grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 20px; }
+			.legislacao-portal-panel { padding: 20px; border-radius: 18px; background: #fff; border: 1px solid #dde7f1; }
+			.legislacao-portal-panel__title { margin: 0 0 14px; font-size: 16px; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; color: #17324d; }
+			.legislacao-portal-panel__text { margin: 0; font-size: 14px; line-height: 1.7; color: #5b7088; }
+			.legislacao-portal-two-col { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+			.legislacao-portal-two-col--stack { grid-template-columns: 1fr; }
+			.legislacao-portal-timeline { margin: 0; padding: 0; list-style: none; display: grid; gap: 14px; }
+			.legislacao-portal-timeline li { position: relative; padding-left: 22px; font-size: 14px; line-height: 1.6; color: #17324d; }
+			.legislacao-portal-timeline li::before { content: ""; position: absolute; left: 0; top: 7px; width: 10px; height: 10px; border-radius: 50%; background: #ffd400; box-shadow: 0 0 0 4px rgba(255, 212, 0, 0.18); }
+			.legislacao-portal-file-list { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+			.legislacao-portal-file-list li { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 14px; border-radius: 14px; background: #f6f9fd; border: 1px solid #e0e8f1; }
+			.legislacao-portal-file-list strong { display: block; font-size: 14px; color: #17324d; }
+			.legislacao-portal-file-list span { display: block; margin-top: 4px; font-size: 12px; color: #6f8498; }
+			.legislacao-portal-file-list a { display: inline-flex; align-items: center; justify-content: center; min-height: 34px; padding: 0 12px; border-radius: 999px; background: #0f4c81; color: #fff; font-size: 12px; font-weight: 700; flex-shrink: 0; }
+			.legislacao-portal-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+			.legislacao-portal-card { display: block; border: 1px solid #dde7f1; border-radius: 18px; overflow: hidden; background: #fff; box-shadow: 0 16px 36px rgba(15, 23, 42, 0.08); transition: transform 0.25s ease, box-shadow 0.25s ease; }
+			.legislacao-portal-card:hover, .legislacao-portal-card:focus { transform: translateY(-4px); box-shadow: 0 20px 44px rgba(15, 23, 42, 0.12); }
+			.legislacao-portal-card__cover { display: flex; align-items: center; justify-content: center; min-height: 170px; padding: 24px; background: linear-gradient(135deg, #2f56d6 0%, #2139a9 100%); text-align: center; }
+			.legislacao-portal-card__cover span { color: #fff; font-size: 22px; font-weight: 700; line-height: 1.25; text-transform: uppercase; }
+			.legislacao-portal-card__body { padding: 16px 16px 18px; }
+			.legislacao-portal-card__sigla { display: inline-block; margin-bottom: 8px; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; color: #2f56d6; text-transform: uppercase; }
+			.legislacao-portal-card__title { margin: 0 0 8px; font-size: 16px; font-weight: 700; color: #17324d; text-transform: uppercase; }
+			.legislacao-portal-card__text { margin: 0; font-size: 13px; line-height: 1.55; color: #5b7088; }
+			.legislacao-portal-footer { display: flex; justify-content: space-between; gap: 16px; margin-top: 34px; padding-top: 18px; border-top: 1px solid #dde7f1; font-size: 13px; color: #5b7088; }
+			.legislacao-portal-footer a { color: #0f4c81; font-weight: 600; }
+			@media (max-width: 1199.98px) { .legislacao-portal-search__form { grid-template-columns: repeat(4, minmax(0, 1fr)); } .legislacao-portal-search__field--span-3 { grid-column: span 2; } .legislacao-portal-actions-grid, .legislacao-portal-detail__meta { grid-template-columns: repeat(2, minmax(0, 1fr)); } .legislacao-portal-results__top, .legislacao-portal-detail__top { flex-direction: column; } .legislacao-portal-kpis { min-width: 0; width: 100%; } }
+			@media (max-width: 991.98px) { .legislacao-portal-shortcuts__grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } .legislacao-portal-grid, .legislacao-portal-mode-grid, .legislacao-portal-detail__grid, .legislacao-portal-two-col { grid-template-columns: 1fr; } .legislacao-portal-search__body { grid-template-columns: 1fr; } .legislacao-portal-search__aside { padding-top: 0; } .legislacao-portal-kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+			@media (max-width: 767.98px) { .legislacao-portal-area { padding: 90px 0; } .legislacao-portal-topbar, .legislacao-portal-breadcrumb, .legislacao-portal-shortcuts, .legislacao-portal-content { padding-left: 20px; padding-right: 20px; } .legislacao-portal-shortcuts__grid, .legislacao-portal-grid, .legislacao-portal-search__form, .legislacao-portal-actions-grid, .legislacao-portal-kpis, .legislacao-portal-detail__meta { grid-template-columns: 1fr; } .legislacao-portal-footer, .legislacao-portal-search__top, .legislacao-portal-search__actions { flex-direction: column; } .legislacao-portal-search { padding: 24px 18px 20px; } .legislacao-portal-search__title { font-size: 30px; } .legislacao-portal-search__subtitle { font-size: 16px; } .legislacao-portal-search__field--span-2, .legislacao-portal-search__field--span-3 { grid-column: auto; } .legislacao-portal-search__btn { width: 100%; } .legislacao-portal-results, .legislacao-portal-detail, .legislacao-portal-actions-panel, .legislacao-portal-mode-card { padding: 20px 16px; } }
+		</style>
+	</head>
+	<body>
+		<button class="scroll__top scroll-to-target" data-target="html"><i class="fas fa-angle-up"></i></button>
+		<header>
+			<div id="header-fixed-height"></div>
+			<div id="sticky-header" class="tg-header__area">
+				<div class="container custom-container">
+					<div class="row">
+						<div class="col-12">
+							<div class="tgmenu__wrap">
+								<nav class="tgmenu__nav">
+									<div class="logo"><a href="index.html"><img src="assets/img/logo/logo.png" alt="Logo" /></a></div>
+									<div class="tgmenu__navbar-wrap tgmenu__main-menu d-none d-lg-flex">
+										<ul class="navigation">
+											<li><a href="index.html">In&iacute;cio</a></li>
+											<li><a href="services-3.html">Sites Municipais</a></li>
+											<li><a href="services.html">Portal Transpar&ecirc;ncia</a></li>
+											<li><a href="services-5.html">Servi&ccedil;os</a></li>
+											<li><a href="blog.html">Not&iacute;cias</a></li>
+											<li><a href="contact.html">Fale Conosco</a></li>
+										</ul>
+									</div>
+									<div class="tgmenu__action d-none d-md-block">
+										<ul class="list-wrap">
+											<li class="header-search">
+												<a href="javascript:void(0)" class="search-open-btn" aria-label="Abrir pesquisa">
+													<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none">
+														<path d="M19 19.0002L14.657 14.6572M14.657 14.6572C15.3999 13.9143 15.9892 13.0324 16.3912 12.0618C16.7933 11.0911 17.0002 10.0508 17.0002 9.00021C17.0002 7.9496 16.7933 6.90929 16.3913 5.93866C15.9892 4.96803 15.3999 4.08609 14.657 3.34321C13.9141 2.60032 13.0322 2.01103 12.0616 1.60898C11.0909 1.20693 10.0506 1 9.00002 1C7.94942 1 6.90911 1.20693 5.93848 1.60898C4.96785 2.01103 4.08591 2.60032 3.34302 3.34321C1.84269 4.84354 0.999817 6.87842 0.999817 9.00021C0.999817 11.122 1.84269 13.1569 3.34302 14.6572C4.84335 16.1575 6.87824 17.0004 9.00002 17.0004C11.1218 17.0004 13.1567 16.1575 14.657 14.6572Z" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+													</svg>
+												</a>
+											</li>
+										</ul>
+									</div>									<div class="mobile-nav-toggler">
+										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18" fill="none">
+											<path d="M0 2C0 0.895431 0.895431 0 2 0C3.10457 0 4 0.895431 4 2C4 3.10457 3.10457 4 2 4C0.895431 4 0 3.10457 0 2Z" fill="currentcolor" />
+											<path d="M0 9C0 7.89543 0.895431 7 2 7C3.10457 7 4 7.89543 4 9C4 10.1046 3.10457 11 2 11C0.895431 11 0 10.1046 0 9Z" fill="currentcolor" />
+											<path d="M0 16C0 14.8954 0.895431 14 2 14C3.10457 14 4 14.8954 4 16C4 17.1046 3.10457 18 2 18C0.895431 18 0 17.1046 0 16Z" fill="currentcolor" />
+											<path d="M7 2C7 0.895431 7.89543 0 9 0C10.1046 0 11 0.895431 11 2C11 3.10457 10.1046 4 9 4C7.89543 4 7 3.10457 7 2Z" fill="currentcolor" />
+											<path d="M7 9C7 7.89543 7.89543 7 9 7C10.1046 7 11 7.89543 11 9C11 10.1046 10.1046 11 9 11C7.89543 11 7 10.1046 7 9Z" fill="currentcolor" />
+											<path d="M7 16C7 14.8954 7.89543 14 9 14C10.1046 14 11 14.8954 11 16C11 17.1046 10.1046 18 9 18C7.89543 18 7 17.1046 7 16Z" fill="currentcolor" />
+											<path d="M14 2C14 0.895431 14.8954 0 16 0C17.1046 0 18 0.895431 18 2C18 3.10457 17.1046 4 16 4C14.8954 4 14 3.10457 14 2Z" fill="currentcolor" />
+											<path d="M14 9C14 7.89543 14.8954 7 16 7C17.1046 7 18 7.89543 18 9C18 10.1046 17.1046 11 16 11C14.8954 11 14 10.1046 14 9Z" fill="currentcolor" />
+											<path d="M14 16C14 14.8954 14.8954 14 16 14C17.1046 14 18 14.8954 18 16C18 17.1046 17.1046 18 16 18C14.8954 18 14 17.1046 14 16Z" fill="currentcolor" />
+										</svg>
+									</div>
+								</nav>
+							</div>
+							<div class="tgmobile__menu">
+								<nav class="tgmobile__menu-box">
+									<div class="close-btn"><i class="fas fa-times"></i></div>
+									<div class="nav-logo"><a href="index.html"><img src="assets/img/logo/logo.png" alt="Logo" /></a></div>
+									<div class="tgmobile__menu-outer"></div>
+								</nav>
+							</div>
+							<div class="tgmobile__menu-backdrop"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- header-search -->
+			<div class="search__popup">
+				<div class="container">
+					<div class="row">
+						<div class="col-12">
+							<div class="search__wrapper">
+								<div class="search__close">
+									<button type="button" class="search-close-btn" aria-label="Fechar pesquisa">
+										<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M17 1L1 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+											<path d="M1 1L17 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+										</svg>
+									</button>
+								</div>
+								<div class="search__form">
+									<form action="formulario.php" method="get">
+										<h2 class="search-advanced__title">Busca no portal</h2>
+										<div class="search__input">
+											<input class="search-input-field" type="text" name="q" placeholder="Digite o termo da consulta" />
+											<span class="search-focus-border"></span>
+											<button type="submit" aria-label="Pesquisar">
+												<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+													<path d="M9.55 18.1C14.272 18.1 18.1 14.272 18.1 9.55C18.1 4.82797 14.272 1 9.55 1C4.82797 1 1 4.82797 1 9.55C1 14.272 4.82797 18.1 9.55 18.1Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+													<path d="M19.0002 19.0002L17.2002 17.2002" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+												</svg>
+											</button>
+										</div>
+										<div class="search-advanced__message" aria-live="polite"></div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="search-popup-overlay"></div>
+			<!-- header-search-end -->		</header>
+		<main class="fix">
+			<section class="legislacao-portal-area">
+				<div class="container">
+					<div class="legislacao-portal-shell">
+						<div class="legislacao-portal-topbar"><div class="legislacao-portal-topbar__nav"><span>O Portal</span><span>Contas Publicas</span><span>Prestacao de Contas</span><span>Dados Abertos</span><span>Boas Praticas</span></div></div>
+						<div class="legislacao-portal-breadcrumb">Prefeitura de Campo Grande &gt; Transparencia &gt; Legislacao</div>
+						<div class="legislacao-portal-shortcuts">
+							<div class="legislacao-portal-shortcuts__grid">
+								<a class="legislacao-portal-shortcuts__item" href="lgpd-portal.html"><i class="fas fa-file-alt"></i><span>LGPD</span></a>
+								<a class="legislacao-portal-shortcuts__item" href="obras-portal.html"><i class="fas fa-hammer"></i><span>Obras</span></a>
+								<a class="legislacao-portal-shortcuts__item" href="contratos-portal.html"><i class="fas fa-file-contract"></i><span>Contratos</span></a>
+								<a class="legislacao-portal-shortcuts__item" href="perguntas-frequentes.html"><i class="fas fa-question-circle"></i><span>Perguntas Frequentes</span></a>
+								<a class="legislacao-portal-shortcuts__item" href="prestacao-contas.html"><i class="fas fa-clipboard-check"></i><span>Prestacao de Contas</span></a>
+								<a class="legislacao-portal-shortcuts__item" href="convenios-portal.html"><i class="fas fa-handshake"></i><span>Convenios</span></a>
+								<a class="legislacao-portal-shortcuts__item" href="orcamento.html"><i class="fas fa-wallet"></i><span>Orcamento</span></a>
+								<a class="legislacao-portal-shortcuts__item" href="diarias-passagens-consulta.html"><i class="fas fa-plane-departure"></i><span>Ver Diarias e Passagens</span></a>
+							</div>
+						</div>
+						<div class="legislacao-portal-content">
+							<section class="legislacao-portal-search" aria-labelledby="legislacao-busca-titulo">
+								<div class="legislacao-portal-search__top">
+									<div>
+										<h2 class="legislacao-portal-search__title" id="legislacao-busca-titulo">Consulta de <strong>Processos Legislativos</strong></h2>
+										<p class="legislacao-portal-search__subtitle">Busca avancada por tipo, numero do processo, protocolo, ementa, autoria, situacao, gabinete, sessao vinculada e periodo de tramitacao.</p>
+									</div>
+								</div>
+								<div class="legislacao-portal-search__body">
+									<div>
+										<h3 class="legislacao-portal-search__section-title">Busca</h3>
+										<form class="legislacao-portal-search__form" id="legislacao-portal-search-form">
+											<div class="legislacao-portal-search__field legislacao-portal-search__field--span-2">
+												<label for="tipo-legislacao">Tipo de processo</label>
+												<select id="tipo-legislacao" name="tipo-legislacao">
+													<option value="">Selecione</option>
+													<option>Projeto de Lei</option>
+													<option>Projeto de Resolucao</option>
+													<option>Requerimento</option>
+													<option>Indicacao</option>
+													<option>Emenda</option>
+												</select>
+											</div>
+											<div class="legislacao-portal-search__field legislacao-portal-search__field--span-2">
+												<label for="numero-legislacao">Numero do processo</label>
+												<input id="numero-legislacao" name="numero-legislacao" type="text" placeholder="NUMERO DO PROCESSO" />
+											</div>
+											<div class="legislacao-portal-search__field legislacao-portal-search__field--span-2">
+												<label for="ano-legislacao">Ano</label>
+												<input id="ano-legislacao" name="ano-legislacao" type="text" placeholder="ANO" />
+											</div>
+											<div class="legislacao-portal-search__field legislacao-portal-search__field--span-2">
+												<label for="numero-protocolo-legislacao">Numero do protocolo</label>
+												<input id="numero-protocolo-legislacao" name="numero-protocolo-legislacao" type="text" placeholder="PROTOCOLO" />
+											</div>
+											<div class="legislacao-portal-search__field legislacao-portal-search__field--span-2">
+												<label for="ementa-legislacao">Ementa</label>
+												<input id="ementa-legislacao" name="ementa-legislacao" type="text" placeholder="EMENTA" />
+											</div>
+											<div class="legislacao-portal-search__field legislacao-portal-search__field--span-2">
+												<label for="autor-legislacao">Autor</label>
+												<input id="autor-legislacao" name="autor-legislacao" type="text" placeholder="AUTOR OU COAUTOR" />
+											</div>
+											<div class="legislacao-portal-search__field legislacao-portal-search__field--span-2">
+												<label for="situacao-legislacao">Situacao / status</label>
+												<select id="situacao-legislacao" name="situacao-legislacao">
+													<option value="">Selecione</option>
+													<option>Protocolado</option>
+													<option>Em analise</option>
+													<option>Em pauta</option>
+													<option>Apreciado</option>
+													<option>Arquivado</option>
+												</select>
+											</div>
+											<div class="legislacao-portal-search__field legislacao-portal-search__field--span-2">
+												<label for="secretaria-legislacao">Departamento / gabinete</label>
+												<select id="secretaria-legislacao" name="secretaria-legislacao">
+													<option value="">Selecione</option>
+													<option>Gabinete 01</option>
+													<option>Gabinete 04</option>
+													<option>Mesa Diretora</option>
+													<option>Procuradoria Legislativa</option>
+												</select>
+											</div>
+											<div class="legislacao-portal-search__field legislacao-portal-search__field--span-2">
+												<label for="sessao-vinculada-legislacao">Sessao vinculada</label>
+												<select id="sessao-vinculada-legislacao" name="sessao-vinculada-legislacao">
+													<option value="">Selecione</option>
+													<option>Ordinaria n 12</option>
+													<option>Extraordinaria n 5</option>
+													<option>CCJ - Reuniao 03</option>
+												</select>
+											</div>
+											<div class="legislacao-portal-search__field legislacao-portal-search__field--span-2">
+												<label for="data-inicial-legislacao">Periodo de tramitacao - inicio</label>
+												<input id="data-inicial-legislacao" name="data-inicial-legislacao" type="date" />
+											</div>
+											<div class="legislacao-portal-search__field legislacao-portal-search__field--span-2">
+												<label for="data-final-legislacao">Periodo de tramitacao - fim</label>
+												<input id="data-final-legislacao" name="data-final-legislacao" type="date" />
+											</div>
+											<div class="legislacao-portal-search__field legislacao-portal-search__field--span-2">
+												<label for="sessao-apresentacao-legislacao">Sessao de apresentacao</label>
+												<input id="sessao-apresentacao-legislacao" name="sessao-apresentacao-legislacao" type="text" placeholder="SESSAO DE APRESENTACAO" />
+											</div>
+											<div class="legislacao-portal-search__field legislacao-portal-search__field--span-2">
+												<label for="sessao-apreciacao-legislacao">Sessao de apreciacao</label>
+												<input id="sessao-apreciacao-legislacao" name="sessao-apreciacao-legislacao" type="text" placeholder="SESSAO DE APRECIACAO" />
+											</div>
+											<div class="legislacao-portal-search__field legislacao-portal-search__field--span-2">
+												<label for="data-sessao-legislacao">Data da sessao</label>
+												<input id="data-sessao-legislacao" name="data-sessao-legislacao" type="date" />
+											</div>
+											<div class="legislacao-portal-search__field legislacao-portal-search__field--span-2">
+												<label for="status-sessao-legislacao">Status na sessao</label>
+												<select id="status-sessao-legislacao" name="status-sessao-legislacao">
+													<option value="">Selecione</option>
+													<option>Vinculado</option>
+													<option>Em pauta</option>
+													<option>Apreciado</option>
+													<option>Retirado</option>
+												</select>
+											</div>
+											<div class="legislacao-portal-search__field legislacao-portal-search__field--span-3">
+												<label for="assunto-legislacao">Assunto</label>
+												<input id="assunto-legislacao" name="assunto-legislacao" type="text" placeholder="ASSUNTO / PROJETO" />
+											</div>
+											<div class="legislacao-portal-search__field legislacao-portal-search__field--span-3">
+												<label for="texto-legislacao">Texto livre</label>
+												<input id="texto-legislacao" name="texto-legislacao" type="text" placeholder="EMENTA, DESPACHO OU TEXTO DO PROCESSO" />
+											</div>
+										</form>
+										<div class="legislacao-portal-search__actions">
+											<button class="legislacao-portal-search__btn legislacao-portal-search__btn--ghost" type="reset" form="legislacao-portal-search-form"><i class="far fa-file-alt"></i>Limpar</button>
+											<button class="legislacao-portal-search__btn legislacao-portal-search__btn--submit" type="submit" form="legislacao-portal-search-form"><i class="fas fa-search"></i>Buscar</button>
+										</div>
+									</div>
+									<aside class="legislacao-portal-search__aside">
+										<h3 class="legislacao-portal-search__aside-title">Dica <span>Importante</span></h3>
+										<p>Use os filtros para localizar rapidamente por numero do processo, protocolo, autor, ementa, situacao ou sessao vinculada.</p>
+										<p>O painel agora contempla os pontos publicos e operacionais exigidos para o processo legislativo.</p>
+									</aside>
+								</div>
+							</section>
+							<span class="legislacao-portal-eyebrow"><i class="fas fa-landmark"></i>Modulo Legislativo</span>
+							<h1 class="legislacao-portal-title">Central do Processo Legislativo</h1>
+							<p class="legislacao-portal-lead">A pagina agora funciona como porta de entrada para consulta publica e operacao interna do processo legislativo, reunindo filtros por protocolo, autoria, tramitacao, sessao, anexos, integra e historico completo do documento.</p>
+							<section class="legislacao-portal-actions-panel" aria-labelledby="legislacao-acoes-titulo">
+								<h2 class="legislacao-portal-actions-panel__title" id="legislacao-acoes-titulo">Acoes do Processo</h2>
+								<p class="legislacao-portal-actions-panel__text">Alem da busca, a area legislativa passa a oferecer atalhos diretos para cadastro, tramitacao, autores, sessoes, anexos e historico operacional do processo.</p>
+								<div class="legislacao-portal-actions-grid">
+									<a class="legislacao-portal-action-btn" href="javascript:void(0)"><i class="fas fa-plus-circle"></i><span>Cadastrar processo legislativo</span></a>
+									<a class="legislacao-portal-action-btn" href="javascript:void(0)"><i class="fas fa-file-signature"></i><span>Nova proposicao / projeto / lei</span></a>
+									<a class="legislacao-portal-action-btn" href="javascript:void(0)"><i class="fas fa-route"></i><span>Ver tramitacao</span></a>
+									<a class="legislacao-portal-action-btn" href="javascript:void(0)"><i class="fas fa-users"></i><span>Ver autores</span></a>
+									<a class="legislacao-portal-action-btn" href="javascript:void(0)"><i class="fas fa-link"></i><span>Vincular a sessao</span></a>
+									<a class="legislacao-portal-action-btn" href="javascript:void(0)"><i class="fas fa-paperclip"></i><span>Anexos / integra</span></a>
+									<a class="legislacao-portal-action-btn" href="javascript:void(0)"><i class="fas fa-history"></i><span>Historico / despachos</span></a>
+									<a class="legislacao-portal-action-btn" href="javascript:void(0)"><i class="fas fa-qrcode"></i><span>Etiqueta, QR Code e barras</span></a>
+								</div>
+							</section>
+							<div class="legislacao-portal-mode-grid">
+								<article class="legislacao-portal-mode-card">
+									<span class="legislacao-portal-mode-card__tag"><i class="fas fa-globe"></i>Modo Publico</span>
+									<h2 class="legislacao-portal-mode-card__title">Consulta, integras e acompanhamento</h2>
+									<p class="legislacao-portal-mode-card__text">Voltado para cidadaos, imprensa e controle social, com consulta por numero do processo, protocolo, ementa, status, sessao vinculada e timeline de tramitacao.</p>
+									<ul class="legislacao-portal-mode-card__list">
+										<li>Consulta de leis, projetos, proposicoes e despachos.</li>
+										<li>Visualizacao da integra, anexos e arquivos oficiais.</li>
+										<li>Acompanhamento de tramitacao, sessoes e historico.</li>
+									</ul>
+								</article>
+								<article class="legislacao-portal-mode-card">
+									<span class="legislacao-portal-mode-card__tag"><i class="fas fa-user-shield"></i>Modo Interno</span>
+									<h2 class="legislacao-portal-mode-card__title">Cadastro, vinculacao e operacao</h2>
+									<p class="legislacao-portal-mode-card__text">Area para equipes legislativas realizarem cadastro de processos, despacho, alteracao de status, vinculo com autores, anexos, sessoes e controle documental.</p>
+									<ul class="legislacao-portal-mode-card__list">
+										<li>Cadastro de processo legislativo e nova proposicao.</li>
+										<li>Vinculacao de autores, coautores, gabinete e comissoes.</li>
+										<li>Gestao de anexos, integra, sessoes e historico de alteracoes.</li>
+									</ul>
+								</article>
+							</div>
+							<section class="legislacao-portal-results" aria-labelledby="legislacao-processos-titulo">
+								<div class="legislacao-portal-results__top">
+									<div>
+										<h2 class="legislacao-portal-results__title" id="legislacao-processos-titulo">Processos Legislativos</h2>
+										<p class="legislacao-portal-results__subtitle">Listagem enriquecida com autoria, tramitacao, protocolo, sessao vinculada, anexos, integra e historico completo do processo.</p>
+									</div>
+									<div class="legislacao-portal-kpis">
+										<div class="legislacao-portal-kpi"><strong id="legislacao-kpi-records">0</strong><span>Processos ativos</span></div>
+										<div class="legislacao-portal-kpi"><strong id="legislacao-kpi-progress">0</strong><span>Em tramitacao</span></div>
+										<div class="legislacao-portal-kpi"><strong id="legislacao-kpi-session">0</strong><span>Vinculados a sessao</span></div>
+										<div class="legislacao-portal-kpi"><strong id="legislacao-kpi-attachments">0</strong><span>Com anexos</span></div>
+									</div>
+								</div>
+								<div class="legislacao-portal-message" id="legislacao-message"></div>
+								<div class="legislacao-portal-table-wrap">
+									<table class="legislacao-portal-table">
+										<thead>
+											<tr>
+												<th>Processo</th>
+												<th>Autoria</th>
+												<th>Tramitacao</th>
+												<th>Sessao</th>
+												<th>Identificacao</th>
+												<th>Acoes</th>
+											</tr>
+										</thead>
+										<tbody id="legislacao-table-body">
+											<tr><td colspan="6">Carregando processos legislativos...</td></tr>
+										</tbody>
+									</table>
+								</div>
+							</section>
+							<section class="legislacao-portal-detail" id="detalhes-processo-legislativo" aria-labelledby="legislacao-detalhes-titulo">
+								<div class="legislacao-portal-detail__top">
+									<div>
+										<h2 class="legislacao-portal-detail__title" id="legislacao-detalhes-titulo">Tela de Detalhes do Processo</h2>
+										<p class="legislacao-portal-detail__text" id="legislacao-detail-lead">Ao abrir um registro, o usuario visualiza dados gerais, ementa, despacho, autores, anexos, sessao vinculada, historico de alteracoes e timeline integral de tramitacao do processo legislativo.</p>
+									</div>
+									<div class="legislacao-portal-detail__header-actions">
+										<a href="javascript:void(0)" id="legislacao-action-timeline"><i class="fas fa-eye"></i>Timeline</a>
+										<a href="javascript:void(0)" id="legislacao-action-main"><i class="fas fa-file-pdf"></i>Gerar integra</a>
+										<a href="javascript:void(0)" id="legislacao-action-download"><i class="fas fa-download"></i>Baixar PDF/Word</a>
+									</div>
+								</div>
+								<div class="legislacao-portal-detail__meta">
+									<div class="legislacao-portal-detail__meta-card"><span>Numero do processo</span><strong id="legislacao-meta-processo">-</strong></div>
+									<div class="legislacao-portal-detail__meta-card"><span>Numero do protocolo</span><strong id="legislacao-meta-protocolo">-</strong></div>
+									<div class="legislacao-portal-detail__meta-card"><span>Status atual</span><strong id="legislacao-meta-status">-</strong></div>
+									<div class="legislacao-portal-detail__meta-card"><span>Sessao vinculada</span><strong id="legislacao-meta-sessao">-</strong></div>
+								</div>
+								<div class="legislacao-portal-detail__grid">
+									<div class="legislacao-portal-two-col">
+										<article class="legislacao-portal-panel">
+											<h3 class="legislacao-portal-panel__title">Dados gerais e ementa</h3>
+											<p class="legislacao-portal-panel__text" id="legislacao-detail-ementa">Selecione um processo legislativo para visualizar os detalhes cadastrados no sistema.</p>
+										</article>
+										<article class="legislacao-portal-panel">
+											<h3 class="legislacao-portal-panel__title">Despacho atual</h3>
+											<p class="legislacao-portal-panel__text" id="legislacao-detail-despacho">Nenhum despacho selecionado.</p>
+										</article>
+										<article class="legislacao-portal-panel">
+											<h3 class="legislacao-portal-panel__title">Autores e coautores</h3>
+											<ul class="legislacao-portal-author-list" id="legislacao-detail-autores">
+												<li>Nenhum processo selecionado.</li>
+											</ul>
+										</article>
+										<article class="legislacao-portal-panel">
+											<h3 class="legislacao-portal-panel__title">Sessao vinculada</h3>
+											<ul class="legislacao-portal-session-list" id="legislacao-detail-sessao">
+												<li>Nenhuma sessao vinculada.</li>
+											</ul>
+										</article>
+									</div>
+									<div class="legislacao-portal-two-col legislacao-portal-two-col--stack">
+										<article class="legislacao-portal-panel">
+											<h3 class="legislacao-portal-panel__title">Anexos e integra</h3>
+											<ul class="legislacao-portal-file-list" id="legislacao-detail-anexos">
+												<li><div><strong>Nenhum anexo</strong><span>Selecione um processo com arquivos cadastrados.</span></div></li>
+											</ul>
+										</article>
+										<article class="legislacao-portal-panel">
+											<h3 class="legislacao-portal-panel__title">Timeline de tramitacao</h3>
+											<ul class="legislacao-portal-timeline" id="legislacao-detail-timeline">
+												<li>Nenhuma tramitacao cadastrada.</li>
+											</ul>
+										</article>
+										<article class="legislacao-portal-panel">
+											<h3 class="legislacao-portal-panel__title">Historico de alteracoes</h3>
+											<ul class="legislacao-portal-timeline" id="legislacao-detail-historico">
+												<li>Nenhum historico disponivel.</li>
+											</ul>
+										</article>
+										<article class="legislacao-portal-panel">
+											<h3 class="legislacao-portal-panel__title">Checklist funcional</h3>
+											<ul class="legislacao-portal-author-list">
+												<li><strong>Consulta publica:</strong> numero, ano, protocolo, projeto, ementa e assunto.</li>
+												<li><strong>Operacao interna:</strong> autores, sessoes, anexos, despacho e historico.</li>
+												<li><strong>Acoes por linha:</strong> detalhes, autores, sessao, integra, baixar e timeline.</li>
+											</ul>
+										</article>
+									</div>
+								</div>
+							</section>
+							<div style="margin-top: 24px;">
+								<a href="services.html" style="display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 0 20px; border-radius: 10px; background: #0f4c81; color: #fff; font-size: 14px; font-weight: 700; text-transform: uppercase;">Voltar ao Portal Transparencia</a>
+							</div>
+							<div class="legislacao-portal-footer"><div><a href="services.html">Voltar</a> para a pagina inicial</div><div>Nao imprima, compartilhe</div></div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+		<footer>
+			<div class="footer__area-three">
+				<div class="footer__bottom-three">
+					<div class="container">
+						<div class="row align-items-center">
+							<div class="col-lg-6"><div class="copyright-text-two"><p>Copyright &copy; <a href="index.html">Ti-Genesis</a> | Todos os direitos reservados</p></div></div>
+							<div class="col-lg-6"><div class="footer__social-three"><ul class="list-wrap justify-content-center justify-content-lg-end"><li><a href="javascript:void(0)"><i class="fab fa-facebook-f"></i></a></li><li><a href="javascript:void(0)"><i class="fab fa-twitter"></i></a></li><li><a href="javascript:void(0)"><i class="fab fa-instagram"></i></a></li></ul></div></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+		<script src="assets/js/vendor/jquery-3.6.0.min.js"></script>
+		<script src="assets/js/bootstrap.bundle.min.js"></script>
+		<script src="assets/js/jquery.magnific-popup.min.js"></script>
+		<script src="assets/js/jquery.odometer.min.js"></script>
+		<script src="assets/js/jquery.appear.js"></script>
+		<script src="assets/js/gsap.js"></script>
+		<script src="assets/js/ScrollTrigger.js"></script>
+		<script src="assets/js/SplitText.js"></script>
+		<script src="assets/js/gsap-animation.js"></script>
+		<script src="assets/js/jquery.parallaxScroll.min.js"></script>
+		<script src="assets/js/swiper-bundle.js"></script>
+		<script src="assets/js/ajax-form.js"></script>
+		<script src="assets/js/wow.min.js"></script>
+		<script src="assets/js/aos.js"></script>
+		<script src="assets/js/main.js"></script>
+		<script>
+			(function () {
+				const endpoint = 'admin/public_processos_legislativos_consulta.php';
+				let dataset = [];
+				let currentItem = null;
+
+				const form = document.getElementById('legislacao-portal-search-form');
+				const tableBody = document.getElementById('legislacao-table-body');
+				const messageElement = document.getElementById('legislacao-message');
+				const recordsElement = document.getElementById('legislacao-kpi-records');
+				const progressElement = document.getElementById('legislacao-kpi-progress');
+				const sessionElement = document.getElementById('legislacao-kpi-session');
+				const attachmentsElement = document.getElementById('legislacao-kpi-attachments');
+
+				const detailLead = document.getElementById('legislacao-detail-lead');
+				const metaProcesso = document.getElementById('legislacao-meta-processo');
+				const metaProtocolo = document.getElementById('legislacao-meta-protocolo');
+				const metaStatus = document.getElementById('legislacao-meta-status');
+				const metaSessao = document.getElementById('legislacao-meta-sessao');
+				const detailEmenta = document.getElementById('legislacao-detail-ementa');
+				const detailDespacho = document.getElementById('legislacao-detail-despacho');
+				const detailAutores = document.getElementById('legislacao-detail-autores');
+				const detailSessao = document.getElementById('legislacao-detail-sessao');
+				const detailAnexos = document.getElementById('legislacao-detail-anexos');
+				const detailTimeline = document.getElementById('legislacao-detail-timeline');
+				const detailHistorico = document.getElementById('legislacao-detail-historico');
+				const actionTimeline = document.getElementById('legislacao-action-timeline');
+				const actionMain = document.getElementById('legislacao-action-main');
+				const actionDownload = document.getElementById('legislacao-action-download');
+
+				const typeSelect = document.getElementById('tipo-legislacao');
+				const processInput = document.getElementById('numero-legislacao');
+				const yearInput = document.getElementById('ano-legislacao');
+				const protocolInput = document.getElementById('numero-protocolo-legislacao');
+				const ementaInput = document.getElementById('ementa-legislacao');
+				const authorInput = document.getElementById('autor-legislacao');
+				const statusSelect = document.getElementById('situacao-legislacao');
+				const departmentSelect = document.getElementById('secretaria-legislacao');
+				const sessionSelect = document.getElementById('sessao-vinculada-legislacao');
+				const startInput = document.getElementById('data-inicial-legislacao');
+				const endInput = document.getElementById('data-final-legislacao');
+				const sessionPresentationInput = document.getElementById('sessao-apresentacao-legislacao');
+				const sessionAppreciationInput = document.getElementById('sessao-apreciacao-legislacao');
+				const sessionDateInput = document.getElementById('data-sessao-legislacao');
+				const sessionStatusSelect = document.getElementById('status-sessao-legislacao');
+				const subjectInput = document.getElementById('assunto-legislacao');
+				const textInput = document.getElementById('texto-legislacao');
+
+				function escapeHtml(value) {
+					return String(value || '')
+						.replace(/&/g, '&amp;')
+						.replace(/</g, '&lt;')
+						.replace(/>/g, '&gt;')
+						.replace(/"/g, '&quot;')
+						.replace(/'/g, '&#39;');
+				}
+
+				function formatDateTime(value) {
+					if (!value) return 'Nao informado';
+					const parsed = new Date(value.replace(' ', 'T'));
+					if (!Number.isNaN(parsed.getTime())) {
+						return parsed.toLocaleString('pt-BR');
+					}
+					return value;
+				}
+
+				function showMessage(message) {
+					messageElement.textContent = message;
+					messageElement.style.display = 'block';
+				}
+
+				function hideMessage() {
+					messageElement.textContent = '';
+					messageElement.style.display = 'none';
+				}
+
+				function badgeClass(status) {
+					if (status === 'Em pauta' || status === 'Vinculado') return 'legislacao-portal-badge legislacao-portal-badge--green';
+					if (status === 'Em analise' || status === 'Aguardando parecer' || status === 'Protocolado') return 'legislacao-portal-badge legislacao-portal-badge--amber';
+					if (status === 'Apreciado') return 'legislacao-portal-badge legislacao-portal-badge--blue';
+					if (status === 'Arquivado' || status === 'Retirado') return 'legislacao-portal-badge legislacao-portal-badge--red';
+					return 'legislacao-portal-badge legislacao-portal-badge--slate';
+				}
+
+				function fillSelect(selectElement, items, selectedValue) {
+					const firstLabel = selectElement.options.length ? selectElement.options[0].textContent : 'Selecione';
+					const options = ['<option value="">' + escapeHtml(firstLabel) + '</option>'];
+					(items || []).forEach(function (item) {
+						options.push('<option value="' + escapeHtml(item) + '">' + escapeHtml(item) + '</option>');
+					});
+					selectElement.innerHTML = options.join('');
+					selectElement.value = selectedValue || '';
+				}
+
+				function buildQueryString() {
+					const params = new URLSearchParams();
+
+					if (typeSelect.value) params.set('tipo_processo', typeSelect.value);
+					if (processInput.value.trim()) params.set('numero_processo', processInput.value.trim());
+					if (yearInput.value.trim()) params.set('ano', yearInput.value.trim());
+					if (protocolInput.value.trim()) params.set('numero_protocolo', protocolInput.value.trim());
+					if (ementaInput.value.trim()) params.set('ementa', ementaInput.value.trim());
+					if (authorInput.value.trim()) params.set('autor', authorInput.value.trim());
+					if (statusSelect.value) params.set('situacao_status', statusSelect.value);
+					if (departmentSelect.value) params.set('departamento_gabinete', departmentSelect.value);
+					if (sessionSelect.value) params.set('sessao_vinculada', sessionSelect.value);
+					if (startInput.value) params.set('data_tramitacao_inicial', startInput.value);
+					if (endInput.value) params.set('data_tramitacao_final', endInput.value);
+					if (sessionPresentationInput.value.trim()) params.set('sessao_apresentacao', sessionPresentationInput.value.trim());
+					if (sessionAppreciationInput.value.trim()) params.set('sessao_apreciacao', sessionAppreciationInput.value.trim());
+					if (sessionDateInput.value) params.set('data_sessao', sessionDateInput.value);
+					if (sessionStatusSelect.value) params.set('status_sessao', sessionStatusSelect.value);
+					if (subjectInput.value.trim()) params.set('assunto', subjectInput.value.trim());
+					if (textInput.value.trim()) params.set('texto', textInput.value.trim());
+
+					return params.toString();
+				}
+
+				function renderSummary(summary) {
+					recordsElement.textContent = String(summary.records || 0);
+					progressElement.textContent = String(summary.in_progress || 0);
+					sessionElement.textContent = String(summary.in_session || 0);
+					attachmentsElement.textContent = String(summary.attachments || 0);
+				}
+
+				function renderTable(items) {
+					if (!items.length) {
+						tableBody.innerHTML = '<tr><td colspan="6">Nenhum processo legislativo cadastrado foi encontrado para os filtros informados.</td></tr>';
+						showMessage('Nenhum processo legislativo cadastrado corresponde aos filtros atuais.');
+						return;
+					}
+
+					hideMessage();
+					tableBody.innerHTML = items.map(function (item) {
+						const linkedSessionText = item.linked_session ? 'Vinculado a ' + item.linked_session : 'Sem sessao vinculada';
+						const mainAttachmentName = item.main_attachment ? item.main_attachment.name : 'Sem arquivo principal';
+
+						return [
+							'<tr>',
+							'<td><div class="legislacao-portal-process"><strong>' + escapeHtml(item.process_number) + '</strong><span class="' + badgeClass(item.type) + '">' + escapeHtml(item.type) + '</span><span class="legislacao-portal-muted">Protocolo ' + escapeHtml(item.protocol_number) + ' | Ementa: ' + escapeHtml(item.ementa) + '</span><small>Criado em ' + escapeHtml(formatDateTime(item.created_at)) + '</small></div></td>',
+							'<td><ul class="legislacao-portal-author-list"><li><strong>Autor principal:</strong> ' + escapeHtml(item.main_author) + '<div class="legislacao-portal-author-role">' + escapeHtml(item.author_type) + '</div></li><li><strong>Coautores:</strong> ' + escapeHtml(item.coauthors || 'Nao informado') + '</li></ul></td>',
+							'<td><ul class="legislacao-portal-flow-list"><li><span class="' + badgeClass(item.latest.situation || item.status) + '">' + escapeHtml(item.latest.situation || item.status) + '</span></li><li><strong>Ultimo andamento:</strong> ' + escapeHtml(item.latest.movement || 'Sem tramitacao cadastrada') + '</li><li><strong>Data:</strong> ' + escapeHtml(formatDateTime(item.latest.date)) + '</li><li><strong>Remetente:</strong> ' + escapeHtml(item.latest.sender || 'Nao informado') + '</li><li><strong>Destinatario:</strong> ' + escapeHtml(item.latest.recipient || 'Nao informado') + '</li></ul></td>',
+							'<td><ul class="legislacao-portal-session-list"><li><span class="' + badgeClass(item.session_status || linkedSessionText) + '">' + escapeHtml(linkedSessionText) + '</span></li><li><strong>Apresentacao:</strong> ' + escapeHtml(item.session_presentation || 'Nao informado') + '</li><li><strong>Apreciacao:</strong> ' + escapeHtml(item.session_appreciation || 'Nao informado') + '</li><li><strong>Status na sessao:</strong> ' + escapeHtml(item.session_status || 'Nao informado') + '</li></ul></td>',
+							'<td><ul class="legislacao-portal-id-list"><li><strong>QR Code:</strong> Gerado</li><li><strong>Codigo de barras:</strong> ' + escapeHtml(String(item.id).padStart(12, '0')) + '</li><li><strong>Etiqueta:</strong> ETQ-LEG-' + escapeHtml(String(item.id).padStart(4, '0')) + '</li><li><strong>Arquivo principal:</strong> ' + escapeHtml(mainAttachmentName) + '</li></ul></td>',
+							'<td><div class="legislacao-portal-row-actions"><a href="#detalhes-processo-legislativo" class="js-legislacao-detalhes" data-id="' + item.id + '">Detalhes</a><a class="alt js-legislacao-detalhes" href="#detalhes-processo-legislativo" data-id="' + item.id + '">Tramitacao</a><a class="alt js-legislacao-detalhes" href="#detalhes-processo-legislativo" data-id="' + item.id + '">Autores</a><a class="alt js-legislacao-detalhes" href="#detalhes-processo-legislativo" data-id="' + item.id + '">Sessao</a><a class="alt js-legislacao-detalhes" href="#detalhes-processo-legislativo" data-id="' + item.id + '">Anexos</a><a class="alt" href="' + escapeHtml(item.main_attachment ? item.main_attachment.download_url : 'javascript:void(0)') + '" target="_blank" rel="noopener">Integra</a><a class="alt" href="' + escapeHtml(item.main_attachment ? item.main_attachment.download_url : 'javascript:void(0)') + '" target="_blank" rel="noopener">Baixar</a><a class="alt js-legislacao-detalhes" href="#detalhes-processo-legislativo" data-id="' + item.id + '">Historico</a></div></td>',
+							'</tr>'
+						].join('');
+					}).join('');
+				}
+
+				function renderDetail(item) {
+					currentItem = item;
+
+					detailLead.textContent = 'Detalhamento completo do processo legislativo cadastrado, com ementa, despacho, autores, anexos, sessao e timeline de tramitacao.';
+					metaProcesso.textContent = item.process_number || '-';
+					metaProtocolo.textContent = item.protocol_number || '-';
+					metaStatus.textContent = item.status || '-';
+					metaSessao.textContent = item.linked_session || 'Nao vinculada';
+					detailEmenta.textContent = item.ementa || item.subject || 'Sem ementa cadastrada.';
+					detailDespacho.textContent = item.dispatch_text || 'Nenhum despacho cadastrado.';
+
+					detailAutores.innerHTML = [
+						'<li><strong>Autor principal:</strong> ' + escapeHtml(item.main_author || 'Nao informado') + '<div class="legislacao-portal-author-role">' + escapeHtml(item.author_type || 'Nao informado') + '</div></li>',
+						'<li><strong>Coautores:</strong> ' + escapeHtml(item.coauthors || 'Nao informado') + '</li>',
+						'<li><strong>Departamento / gabinete:</strong> ' + escapeHtml(item.department || 'Nao informado') + '</li>'
+					].join('');
+
+					detailSessao.innerHTML = [
+						'<li><strong>Sessao vinculada:</strong> ' + escapeHtml(item.linked_session || 'Nao vinculada') + '</li>',
+						'<li><strong>Sessao de apresentacao:</strong> ' + escapeHtml(item.session_presentation || 'Nao informado') + '</li>',
+						'<li><strong>Sessao de apreciacao:</strong> ' + escapeHtml(item.session_appreciation || 'Nao informado') + '</li>',
+						'<li><strong>Data da sessao:</strong> ' + escapeHtml(formatDateTime(item.session_date)) + '</li>',
+						'<li><strong>Status na sessao:</strong> ' + escapeHtml(item.session_status || 'Nao informado') + '</li>'
+					].join('');
+
+					if (item.attachments && item.attachments.length) {
+						detailAnexos.innerHTML = item.attachments.map(function (file) {
+							const title = file.is_main ? 'Arquivo principal' : file.name;
+							const subtitle = file.is_main ? (file.name + ' | Integra consolidada') : file.name;
+							return '<li><div><strong>' + escapeHtml(title) + '</strong><span>' + escapeHtml(subtitle) + '</span></div><a href="' + escapeHtml(file.download_url) + '" target="_blank" rel="noopener">Visualizar</a></li>';
+						}).join('');
+					} else {
+						detailAnexos.innerHTML = '<li><div><strong>Nenhum anexo</strong><span>Este processo nao possui anexos cadastrados.</span></div></li>';
+					}
+
+					if (item.history && item.history.length) {
+						const timelineHtml = item.history.map(function (entry) {
+							return '<li><strong>' + escapeHtml(formatDateTime(entry.date)) + '</strong> ' + escapeHtml(entry.movement || entry.note || 'Movimentacao cadastrada.') + '</li>';
+						}).join('');
+						detailTimeline.innerHTML = timelineHtml;
+						detailHistorico.innerHTML = item.history.map(function (entry) {
+							const text = [entry.situation, entry.sender && ('Remetente: ' + entry.sender), entry.recipient && ('Destinatario: ' + entry.recipient), entry.note].filter(Boolean).join(' | ');
+							return '<li><strong>' + escapeHtml(formatDateTime(entry.date)) + '</strong> ' + escapeHtml(text || 'Historico registrado.') + '</li>';
+						}).join('');
+					} else {
+						detailTimeline.innerHTML = '<li>Nenhuma tramitacao cadastrada.</li>';
+						detailHistorico.innerHTML = '<li>Nenhum historico disponivel.</li>';
+					}
+
+					if (item.main_attachment) {
+						actionMain.href = item.main_attachment.download_url;
+						actionDownload.href = item.main_attachment.download_url;
+					} else {
+						actionMain.href = 'javascript:void(0)';
+						actionDownload.href = 'javascript:void(0)';
+					}
+					actionTimeline.href = '#detalhes-processo-legislativo';
+				}
+
+				function populateFilters(filters) {
+					fillSelect(typeSelect, filters.types, filters.tipo_processo);
+					fillSelect(statusSelect, filters.statuses, filters.situacao_status);
+					fillSelect(departmentSelect, filters.departments, filters.departamento_gabinete);
+					fillSelect(sessionSelect, filters.sessions, filters.sessao_vinculada);
+					fillSelect(sessionStatusSelect, filters.session_statuses, filters.status_sessao);
+
+					processInput.value = filters.numero_processo || '';
+					yearInput.value = filters.ano || '';
+					protocolInput.value = filters.numero_protocolo || '';
+					ementaInput.value = filters.ementa || '';
+					authorInput.value = filters.autor || '';
+					startInput.value = filters.data_tramitacao_inicial || '';
+					endInput.value = filters.data_tramitacao_final || '';
+					sessionPresentationInput.value = filters.sessao_apresentacao || '';
+					sessionAppreciationInput.value = filters.sessao_apreciacao || '';
+					sessionDateInput.value = filters.data_sessao || '';
+					subjectInput.value = filters.assunto || '';
+					textInput.value = filters.texto || '';
+				}
+
+				async function loadProcessos() {
+					showMessage('Carregando processos legislativos cadastrados...');
+
+					try {
+						const queryString = buildQueryString();
+						const response = await fetch(endpoint + (queryString ? '?' + queryString : ''), {
+							headers: { Accept: 'application/json' }
+						});
+
+						if (!response.ok) {
+							throw new Error('Falha ao consultar os processos legislativos.');
+						}
+
+						const payload = await response.json();
+						if (payload.error) {
+							throw new Error(payload.message || 'Nao foi possivel carregar os processos legislativos.');
+						}
+
+						dataset = Array.isArray(payload.rows) ? payload.rows : [];
+						populateFilters(payload.filters || {});
+						renderSummary(payload.summary || {});
+						renderTable(dataset);
+
+						if (dataset.length) {
+							renderDetail(dataset[0]);
+						}
+					} catch (error) {
+						dataset = [];
+						renderSummary({});
+						tableBody.innerHTML = '<tr><td colspan="6">Nao foi possivel carregar os processos legislativos cadastrados.</td></tr>';
+						showMessage(error.message || 'Nao foi possivel carregar os processos legislativos cadastrados.');
+					}
+				}
+
+				form.addEventListener('submit', function (event) {
+					event.preventDefault();
+					loadProcessos();
+				});
+
+				form.addEventListener('reset', function () {
+					window.setTimeout(function () {
+						hideMessage();
+						loadProcessos();
+					}, 0);
+				});
+
+				tableBody.addEventListener('click', function (event) {
+					const button = event.target.closest('.js-legislacao-detalhes');
+					if (!button) return;
+
+					const id = Number(button.getAttribute('data-id'));
+					const item = dataset.find(function (entry) { return entry.id === id; });
+					if (item) {
+						renderDetail(item);
+					}
+				});
+
+				loadProcessos();
+			})();
+		</script>
+	</body>
+</html>

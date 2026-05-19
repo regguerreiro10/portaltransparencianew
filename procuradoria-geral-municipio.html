@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html class="no-js" lang="pt-BR">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="x-ua-compatible" content="ie=edge" />
+		<title>Procuradoria-Geral do Municipio</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png" />
+		<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="assets/css/animate.min.css" />
+		<link rel="stylesheet" href="assets/css/magnific-popup.css" />
+		<link rel="stylesheet" href="assets/css/fontawesome-all.min.css" />
+		<link rel="stylesheet" href="assets/css/flaticon.css" />
+		<link rel="stylesheet" href="assets/css/odometer.css" />
+		<link rel="stylesheet" href="assets/css/swiper-bundle.css" />
+		<link rel="stylesheet" href="assets/css/aos.css" />
+		<link rel="stylesheet" href="assets/css/default.css" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<style>
+			.pgm-page { background: #173b86; color: #fff; }
+			.pgm-hero { padding: 40px 0 54px; background: linear-gradient(180deg, rgba(14, 28, 66, 0.44) 0%, rgba(14, 28, 66, 0.82) 100%), url("assets/img/bg/breadcrumb_bg.jpg") center/cover no-repeat; }
+			.pgm-crumbs { margin-bottom: 8px; font-size: 13px; color: rgba(255, 255, 255, 0.82); }
+			.pgm-crumbs a { color: #fff; }
+			.pgm-title { margin: 0; font-size: 42px; line-height: 1.08; color: #fff; }
+			.pgm-shell { padding: 18px 0 56px; }
+			.pgm-tabs { display: flex; flex-wrap: wrap; gap: 8px; padding: 10px 12px; border-radius: 999px; background: rgba(255, 255, 255, 0.14); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08); }
+			.pgm-tabs a { display: inline-flex; align-items: center; min-height: 40px; padding: 10px 18px; border-radius: 999px; font-size: 13px; font-weight: 700; color: rgba(255, 255, 255, 0.9); }
+			.pgm-tabs a.is-active { background: #fff; color: #2449aa; }
+			.pgm-shortcuts { display: grid; grid-template-columns: 1.35fr 1.1fr 1.1fr 1.1fr; gap: 14px; margin-top: 18px; }
+			.pgm-card { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 154px; padding: 22px 18px; border-radius: 18px; background: #1f4aa2; text-align: center; color: #fff; box-shadow: 0 20px 40px rgba(8, 19, 47, 0.14); transition: 0.25s ease; }
+			.pgm-card:hover { transform: translateY(-2px); background: #2351b1; }
+			.pgm-card--large { grid-row: span 2; min-height: 322px; }
+			.pgm-card__icon { display: flex; align-items: center; justify-content: center; width: 52px; height: 52px; margin-bottom: 14px; border-radius: 14px; background: rgba(255, 255, 255, 0.12); font-size: 22px; }
+			.pgm-card__title { margin: 0 0 8px; font-size: 18px; color: #fff; }
+			.pgm-card__text { margin: 0; font-size: 12px; line-height: 1.55; color: rgba(255, 255, 255, 0.9); }
+			.pgm-info { display: grid; grid-template-columns: minmax(250px, 0.8fr) minmax(0, 2fr); gap: 14px; margin-top: 14px; }
+			.pgm-panel { padding: 22px; border-radius: 18px; background: #f6f6f8; box-shadow: 0 20px 40px rgba(8, 19, 47, 0.14); }
+			.pgm-panel__title { margin: 0 0 14px; font-size: 22px; color: #17324d; }
+			.pgm-news-box { align-items: flex-start; text-align: left; }
+			.pgm-news-box__cta { display: inline-flex; align-items: center; gap: 10px; margin-top: auto; padding: 12px 16px; border-radius: 10px; background: #d9a000; font-size: 13px; font-weight: 800; color: #17324d; }
+			.pgm-news-box__cta i { font-size: 16px; }
+			.pgm-competencias p { margin: 0; font-size: 13px; line-height: 1.75; color: #26374a; }
+			.pgm-cg { margin-top: 18px; padding: 22px; border-radius: 18px; background: #f6f6f8; box-shadow: 0 20px 40px rgba(8, 19, 47, 0.14); }
+			.pgm-cg__header { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 18px; }
+			.pgm-cg__title { margin: 0; font-size: 24px; color: #111827; }
+			.pgm-cg__more { font-size: 14px; font-weight: 800; color: #d69a00; }
+			.pgm-cg__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+			.pgm-cg__item { color: #0f172a; }
+			.pgm-cg__thumb { display: block; width: 100%; height: 168px; border-radius: 16px; object-fit: cover; }
+			.pgm-cg__headline { margin: 14px 0 8px; font-size: 17px; line-height: 1.45; color: #111827; }
+			.pgm-cg__text { margin: 0 0 8px; font-size: 13px; line-height: 1.65; color: #4b5563; }
+			.pgm-cg__meta { font-size: 12px; color: #6b7280; }
+			.pgm-footer { padding: 26px 0 28px; background: #143374; }
+			.pgm-footer__grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 26px; }
+			.pgm-footer__title { margin: 0 0 10px; font-size: 16px; color: #ffc62b; }
+			.pgm-footer__links { display: grid; gap: 6px; }
+			.pgm-footer__links a { font-size: 14px; color: rgba(255, 255, 255, 0.9); }
+			@media (max-width: 1199.98px) { .pgm-shortcuts { grid-template-columns: repeat(2, minmax(0, 1fr)); } .pgm-card--large { grid-row: span 1; min-height: 154px; } .pgm-footer__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+			@media (max-width: 991.98px) { .pgm-info, .pgm-cg__grid { grid-template-columns: 1fr; } }
+			@media (max-width: 767.98px) { .pgm-title { font-size: 32px; } .pgm-shortcuts, .pgm-footer__grid { grid-template-columns: 1fr; } .pgm-card, .pgm-card--large { min-height: 150px; } }
+		</style>
+	</head>
+	<body class="pgm-page">
+		<button class="scroll__top scroll-to-target" data-target="html"><i class="fas fa-angle-up"></i></button>
+		<header>
+			<div id="header-fixed-height"></div>
+			<div id="sticky-header" class="tg-header__area">
+				<div class="container custom-container">
+					<div class="row">
+						<div class="col-12">
+							<div class="tgmenu__wrap">
+								<nav class="tgmenu__nav">
+									<div class="logo"><a href="index.html"><img src="assets/img/logo/logo.png" alt="Logo" /></a></div>
+									<div class="tgmenu__navbar-wrap tgmenu__main-menu d-none d-lg-flex">
+										<ul class="navigation">
+											<li><a href="index.html">Inicio</a></li>
+											<li><a href="services-3.html">Sites Institucionais</a></li>
+											<li><a href="services.html">Portal Transparencia</a></li>
+											<li><a href="services-5.html">Servicos</a></li>
+											<li><a href="blog.html">Noticias</a></li>
+											<li><a href="contact.html">Fale Conosco</a></li>
+										</ul>
+									</div>
+									<div class="tgmenu__action d-none d-md-block">
+										<ul class="list-wrap">
+											<li class="header-search">
+												<a href="javascript:void(0)" class="search-open-btn" aria-label="Abrir pesquisa">
+													<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none">
+														<path d="M19 19.0002L14.657 14.6572M14.657 14.6572C15.3999 13.9143 15.9892 13.0324 16.3912 12.0618C16.7933 11.0911 17.0002 10.0508 17.0002 9.00021C17.0002 7.9496 16.7933 6.90929 16.3913 5.93866C15.9892 4.96803 15.3999 4.08609 14.657 3.34321C13.9141 2.60032 13.0322 2.01103 12.0616 1.60898C11.0909 1.20693 10.0506 1 9.00002 1C7.94942 1 6.90911 1.20693 5.93848 1.60898C4.96785 2.01103 4.08591 2.60032 3.34302 3.34321C1.84269 4.84354 0.999817 6.87842 0.999817 9.00021C0.999817 11.122 1.84269 13.1569 3.34302 14.6572C4.84335 16.1575 6.87824 17.0004 9.00002 17.0004C11.1218 17.0004 13.1567 16.1575 14.657 14.6572Z" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+													</svg>
+												</a>
+											</li>
+										</ul>
+									</div>									<div class="mobile-nav-toggler">
+										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18" fill="none">
+											<path d="M0 2C0 0.895431 0.895431 0 2 0C3.10457 0 4 0.895431 4 2C4 3.10457 3.10457 4 2 4C0.895431 4 0 3.10457 0 2Z" fill="currentcolor" />
+											<path d="M0 9C0 7.89543 0.895431 7 2 7C3.10457 7 4 7.89543 4 9C4 10.1046 3.10457 11 2 11C0.895431 11 0 10.1046 0 9Z" fill="currentcolor" />
+											<path d="M0 16C0 14.8954 0.895431 14 2 14C3.10457 14 4 14.8954 4 16C4 17.1046 3.10457 18 2 18C0.895431 18 0 17.1046 0 16Z" fill="currentcolor" />
+											<path d="M7 2C7 0.895431 7.89543 0 9 0C10.1046 0 11 0.895431 11 2C11 3.10457 10.1046 4 9 4C7.89543 4 7 3.10457 7 2Z" fill="currentcolor" />
+											<path d="M7 9C7 7.89543 7.89543 7 9 7C10.1046 7 11 7.89543 11 9C11 10.1046 10.1046 11 9 11C7.89543 11 7 10.1046 7 9Z" fill="currentcolor" />
+											<path d="M7 16C7 14.8954 7.89543 14 9 14C10.1046 14 11 14.8954 11 16C11 17.1046 10.1046 18 9 18C7.89543 18 7 17.1046 7 16Z" fill="currentcolor" />
+											<path d="M14 2C14 0.895431 14.8954 0 16 0C17.1046 0 18 0.895431 18 2C18 3.10457 17.1046 4 16 4C14.8954 4 14 3.10457 14 2Z" fill="currentcolor" />
+											<path d="M14 9C14 7.89543 14.8954 7 16 7C17.1046 7 18 7.89543 18 9C18 10.1046 17.1046 11 16 11C14.8954 11 14 10.1046 14 9Z" fill="currentcolor" />
+											<path d="M14 16C14 14.8954 14.8954 14 16 14C17.1046 14 18 14.8954 18 16C18 17.1046 17.1046 18 16 18C14.8954 18 14 17.1046 14 16Z" fill="currentcolor" />
+										</svg>
+									</div>
+								</nav>
+							</div>
+							<div class="tgmobile__menu">
+								<nav class="tgmobile__menu-box">
+									<div class="close-btn"><i class="fas fa-times"></i></div>
+									<div class="nav-logo"><a href="index.html"><img src="assets/img/logo/logo.png" alt="Logo" /></a></div>
+									<div class="tgmobile__menu-outer"></div>
+								</nav>
+							</div>
+							<div class="tgmobile__menu-backdrop"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- header-search -->
+			<div class="search__popup">
+				<div class="container">
+					<div class="row">
+						<div class="col-12">
+							<div class="search__wrapper">
+								<div class="search__close">
+									<button type="button" class="search-close-btn" aria-label="Fechar pesquisa">
+										<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M17 1L1 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+											<path d="M1 1L17 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+										</svg>
+									</button>
+								</div>
+								<div class="search__form">
+									<form action="formulario.php" method="get">
+										<h2 class="search-advanced__title">Busca no portal</h2>
+										<div class="search__input">
+											<input class="search-input-field" type="text" name="q" placeholder="Digite o termo da consulta" />
+											<span class="search-focus-border"></span>
+											<button type="submit" aria-label="Pesquisar">
+												<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+													<path d="M9.55 18.1C14.272 18.1 18.1 14.272 18.1 9.55C18.1 4.82797 14.272 1 9.55 1C4.82797 1 1 4.82797 1 9.55C1 14.272 4.82797 18.1 9.55 18.1Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+													<path d="M19.0002 19.0002L17.2002 17.2002" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+												</svg>
+											</button>
+										</div>
+										<div class="search-advanced__message" aria-live="polite"></div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="search-popup-overlay"></div>
+			<!-- header-search-end -->		</header>
+		<main class="fix">
+			<section class="pgm-hero">
+				<div class="container">
+					<div class="pgm-crumbs"><a href="index.html">Inicio</a> &gt; <a href="services-3.html">Sites Institucionais</a> &gt; PGM</div>
+					<h1 class="pgm-title">Procuradoria-Geral do Municipio</h1>
+				</div>
+			</section>
+			<section class="pgm-shell">
+				<div class="container">
+					<div class="pgm-tabs">
+						<a href="javascript:void(0)" class="is-active">Inicio</a>
+						<a href="javascript:void(0)">Institucional</a>
+						<a href="javascript:void(0)">Procuradorias do Municipio</a>
+						<a href="javascript:void(0)">Legislacao Institucional</a>
+						<a href="javascript:void(0)">Eventos</a>
+						<a href="javascript:void(0)">Downloads</a>
+						<a href="javascript:void(0)">Editais</a>
+						<a href="javascript:void(0)">Fale Conosco</a>
+					</div>
+					<div class="pgm-shortcuts">
+						<a class="pgm-card pgm-card--large" href="sobre-pgm.html">
+							<div class="pgm-card__icon"><i class="fas fa-landmark"></i></div>
+							<h2 class="pgm-card__title">Sobre a PGM</h2>
+							<p class="pgm-card__text">Conheca a competencia da PGM e a Procuradoria-Geral do Municipio.</p>
+						</a>
+						<a class="pgm-card" href="estrutura-organizacional-pgm.html">
+							<div class="pgm-card__icon"><i class="fas fa-building"></i></div>
+							<h2 class="pgm-card__title">Setores e Departamentos</h2>
+							<p class="pgm-card__text">Veja os setores e departamentos ligados a Procuradoria-Geral do Municipio.</p>
+						</a>
+						<a class="pgm-card" href="procuradores-municipio.html">
+							<div class="pgm-card__icon"><i class="fas fa-users"></i></div>
+							<h2 class="pgm-card__title">Lista de Procuradores</h2>
+							<p class="pgm-card__text">Conheca os Procuradores Municipais ativos e inativos que fazem parte da PGM.</p>
+						</a>
+						<a class="pgm-card" href="javascript:void(0)">
+							<div class="pgm-card__icon"><i class="fas fa-project-diagram"></i></div>
+							<h2 class="pgm-card__title">Organograma</h2>
+							<p class="pgm-card__text">Veja a estrutura institucional e o organograma interno da PGM.</p>
+						</a>
+						<a class="pgm-card" href="javascript:void(0)">
+							<div class="pgm-card__icon"><i class="fas fa-lock"></i></div>
+							<h2 class="pgm-card__title">Sistema SGA</h2>
+							<p class="pgm-card__text">Acesse o sistema de gestao de contratos.</p>
+						</a>
+						<a class="pgm-card" href="javascript:void(0)">
+							<div class="pgm-card__icon"><i class="fas fa-home"></i></div>
+							<h2 class="pgm-card__title">SEI</h2>
+							<p class="pgm-card__text">Para ter acesso ao processo SEI e necessario realizar o cadastro.</p>
+						</a>
+					</div>
+					<div class="pgm-info">
+						<div class="pgm-panel pgm-news-box">
+							<h2 class="pgm-panel__title">Acompanhe as noticias da PGM</h2>
+							<a class="pgm-news-box__cta" href="javascript:void(0)"><i class="fas fa-play-circle"></i>Clique aqui para acessar</a>
+						</div>
+						<div class="pgm-panel pgm-competencias">
+							<h2 class="pgm-panel__title">Competencias da PGM</h2>
+							<p>A Procuradoria-Geral do Municipio tem o papel de defender os interesses municipais em questoes juridicas e administrativas, a representacao judicial e extrajudicial do Municipio e a interpretacao da Constituicao e das leis para orientacao do Poder Executivo. Alem da unificacao da jurisprudencia administrativa, a instituicao e responsavel pela elaboracao, observancia judicial de debitos e dividas ativas, a elaboracao de minutas para informacoes a serem prestadas pelos agentes politicos, o estudo e elaboracao de projetos de lei, a consultoria juridica aos orgaos do Poder Executivo e a elaboracao de minutas padrao de contratos e termos.</p>
+						</div>
+					</div>
+					<div class="pgm-cg">
+						<div class="pgm-cg__header">
+							<h2 class="pgm-cg__title">CGNoticias</h2>
+							<a class="pgm-cg__more" href="blog.html">Ver mais</a>
+						</div>
+						<div class="pgm-cg__grid">
+							<article class="pgm-cg__item">
+								<img class="pgm-cg__thumb" src="assets/img/services/foto-4.png" alt="Atendimento em acao social" />
+								<h3 class="pgm-cg__headline">CCIs participam de pesquisa nacional de nova vacina contra a gripe</h3>
+								<p class="pgm-cg__text">Pesquisadores dos Centros de Convivencia do Idoso participam da iniciativa em parceria com a Fiocruz e a rede municipal de saude.</p>
+								<div class="pgm-cg__meta">29/03/2026 08:44</div>
+							</article>
+							<article class="pgm-cg__item">
+								<img class="pgm-cg__thumb" src="assets/img/services/foto-5.png" alt="Participantes em evento esportivo" />
+								<h3 class="pgm-cg__headline">Badminton abre Jogos Escolares com partidas intensas</h3>
+								<p class="pgm-cg__text">A 3a edicao dos Jogos Escolares de Campo Grande comecou com alto rendimento no badminton e grande participacao estudantil.</p>
+								<div class="pgm-cg__meta">28/03/2026 10:13</div>
+							</article>
+							<article class="pgm-cg__item">
+								<img class="pgm-cg__thumb" src="assets/img/services/foto-6.png" alt="Onibus em terminal urbano" />
+								<h3 class="pgm-cg__headline">Feriado chegando: veja como fica o transporte coletivo na Semana Santa</h3>
+								<p class="pgm-cg__text">Com o feriado prolongado, a Agetran e a Agencia Municipal de Transporte ajustaram horarios e reforcaram o atendimento a populacao.</p>
+								<div class="pgm-cg__meta">27/03/2026 08:23</div>
+							</article>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+		<footer class="pgm-footer">
+			<div class="container">
+				<div class="pgm-footer__grid">
+					<div><h3 class="pgm-footer__title">Governo</h3><div class="pgm-footer__links"><a href="javascript:void(0)">Prefeitura</a><a href="javascript:void(0)">Secretarias</a><a href="javascript:void(0)">Agencias</a><a href="services-3.html">Ver todas</a></div></div>
+					<div><h3 class="pgm-footer__title">Servicos</h3><div class="pgm-footer__links"><a href="javascript:void(0)">Cidadao</a><a href="javascript:void(0)">Empresa</a><a href="javascript:void(0)">Servidor</a><a href="services-5.html">Todos os servicos</a></div></div>
+					<div><h3 class="pgm-footer__title">Transparencia</h3><div class="pgm-footer__links"><a href="javascript:void(0)">Acesso a Informacao</a><a href="javascript:void(0)">COVID-19</a><a href="services.html">Portal da Transparencia</a><a href="prestacao-contas.html">Prestacao de Contas</a></div></div>
+					<div><h3 class="pgm-footer__title">Servidor</h3><div class="pgm-footer__links"><a href="javascript:void(0)">Canal do Servidor</a><a href="javascript:void(0)">Intranet</a><a href="javascript:void(0)">Webmail</a><a href="javascript:void(0)">Portal do Servidor</a></div></div>
+					<div><h3 class="pgm-footer__title">Atendimento</h3><div class="pgm-footer__links"><a href="javascript:void(0)">Ouvidoria Geral</a><a href="javascript:void(0)">Canais de Comunicacao</a><a href="javascript:void(0)">Faca sua Manifestacao</a><a href="javascript:void(0)">OuvidCG</a></div></div>
+				</div>
+			</div>
+		</footer>
+		<script src="assets/js/vendor/jquery-3.6.0.min.js"></script>
+		<script src="assets/js/bootstrap.bundle.min.js"></script>
+		<script src="assets/js/jquery.magnific-popup.min.js"></script>
+		<script src="assets/js/jquery.odometer.min.js"></script>
+		<script src="assets/js/jquery.appear.js"></script>
+		<script src="assets/js/gsap.js"></script>
+		<script src="assets/js/ScrollTrigger.js"></script>
+		<script src="assets/js/SplitText.js"></script>
+		<script src="assets/js/gsap-animation.js"></script>
+		<script src="assets/js/jquery.parallaxScroll.min.js"></script>
+		<script src="assets/js/swiper-bundle.js"></script>
+		<script src="assets/js/ajax-form.js"></script>
+		<script src="assets/js/wow.min.js"></script>
+		<script src="assets/js/aos.js"></script>
+		<script src="assets/js/main.js"></script>
+	</body>
+</html>

@@ -1,0 +1,509 @@
+{
+	"info": {
+		"_postman_id": "a3d5727a-4559-4aa6-aee9-97b547bf2c61",
+		"name": "NP3 - wsInterfaceAtendimentoAPI (HTTP POST - strXMLDados) Copy 3",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10945933"
+	},
+	"item": [
+		{
+			"name": "01 - API_PegarTokenJwt",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// 1) Read raw response (SOAP)",
+							"const raw = pm.response.text();",
+							"",
+							"// Helper: decode HTML entities (&lt; &gt; &amp; etc)",
+							"function htmlDecode(s) {",
+							"  return s",
+							"    .replace(/&lt;/g, \"<\")",
+							"    .replace(/&gt;/g, \">\")",
+							"    .replace(/&amp;/g, \"&\")",
+							"    .replace(/&quot;/g, \"\\\"\")",
+							"    .replace(/&#39;/g, \"'\")",
+							"    .replace(/&apos;/g, \"'\");",
+							"}",
+							"",
+							"// 2) Try direct <de_token> first (some servers return plain XML)",
+							"let token = null;",
+							"let m = raw.match(/<de_token>\\s*(?:<!\\[CDATA\\[)?([\\s\\S]*?)(?:\\]\\]>)?\\s*<\\/de_token>/i);",
+							"if (m && m[1]) token = m[1].trim();",
+							"",
+							"// 3) If not found, extract inner escaped XML inside <string>...</string>",
+							"if (!token) {",
+							"  const sm = raw.match(/<string[^>]*>([\\s\\S]*?)<\\/string>/i);",
+							"  if (sm && sm[1]) {",
+							"    const innerXml = htmlDecode(sm[1]);",
+							"",
+							"    const tm = innerXml.match(/<de_token>\\s*(?:<!\\[CDATA\\[)?([\\s\\S]*?)(?:\\]\\]>)?\\s*<\\/de_token>/i);",
+							"    if (tm && tm[1]) token = tm[1].trim();",
+							"  }",
+							"}",
+							"",
+							"// 4) Save to collection variable",
+							"if (token) {",
+							"  pm.collectionVariables.set(\"app_token\", token);",
+							"  console.log(\"✅ app_token salvo. len =\", token.length);",
+							"  console.log(\"Lido da variável:\", pm.collectionVariables.get(\"app_token\"));",
+							"",
+							"} else {",
+							"  console.warn(\"❌ Não achei de_token. Raw response:\", raw);",
+							"}",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "strXMLDados",
+							"value": "<atend>\n  <identificacao_origem>\n    <cd_grupo>{{cd_grupo}}</cd_grupo>\n    <de_login_usu>{{origem_login}}</de_login_usu>\n    <de_senha_usu>{{origem_senha}}</de_senha_usu>\n  </identificacao_origem>\n</atend>",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseUrl}}/API_PegarTokenJwt",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"API_PegarTokenJwt"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "02 - API_Login (identificacao_cliente / nu_cartao + de_senha + de_token)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const raw = pm.response.text();",
+							"",
+							"function htmlDecode(s) {",
+							"  return s",
+							"    .replace(/&lt;/g, \"<\")",
+							"    .replace(/&gt;/g, \">\")",
+							"    .replace(/&amp;/g, \"&\")",
+							"    .replace(/&quot;/g, \"\\\"\")",
+							"    .replace(/&#39;/g, \"'\")",
+							"    .replace(/&apos;/g, \"'\");",
+							"}",
+							"",
+							"const sm = raw.match(/<string[^>]*>([\\s\\S]*?)<\\/string>/i);",
+							"const inner = sm && sm[1] ? htmlDecode(sm[1]) : raw;",
+							"",
+							"// pega erro",
+							"const cod = (inner.match(/<cod>\\s*([^<]+)\\s*<\\/cod>/i)||[])[1];",
+							"const msg = (inner.match(/<msg>\\s*([^<]+)\\s*<\\/msg>/i)||[])[1];",
+							"console.log(\"cod:\", cod, \"msg:\", msg);",
+							"",
+							"// salva cd_rede e cd_cliente se vierem",
+							"const cd_rede = (inner.match(/<cd_rede>\\s*([^<]*)\\s*<\\/cd_rede>/i)||[])[1];",
+							"const cd_cliente = (inner.match(/<cd_cliente>\\s*([^<]*)\\s*<\\/cd_cliente>/i)||[])[1];",
+							"",
+							"if (cd_rede) pm.collectionVariables.set(\"cd_rede\", cd_rede.trim());",
+							"if (cd_cliente) pm.collectionVariables.set(\"cd_cliente\", cd_cliente.trim());",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{app_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "strXMLDados",
+							"value": "<atend>\n  <identificacao_origem>\n    <cd_grupo>{{cd_grupo}}</cd_grupo>\n    <de_login_usu>{{origem_login}}</de_login_usu>\n    <de_senha_usu>{{origem_senha}}</de_senha_usu>\n  </identificacao_origem>\n  <identificacao_cliente>\n    <nu_cartao>{{nu_cartao}}</nu_cartao>\n    <de_senha>{{de_senha}}</de_senha>\n    <de_token>{{push_token}}</de_token>\n    <de_versao_app>{{de_versao_app}}</de_versao_app>\n    <de_campos_nr>{{de_campos_nr}}</de_campos_nr>\n    <fl_refresh>{{fl_refresh}}</fl_refresh>\n  </identificacao_cliente>\n</atend>",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseUrl}}/API_Login",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"API_Login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "03 - API_RecuperarDadosCadastrais",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "strXMLDados",
+							"value": "<atend>\n  <identificacao_origem>\n    <cd_grupo>{{cd_grupo}}</cd_grupo>\n    <de_login_usu>{{origem_login}}</de_login_usu>\n    <de_senha_usu>{{origem_senha}}</de_senha_usu>\n  </identificacao_origem>\n  <identificacao_cliente>\n    <nu_cartao>{{nu_cartao}}</nu_cartao>\n    <de_senha>{{de_senha}}</de_senha>\n    <de_token>{{push_token}}</de_token>\n    <de_versao_app>{{de_versao_app}}</de_versao_app>\n    <de_campos_nr>{{de_campos_nr}}</de_campos_nr>\n    <fl_refresh>N</fl_refresh>\n  </identificacao_cliente>\n</atend>",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseUrl}}/API_RecuperarDadosCadastrais",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"API_RecuperarDadosCadastrais"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "04 - API_RecuperarDadosConta",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "strXMLDados",
+							"value": "<atend>\n  <identificacao_origem>\n    <cd_grupo>{{cd_grupo}}</cd_grupo>\n    <de_login_usu>{{origem_login}}</de_login_usu>\n    <de_senha_usu>{{origem_senha}}</de_senha_usu>\n  </identificacao_origem>\n  <identificacao_cliente>\n    <nu_cartao>{{nu_cartao}}</nu_cartao>\n    <de_senha>{{de_senha}}</de_senha>\n    <de_token>{{push_token}}</de_token>\n    <de_versao_app>{{de_versao_app}}</de_versao_app>\n    <de_campos_nr>{{de_campos_nr}}</de_campos_nr>\n    <fl_refresh>N</fl_refresh>\n  </identificacao_cliente>\n</atend>",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseUrl}}/API_RecuperarDadosConta",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"API_RecuperarDadosConta"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "05 - API_RecuperarFatura (Faturas)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// -------- decode SOAP <string> and visualize faturas --------",
+							"const raw = pm.response.text();",
+							"",
+							"function htmlDecode(s) {",
+							"  return s",
+							"    .replace(/&lt;/g, \"<\")",
+							"    .replace(/&gt;/g, \">\")",
+							"    .replace(/&amp;/g, \"&\")",
+							"    .replace(/&quot;/g, \"\\\"\")",
+							"    .replace(/&#39;/g, \"'\")",
+							"    .replace(/&apos;/g, \"'\");",
+							"}",
+							"",
+							"function stripCdata(s) {",
+							"  if (!s) return \"\";",
+							"  return s.replace(/^<!\\[CDATA\\[/, \"\").replace(/\\]\\]>$/, \"\");",
+							"}",
+							"",
+							"function getTag(xml, tag) {",
+							"  const re = new RegExp(`<${tag}[^>]*>\\\\s*([\\\\s\\\\S]*?)\\\\s*<\\\\/${tag}>`, \"i\");",
+							"  const m = xml.match(re);",
+							"  return m && m[1] ? stripCdata(m[1].trim()) : \"\";",
+							"}",
+							"",
+							"function getAllFaturas(xml) {",
+							"  const list = [];",
+							"  const block = (xml.match(/<faturas[^>]*>([\\s\\S]*?)<\\/faturas>/i) || [])[1] || \"\";",
+							"  const re = /<fatura[^>]*>([\\s\\S]*?)<\\/fatura>/gi;",
+							"  let m;",
+							"  while ((m = re.exec(block)) !== null) {",
+							"    const f = m[1];",
+							"    list.push({",
+							"      nu_seq_fatura: getTag(f, \"nu_seq_fatura\"),",
+							"      tp_fase_fatura: getTag(f, \"tp_fase_fatura\"),",
+							"      dt_venc_fatura: getTag(f, \"dt_venc_fatura\"),",
+							"      vl_saldo_fatura: getTag(f, \"vl_saldo_fatura\"),",
+							"      vl_pagto_minimo: getTag(f, \"vl_pagto_minimo\"),",
+							"      nu_linha_digitavel: getTag(f, \"nu_linha_digitavel\"),",
+							"      de_qrcode_pix: getTag(f, \"de_qrcode_pix\"),",
+							"      de_url_fatura: getTag(f, \"de_url_fatura\")",
+							"    });",
+							"  }",
+							"  return list;",
+							"}",
+							"",
+							"// Extract inner XML (SOAP <string>escaped</string> OR plain XML)",
+							"let xml = raw;",
+							"const sm = raw.match(/<string[^>]*>([\\s\\S]*?)<\\/string>/i);",
+							"if (sm && sm[1]) xml = htmlDecode(sm[1]);",
+							"xml = xml.trim();",
+							"",
+							"// Save cd_rede/cd_cliente if returned",
+							"const cod = getTag(xml, \"cod\");",
+							"const msg = getTag(xml, \"msg\");",
+							"const cd_rede = getTag(xml, \"cd_rede\");",
+							"const cd_cliente = getTag(xml, \"cd_cliente\");",
+							"if (cd_rede) pm.collectionVariables.set(\"cd_rede\", cd_rede);",
+							"if (cd_cliente) pm.collectionVariables.set(\"cd_cliente\", cd_cliente);",
+							"",
+							"const faturas = getAllFaturas(xml);",
+							"",
+							"const vm = {",
+							"  status: { cod, msg, cd_rede, cd_cliente },",
+							"  faturas,",
+							"  rawXml: xml",
+							"};",
+							"",
+							"const template = `",
+							"<style>",
+							"  body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Arial,sans-serif;padding:12px}",
+							"  .card{border:1px solid #3333;border-radius:10px;padding:12px;margin-bottom:12px}",
+							"  .ok{color:#2e7d32;font-weight:700}",
+							"  .bad{color:#c62828;font-weight:700}",
+							"  table{width:100%;border-collapse:collapse;font-size:13px}",
+							"  th,td{border-bottom:1px solid #3333;padding:8px;vertical-align:top}",
+							"  th{opacity:.8;text-align:left}",
+							"  pre{white-space:pre-wrap;word-break:break-word;font-size:12px;border:1px solid #3333;padding:10px;border-radius:10px}",
+							"</style>",
+							"",
+							"<div class='card'>",
+							"  <div>Status: <span class='{{statusClass}}'>{{status.cod}}</span> — {{status.msg}}</div>",
+							"  <div>cd_rede: <b>{{status.cd_rede}}</b> | cd_cliente: <b>{{status.cd_cliente}}</b></div>",
+							"</div>",
+							"",
+							"<div class='card'>",
+							"  <h3 style='margin:0 0 10px 0'>Faturas ({{faturas.length}})</h3>",
+							"  <table>",
+							"    <thead>",
+							"      <tr>",
+							"        <th>Seq</th><th>Fase</th><th>Vencimento</th><th>Valor</th><th>Min.</th><th>Linha digitável</th><th>Pix</th><th>URL PDF</th>",
+							"      </tr>",
+							"    </thead>",
+							"    <tbody>",
+							"    {{#each faturas}}",
+							"      <tr>",
+							"        <td>{{nu_seq_fatura}}</td>",
+							"        <td>{{tp_fase_fatura}}</td>",
+							"        <td>{{dt_venc_fatura}}</td>",
+							"        <td>{{vl_saldo_fatura}}</td>",
+							"        <td>{{vl_pagto_minimo}}</td>",
+							"        <td style='word-break:break-word'>{{nu_linha_digitavel}}</td>",
+							"        <td style='word-break:break-word'>{{de_qrcode_pix}}</td>",
+							"        <td style='word-break:break-word'>{{de_url_fatura}}</td>",
+							"      </tr>",
+							"    {{/each}}",
+							"    </tbody>",
+							"  </table>",
+							"</div>",
+							"",
+							"<div class='card'>",
+							"  <h3 style='margin:0 0 10px 0'>XML bruto (decodificado)</h3>",
+							"  <pre>{{rawXml}}</pre>",
+							"</div>",
+							"`;",
+							"",
+							"vm.statusClass = (cod === \"0\") ? \"ok\" : \"bad\";",
+							"pm.visualizer.set(template, vm);"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{app_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "strXMLDados",
+							"value": "<atend>\n  <identificacao_origem>\n    <cd_grupo>{{cd_grupo}}</cd_grupo>\n    <de_login_usu>{{origem_login}}</de_login_usu>\n    <de_senha_usu>{{origem_senha}}</de_senha_usu>\n  </identificacao_origem>\n  <identificacao_cliente>\n    <cd_rede>{{cd_rede}}</cd_rede>\n    <nu_cpf>{{nu_cpf}}</nu_cpf>\n    <nu_cartao>{{nu_cartao}}</nu_cartao>\n  </identificacao_cliente>\n</atend>",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseUrl}}/API_RecuperarFaturas",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"API_RecuperarFaturas"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{app_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://cartao.np3beneficios.com.br/np3/wsInterfaceAtendimentoAPI.asmx"
+		},
+		{
+			"key": "cd_grupo",
+			"value": "04"
+		},
+		{
+			"key": "origem_login",
+			"value": "App.Np3"
+		},
+		{
+			"key": "origem_senha",
+			"value": "a1#j%5ht"
+		},
+		{
+			"key": "nu_cartao",
+			"value": "6280150298207011"
+		},
+		{
+			"key": "de_senha",
+			"value": "310377"
+		},
+		{
+			"key": "app_token",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJDTj1TZWN0aWdvIFJTQSBEb21haW4gVmFsaWRhdGlvbiBTZWN1cmUgU2VydmVyIENBLCBPPVNlY3RpZ28gTGltaXRlZCwgTD1TYWxmb3JkLCBTPUdyZWF0ZXIgTWFuY2hlc3RlciwgQz1HQiIsInN1YiI6IkI3RDA3ODQwREJGQzgwQzEwMzk3Q0I2QzY2RkMyN0UwOUYzMDZFNUMiLCJleHAiOjE3NjU5ODQ2NjcsImlhdCI6MTc2NTk4NDM2N30.K8RaWTS9hRu-RqaOD4S7YaMLMn9y7oOL2HwGBuA9JNKV1NyoHiH8aX2T08Tf700uOKFdrqZcHuTYxnoFJmHs8bRV7IEWmKErmBNrXBdIIXu7ch58v0_-iUzANK2UnupthsFzLScBZwOiEue3EEqaQlefUWiC-qJL_9IioK3MmJUf1M5FqDrKhJDZGnCSgly81nhvUvIcmP9F0TlzMEnstZznUSmkzCO8a2H5vgVNtmzLMH-bVoLblECrPqsnn_Rj7fXW65AEUD2LkJ0-eou1pBdE8Jq0JemuWzTokZuTxueimlkmlyubHm5ZeZyWIHm2cxl1uB7w5wSwGKDQDB84Cg"
+		},
+		{
+			"key": "push_token",
+			"value": "ehoGAc3pQRaJaXMZMqn5kg:APA91bEHED6Jn..."
+		},
+		{
+			"key": "de_versao_app",
+			"value": "4.1.8"
+		},
+		{
+			"key": "de_campos_nr",
+			"value": "rg|eres|ecom"
+		},
+		{
+			"key": "fl_refresh",
+			"value": "N"
+		},
+		{
+			"key": "cd_rede",
+			"value": "426"
+		},
+		{
+			"key": "cd_cliente",
+			"value": "298207"
+		}
+	]
+}

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html class="no-js" lang="pt-BR">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="x-ua-compatible" content="ie=edge" />
+		<title>Editais</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png" />
+		<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="assets/css/fontawesome-all.min.css" />
+		<style>
+			.editais-page {
+				margin: 0;
+				background: #ffffff;
+				font-family: Arial, sans-serif;
+				color: #243447;
+			}
+
+			.editais-wrap {
+				padding: 0 24px 28px;
+			}
+
+			.editais-head {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 16px;
+				margin-bottom: 44px;
+				padding-top: 4px;
+			}
+
+			.editais-head h1 {
+				margin: 0;
+				font-size: 20px;
+				font-weight: 700;
+				color: #0f6ead;
+			}
+
+			.editais-search {
+				display: flex;
+				align-items: center;
+				width: min(430px, 100%);
+				border: 1px solid #d8d8d8;
+				border-radius: 24px;
+				overflow: hidden;
+				background: #f6f6f6;
+			}
+
+			.editais-search input {
+				flex: 1;
+				height: 32px;
+				padding: 0 14px;
+				border: 0;
+				background: transparent;
+				font-size: 13px;
+				color: #4b5563;
+			}
+
+			.editais-search input::placeholder {
+				color: #b6b6b6;
+			}
+
+			.editais-search button {
+				width: 34px;
+				height: 32px;
+				border: 0;
+				background: #0f6ead;
+				color: #fff;
+			}
+
+			.editais-card {
+				border: 1px solid #d7d7d7;
+				background: #fff;
+			}
+
+			.editais-table {
+				width: 100%;
+				border-collapse: collapse;
+			}
+
+			.editais-table thead th {
+				padding: 10px 10px;
+				border-bottom: 1px solid #d7d7d7;
+				font-size: 12px;
+				font-weight: 700;
+				text-align: left;
+				color: #0f6ead;
+				background: #fff;
+				white-space: nowrap;
+			}
+
+			.editais-table tbody td {
+				padding: 10px 10px;
+				border-bottom: 1px solid #d7d7d7;
+				font-size: 12px;
+				line-height: 1.45;
+				vertical-align: middle;
+				color: #333;
+			}
+
+			.editais-table tbody tr:last-child td {
+				border-bottom: 0;
+			}
+
+			.editais-action {
+				text-align: center;
+				font-size: 15px;
+				color: #0f6ead;
+				white-space: nowrap;
+			}
+
+			.editais-action .warn {
+				margin-left: 6px;
+				color: #f39c12;
+			}
+
+			.editais-footer {
+				margin-top: 14px;
+				font-size: 13px;
+				color: #4b5563;
+			}
+
+			.editais-footer a {
+				color: #0f6ead;
+				font-weight: 700;
+			}
+
+			@media (max-width: 991.98px) {
+				.editais-head {
+					flex-direction: column;
+					align-items: stretch;
+					margin-bottom: 22px;
+				}
+
+				.editais-wrap {
+					padding-left: 12px;
+					padding-right: 12px;
+				}
+
+				.editais-card {
+					overflow-x: auto;
+				}
+
+				.editais-table {
+					min-width: 1080px;
+				}
+			}
+		</style>
+	</head>
+	<body class="editais-page">
+		<div class="editais-wrap">
+			<div class="editais-head">
+				<h1>Editais</h1>
+				<form class="editais-search" action="javascript:void(0)">
+					<input type="search" placeholder="Busque por: N° Processo, N° Edital, Objeto ou Órgão" />
+					<button type="submit" aria-label="Buscar"><i class="fas fa-search"></i></button>
+				</form>
+			</div>
+
+			<div class="editais-card">
+				<table class="editais-table">
+					<thead>
+						<tr>
+							<th>Abertura</th>
+							<th>Nº Edital</th>
+							<th>Nº Processo</th>
+							<th>Objeto</th>
+							<th>Órgão</th>
+							<th>Procedimento</th>
+							<th>Modo Disputa</th>
+							<th>Situação</th>
+							<th>Ações</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>24/04/2026<br />08h 00min</td>
+							<td>109/2025</td>
+							<td>009374/2025-57</td>
+							<td>Registro de Preço para aquisição de FÓRMULAS ALIMENTARES ENTERAIS para atender demandas judiciais.</td>
+							<td>SELC</td>
+							<td>Pregão Eletrônico</td>
+							<td>Aberto</td>
+							<td>Suspenso</td>
+							<td class="editais-action"><i class="fas fa-sign-in-alt"></i></td>
+						</tr>
+						<tr>
+							<td>23/04/2026<br />07h 45min</td>
+							<td>002/2026</td>
+							<td>015745/2025-30</td>
+							<td>CONTRATAÇÃO DE EMPRESA ESPECIALIZADA PARA A CONSTRUÇÃO DO CENTRO COMUNITÁRIO PELA VIDA (CONVIVE), EM CAMPO GRANDE - MS</td>
+							<td>SISEP</td>
+							<td>Concorrência Eletrônica</td>
+							<td>Aberto</td>
+							<td>Aguardando Abertura</td>
+							<td class="editais-action"><i class="fas fa-sign-in-alt"></i></td>
+						</tr>
+						<tr>
+							<td>17/04/2026<br />08h 00min</td>
+							<td>030/2026</td>
+							<td>053949/2025-79</td>
+							<td>Registro de Preços para a aquisição de Gêneros Alimentícios - Carga Seca I</td>
+							<td>SELC</td>
+							<td>Pregão Eletrônico</td>
+							<td>Aberto</td>
+							<td>Aguardando Abertura</td>
+							<td class="editais-action"><i class="fas fa-sign-in-alt"></i></td>
+						</tr>
+						<tr>
+							<td>16/04/2026<br />08h 00min</td>
+							<td>029/2026</td>
+							<td>005527/2026-78</td>
+							<td>Registro de Preços para uma eventual aquisição de MEDICAMENTO ANESTÉSICO para atender a Gerência de Controle de Zoonoses</td>
+							<td>FMS</td>
+							<td>Pregão Eletrônico</td>
+							<td>Aberto</td>
+							<td>Aguardando Abertura</td>
+							<td class="editais-action"><i class="fas fa-sign-in-alt"></i></td>
+						</tr>
+						<tr>
+							<td>13/04/2026<br />08h 00min</td>
+							<td>028/2026</td>
+							<td>027620/2025-52</td>
+							<td>Aquisição de Medicamentos para atender a Rede Municipal de Saúde.</td>
+							<td>FMS</td>
+							<td>Pregão Eletrônico</td>
+							<td>Aberto</td>
+							<td>Aguardando Abertura</td>
+							<td class="editais-action"><i class="fas fa-sign-in-alt"></i></td>
+						</tr>
+						<tr>
+							<td>19/06/2026<br />06h 45min</td>
+							<td>001/2026</td>
+							<td>052477/2024-01</td>
+							<td>CONTRATAÇÃO DE PESSOA JURÍDICA VISANDO A IMPLANTAÇÃO DE UM COMPLEXO HOSPITALAR MUNICIPAL EM CAMPO GRANDE - MS, NA</td>
+							<td>SISEP</td>
+							<td>-</td>
+							<td>Aberto</td>
+							<td>Aguardando Abertura</td>
+							<td class="editais-action"><i class="fas fa-external-link-alt"></i><i class="fas fa-info-circle warn"></i></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<div style="margin-top: 20px;">
+				<a href="services.html" style="display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 18px; border-radius: 10px; background: #0f6ead; color: #fff; font-size: 14px; font-weight: 700; text-transform: uppercase;">Voltar ao Portal Transparencia</a>
+			</div>
+			<div class="editais-footer"><a href="secretaria-licitacoes-contratos.html">Voltar</a> para a pagina da SELC</div>
+		</div>
+	</body>
+</html>

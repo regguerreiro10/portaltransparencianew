@@ -1,0 +1,1037 @@
+ALTER TABLE estado
+CONVERT TO CHARACTER SET utf8mb4
+COLLATE utf8mb4_unicode_ci;
+
+Estado e Cidade - importação pelo sistema
+
+ALTER TABLE clientes
+CONVERT TO CHARACTER SET utf8mb4
+COLLATE utf8mb4_unicode_ci;
+
+select p.cliente_id, c.empresa,c.alto_gestao,c.status, 
+max(p.dataConsulta) from pedidos p inner join clientes c on 
+c.id=p.cliente_id and c.alto_gestao='Ativo' 
+and c.status='Ativo' where p.dataConsulta>= '2025-06-01' 
+group by p.cliente_id;
+
+ALTER TABLE entidade
+CONVERT TO CHARACTER SET utf8mb4
+COLLATE utf8mb4_unicode_ci;
+
+INSERT INTO gestaonp3benefic_dbgestao.entidade
+(
+    nome,
+    cnpj,
+    email,
+    cep,
+    rua,
+    numero,
+    bairro,
+    cidade_id,
+    telefone01,
+    telefone02,
+    administradora_id,
+    frotas,
+    compras,
+    tipo_frota,
+    abastecimento,
+    taxacontrato,
+    idold
+)
+SELECT
+    c.empresa,
+    c.cnpj,
+    c.email,
+    NULL AS cep,
+    c.endereco,
+    c.numero,
+    c.bairro,
+    (
+        SELECT cid.id
+        FROM gestaonp3benefic_dbgestao.cidade cid
+        WHERE cid.idold = c.cidade_id
+        LIMIT 1
+    ) AS cidade_id,
+    c.tel,
+    c.cel,
+    2 AS administradora_id,
+    1 AS frotas,
+    2 AS compras,
+    2 AS tipo_frota,
+    2 AS abastecimento,
+    c.taxa AS taxacontrato,
+    c.id AS idold
+FROM gestaonp3benefic_dbsystem_np3.clientes c
+WHERE c.id IN (1461,3225,3602,3624,3815,3981028,3981069);
+
+INSERT INTO gestaonp3benefic_dbgestao.system_unit
+(
+    name,
+    cnpj,
+    email,
+    rua,
+    numero,
+    bairro,
+    cidade_id,
+    telefone01,
+    telefone02,
+    entidade_id,
+    utilizasinapi,
+    recaptcha,
+    testar_valor_venal,
+    aprovacao_por_item,
+    selecao_redes_aleatoria,
+    pedido_base,
+    testar_revisao,
+    utiliza_temparia,
+    enviar_email_auto_relatorio,
+    idold
+)
+SELECT
+    c.empresa                              AS name,
+    c.cnpj                                 AS cnpj,
+    c.email                                AS email,
+    c.endereco                             AS rua,
+    c.numero                               AS numero,
+    c.bairro                               AS bairro,
+
+    ( SELECT cid.id
+      FROM gestaonp3benefic_dbgestao.cidade cid
+      WHERE cid.idold = c.cidade_id
+      LIMIT 1
+    )                                      AS cidade_id,
+
+    c.tel                                  AS telefone01,
+    c.cel                                  AS telefone02,
+
+    ( SELECT e.id
+      FROM gestaonp3benefic_dbgestao.entidade e
+      WHERE e.idold = c.id
+      LIMIT 1
+    )                                      AS entidade_id,
+
+    'N'                                    AS utilizasinapi,
+    'N'                                    AS recaptcha,
+    2                                      AS testar_valor_venal,
+    2                                      AS aprovacao_por_item,
+    2                                      AS selecao_redes_aleatoria,
+    2                                      AS pedido_base,
+    2                                      AS testar_revisao,
+    2                                      AS utiliza_temparia,
+    2                                      AS enviar_email_auto_relatorio,
+
+    c.id                                   AS idold
+FROM gestaonp3benefic_dbsystem_np3.clientes c
+WHERE c.id IN (1461,3225,3602,3624,3815,3981028,3981069);
+
+saldo_entidade_contrato
+INSERT INTO gestaonp3benefic_dbgestao.saldo_entidade_contrato
+    (entidade_id, system_users_id, tipotransacao, datatransacao, valor_saldo, dtinicio, dtfinal, idold)
+SELECT 
+    e.id AS entidade_id,
+    1 AS system_users_id,
+    'C' AS tipotransacao,
+    DATE(stm.data_cadastro) AS datatransacao,
+    stm.saldo AS valor_saldo,
+    DATE(stm.data_cadastro) AS dtinicio,
+    '2027-12-31' AS dtfinal, 
+    stm.id
+FROM saldo_total_manutencao stm
+JOIN gestaonp3benefic_dbgestao.entidade e 
+    ON e.idold = stm.cliente_id
+WHERE stm.cliente_id IN (1461,3225,3602,3624,3815,3981028,3981069)
+  AND NOT EXISTS (
+      SELECT 1
+      FROM gestaonp3benefic_dbgestao.saldo_entidade_contrato sec
+      WHERE sec.entidade_id = e.id
+        AND sec.tipotransacao = 'C'
+        AND sec.datatransacao = DATE(stm.data_cadastro)
+        AND sec.valor_saldo = stm.saldo
+        AND sec.dtinicio = DATE(stm.data_cadastro)
+        AND sec.dtfinal = '2027-12-31'
+  );
+saldo_departamento - cadastrar
+
+departamento
+
+ALTER TABLE departamento_cliente
+CONVERT TO CHARACTER SET utf8mb4
+COLLATE utf8mb4_unicode_ci;
+
+INSERT INTO gestaonp3benefic_dbgestao.departamento_unit
+    (name, email, system_unit_id, valor_empenho, idold)
+SELECT
+    dc.nome_dep,
+    dc.email,
+    (SELECT su.id
+     FROM gestaonp3benefic_dbgestao.system_unit su
+     WHERE su.idold = dc.cliente_id
+     LIMIT 1) AS system_unit_id,
+    dc.empenho,
+    dc.id
+FROM gestaonp3benefic_dbsystem_np3.departamento_cliente dc
+WHERE dc.cliente_id IN (1461,3225,3602,3624,3815,3981028,3981069);
+
+
+alto_gestao='Inativo' status='Ativo'
+
+pessoa
+ALTER TABLE clientes CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+INSERT INTO gestaonp3benefic_dbgestao.pessoa
+    (tipo_cliente_id, categoria_cliente_id, system_user_id, nome, documento, obs, fone, email, created_at,
+     banco, agencia, conta, operacao, idold)
+SELECT
+    2 AS tipo_cliente_id,
+    2 AS categoria_cliente_id,
+    1 AS system_user_id,
+    c.empresa AS nome,
+    c.cnpj   AS documento,
+    'Importação sistema.np3' AS obs,
+    c.tel    AS fone,
+    c.email  AS email,
+    '2026-01-26' AS created_at,
+    c.banco1 AS banco,
+    c.ag1    AS agencia,
+    c.cta1   AS conta,
+    c.tipo1  AS operacao,
+    c.id     AS idold
+FROM gestaonp3benefic_dbsystem_np3.clientes c
+WHERE NOT EXISTS (
+      SELECT 1
+      FROM gestaonp3benefic_dbgestao.pessoa p
+      WHERE p.documento = c.cnpj
+  );
+
+UPDATE gestaonp3benefic_dbgestao.pessoa p
+JOIN gestaonp3benefic_dbsystem_np3.clientes c
+  ON c.cnpj = p.documento
+SET p.idold = c.id
+WHERE p.idold IS NULL
+
+
+update pessoa set ativo='T' where  ativo is null;
+
+update pessoa set cidade_id = (select cidade_id
+                                from pessoa_endereco pe where pe.pessoa_id=pessoa.id)
+                            where pessoa.cidade_id is null and pessoa.idold <> 0 and pessoa.id>2382
+
+pessoa_endereco
+INSERT INTO gestaonp3benefic_dbgestao.pessoa_endereco
+(pessoa_id, cidade_id, nome, principal, rua, numero, bairro)
+SELECT 
+    p.id AS pessoa_id,
+    c.cidade_id,
+    'sistema.np3' AS nome,
+    'T' AS principal,
+    c.endereco AS rua,
+    c.numero,
+    c.bairro
+FROM gestaonp3benefic_dbgestao.pessoa p
+JOIN gestaonp3benefic_dbsystem_np3.clientes c
+  ON c.id = p.idold;
+
+pessoa_grupo
+INSERT INTO gestaonp3benefic_dbgestao.pessoa_grupo (pessoa_id, grupo_pessoa_id)
+SELECT p.id AS pessoa_id, 4 AS grupo_pessoa_id
+FROM gestaonp3benefic_dbsystem_np3.clientes c
+INNER JOIN gestaonp3benefic_dbgestao.pessoa p
+  ON p.idold = c.id
+WHERE p.id > 2382;
+
+update pessoa set system_user_id=null where id>2382
+
+pessoa_contato
+INSERT INTO gestaonp3benefic_dbgestao.pessoa_contato (pessoa_id, telefone, nome)
+SELECT 
+    p.id        AS pessoa_id,
+    c.cel       AS telefone,
+    c.site      AS nome
+FROM gestaonp3benefic_dbsystem_np3.clientes c
+INNER JOIN gestaonp3benefic_dbgestao.pessoa p
+  ON p.idold = c.id;
+
+seguimento_pessoa
+
+INSERT INTO gestaonp3benefic_dbgestao.seguimento_pessoa (seguimento_id, pessoa_id)
+SELECT 
+   s.id,
+   p.id
+FROM gestaonp3benefic_dbsystem_np3.cliente_has_seguimento chsx
+inner join gestaonp3benefic_dbgestao.pessoa p on p.idold=chsx.cliente_id
+inner join gestaonp3benefic_dbgestao.seguimento s on s.idold=chsx.seguimento_id where p.id>2382
+
+INSERT INTO gestaonp3benefic_dbgestao.system_users
+(
+    name,
+    login,
+    password1,
+    email,
+    frontpage_id,
+    system_unit_id,
+    active,
+    two_factor_enabled,
+    cpf,
+    notificarusuario,
+    idold
+)SELECT uc.nome,uc.nome,uc.senha, uc.email,215,(select su.id from gestaonp3benefic_dbgestao.system_unit su where su.idold=uc.cliente_id),'Y','N',uc.cpf,1,uc.id_usuario FROM gestaonp3benefic_dbsystem_np3.usuariocliente uc inner join gestaonp3benefic_dbsystem_np3.clientes c on c.id=uc.cliente_id where  uc.cliente_id in (1461,3225,3602,3624,3815,3981028,3981069);
+
+INSERT INTO gestaonp3benefic_dbgestao.system_user_group (system_user_id, system_group_id) 
+SELECT u.id, g.group_id FROM gestaonp3benefic_dbgestao.system_users u JOIN 
+( SELECT 20 AS group_id 
+ UNION ALL SELECT 16  
+UNION ALL SELECT 7 UNION ALL SELECT 19 UNION ALL SELECT 15 ) g WHERE u.id > 1730;
+
+INSERT INTO gestaonp3benefic_dbgestao.system_user_unit (system_user_id, system_unit_id)
+SELECT u.id, su.id
+FROM gestaonp3benefic_dbgestao.system_users u
+inner join gestaonp3benefic_dbgestao.system_unit su on su.id=u.system_unit_id
+WHERE u.id > 1730
+
+
+INSERT INTO gestaonp3benefic_dbgestao.system_user_departamento_unit (system_users_id, departamento_unit_id)
+SELECT u.id, su.id
+FROM gestaonp3benefic_dbgestao.system_users u
+inner join gestaonp3benefic_dbgestao.system_unit su on su.id=u.system_unit_id
+WHERE u.id >1730;
+
+UPDATE pessoa p INNER JOIN pessoaold po ON po.id = p.id SET p.system_user_id = po.system_users_id;
+
+UPDATE gestaonp3benefic_dbgestao.pessoa p 
+JOIN gestaonp3benefic_dbgestao.system_users su ON su.email = p.email SET p.system_user_id = su.id WHERE p.email IS NOT NULL AND p.email <> '' and p.id>2382;
+
+condutor
+INSERT INTO gestaonp3benefic_dbgestao.pessoa
+(
+    tipo_cliente_id,
+    categoria_cliente_id,
+    system_user_id,
+    nome,
+    documento,
+    cpf,
+    obs,
+    fone,
+    categoria_cnh_id,
+    data_validade_cnh,
+    numero_registro_cnh,
+    numero_registro,
+    nomeresponsavel,
+    created_at,
+    idold,
+    system_unit_id,
+    ativo
+)
+SELECT
+    1 AS tipo_cliente_id,
+    2 AS categoria_cliente_id,
+    1 AS system_user_id,
+    m.nome_mot AS nome,
+    m.cpf_mot  AS documento,
+    m.cpf_mot  AS cpf,
+    CONCAT('Importação sistema.np3 condutor matricula: ', m.matricula) AS obs,
+    m.tel_mot  AS fone,
+    (
+        SELECT ct.id
+        FROM gestaonp3benefic_dbgestao.categoria_cnh ct
+        WHERE ct.descricao = m.cnh_mot
+        LIMIT 1
+    ) AS categoria_cnh_id,
+    m.vencimento_cnh_mot AS data_validade_cnh,
+    m.numero_cnh_mot     AS numero_registro_cnh,
+    m.registro           AS numero_registro,
+    m.usuario_mot        AS nomeresponsavel,
+    '2026-01-26'         AS created_at,
+    m.id_mot             AS idold,
+    (
+        SELECT su.id
+        FROM gestaonp3benefic_dbgestao.system_unit su
+        WHERE su.idold = m.cliente_id_mot
+        LIMIT 1
+    ) AS system_unit_id,
+    'T' AS ativo
+FROM gestaonp3benefic_dbsystem_np3.motoristas m
+INNER JOIN gestaonp3benefic_dbsystem_np3.usuariocliente uc
+    ON uc.id_usuario = m.usuario_id_mot
+INNER JOIN gestaonp3benefic_dbsystem_np3.departamento_cliente dm
+    ON dm.id = m.departamento_id_mot
+WHERE m.cliente_id_mot IN (1461,3225,3602,3624,3815,3981028,3981069);
+
+
+
+INSERT INTO gestaonp3benefic_dbgestao.pessoa_grupo (pessoa_id, grupo_pessoa_id)
+SELECT p.id AS pessoa_id, 5 AS grupo_pessoa_id
+FROM gestaonp3benefic_dbgestao.pessoa p
+WHERE p.id >= 6403
+
+
+INSERT INTO gestaonp3benefic_dbgestao.produto
+    (nome, tipo_produto_id, familia_produto_id, system_unit_id, ativo)
+SELECT
+    i.nome,
+    CASE
+        WHEN i.tipo = 1 THEN 2
+        WHEN i.tipo = 2 THEN 1
+        ELSE NULL
+    END AS tipo_produto_id,
+    81 AS familia_produto_id,
+    85 AS system_unit_id,
+    'T' AS ativo
+FROM gestaonp3benefic_dbsystem_np3.item i
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM gestaonp3benefic_dbgestao.produto p
+    WHERE p.nome = i.nome
+)
+GROUP BY i.nome, i.tipo;
+
+marca
+insert into gestaonp3benefic_dbgestao.marca (descricao)
+SELECT
+    v.marca
+FROM gestaonp3benefic_dbsystem_np3.veiculos v
+WHERE v.cliente_id IN (1461,3225,3602,3624,3815,3981028,3981069)
+  AND v.marca IS NOT NULL
+  AND v.marca <> ''
+  AND NOT EXISTS (
+      SELECT 1
+      FROM gestaonp3benefic_dbgestao.marca m
+      WHERE m.descricao = v.marca
+  )
+GROUP BY v.marca
+
+tipo_veiculo
+tipo_combustivel
+especie
+propriedade
+familia
+
+
+
+tipo
+SELECT
+    v.tipo,
+    COUNT(*) AS qtd
+FROM gestaonp3benefic_dbsystem_np3.veiculos v
+WHERE v.cliente_id IN (1461,3225,3602,3624,3815,3981028,3981069)
+  AND v.tipo IS NOT NULL
+  AND v.tipo <> ''
+  AND NOT EXISTS (
+      SELECT 1
+      FROM gestaonp3benefic_dbgestao.tipo_veiculo tv
+      WHERE tv.descricao = v.tipo
+  )
+GROUP BY v.tipo
+ORDER BY qtd DESC;
+
+-- tipo combustivel
+
+INSERT INTO gestaonp3benefic_dbgestao.tipo_combustivel (descricao,idold)
+SELECT
+    c.nome_comb, c.id_comb
+FROM gestaonp3benefic_dbsystem_np3.combustivel c
+WHERE c.nome_comb IS NOT NULL
+  AND c.nome_comb <> ''
+  AND NOT EXISTS (
+      SELECT 1
+      FROM gestaonp3benefic_dbgestao.tipo_combustivel tc
+      WHERE tc.descricao = c.nome_comb
+  )
+GROUP BY c.nome_comb;
+
+-- propriedade
+
+INSERT INTO gestaonp3benefic_dbgestao.propriedade (descricao)
+SELECT
+    v.propriedade
+FROM gestaonp3benefic_dbsystem_np3.veiculos v
+WHERE v.cliente_id IN (1461,3225,3602,3624,3815,3981028,3981069)
+  AND v.propriedade IS NOT NULL
+  AND v.propriedade <> ''
+  AND NOT EXISTS (
+      SELECT 1
+      FROM gestaonp3benefic_dbgestao.propriedade p
+      WHERE p.descricao = v.propriedade
+  )
+GROUP BY v.propriedade;
+
+-- identificacao
+identificacao é o mesmo campo da tabela veiculos
+
+-- cor
+
+insert into gestaonp3benefic_dbgestao.corveiculo(descricao)
+SELECT
+    v.cor FROM gestaonp3benefic_dbsystem_np3.veiculos v
+WHERE v.cliente_id IN (1461,3225,3602,3624,3815,3981028,3981069)
+  AND v.cor IS NOT NULL
+  AND TRIM(v.cor) <> ''
+  AND NOT EXISTS (
+      SELECT 1
+      FROM gestaonp3benefic_dbgestao.corveiculo cv
+      WHERE cv.descricao = v.cor
+  )
+GROUP BY v.cor;
+
+-- modelo
+insert into gestaonp3benefic_dbgestao.modelo 
+(descricao, marca_id, tipo_veiculo_id, tipo_combustivel_id, propriedade_id) 
+select v.modelo, (select mc.id from gestaonp3benefic_dbgestao.marca mc where 
+mc.descricao=v.marca limit 1) as marca_id, (select tv.id from gestaonp3benefic_dbgestao.tipo_veiculo tv where tv.descricao=v.tipo limit 1) as tipo_veiculo_id,
+tc.id as tipo_combustivel_id,
+(select prop.id from gestaonp3benefic_dbgestao.propriedade prop where prop.descricao=v.propriedade limit 1) as propriedade_id 
+FROM gestaonp3benefic_dbsystem_np3.veiculos v 
+LEFT JOIN gestaonp3benefic_dbsystem_np3.combustivel c
+  ON c.id_comb = v.tipo_combustivel
+LEFT JOIN gestaonp3benefic_dbgestao.tipo_combustivel tc
+  ON TRIM(LOWER(tc.descricao)) = TRIM(LOWER(c.nome_comb))
+WHERE v.cliente_id IN (1461,3225,3602,3624,3815,3981028,3981069) 
+group by v.modelo;
+
+
+-- veiculos
+
+INSERT INTO gestaonp3benefic_dbgestao.veiculos
+(
+  placa,
+  modelo_id,
+  dispositivos_id,
+  marca_id,
+  anof,
+  anom,
+  chassi,
+  renavam,
+  capacidade_tanque,
+  hodometroatual,
+  tipo_veiculo_id,
+  status_veiculo_id,
+  corveiculo_id,
+  tipo_combustivel_id,
+  propriedade_id,
+  system_unit_id,
+  departamento_unit_id,
+  prefixo,
+  valor_tabela_fipe,
+  saldo_veiculo,
+  system_users_id,
+  identificacao,
+    idold
+)
+SELECT
+  v.placa,
+  mo.id AS modelo_id,
+  2 AS dispositivos_id,
+  mar.id AS marca_id,
+  v.anoF AS anof,
+  v.anoM AS anom,
+  v.chassi,
+  v.renavam,
+  v.capacidade_tanque,
+  v.km AS hodometroatual,
+  tv.id AS tipo_veiculo_id,
+  1 AS status_veiculo_id,
+  cv.id AS corveiculo_id,
+  tcc.id AS tipo_combustivel_id,
+  prop.id AS propriedade_id,
+  su.id AS system_unit_id,
+  dep1.departamento_unit_id,
+  v.prefixo AS prefixo,
+  v.valor AS valor_tabela_fipe,
+  v.valor AS saldo_veiculo,
+  1 AS system_users_id,
+  TRIM(LOWER(v.identificacao))  AS identificacao,
+  v.id_veiculo
+FROM gestaonp3benefic_dbsystem_np3.veiculos v
+
+LEFT JOIN gestaonp3benefic_dbgestao.marca mar
+       ON mar.descricao = v.marca
+
+LEFT JOIN gestaonp3benefic_dbgestao.modelo mo
+       ON mo.descricao = v.modelo
+      AND mo.marca_id  = mar.id
+
+LEFT JOIN gestaonp3benefic_dbgestao.tipo_veiculo tv
+       ON tv.descricao = v.tipo
+
+LEFT JOIN gestaonp3benefic_dbgestao.corveiculo cv
+       ON cv.descricao = v.cor
+
+
+
+LEFT JOIN gestaonp3benefic_dbgestao.propriedade prop
+       ON prop.descricao = v.propriedade
+
+LEFT JOIN gestaonp3benefic_dbgestao.system_unit su
+       ON su.idold = v.cliente_id
+
+LEFT JOIN (
+    SELECT system_unit_id, MIN(id) AS departamento_unit_id
+    FROM gestaonp3benefic_dbgestao.departamento_unit
+    GROUP BY system_unit_id
+) dep1
+    ON dep1.system_unit_id = su.id
+   
+LEFT JOIN gestaonp3benefic_dbsystem_np3.combustivel c
+  ON c.id_comb = v.tipo_combustivel
+LEFT JOIN gestaonp3benefic_dbgestao.tipo_combustivel tcc
+  ON TRIM(LOWER(tcc.descricao)) = TRIM(LOWER(c.nome_comb))
+
+WHERE v.cliente_id IN (1461,3225,3602,3624,3815,3981028,3981069);
+
+/* EXEMPLO
+SELECT v.id_veiculo,
+  v.cliente_id,
+  v.placa,
+  tc.descricao AS tipo_combustivel_descricao,
+  v.tipo_combustivel AS id_comb,
+  c.nome_comb
+FROM gestaonp3benefic_dbsystem_np3.veiculos v
+LEFT JOIN gestaonp3benefic_dbsystem_np3.combustivel c
+  ON c.id_comb = v.tipo_combustivel
+LEFT JOIN gestaonp3benefic_dbgestao.tipo_combustivel tc
+  ON TRIM(LOWER(tc.descricao)) = TRIM(LOWER(c.nome_comb))
+  WHERE v.cliente_id =3981069;
+*/
+
+-- categoria
+
+INSERT INTO gestaonp3benefic_dbgestao.tipo_manutencao (descricao, idold)
+SELECT
+    c.categoria AS descricao,
+    c.id        AS idold
+FROM gestaonp3benefic_dbsystem_np3.categoria c
+WHERE c.categoria IS NOT NULL
+  AND c.categoria <> ''
+  AND NOT EXISTS (
+      SELECT 1
+      FROM gestaonp3benefic_dbgestao.tipo_manutencao tm
+      WHERE tm.descricao = c.categoria
+  );
+  
+-- ********************************** pedidos (PENDENTE)
+/*****
+DELETE FROM pedido_frotas
+WHERE system_unit_id IN (79,80,81,82,83,84,85);
+
+***********/
+INSERT INTO gestaonp3benefic_dbgestao.pedido_frotas
+(
+  idold,
+  veiculos_id,
+  descricaopedido,
+  dt_pedido,
+  mes,
+  ano,
+  km,
+  system_unit_id,
+  entidade_id,
+  departamento_unit_id,
+  system_users_id,
+  tipo_manutencao_id,
+  estado_pedido_frotas_id,
+  dt_finalizacao,
+  data_aprovacao,
+  status_old,
+  enviar_old,
+  motorista_idold ,
+  motorista_old ,
+  system_users_idold,
+  usuarioaprovou_old,
+  usuariocliente_idold
+    
+)
+SELECT
+  distinct p.id_pedido                                           AS idold,
+  vei.id                                                AS veiculos_id,
+  p.servico                                             AS descricaopedido,
+  STR_TO_DATE(p.dataVisual, '%d-%m-%Y %H:%i:%s') AS dt_pedido,
+  MONTH(p.dataVisual)                                   AS mes,
+  YEAR(p.dataVisual)                                    AS ano,
+  p.km                                                  AS km,
+  su.id                                                 AS system_unit_id,
+  ent.id                                                AS entidade_id,
+  dep.id                                                AS departamento_unit_id,
+  sus.id                                                AS system_users_id,
+  tm.id                                                 AS tipo_manutencao_id,
+  null as estado_pedido_frotas_id,
+  p.data_finalizacao,
+  p.data_aprovacao,
+  p.status,
+  p.enviar,
+  p.motorista_id,
+  p.motorista,
+  p.usuario_id,
+  p.usuario_aprovou,
+  p.usuariocliente_id
+  
+FROM gestaonp3benefic_dbsystem_np3.pedidos p
+JOIN gestaonp3benefic_dbgestao.veiculos vei
+  ON vei.idold = p.veiculo_id
+JOIN gestaonp3benefic_dbgestao.system_unit su
+  ON su.idold = p.cliente_id
+LEFT JOIN gestaonp3benefic_dbgestao.entidade ent
+  ON ent.idold = p.cliente_id
+LEFT JOIN gestaonp3benefic_dbgestao.departamento_unit dep
+  ON dep.idold = p.departamento_id
+LEFT JOIN gestaonp3benefic_dbgestao.pessoa pes
+  ON pes.idold = p.motorista_id
+LEFT JOIN gestaonp3benefic_dbgestao.system_users sus
+  ON sus.idold = p.usuariocliente_id
+LEFT JOIN gestaonp3benefic_dbgestao.tipo_manutencao tm
+  ON tm.idold = p.categoria_id
+
+WHERE p.cliente_id IN (1461,3225,3602,3624,3815,3981028,3981069);
+
+--- finalizar pedido frotas
+
+
+---- status pedido frotas
+
+UPDATE pedido_frotas pf
+JOIN system_unit su ON su.id = pf.system_unit_id
+SET pf.estado_pedido_frotas_id = 13
+WHERE su.idold IN (1461,3225,3602,3624,3815,3981028,3981069)
+  AND pf.status_old = 'APROVADO';
+  
+UPDATE pedido_frotas pf
+JOIN system_unit su ON su.id = pf.system_unit_id
+SET pf.estado_pedido_frotas_id = 19
+WHERE su.idold IN (1461,3225,3602,3624,3815,3981028,3981069)
+  AND pf.status_old = 'COTACAO';
+  
+UPDATE pedido_frotas pf
+JOIN system_unit su ON su.id = pf.system_unit_id
+SET pf.estado_pedido_frotas_id = 11
+WHERE su.idold IN (1461,3225,3602,3624,3815,3981028,3981069)
+  AND pf.status_old = 'PENDENTE';  
+
+--- pessoa aprovada
+UPDATE gestaonp3benefic_dbgestao.pedido_frotas pf
+JOIN  gestaonp3benefic_dbgestao.system_unit su ON su.id = pf.system_unit_id
+SET pf.estabelecimento_id = (select p.id from pessoa p 
+                    inner join gestaonp3benefic_dbsystem_np3.proposta_frotas pfnp3 where pfnp3.pedido_id = pf.idold and pfnp3.status='APROVADO' and p.idold=pfnp3.estabelecimento_id limit 1)
+WHERE su.idold IN (1461,3225,3602,3624,3815,3981028,3981069)
+  AND pf.status_old = 'APROVADO';
+
+  
+-- pedido_as_cliente
+insert into  gestaonp3benefic_dbgestao.pedido_as_cliente (pedido_frotas_id, pessoa_id)
+
+SELECT DISTINCT
+    pf.id        AS pedido_frotas_id,
+    pnew.id      AS pessoa_id
+FROM gestaonp3benefic_dbsystem_np3.pedidos pe
+
+LEFT JOIN gestaonp3benefic_dbsystem_np3.pedido_as_cidade pac
+  ON pac.pedido_id = pe.id_pedido
+ AND pac.status = 'on'
+
+JOIN gestaonp3benefic_dbsystem_np3.clientes cl
+  ON (
+       (cl.cidade_id = pac.cidade_id) and 
+      (cl.alto_gestao='Inativo')
+     )
+     
+LEFT JOIN gestaonp3benefic_dbsystem_np3.pedido_as_seguimento pas
+  ON pas.pedido_id = pe.id_pedido
+ AND pas.status = 'on'
+ inner join gestaonp3benefic_dbsystem_np3.cliente_has_seguimento chs
+ on chs.cliente_id=cl.id and pas.seguimento_id=chs.seguimento_id
+ 
+ LEFT JOIN gestaonp3benefic_dbgestao.pessoa pnew
+  ON pnew.idold = cl.id
+
+LEFT JOIN gestaonp3benefic_dbgestao.pedido_frotas pf
+  ON pf.idold = pe.id_pedido
+
+WHERE pe.cliente_id IN (1461,3225,3602,3624,3815,3981028,3981069)
+  
+
+ORDER BY pe.id_pedido, cl.id;
+
+inserção pelo sistema - pedidofrotaslist - importar mysql
+-- pedido_frotas_historico
+
+INSERT INTO gestaonp3benefic_dbgestao.pedido_frotas_historico
+(
+  pedido_frotas_id,
+  data_operacao,
+  aprovador_frotas_id,
+  obs,
+  estado_pedido_frotas_id
+)
+SELECT DISTINCT
+   pf.id AS pedido_frotas_id,
+   pf.dt_pedido AS dt_pedido,
+   2 as aprovador_frotas_id,
+   'Pedido importados',
+   pf.estado_pedido_frotas_id
+FROM gestaonp3benefic_dbgestao.pedido_frotas pf
+INNER JOIN gestaonp3benefic_dbgestao.system_unit su on su.id = pf.system_unit_id
+WHERE su.idold IN (1461,3225,3602,3624,3815,3981028,3981069) and pf.idold<>0;
+
+
+
+-- item (PENDENTE)
+
+/****
+excluindo motivo duplicidade nos pedidos
+DELETE ipf
+FROM itens_pedido_frotas ipf
+INNER JOIN pedido_frotas pf ON pf.id = ipf.pedido_frotas_id
+WHERE pf.system_unit_id IN (79,80,81,82,83,84,85);
+****/
+
+--- itens_pedido_frotas
+
+insert into gestaonp3benefic_dbgestao.itens_pedido_frotas (pedido_frotas_id, tipo, qtde, descricao, produto_id, idold, tipo_old, pedido_idold)
+SELECT pf.id, null as tipo, i.qtd as qtde, i.nome as descricao, (select id from produto p where p.nome = i.nome limit 1) as produto_id, i.id_item as idold, i.tipo as tipo_old, i.pedido_id as pedido_idold
+FROM gestaonp3benefic_dbsystem_np3.item i
+INNER JOIN gestaonp3benefic_dbsystem_np3.pedidos p
+        ON p.id_pedido = i.pedido_id
+inner join gestaonp3benefic_dbgestao.pedido_frotas pf on pf.idold=p.id_pedido
+
+WHERE p.cliente_id IN (1461,3225,3602,3624,3815,3981028,3981069);
+
+--- update itens_pedido_frotas (produto)
+
+UPDATE gestaonp3benefic_dbgestao.itens_pedido_frotas ipf
+JOIN gestaonp3benefic_dbsystem_np3.pedidos p
+  ON p.id_pedido = ipf.pedido_idold
+JOIN gestaonp3benefic_dbgestao.pedido_frotas pf
+  ON pf.idold = p.id_pedido
+SET ipf.tipo = 1
+WHERE ipf.tipo IS NULL
+  AND ipf.tipo_old = 2
+  AND ipf.pedido_idold <> 0
+  AND p.cliente_id IN (1461,3225,3602,3624,3815,3981028,3981069);
+  
+  --- update itens_pedido_frotas (serviço)
+
+UPDATE gestaonp3benefic_dbgestao.itens_pedido_frotas ipf
+JOIN gestaonp3benefic_dbsystem_np3.pedidos p
+  ON p.id_pedido = ipf.pedido_idold
+JOIN gestaonp3benefic_dbgestao.pedido_frotas pf
+  ON pf.idold = p.id_pedido
+SET ipf.tipo = 2
+WHERE ipf.tipo IS NULL
+  AND ipf.tipo_old = 1
+  AND ipf.pedido_idold <> 0
+  AND p.cliente_id IN (1461,3225,3602,3624,3815,3981028,3981069);
+  
+--- PEDIDOS FROTAS SEM DEPARTAMENTO
+UPDATE pedido_frotas SET departamento_unit_id=312 where idold<>0 and departamento_unit_id is null AND system_unit_id=81;
+UPDATE pedido_frotas SET departamento_unit_id=313 where idold<>0 and departamento_unit_id is null AND system_unit_id=83;
+
+
+  
+  
+--- PROPOSTAS
+insert into  gestaonp3benefic_dbgestao.propostas (pedido_frotas_id, pessoa_id, motorista_entrada_id, motorista_retirada_id, veiculos_id, data_cotacao, obs,
+valor_total, valor_desconto, valor_liquido, system_unit_id, departamento_unit_id, system_users_id,
+data_entrada_veiculo, data_retirada_veiculo, data_previsao_entrega, km, cidade_id, total_produtos_sem_desconto,
+total_servicos_sem_desconto, total_geral_sem_desconto, total_produtos_com_desconto, total_servicos_com_desconto,
+total_geral_com_desconto, datahora_inicioservico, datahora_fimservico, responsavel_tecnico, data_limite_resposta,
+status_old, idold, pedido_idold, estabelecimento_idold, cliente_idold, data_pag_autorizadoold, pagamento_autorizadoold)                      
+select 
+   pf.id as pedido_frotas_id,
+   pes.id as pessoa_id,
+   mot.id as motorista_entrada_id,
+   mot.id as motorista_retirada_id,
+   pf.veiculos_id as veiculos_id,
+STR_TO_DATE(propf.dataVisual, '%d-%m-%Y %H:%i'),
+   propf.historico as obs,
+    ROUND((select sum(subtotal) from gestaonp3benefic_dbsystem_np3.itens_proposta_frotas iprof where iprof.proposta_id=propf.id_proposta),2) as valor_total,
+  ROUND(
+    (SELECT SUM(subtotal) - SUM(valortotal)
+     FROM gestaonp3benefic_dbsystem_np3.itens_proposta_frotas iprof
+     WHERE iprof.proposta_id = propf.id_proposta
+    ), 2
+) AS valor_desconto,
+    ROUND((select sum(valortotal) from gestaonp3benefic_dbsystem_np3.itens_proposta_frotas iprof where iprof.proposta_id=propf.id_proposta),2) as valor_liquido,
+    pf.system_unit_id as system_unit_id,
+    pf.departamento_unit_id as departamento_unit_id,
+    pf.system_users_id as system_users_id,
+    propf.previsao_inicio_obra as data_entrada_veiculo,
+    propf.previsao_fim_obra as data_retirada_veiculo,
+    propf.previsao_fim_obra as data_previsao_entrega,
+    pf.km as km,
+    (select pe.cidade_id from pessoa_endereco pe where pe.pessoa_id=pes.id and pe.principal='T' limit 1) as cidade_id,
+     ROUND(
+    (SELECT SUM(subtotal) 
+     FROM gestaonp3benefic_dbsystem_np3.itens_proposta_frotas iprof
+     WHERE iprof.proposta_id = propf.id_proposta and iprof.tipo=2
+    ), 2
+) AS total_produtos_sem_desconto,
+   ROUND(
+    (SELECT SUM(subtotal) 
+     FROM gestaonp3benefic_dbsystem_np3.itens_proposta_frotas iprof
+     WHERE iprof.proposta_id = propf.id_proposta and iprof.tipo=1
+    ), 2
+) AS total_servicos_sem_desconto,
+   ROUND(
+    (SELECT SUM(subtotal) 
+     FROM gestaonp3benefic_dbsystem_np3.itens_proposta_frotas iprof
+     WHERE iprof.proposta_id = propf.id_proposta 
+    ), 2
+) AS total_geral_sem_desconto,
+ROUND(
+    (SELECT SUM(valortotal) 
+     FROM gestaonp3benefic_dbsystem_np3.itens_proposta_frotas iprof
+     WHERE iprof.proposta_id = propf.id_proposta and iprof.tipo=2
+    ), 2
+) AS total_produtos_com_desconto,
+   ROUND(
+    (SELECT SUM(valortotal) 
+     FROM gestaonp3benefic_dbsystem_np3.itens_proposta_frotas iprof
+     WHERE iprof.proposta_id = propf.id_proposta and iprof.tipo=1
+    ), 2
+) AS total_servicos_com_desconto,
+   ROUND(
+    (SELECT SUM(valortotal) 
+     FROM gestaonp3benefic_dbsystem_np3.itens_proposta_frotas iprof
+     WHERE iprof.proposta_id = propf.id_proposta 
+    ), 2
+) AS total_geral_com_desconto,
+    propf.previsao_inicio_obra as datahora_inicioservico,
+    propf.previsao_fim_obra as datahora_fimservico,
+    propf.usuarioProposta as responsavel_tecnico,
+    DATE_ADD(propf.dataVisual, INTERVAL 90 DAY) AS data_limite_resposta,
+   propf.status as status_old,
+   propf.id_proposta as idold,
+   propf.pedido_id as pedido_idold,
+   propf.estabelecimento_id as estabelecimento_idold,
+   propf.cliente_id as cliente_idold,
+   propf.data_pag_autorizado as data_pag_autorizadoold,
+   propf.pagamento_autorizado as pagamento_autorizadoold
+   
+from gestaonp3benefic_dbgestao.pedido_frotas pf 
+   inner join gestaonp3benefic_dbsystem_np3.proposta_frotas propf on propf.pedido_id=pf.idold 
+   left join gestaonp3benefic_dbgestao.pessoa pes on pes.idold=propf.estabelecimento_id
+   left join gestaonp3benefic_dbgestao.pessoa mot on mot.idold=pf.motorista_idold
+   where propf.cliente_id in (1461,3225,3602,3624,3815,3981028,3981069);
+   
+  --- update propostas
+  update gestaonp3benefic_dbgestao.propostas set estado_pedido_frotas_id=13 where idold<>0 and status_old='APROVADO'
+and  cliente_idold in (1461,3225,3602,3624,3815,3981028,3981069);
+
+update gestaonp3benefic_dbgestao.propostas set estado_pedido_frotas_id=10 where idold<>0 and status_old='REJEITADA'
+and  cliente_idold in (1461,3225,3602,3624,3815,3981028,3981069);
+
+update gestaonp3benefic_dbgestao.propostas set estado_pedido_frotas_id=12 where idold<>0 and status_old='COTACAO'
+and  cliente_idold in (1461,3225,3602,3624,3815,3981028,3981069);
+
+--- update propostas taxa contrato
+UPDATE propostas p
+JOIN system_unit su ON su.id = p.system_unit_id
+JOIN entidade e ON e.id = su.entidade_id
+SET p.desconto_contratual = e.taxacontrato
+WHERE p.desconto_contratual IS NULL
+  AND p.idold <> 0
+  AND su.idold <> 0;
+  
+--- finalizar propostas
+--- script
+select * from gestaonp3benefic_dbgestao.propostas propf
+inner join system_unit su on su.id = propf.system_unit_id
+inner join gestaonp3benefic_dbsystem_np3.proposta_frotas propfold on propfold.id_proposta=propf.idold
+where su.idold IN (1461,3225,3602,3624,3815,3981028,3981069) and  propfold.status ='APROVADO' AND propfold.enviar = 'sim'  AND propfold.pagamento_autorizado = 'sim';
+
+
+--- itens_propostas
+
+INSERT INTO gestaonp3benefic_dbgestao.itens_propostas
+(propostas_id, descricao, qtdekmgarantia, diasdegarantia, qtdehoras, valor, perc_desconto, valor_total, marca_modelo, fabricante, codigo, itens_pedido_frotas_id, tipo_pecas_id, produto_id, familia_produto_id, qtde, idold, pedido_idold, propostas_idold, tipo_old, item_idold)
+SELECT
+  pp.id              AS propostas_id,
+  ipropf.nome        AS descricao,
+  ipropf.km_garantia AS qtdekmgarantia,
+  ipropf.dias_garantia AS diasdegarantia,
+  0                  AS qtdehoras,
+  ipropf.valor        AS valor,
+  ROUND((ipropf.subtotal - ipropf.valortotal), 2) AS perc_desconto
+  ipropf.valortotal   AS valor_total,
+  ipropf.marca        AS marca_modelo,
+  NULL                AS fabricante,
+  NULL                AS codigo,
+  (SELECT ipf.id
+     FROM gestaonp3benefic_dbgestao.itens_pedido_frotas ipf
+    WHERE ipf.idold = ipropf.item_id
+    LIMIT 1)          AS itens_pedido_frotas_id,
+  NULL                AS tipo_pecas_id,
+  (SELECT ipf.produto_id
+     FROM gestaonp3benefic_dbgestao.itens_pedido_frotas ipf
+    WHERE ipf.idold = ipropf.item_id
+    LIMIT 1)          AS produto_id,
+  NULL                AS familia_produto_id,
+  ipropf.qtd          AS qtde,
+  ipropf.item_id      AS idold,
+  ipropf.pedido_id    AS pedido_idold,
+  ipropf.proposta_id  AS propostas_idold,
+  ipropf.tipo         AS tipo_old,
+  ipropf.item_id      AS item_idold
+FROM gestaonp3benefic_dbsystem_np3.itens_proposta_frotas ipropf
+JOIN gestaonp3benefic_dbgestao.propostas pp
+  ON pp.idold = ipropf.proposta_id
+WHERE ipropf.cliente_id IN (1461,3225,3602,3624,3815,3981028,3981069);
+
+--- update itens_propostas tipo (produto)
+UPDATE gestaonp3benefic_dbgestao.itens_propostas ip
+JOIN gestaonp3benefic_dbsystem_np3.pedidos p
+  ON p.id_pedido = ip.pedido_idold
+SET ip.tipo = 1
+WHERE ip.tipo_old = 2
+  AND p.cliente_id IN (1461,3225,3602,3624,3815,3981028,3981069);
+
+--- update itens_propostas tipo (serviço)
+
+  UPDATE gestaonp3benefic_dbgestao.itens_propostas ip
+JOIN gestaonp3benefic_dbsystem_np3.pedidos p
+  ON p.id_pedido = ip.pedido_idold
+SET ip.tipo = 2
+WHERE ip.tipo_old = 1
+  AND p.cliente_id IN (1461,3225,3602,3624,3815,3981028,3981069);
+
+
+--- documentos_propostas
+INSERT INTO gestaonp3benefic_dbgestao.documentos_propostas
+(propostas_id, caminho, numero, tipo_documentos_propostas_id, valor, created_at,
+ estabelecimento_idold, cliente_idold, pedido_idold, proposta_idold)
+SELECT
+  (SELECT p.id
+   FROM gestaonp3benefic_dbgestao.propostas p
+   WHERE p.idold = nf.proposta_id
+   LIMIT 1) AS propostas_id,
+
+  CONCAT('app/documentos/redes/frotas/', nf.pdf) AS caminho,
+
+  nf.id_nota AS numero,
+  1 AS tipo_documentos_propostas_id,
+  NULL AS valor,
+
+  nf.`data-anexa_nota` AS created_at,
+
+  nf.estabelecimento_id AS estabelecimento_idold,
+  nf.cliente_id AS cliente_idold,
+  nf.pedido_id AS pedido_idold,
+  nf.proposta_id AS proposta_idold
+FROM gestaonp3benefic_dbsystem_np3.notafiscal nf
+WHERE nf.cliente_id IN (1461,3225,3602,3624,3815,3981028,3981069);
+  
+  
+
+
+  
+  
+  
+  
+ 
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html class="no-js" lang="pt-BR">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="x-ua-compatible" content="ie=edge" />
+		<title>Convenios</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png" />
+		<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="assets/css/animate.min.css" />
+		<link rel="stylesheet" href="assets/css/magnific-popup.css" />
+		<link rel="stylesheet" href="assets/css/fontawesome-all.min.css" />
+		<link rel="stylesheet" href="assets/css/flaticon.css" />
+		<link rel="stylesheet" href="assets/css/odometer.css" />
+		<link rel="stylesheet" href="assets/css/swiper-bundle.css" />
+		<link rel="stylesheet" href="assets/css/aos.css" />
+		<link rel="stylesheet" href="assets/css/default.css" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<style>
+			.convenios-portal-area { padding: 110px 0 120px; background: linear-gradient(180deg, rgba(255, 209, 0, 0.08) 0%, rgba(255, 255, 255, 0) 220px), #f7f9fc; }
+			.convenios-portal-shell { background: #fff; border: 1px solid rgba(15, 23, 42, 0.08); border-radius: 22px; box-shadow: 0 24px 60px rgba(15, 23, 42, 0.1); overflow: hidden; }
+			.convenios-portal-topbar { padding: 18px 36px; background: #ffd400; border-bottom: 1px solid rgba(15, 23, 42, 0.08); }
+			.convenios-portal-topbar__nav { display: flex; flex-wrap: wrap; gap: 18px; font-size: 13px; font-weight: 600; color: #17324d; }
+			.convenios-portal-breadcrumb { padding: 10px 36px; font-size: 13px; color: #5b7088; background: #fff; border-bottom: 1px solid rgba(15, 23, 42, 0.08); }
+			.convenios-portal-shortcuts { padding: 20px 36px; background: #f3f6fa; border-bottom: 1px solid rgba(15, 23, 42, 0.08); }
+			.convenios-portal-shortcuts__grid { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 14px 10px; }
+			.convenios-portal-shortcuts__item { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 86px; padding: 12px 10px; border-radius: 14px; background: transparent; border: 1px solid transparent; text-align: center; color: #5b7088; transition: 0.25s ease; }
+			.convenios-portal-shortcuts__item:hover, .convenios-portal-shortcuts__item:focus, .convenios-portal-shortcuts__item.is-active { background: #fff; border-color: #d8e2ee; color: #17324d; }
+			.convenios-portal-shortcuts__item i { margin-bottom: 10px; font-size: 18px; color: #0f4c81; }
+			.convenios-portal-shortcuts__item span { font-size: 12px; font-weight: 600; line-height: 1.35; text-transform: uppercase; }
+			.convenios-portal-content { padding: 34px 36px 40px; }
+			.convenios-portal-title { margin: 0 0 28px; padding-bottom: 12px; font-size: 30px; text-transform: uppercase; color: #0f4c81; border-bottom: 2px solid #f0db37; }
+			.convenios-portal-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+			.convenios-portal-card { display: block; border: 1px solid #dde7f1; border-radius: 18px; overflow: hidden; background: #fff; box-shadow: 0 16px 36px rgba(15, 23, 42, 0.08); transition: transform 0.25s ease, box-shadow 0.25s ease; }
+			.convenios-portal-card:hover, .convenios-portal-card:focus { transform: translateY(-4px); box-shadow: 0 20px 44px rgba(15, 23, 42, 0.12); }
+			.convenios-portal-card__cover { display: flex; align-items: center; justify-content: center; min-height: 170px; padding: 24px; background: linear-gradient(135deg, #2f56d6 0%, #2139a9 100%); text-align: center; }
+			.convenios-portal-card__cover span { color: #fff; font-size: 22px; font-weight: 700; line-height: 1.25; text-transform: uppercase; }
+			.convenios-portal-card__body { padding: 16px 16px 18px; }
+			.convenios-portal-card__sigla { display: inline-block; margin-bottom: 8px; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; color: #2f56d6; text-transform: uppercase; }
+			.convenios-portal-card__title { margin: 0 0 8px; font-size: 16px; font-weight: 700; color: #17324d; text-transform: uppercase; }
+			.convenios-portal-card__text { margin: 0; font-size: 13px; line-height: 1.55; color: #5b7088; }
+			.convenios-portal-footer { display: flex; justify-content: space-between; gap: 16px; margin-top: 34px; padding-top: 18px; border-top: 1px solid #dde7f1; font-size: 13px; color: #5b7088; }
+			.convenios-portal-footer a { color: #0f4c81; font-weight: 600; }
+			@media (max-width: 1199.98px) { .convenios-portal-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+			@media (max-width: 991.98px) { .convenios-portal-shortcuts__grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } .convenios-portal-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+			@media (max-width: 767.98px) { .convenios-portal-area { padding: 90px 0; } .convenios-portal-topbar, .convenios-portal-breadcrumb, .convenios-portal-shortcuts, .convenios-portal-content { padding-left: 20px; padding-right: 20px; } .convenios-portal-shortcuts__grid, .convenios-portal-grid { grid-template-columns: 1fr; } .convenios-portal-footer { flex-direction: column; } }
+		</style>
+	</head>
+	<body>
+		<button class="scroll__top scroll-to-target" data-target="html"><i class="fas fa-angle-up"></i></button>
+		<header>
+			<div id="header-fixed-height"></div>
+			<div id="sticky-header" class="tg-header__area">
+				<div class="container custom-container">
+					<div class="row">
+						<div class="col-12">
+							<div class="tgmenu__wrap">
+								<nav class="tgmenu__nav">
+									<div class="logo"><a href="index.html"><img src="assets/img/logo/logo.png" alt="Logo" /></a></div>
+									<div class="tgmenu__navbar-wrap tgmenu__main-menu d-none d-lg-flex">
+										<ul class="navigation">
+											<li><a href="index.html">In&iacute;cio</a></li>
+											<li><a href="services-3.html">Sites Municipais</a></li>
+											<li><a href="services.html">Portal Transpar&ecirc;ncia</a></li>
+											<li><a href="services-5.html">Servi&ccedil;os</a></li>
+											<li><a href="blog.html">Not&iacute;cias</a></li>
+											<li><a href="contact.html">Fale Conosco</a></li>
+										</ul>
+									</div>
+									<div class="tgmenu__action d-none d-md-block">
+										<ul class="list-wrap">
+											<li class="header-search">
+												<a href="javascript:void(0)" class="search-open-btn" aria-label="Abrir pesquisa">
+													<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none">
+														<path d="M19 19.0002L14.657 14.6572M14.657 14.6572C15.3999 13.9143 15.9892 13.0324 16.3912 12.0618C16.7933 11.0911 17.0002 10.0508 17.0002 9.00021C17.0002 7.9496 16.7933 6.90929 16.3913 5.93866C15.9892 4.96803 15.3999 4.08609 14.657 3.34321C13.9141 2.60032 13.0322 2.01103 12.0616 1.60898C11.0909 1.20693 10.0506 1 9.00002 1C7.94942 1 6.90911 1.20693 5.93848 1.60898C4.96785 2.01103 4.08591 2.60032 3.34302 3.34321C1.84269 4.84354 0.999817 6.87842 0.999817 9.00021C0.999817 11.122 1.84269 13.1569 3.34302 14.6572C4.84335 16.1575 6.87824 17.0004 9.00002 17.0004C11.1218 17.0004 13.1567 16.1575 14.657 14.6572Z" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+													</svg>
+												</a>
+											</li>
+										</ul>
+									</div>									<div class="mobile-nav-toggler">
+										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18" fill="none">
+											<path d="M0 2C0 0.895431 0.895431 0 2 0C3.10457 0 4 0.895431 4 2C4 3.10457 3.10457 4 2 4C0.895431 4 0 3.10457 0 2Z" fill="currentcolor" />
+											<path d="M0 9C0 7.89543 0.895431 7 2 7C3.10457 7 4 7.89543 4 9C4 10.1046 3.10457 11 2 11C0.895431 11 0 10.1046 0 9Z" fill="currentcolor" />
+											<path d="M0 16C0 14.8954 0.895431 14 2 14C3.10457 14 4 14.8954 4 16C4 17.1046 3.10457 18 2 18C0.895431 18 0 17.1046 0 16Z" fill="currentcolor" />
+											<path d="M7 2C7 0.895431 7.89543 0 9 0C10.1046 0 11 0.895431 11 2C11 3.10457 10.1046 4 9 4C7.89543 4 7 3.10457 7 2Z" fill="currentcolor" />
+											<path d="M7 9C7 7.89543 7.89543 7 9 7C10.1046 7 11 7.89543 11 9C11 10.1046 10.1046 11 9 11C7.89543 11 7 10.1046 7 9Z" fill="currentcolor" />
+											<path d="M7 16C7 14.8954 7.89543 14 9 14C10.1046 14 11 14.8954 11 16C11 17.1046 10.1046 18 9 18C7.89543 18 7 17.1046 7 16Z" fill="currentcolor" />
+											<path d="M14 2C14 0.895431 14.8954 0 16 0C17.1046 0 18 0.895431 18 2C18 3.10457 17.1046 4 16 4C14.8954 4 14 3.10457 14 2Z" fill="currentcolor" />
+											<path d="M14 9C14 7.89543 14.8954 7 16 7C17.1046 7 18 7.89543 18 9C18 10.1046 17.1046 11 16 11C14.8954 11 14 10.1046 14 9Z" fill="currentcolor" />
+											<path d="M14 16C14 14.8954 14.8954 14 16 14C17.1046 14 18 14.8954 18 16C18 17.1046 17.1046 18 16 18C14.8954 18 14 17.1046 14 16Z" fill="currentcolor" />
+										</svg>
+									</div>
+								</nav>
+							</div>
+							<div class="tgmobile__menu">
+								<nav class="tgmobile__menu-box">
+									<div class="close-btn"><i class="fas fa-times"></i></div>
+									<div class="nav-logo"><a href="index.html"><img src="assets/img/logo/logo.png" alt="Logo" /></a></div>
+									<div class="tgmobile__menu-outer"></div>
+								</nav>
+							</div>
+							<div class="tgmobile__menu-backdrop"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- header-search -->
+			<div class="search__popup">
+				<div class="container">
+					<div class="row">
+						<div class="col-12">
+							<div class="search__wrapper">
+								<div class="search__close">
+									<button type="button" class="search-close-btn" aria-label="Fechar pesquisa">
+										<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M17 1L1 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+											<path d="M1 1L17 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+										</svg>
+									</button>
+								</div>
+								<div class="search__form">
+									<form action="formulario.php" method="get">
+										<h2 class="search-advanced__title">Busca no portal</h2>
+										<div class="search__input">
+											<input class="search-input-field" type="text" name="q" placeholder="Digite o termo da consulta" />
+											<span class="search-focus-border"></span>
+											<button type="submit" aria-label="Pesquisar">
+												<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+													<path d="M9.55 18.1C14.272 18.1 18.1 14.272 18.1 9.55C18.1 4.82797 14.272 1 9.55 1C4.82797 1 1 4.82797 1 9.55C1 14.272 4.82797 18.1 9.55 18.1Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+													<path d="M19.0002 19.0002L17.2002 17.2002" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+												</svg>
+											</button>
+										</div>
+										<div class="search-advanced__message" aria-live="polite"></div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="search-popup-overlay"></div>
+			<!-- header-search-end -->		</header>
+		<main class="fix">
+			<section class="convenios-portal-area">
+				<div class="container">
+					<div class="convenios-portal-shell">
+						<div class="convenios-portal-topbar"><div class="convenios-portal-topbar__nav"><span>O Portal</span><span>Contas Publicas</span><span>Prestacao de Contas</span><span>Dados Abertos</span><span>Boas Praticas</span></div></div>
+						<div class="convenios-portal-breadcrumb">Prefeitura de Campo Grande &gt; Transparencia &gt; Convenios</div>
+						<div class="convenios-portal-shortcuts">
+							<div class="convenios-portal-shortcuts__grid">
+								<a class="convenios-portal-shortcuts__item" href="lgpd-portal.html"><i class="fas fa-file-alt"></i><span>LGPD</span></a>
+								<a class="convenios-portal-shortcuts__item" href="obras-portal.html"><i class="fas fa-hammer"></i><span>Obras</span></a>
+								<a class="convenios-portal-shortcuts__item" href="contratos-portal.html"><i class="fas fa-file-contract"></i><span>Contratos</span></a>
+								<a class="convenios-portal-shortcuts__item" href="perguntas-frequentes.html"><i class="fas fa-question-circle"></i><span>Perguntas Frequentes</span></a>
+								<a class="convenios-portal-shortcuts__item" href="prestacao-contas.html"><i class="fas fa-clipboard-check"></i><span>Prestacao de Contas</span></a>
+								<a class="convenios-portal-shortcuts__item is-active" href="convenios-portal.html"><i class="fas fa-handshake"></i><span>Convenios</span></a>
+								<a class="convenios-portal-shortcuts__item" href="orcamento.html"><i class="fas fa-wallet"></i><span>Orcamento</span></a>
+								<a class="convenios-portal-shortcuts__item" href="diarias-passagens-consulta.html"><i class="fas fa-plane-departure"></i><span>Ver Diarias e Passagens</span></a>
+							</div>
+						</div>
+						<div class="convenios-portal-content">
+							<h1 class="convenios-portal-title">Dados de Convenios</h1>
+							<div class="convenios-portal-grid">
+								<a class="convenios-portal-card" href="services-details.html"><div class="convenios-portal-card__cover"><span>Repasses Municipais</span></div><div class="convenios-portal-card__body"><span class="convenios-portal-card__sigla">Transferencias Municipais</span><h2 class="convenios-portal-card__title">Repasses Municipais</h2><p class="convenios-portal-card__text">Veja os repasses municipais.</p></div></a>
+								<a class="convenios-portal-card" href="services-details.html"><div class="convenios-portal-card__cover"><span>Repasses Estaduais</span></div><div class="convenios-portal-card__body"><span class="convenios-portal-card__sigla">Repasses Estaduais</span><h2 class="convenios-portal-card__title">Repasses Estaduais</h2><p class="convenios-portal-card__text">Veja os repasses do Estado para o municipio.</p></div></a>
+								<a class="convenios-portal-card" href="services-details.html"><div class="convenios-portal-card__cover"><span>Repasses Federais</span></div><div class="convenios-portal-card__body"><span class="convenios-portal-card__sigla">Repasses da Uniao</span><h2 class="convenios-portal-card__title">Repasses Federais</h2><p class="convenios-portal-card__text">Veja os repasses da Uniao para o Municipio.</p></div></a>
+								<a class="convenios-portal-card" href="services-details.html"><div class="convenios-portal-card__cover"><span>Repasses do Fundo Municipal de Saude</span></div><div class="convenios-portal-card__body"><span class="convenios-portal-card__sigla">Saude</span><h2 class="convenios-portal-card__title">Fundo Nacional de Saude</h2><p class="convenios-portal-card__text">Veja os repasses do Fundo Municipal de Saude.</p></div></a>
+								<a class="convenios-portal-card" href="services-details.html"><div class="convenios-portal-card__cover"><span>Emendas Parlamentares</span></div><div class="convenios-portal-card__body"><span class="convenios-portal-card__sigla">Emendas</span><h2 class="convenios-portal-card__title">Emendas Parlamentares</h2><p class="convenios-portal-card__text">Veja as emendas parlamentares.</p></div></a>
+								<a class="convenios-portal-card" href="services-details.html"><div class="convenios-portal-card__cover"><span>Emendas Pix</span></div><div class="convenios-portal-card__body"><span class="convenios-portal-card__sigla">Emendas</span><h2 class="convenios-portal-card__title">Emendas Pix</h2><p class="convenios-portal-card__text">Veja as emendas pix.</p></div></a>
+								<a class="convenios-portal-card" href="services-details.html"><div class="convenios-portal-card__cover"><span>Parcerias, Acordos e Outros Termos</span></div><div class="convenios-portal-card__body"><span class="convenios-portal-card__sigla">Termos</span><h2 class="convenios-portal-card__title">Parcerias, Acordos e Outros Termos</h2><p class="convenios-portal-card__text">Veja as parcerias, acordos e outros termos.</p></div></a>
+							</div>
+							<div style="margin-top: 24px;">
+								<a href="services.html" style="display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 0 20px; border-radius: 10px; background: #0f4c81; color: #fff; font-size: 14px; font-weight: 700; text-transform: uppercase;">Voltar ao Portal Transparencia</a>
+							</div>
+							<div class="convenios-portal-footer"><div><a href="services.html">Voltar</a> para a pagina inicial</div><div>Nao imprima, compartilhe</div></div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+		<footer>
+			<div class="footer__area-three">
+				<div class="footer__bottom-three">
+					<div class="container">
+						<div class="row align-items-center">
+							<div class="col-lg-6"><div class="copyright-text-two"><p>Copyright &copy; <a href="index.html">Ti-Genesis</a> | Todos os direitos reservados</p></div></div>
+							<div class="col-lg-6"><div class="footer__social-three"><ul class="list-wrap justify-content-center justify-content-lg-end"><li><a href="javascript:void(0)"><i class="fab fa-facebook-f"></i></a></li><li><a href="javascript:void(0)"><i class="fab fa-twitter"></i></a></li><li><a href="javascript:void(0)"><i class="fab fa-instagram"></i></a></li></ul></div></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+		<script src="assets/js/vendor/jquery-3.6.0.min.js"></script>
+		<script src="assets/js/bootstrap.bundle.min.js"></script>
+		<script src="assets/js/jquery.magnific-popup.min.js"></script>
+		<script src="assets/js/jquery.odometer.min.js"></script>
+		<script src="assets/js/jquery.appear.js"></script>
+		<script src="assets/js/gsap.js"></script>
+		<script src="assets/js/ScrollTrigger.js"></script>
+		<script src="assets/js/SplitText.js"></script>
+		<script src="assets/js/gsap-animation.js"></script>
+		<script src="assets/js/jquery.parallaxScroll.min.js"></script>
+		<script src="assets/js/swiper-bundle.js"></script>
+		<script src="assets/js/ajax-form.js"></script>
+		<script src="assets/js/wow.min.js"></script>
+		<script src="assets/js/aos.js"></script>
+		<script src="assets/js/main.js"></script>
+	</body>
+</html>

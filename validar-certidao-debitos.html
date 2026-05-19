@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html class="no-js" lang="pt-BR">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="x-ua-compatible" content="ie=edge" />
+		<title>Validar Certidao de Debitos</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png" />
+		<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="assets/css/fontawesome-all.min.css" />
+		<style>
+			.validar-page {
+				margin: 0;
+				background: #eef2f7;
+				font-family: Arial, sans-serif;
+				color: #2d3748;
+			}
+
+			.validar-top {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 18px;
+				padding: 2px 16px 0;
+				background: #fff;
+				border-bottom: 1px solid #d7dde7;
+			}
+
+			.validar-top__left,
+			.validar-top__right {
+				display: flex;
+				align-items: center;
+				gap: 14px;
+			}
+
+			.validar-badge {
+				display: flex;
+				align-items: center;
+				gap: 8px;
+				padding: 2px 8px;
+				background: #1c3f7b;
+				color: #ffd54a;
+				font-weight: 700;
+				font-size: 16px;
+			}
+
+			.validar-badge i {
+				color: #fff;
+			}
+
+			.validar-title {
+				font-size: 17px;
+				font-weight: 700;
+				color: #0f2d5c;
+				text-transform: uppercase;
+			}
+
+			.validar-siat {
+				font-size: 34px;
+				font-weight: 800;
+				color: #214f58;
+				letter-spacing: 0.02em;
+			}
+
+			.validar-subbar {
+				display: flex;
+				align-items: flex-end;
+				gap: 14px;
+				padding: 0 20px;
+				background: linear-gradient(180deg, #cde0f8 0%, #dce9fb 100%);
+				border-bottom: 1px solid #c1d0e8;
+			}
+
+			.validar-menu {
+				margin-top: 10px;
+				padding: 6px 14px 4px;
+				border-radius: 10px 10px 0 0;
+				background: linear-gradient(180deg, #7aa6d4 0%, #5e86b8 100%);
+				box-shadow: inset 0 1px 0 rgba(255,255,255,0.5);
+				color: #fff;
+				text-align: center;
+			}
+
+			.validar-menu strong {
+				display: block;
+				font-size: 18px;
+				line-height: 1;
+			}
+
+			.validar-menu span {
+				display: block;
+				margin-top: 4px;
+				font-size: 11px;
+				opacity: 0.95;
+			}
+
+			.validar-wrap {
+				padding: 14px 18px 18px;
+			}
+
+			.validar-card {
+				background: #fff;
+				border: 1px solid #d0d8e4;
+			}
+
+			.validar-card__title {
+				padding: 8px 14px;
+				font-size: 13px;
+				font-weight: 700;
+				color: #4b5563;
+				text-transform: uppercase;
+			}
+
+			.validar-toolbar {
+				display: flex;
+				gap: 8px;
+				padding: 0 10px 12px;
+			}
+
+			.validar-toolbar button {
+				height: 24px;
+				padding: 0 12px;
+				border: 1px solid #c7d0dc;
+				border-radius: 2px;
+				background: #fff;
+				font-size: 12px;
+				color: #4b5563;
+			}
+
+			.validar-form {
+				margin: 0 8px 8px;
+				padding: 8px 10px 12px;
+				border: 1px solid #d0d8e4;
+			}
+
+			.validar-row {
+				display: grid;
+				grid-template-columns: 220px 220px 1fr;
+				gap: 10px;
+				align-items: end;
+				margin-bottom: 10px;
+			}
+
+			.validar-field label {
+				display: block;
+				margin-bottom: 2px;
+				font-size: 12px;
+				font-weight: 700;
+				color: #374151;
+			}
+
+			.validar-field input,
+			.validar-field select {
+				width: 100%;
+				height: 22px;
+				border: 1px solid #b7c2d1;
+				padding: 0 6px;
+				font-size: 12px;
+				background: #fff;
+			}
+
+			.validar-help {
+				padding: 8px 10px;
+				border: 1px solid #d0d8e4;
+				font-size: 11px;
+				color: #2563eb;
+			}
+
+			.validar-help div:first-child {
+				color: #f97316;
+			}
+
+			.validar-message {
+				margin-top: 10px;
+				padding: 8px 10px;
+				border: 1px solid #d0d8e4;
+				background: #f8fafc;
+				font-size: 12px;
+				color: #4b5563;
+			}
+
+			.validar-bottom {
+				display: flex;
+				justify-content: flex-end;
+				padding: 10px 0 0;
+				font-size: 12px;
+			}
+
+			.validar-bottom a {
+				color: #1d4ed8;
+				font-weight: 700;
+				text-transform: uppercase;
+			}
+
+			@media (max-width: 991.98px) {
+				.validar-top {
+					flex-direction: column;
+					align-items: stretch;
+				}
+
+				.validar-top__left,
+				.validar-top__right {
+					justify-content: center;
+				}
+
+				.validar-row {
+					grid-template-columns: 1fr;
+				}
+			}
+		</style>
+	</head>
+	<body class="validar-page">
+		<div class="validar-top">
+			<div class="validar-top__left">
+				<div class="validar-badge"><i class="fas fa-landmark"></i><span>PREFCG</span></div>
+				<div class="validar-title">Portal de Servicos - Validar Certidao de Debitos</div>
+			</div>
+			<div class="validar-top__right">
+				<div class="validar-siat">SIAT</div>
+			</div>
+		</div>
+
+		<div class="validar-subbar">
+			<div class="validar-menu">
+				<strong>SERVICOS</strong>
+				<span>Prestacoes de Servicos para a Populacao</span>
+			</div>
+		</div>
+
+		<div class="validar-wrap">
+			<div class="validar-card">
+				<div class="validar-card__title">Validar Certidao de Debitos</div>
+
+				<div class="validar-toolbar">
+					<button type="button">Limpar</button>
+					<button type="button">Validar Certidao</button>
+				</div>
+
+				<div class="validar-form">
+					<div class="validar-row">
+						<div class="validar-field">
+							<label>Tipo de Certidao</label>
+							<select>
+								<option>Certidao de Debitos</option>
+								<option>Certidao Negativa</option>
+								<option>Certidao Positiva com Efeito de Negativa</option>
+							</select>
+						</div>
+						<div class="validar-field">
+							<label>Codigo de Autenticidade</label>
+							<input type="text" />
+						</div>
+						<div class="validar-help">
+							<div>* Itens Obrigatorios</div>
+							<div>Informe o codigo de autenticidade impresso na certidao.</div>
+						</div>
+					</div>
+
+					<div class="validar-row" style="grid-template-columns: 220px 220px 1fr;">
+						<div class="validar-field">
+							<label>CPF/CNPJ</label>
+							<input type="text" />
+						</div>
+						<div class="validar-field">
+							<label>Data de Emissao</label>
+							<input type="text" placeholder="dd/mm/aaaa" />
+						</div>
+						<div></div>
+					</div>
+
+					<div class="validar-message">Preencha os dados para validar a autenticidade da certidao de debitos emitida pelo portal.</div>
+				</div>
+			</div>
+
+			<div class="validar-bottom"><a href="secretaria-municipal-fazenda.html">Voltar para pagina inicial</a></div>
+		</div>
+	</body>
+</html>

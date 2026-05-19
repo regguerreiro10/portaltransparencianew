@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<title>Relatório</title>
+<link href="lib/bootstrap/css/bootstrap-print.min.css?afver=750b" rel="stylesheet" type="text/css" media="screen" />
+<link href="lib/adianti/include/adianti.min.css?afver=750" rel="stylesheet" type="text/css" media="screen" />
+<link href="lib/adianti/include/components.min.css?afver=750" rel="stylesheet" type="text/css" media="screen" />
+
+<style>
+.col-sm-6 {
+    width: 45%;
+    float: left;
+}
+.col-sm-3 {
+    width: 23%;
+    float: left;
+}
+.col-sm-9 {
+    width: 71%;
+    float: left;
+}
+.table>thead>tr>th
+{
+    border-bottom: 0;
+}
+.header-actions {
+    display:none;
+}
+
+.tdatagrid_cell.action * {
+    display:none;
+}
+
+.control-label {
+    text-align:right;
+}
+
+.form-group {
+    margin-bottom: 7px;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+body {
+    font-family: 'Source Sans Pro','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-weight: 400;
+    overflow-x: hidden;
+    overflow-y: auto;
+    font-size: 12px;
+    line-height: 1.42857143;
+}
+
+.panel {
+    border-radius: initial;
+    min-height: 50px;
+    border: 1px solid silver;
+    border-radius: 2px;
+    margin-bottom: 4px;
+}
+
+.panel-title {
+    font-size: 16px;
+}
+
+.panel-heading{
+    background-color: whitesmoke;
+    border-bottom: 1px solid silver;
+}
+
+.panel-footer, .card-footer {
+    background-color: rgba(0,0,0,.03);
+}
+
+.label {
+    display:inline-block;
+}
+
+.tdatagrid_cell
+{
+    text-decoration:none;
+    color:#212529;
+}
+
+input{
+    display:none !important;
+}
+</style>
+
+</head>
+<body>
+<table class="table table-striped table-hover" id="PedidoFrotasList_datagrid" type="bootstrap" style="width: 100%">
+<thead class="tdatagrid_head"><tr>
+<th data-column-id="b80bb7740288fda1f201890375a60c8f" class="tdatagrid_col" style="text-align:center;user-select:none" width="70px">Id</th>
+<th data-column-id="528d7be3157ad0ad41a8025dbc1cfd28" class="tdatagrid_col" style="text-align:center;user-select:none" width="300px">Descrição Pedido</th>
+<th data-column-id="6883d9abcb595375fa793afd31f5cac4" class="tdatagrid_col" style="text-align:center;user-select:none" width="300px">Placa</th>
+<th data-column-id="acd5f0f95a80d919c4b79bef265aee17" class="tdatagrid_col" style="text-align:center;user-select:none" width="300px">Estabelecimento</th>
+<th data-column-id="4a09dbb1f61fd29f265a773e0183c036" class="tdatagrid_col" style="text-align:center;user-select:none" width="300px">Departamento</th>
+<th data-column-id="752ceba702a66f01e6d7460d06ba46de" class="tdatagrid_col" style="text-align:center;user-select:none" width="300px">Dt Pedido</th>
+<th data-column-id="36e6ddb97208d8d78e7e4fe6cf0b0ce1" class="tdatagrid_col" data-start-hide="true" style=";display:none;">Dt Finalização</th>
+<th data-column-id="db59204f866a7f80549ce02d20313623" class="tdatagrid_col" style="text-align:center;user-select:none" width="300px">Tipo Manutenção</th>
+<th data-column-id="55ad8c4d63ce60b66576ea7bbc2f424c" class="tdatagrid_col" data-start-hide="true" style=";display:none;">Vl líquido proposta</th>
+<th data-column-id="790487330d9dbb8f4153b97761cba0c3" class="tdatagrid_col" style="text-align:center;user-select:none" width="300px">Estado Pedido</th>
+<th data-column-id="bcbe9177dbe73c64a10c5f0237656a21" class="tdatagrid_col" style="text-align:center;user-select:none" width="300px">Usuário</th>
+<th class="tdatagrid_properties" style="text-align:right" width="28px"><span class="btn btn-default tdatagrid-property-btn" onclick="tdatagrid_show_properties(this, 'class=PedidoFrotasList&method=setDatagridProperties&static=1'); return false;"><i class="fa fa-cog"></i></span>
+</th>
+</tr>
+</thead>
+<tbody class="tdatagrid_body">
+<tr class="tdatagrid_row_even" id="row_1643">
+<td class="tdatagrid_cell" align="center" width="70px">1643</td>
+<td class="tdatagrid_cell" align="center" width="300px">PREVENTIVA</td>
+<td class="tdatagrid_cell" align="center" width="300px">RSY-0E56</td>
+<td class="tdatagrid_cell" align="center" width="300px"></td>
+<td class="tdatagrid_cell" align="center" width="300px">13.SEMED - SECRETARIA MUNICIPAL DE EDUCAÇAO JI PARANA</td>
+<td class="tdatagrid_cell" align="center" width="300px">30/10/2025 11:06:00</td>
+<td style=";display:none;"></td>
+<td class="tdatagrid_cell" align="center" width="300px">Preventiva</td>
+<td style=";display:none;"></td>
+<td class="tdatagrid_cell" align="center" width="300px"><span class='label label-default' style='width:260px; background-color:#44BD32; display:inline-block;'> Com proposta aguardando  </span></td>
+<td class="tdatagrid_cell" align="center" width="300px">Raniel de Lima Silva </td>
+<td>&nbsp;</td>
+</tr>
+<tr><td colspan="11" style="padding: 10px; "><div id="container_propostas_1643"></div>
+</td>
+</tr>
+<tr class="tdatagrid_row_odd" id="row_1621">
+<td class="tdatagrid_cell" align="center" width="70px">1621</td>
+<td class="tdatagrid_cell" align="center" width="300px">MANUTENÇÃO </td>
+<td class="tdatagrid_cell" align="center" width="300px">OHR-9F82</td>
+<td class="tdatagrid_cell" align="center" width="300px"></td>
+<td class="tdatagrid_cell" align="center" width="300px">13.SEMED - SECRETARIA MUNICIPAL DE EDUCAÇAO JI PARANA</td>
+<td class="tdatagrid_cell" align="center" width="300px">30/10/2025 08:16:00</td>
+<td style=";display:none;"></td>
+<td class="tdatagrid_cell" align="center" width="300px">Corretiva</td>
+<td style=";display:none;"></td>
+<td class="tdatagrid_cell" align="center" width="300px"><span class='label label-default' style='width:260px; background-color:#44BD32; display:inline-block;'> Com proposta aguardando  </span></td>
+<td class="tdatagrid_cell" align="center" width="300px">Raniel de Lima Silva </td>
+<td>&nbsp;</td>
+</tr>
+<tr><td colspan="11" style="padding: 10px; "><div id="container_propostas_1621"></div>
+</td>
+</tr>
+<tr class="tdatagrid_row_even" id="row_1598">
+<td class="tdatagrid_cell" align="center" width="70px">1598</td>
+<td class="tdatagrid_cell" align="center" width="300px">CARREGADEIRA - JESSÉ</td>
+<td class="tdatagrid_cell" align="center" width="300px">PMJ-0001</td>
+<td class="tdatagrid_cell" align="center" width="300px"></td>
+<td class="tdatagrid_cell" align="center" width="300px">4.SEMOSP - SECRETARIA MUNICIPAL DE OBRAS E SERVIÇOS PUBLICOS JI PARANA</td>
+<td class="tdatagrid_cell" align="center" width="300px">29/10/2025 11:20:00</td>
+<td style=";display:none;"></td>
+<td class="tdatagrid_cell" align="center" width="300px">Aquisição de peças</td>
+<td style=";display:none;"></td>
+<td class="tdatagrid_cell" align="center" width="300px"><span class='label label-default' style='width:260px; background-color:#44BD32; display:inline-block;'> Com proposta aguardando  </span></td>
+<td class="tdatagrid_cell" align="center" width="300px">Alesandra Fereira de Souza Pires</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td colspan="11" style="padding: 10px; "><div id="container_propostas_1598"></div>
+</td>
+</tr>
+<tr class="tdatagrid_row_odd" id="row_1584">
+<td class="tdatagrid_cell" align="center" width="70px">1584</td>
+<td class="tdatagrid_cell" align="center" width="300px">CRUZETA RETRO JCB</td>
+<td class="tdatagrid_cell" align="center" width="300px">PMJ-0156</td>
+<td class="tdatagrid_cell" align="center" width="300px"></td>
+<td class="tdatagrid_cell" align="center" width="300px">7.SEMAGRI - SECRETARIA MUNICIPAL DE AGRICULTURA E PECUARIA JI PARANA</td>
+<td class="tdatagrid_cell" align="center" width="300px">29/10/2025 09:50:00</td>
+<td style=";display:none;"></td>
+<td class="tdatagrid_cell" align="center" width="300px">Corretiva</td>
+<td style=";display:none;"></td>
+<td class="tdatagrid_cell" align="center" width="300px"><span class='label label-default' style='width:260px; background-color:#44BD32; display:inline-block;'> Com proposta aguardando  </span></td>
+<td class="tdatagrid_cell" align="center" width="300px">Felipe Teixeira Vitorino</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td colspan="11" style="padding: 10px; "><div id="container_propostas_1584"></div>
+</td>
+</tr>
+<tr class="tdatagrid_row_even" id="row_1581">
+<td class="tdatagrid_cell" align="center" width="70px">1581</td>
+<td class="tdatagrid_cell" align="center" width="300px">CAMINHÃO - GAUCHO</td>
+<td class="tdatagrid_cell" align="center" width="300px">RSV-5F35</td>
+<td class="tdatagrid_cell" align="center" width="300px"></td>
+<td class="tdatagrid_cell" align="center" width="300px">4.SEMOSP - SECRETARIA MUNICIPAL DE OBRAS E SERVIÇOS PUBLICOS JI PARANA</td>
+<td class="tdatagrid_cell" align="center" width="300px">28/10/2025 12:39:00</td>
+<td style=";display:none;"></td>
+<td class="tdatagrid_cell" align="center" width="300px">Aquisição de peças</td>
+<td style=";display:none;"></td>
+<td class="tdatagrid_cell" align="center" width="300px"><span class='label label-default' style='width:260px; background-color:#44BD32; display:inline-block;'> Com proposta aguardando  </span></td>
+<td class="tdatagrid_cell" align="center" width="300px">Alesandra Fereira de Souza Pires</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td colspan="11" style="padding: 10px; "><div id="container_propostas_1581"></div>
+</td>
+</tr>
+<tr class="tdatagrid_row_odd" id="row_1485">
+<td class="tdatagrid_cell" align="center" width="70px">1485</td>
+<td class="tdatagrid_cell" align="center" width="300px"></td>
+<td class="tdatagrid_cell" align="center" width="300px">NDS-3593</td>
+<td class="tdatagrid_cell" align="center" width="300px"></td>
+<td class="tdatagrid_cell" align="center" width="300px">12.SEMFAZ - SECRETARIA MUNICIPAL DE FAZENDA JI PARANA</td>
+<td class="tdatagrid_cell" align="center" width="300px">23/10/2025 01:10:00</td>
+<td style=";display:none;"></td>
+<td class="tdatagrid_cell" align="center" width="300px">LAVAGEM</td>
+<td style=";display:none;"></td>
+<td class="tdatagrid_cell" align="center" width="300px"><span class='label label-default' style='width:260px; background-color:#44BD32; display:inline-block;'> Com proposta aguardando  </span></td>
+<td class="tdatagrid_cell" align="center" width="300px">Vagner Teixeira de Souza</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td colspan="11" style="padding: 10px; "><div id="container_propostas_1485"></div>
+</td>
+</tr>
+<tr class="tdatagrid_row_even" id="row_1482">
+<td class="tdatagrid_cell" align="center" width="70px">1482</td>
+<td class="tdatagrid_cell" align="center" width="300px">MANUTENÇÃO PREVENTIVA </td>
+<td class="tdatagrid_cell" align="center" width="300px">NCV-4344</td>
+<td class="tdatagrid_cell" align="center" width="300px"></td>
+<td class="tdatagrid_cell" align="center" width="300px">13.SEMED - SECRETARIA MUNICIPAL DE EDUCAÇAO JI PARANA</td>
+<td class="tdatagrid_cell" align="center" width="300px">23/10/2025 12:01:00</td>
+<td style=";display:none;"></td>
+<td class="tdatagrid_cell" align="center" width="300px">Preventiva</td>
+<td style=";display:none;"></td>
+<td class="tdatagrid_cell" align="center" width="300px"><span class='label label-default' style='width:260px; background-color:#44BD32; display:inline-block;'> Com proposta aguardando  </span></td>
+<td class="tdatagrid_cell" align="center" width="300px">Raniel de Lima Silva </td>
+<td>&nbsp;</td>
+</tr>
+<tr><td colspan="11" style="padding: 10px; "><div id="container_propostas_1482"></div>
+</td>
+</tr>
+<tr class="tdatagrid_row_odd" id="row_1283">
+<td class="tdatagrid_cell" align="center" width="70px">1283</td>
+<td class="tdatagrid_cell" align="center" width="300px">SAVEIRO  - VIANEI</td>
+<td class="tdatagrid_cell" align="center" width="300px">NEH-9486</td>
+<td class="tdatagrid_cell" align="center" width="300px"></td>
+<td class="tdatagrid_cell" align="center" width="300px">4.SEMOSP - SECRETARIA MUNICIPAL DE OBRAS E SERVIÇOS PUBLICOS JI PARANA</td>
+<td class="tdatagrid_cell" align="center" width="300px">16/10/2025 09:50:00</td>
+<td style=";display:none;"></td>
+<td class="tdatagrid_cell" align="center" width="300px">PEÇAS E SERVIÇOS</td>
+<td style=";display:none;"></td>
+<td class="tdatagrid_cell" align="center" width="300px"><span class='label label-default' style='width:260px; background-color:#44BD32; display:inline-block;'> Com proposta aguardando  </span></td>
+<td class="tdatagrid_cell" align="center" width="300px">Alesandra Fereira de Souza Pires</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td colspan="11" style="padding: 10px; "><div id="container_propostas_1283"></div>
+</td>
+</tr>
+<tr class="tdatagrid_row_even" id="row_1188">
+<td class="tdatagrid_cell" align="center" width="70px">1188</td>
+<td class="tdatagrid_cell" align="center" width="300px">MANUTENÇÃO </td>
+<td class="tdatagrid_cell" align="center" width="300px">OHR-9E62</td>
+<td class="tdatagrid_cell" align="center" width="300px"></td>
+<td class="tdatagrid_cell" align="center" width="300px">13.SEMED - SECRETARIA MUNICIPAL DE EDUCAÇAO JI PARANA</td>
+<td class="tdatagrid_cell" align="center" width="300px">14/10/2025 10:41:00</td>
+<td style=";display:none;"></td>
+<td class="tdatagrid_cell" align="center" width="300px">Corretiva</td>
+<td style=";display:none;"></td>
+<td class="tdatagrid_cell" align="center" width="300px"><span class='label label-default' style='width:260px; background-color:#44BD32; display:inline-block;'> Com proposta aguardando  </span></td>
+<td class="tdatagrid_cell" align="center" width="300px">Raniel de Lima Silva </td>
+<td>&nbsp;</td>
+</tr>
+<tr><td colspan="11" style="padding: 10px; "><div id="container_propostas_1188"></div>
+</td>
+</tr>
+<tr class="tdatagrid_row_odd" id="row_828">
+<td class="tdatagrid_cell" align="center" width="70px">828</td>
+<td class="tdatagrid_cell" align="center" width="300px">MANUTENÇÃO</td>
+<td class="tdatagrid_cell" align="center" width="300px">OHR-9E52</td>
+<td class="tdatagrid_cell" align="center" width="300px"></td>
+<td class="tdatagrid_cell" align="center" width="300px">13.SEMED - SECRETARIA MUNICIPAL DE EDUCAÇAO JI PARANA</td>
+<td class="tdatagrid_cell" align="center" width="300px">06/10/2025 08:51:00</td>
+<td style=";display:none;"></td>
+<td class="tdatagrid_cell" align="center" width="300px">Corretiva</td>
+<td style=";display:none;"></td>
+<td class="tdatagrid_cell" align="center" width="300px"><span class='label label-default' style='width:260px; background-color:#44BD32; display:inline-block;'> Com proposta aguardando  </span></td>
+<td class="tdatagrid_cell" align="center" width="300px">Raniel de Lima Silva </td>
+<td>&nbsp;</td>
+</tr>
+<tr><td colspan="11" style="padding: 10px; "><div id="container_propostas_828"></div>
+</td>
+</tr>
+<tr class="tdatagrid_row_even" id="row_762">
+<td class="tdatagrid_cell" align="center" width="70px">762</td>
+<td class="tdatagrid_cell" align="center" width="300px">Manutenção de veiculo</td>
+<td class="tdatagrid_cell" align="center" width="300px">OHS-8324</td>
+<td class="tdatagrid_cell" align="center" width="300px"></td>
+<td class="tdatagrid_cell" align="center" width="300px">5.SEMASF: SECRETARIA MUNICIPAL DE ASSISTÊNCIA SOCIAL E DA FAMILIA JI PARANA</td>
+<td class="tdatagrid_cell" align="center" width="300px">03/10/2025 08:55:00</td>
+<td style=";display:none;"></td>
+<td class="tdatagrid_cell" align="center" width="300px">Corretiva</td>
+<td style=";display:none;"></td>
+<td class="tdatagrid_cell" align="center" width="300px"><span class='label label-default' style='width:260px; background-color:#44BD32; display:inline-block;'> Com proposta aguardando  </span></td>
+<td class="tdatagrid_cell" align="center" width="300px">Eliel Pereira </td>
+<td>&nbsp;</td>
+</tr>
+<tr><td colspan="11" style="padding: 10px; "><div id="container_propostas_762"></div>
+</td>
+</tr>
+<tr class="tdatagrid_row_odd" id="row_713">
+<td class="tdatagrid_cell" align="center" width="70px">713</td>
+<td class="tdatagrid_cell" align="center" width="300px">Manutenção de veiculo</td>
+<td class="tdatagrid_cell" align="center" width="300px">OHS-9E13</td>
+<td class="tdatagrid_cell" align="center" width="300px"></td>
+<td class="tdatagrid_cell" align="center" width="300px">5.SEMASF: SECRETARIA MUNICIPAL DE ASSISTÊNCIA SOCIAL E DA FAMILIA JI PARANA</td>
+<td class="tdatagrid_cell" align="center" width="300px">01/10/2025 11:15:00</td>
+<td style=";display:none;"></td>
+<td class="tdatagrid_cell" align="center" width="300px">Corretiva</td>
+<td style=";display:none;"></td>
+<td class="tdatagrid_cell" align="center" width="300px"><span class='label label-default' style='width:260px; background-color:#44BD32; display:inline-block;'> Com proposta aguardando  </span></td>
+<td class="tdatagrid_cell" align="center" width="300px">Eliel Pereira </td>
+<td>&nbsp;</td>
+</tr>
+<tr><td colspan="11" style="padding: 10px; "><div id="container_propostas_713"></div>
+</td>
+</tr>
+<tr class="tdatagrid_row_even" id="row_707">
+<td class="tdatagrid_cell" align="center" width="70px">707</td>
+<td class="tdatagrid_cell" align="center" width="300px">COMPRA DE OLEO</td>
+<td class="tdatagrid_cell" align="center" width="300px">PMJ-0191</td>
+<td class="tdatagrid_cell" align="center" width="300px"></td>
+<td class="tdatagrid_cell" align="center" width="300px">7.SEMAGRI - SECRETARIA MUNICIPAL DE AGRICULTURA E PECUARIA JI PARANA</td>
+<td class="tdatagrid_cell" align="center" width="300px">01/10/2025 09:45:00</td>
+<td style=";display:none;"></td>
+<td class="tdatagrid_cell" align="center" width="300px">Aquisição de peças</td>
+<td style=";display:none;"></td>
+<td class="tdatagrid_cell" align="center" width="300px"><span class='label label-default' style='width:260px; background-color:#44BD32; display:inline-block;'> Com proposta aguardando  </span></td>
+<td class="tdatagrid_cell" align="center" width="300px">Felipe Teixeira Vitorino</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td colspan="11" style="padding: 10px; "><div id="container_propostas_707"></div>
+</td>
+</tr>
+<tr class="tdatagrid_row_odd" id="row_682">
+<td class="tdatagrid_cell" align="center" width="70px">682</td>
+<td class="tdatagrid_cell" align="center" width="300px">REVISÃO CAÇAMBA</td>
+<td class="tdatagrid_cell" align="center" width="300px">SLJ-5G00</td>
+<td class="tdatagrid_cell" align="center" width="300px"></td>
+<td class="tdatagrid_cell" align="center" width="300px">7.SEMAGRI - SECRETARIA MUNICIPAL DE AGRICULTURA E PECUARIA JI PARANA</td>
+<td class="tdatagrid_cell" align="center" width="300px">30/09/2025 11:40:00</td>
+<td style=";display:none;"></td>
+<td class="tdatagrid_cell" align="center" width="300px">Corretiva</td>
+<td style=";display:none;"></td>
+<td class="tdatagrid_cell" align="center" width="300px"><span class='label label-default' style='width:260px; background-color:#44BD32; display:inline-block;'> Com proposta aguardando  </span></td>
+<td class="tdatagrid_cell" align="center" width="300px">Felipe Teixeira Vitorino</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td colspan="11" style="padding: 10px; "><div id="container_propostas_682"></div>
+</td>
+</tr>
+<tr class="tdatagrid_row_even" id="row_674">
+<td class="tdatagrid_cell" align="center" width="70px">674</td>
+<td class="tdatagrid_cell" align="center" width="300px">LAVAGEM HILLUX</td>
+<td class="tdatagrid_cell" align="center" width="300px">QTB-0E81</td>
+<td class="tdatagrid_cell" align="center" width="300px"></td>
+<td class="tdatagrid_cell" align="center" width="300px">7.SEMAGRI - SECRETARIA MUNICIPAL DE AGRICULTURA E PECUARIA JI PARANA</td>
+<td class="tdatagrid_cell" align="center" width="300px">30/09/2025 11:10:00</td>
+<td style=";display:none;"></td>
+<td class="tdatagrid_cell" align="center" width="300px">LAVAGEM</td>
+<td style=";display:none;"></td>
+<td class="tdatagrid_cell" align="center" width="300px"><span class='label label-default' style='width:260px; background-color:#44BD32; display:inline-block;'> Com proposta aguardando  </span></td>
+<td class="tdatagrid_cell" align="center" width="300px">Felipe Teixeira Vitorino</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td colspan="11" style="padding: 10px; "><div id="container_propostas_674"></div>
+</td>
+</tr>
+</tbody>
+</table>
+<script type='text/javascript'> tdatagrid_start_hide_columns('#PedidoFrotasList_datagrid');</script>
+</body>
+</html>

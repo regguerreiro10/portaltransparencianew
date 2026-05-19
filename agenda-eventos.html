@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html class="no-js" lang="pt-BR">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="x-ua-compatible" content="ie=edge" />
+		<title>Agenda de Eventos</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png" />
+		<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="assets/css/animate.min.css" />
+		<link rel="stylesheet" href="assets/css/magnific-popup.css" />
+		<link rel="stylesheet" href="assets/css/fontawesome-all.min.css" />
+		<link rel="stylesheet" href="assets/css/flaticon.css" />
+		<link rel="stylesheet" href="assets/css/odometer.css" />
+		<link rel="stylesheet" href="assets/css/swiper-bundle.css" />
+		<link rel="stylesheet" href="assets/css/aos.css" />
+		<link rel="stylesheet" href="assets/css/default.css" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<style>
+			.agenda-page { background: #f6f8fb; color: #17324d; }
+			.agenda-hero {
+				padding: 72px 0 54px;
+				background: linear-gradient(180deg, rgba(10, 40, 82, 0.74), rgba(0, 118, 201, 0.66)), url("assets/img/bg/breadcrumb_bg.jpg") center/cover no-repeat;
+				color: #fff;
+			}
+			.agenda-hero h1 {
+				margin: 0 0 10px;
+				font-size: 48px;
+				line-height: 1;
+				color: #fff;
+			}
+			.agenda-hero p {
+				max-width: 840px;
+				margin: 0;
+				color: rgba(255,255,255,.92);
+				font-size: 17px;
+				line-height: 1.7;
+			}
+			.agenda-section { padding: 42px 0 72px; }
+			.agenda-tools {
+				display: grid;
+				grid-template-columns: repeat(4, minmax(0, 1fr));
+				gap: 14px;
+				margin-bottom: 24px;
+				padding: 20px;
+				border: 1px solid #dce6f2;
+				border-radius: 8px;
+				background: #fff;
+			}
+			.agenda-field label {
+				display: block;
+				margin-bottom: 6px;
+				font-size: 13px;
+				font-weight: 800;
+				color: #17324d;
+			}
+			.agenda-field input,
+			.agenda-field select {
+				width: 100%;
+				height: 42px;
+				padding: 0 12px;
+				border: 1px solid #cfdbea;
+				border-radius: 6px;
+				background: #fff;
+				color: #42566e;
+			}
+			.agenda-actions {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 10px;
+				margin-bottom: 24px;
+			}
+			.agenda-button {
+				display: inline-flex;
+				align-items: center;
+				gap: 8px;
+				min-height: 42px;
+				padding: 10px 14px;
+				border: 1px solid #cfdbea;
+				border-radius: 6px;
+				background: #fff;
+				color: #17324d;
+				font-weight: 800;
+			}
+			.agenda-button.is-primary {
+				border-color: #0076c9;
+				background: #0076c9;
+				color: #fff;
+			}
+			.agenda-view-tabs {
+				display: flex;
+				gap: 10px;
+				margin-left: auto;
+			}
+			.agenda-view { display: none; }
+			.agenda-view.is-active { display: block; }
+			.agenda-list {
+				display: grid;
+				gap: 14px;
+			}
+			.agenda-event {
+				display: grid;
+				grid-template-columns: 160px minmax(0, 1fr);
+				gap: 18px;
+				padding: 18px;
+				border: 1px solid #dce6f2;
+				border-radius: 8px;
+				background: #fff;
+				box-shadow: 0 14px 30px rgba(15, 23, 42, .06);
+			}
+			.agenda-event__date {
+				font-weight: 800;
+				color: #0076c9;
+			}
+			.agenda-event__date span {
+				display: block;
+				margin-top: 4px;
+				color: #65758a;
+				font-size: 14px;
+			}
+			.agenda-event h2 {
+				margin: 0 0 8px;
+				font-size: 22px;
+				color: #17324d;
+			}
+			.agenda-event p {
+				margin: 0 0 12px;
+				color: #65758a;
+				line-height: 1.55;
+			}
+			.agenda-meta {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 10px 16px;
+				color: #42566e;
+				font-size: 14px;
+				font-weight: 700;
+			}
+			.agenda-status {
+				align-self: start;
+				justify-self: end;
+				padding: 7px 10px;
+				border-radius: 6px;
+				background: #e9f7ef;
+				color: #137333;
+				font-size: 13px;
+				font-weight: 800;
+			}
+			.agenda-status.is-done { background: #edf2f7; color: #42566e; }
+			.agenda-status.is-canceled { background: #fff0f0; color: #b42318; }
+			.agenda-empty {
+				padding: 24px;
+				border: 1px dashed #c6d5e5;
+				border-radius: 8px;
+				background: #fff;
+				color: #42566e;
+				font-weight: 800;
+			}
+			.agenda-calendar {
+				display: grid;
+				grid-template-columns: repeat(7, minmax(0, 1fr));
+				border: 1px solid #dce6f2;
+				border-radius: 8px;
+				background: #fff;
+				overflow: hidden;
+			}
+			.agenda-calendar__head,
+			.agenda-calendar__day {
+				min-height: 104px;
+				padding: 10px;
+				border-right: 1px solid #e7edf5;
+				border-bottom: 1px solid #e7edf5;
+			}
+			.agenda-calendar__head {
+				min-height: auto;
+				background: #eef5fb;
+				font-weight: 800;
+				color: #17324d;
+			}
+			.agenda-calendar__num {
+				display: block;
+				margin-bottom: 8px;
+				font-weight: 800;
+				color: #65758a;
+			}
+			.agenda-calendar__item {
+				display: block;
+				width: 100%;
+				margin-bottom: 6px;
+				padding: 6px;
+				border: 0;
+				border-radius: 5px;
+				background: #0076c9;
+				color: #fff;
+				font-size: 12px;
+				font-weight: 800;
+				text-align: left;
+			}
+			.agenda-modal {
+				position: fixed;
+				inset: 0;
+				display: none;
+				align-items: center;
+				justify-content: center;
+				padding: 20px;
+				background: rgba(7, 20, 36, .58);
+				z-index: 9999;
+			}
+			.agenda-modal.is-open { display: flex; }
+			.agenda-modal__box {
+				width: min(760px, 100%);
+				max-height: 88vh;
+				overflow: auto;
+				border-radius: 8px;
+				background: #fff;
+			}
+			.agenda-modal__head {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 16px;
+				padding: 18px 22px;
+				border-bottom: 1px solid #e7edf5;
+			}
+			.agenda-modal__head h2 {
+				margin: 0;
+				font-size: 24px;
+				color: #17324d;
+			}
+			.agenda-modal__close {
+				width: 36px;
+				height: 36px;
+				border: 1px solid #cfdbea;
+				border-radius: 6px;
+				background: #fff;
+				color: #17324d;
+			}
+			.agenda-modal__body {
+				padding: 22px;
+			}
+			.agenda-detail-grid {
+				display: grid;
+				grid-template-columns: repeat(2, minmax(0, 1fr));
+				gap: 14px;
+				margin: 18px 0;
+			}
+			.agenda-detail {
+				padding: 12px;
+				border: 1px solid #e7edf5;
+				border-radius: 6px;
+				background: #f8fbff;
+			}
+			.agenda-detail strong {
+				display: block;
+				margin-bottom: 4px;
+				color: #17324d;
+			}
+			.agenda-links {
+				margin: 0;
+				padding-left: 18px;
+			}
+			@media (max-width: 991.98px) {
+				.agenda-tools { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+				.agenda-event { grid-template-columns: 1fr; }
+				.agenda-status { justify-self: start; }
+				.agenda-view-tabs { margin-left: 0; }
+			}
+			@media (max-width: 767.98px) {
+				.agenda-hero h1 { font-size: 36px; }
+				.agenda-tools { grid-template-columns: 1fr; }
+				.agenda-calendar { grid-template-columns: 1fr; }
+				.agenda-calendar__head { display: none; }
+				.agenda-detail-grid { grid-template-columns: 1fr; }
+			}
+		</style>
+	</head>
+	<body class="agenda-page">
+		<button class="scroll__top scroll-to-target" data-target="html"><i class="fas fa-angle-up"></i></button>
+
+		<header>
+			<div id="header-fixed-height"></div>
+			<div id="sticky-header" class="tg-header__area">
+				<div class="container custom-container">
+					<div class="row">
+						<div class="col-12">
+							<div class="tgmenu__wrap">
+								<nav class="tgmenu__nav">
+									<div class="logo"><a href="index.html"><img src="assets/img/logo/logo.png" alt="Logo" /></a></div>
+									<div class="tgmenu__navbar-wrap tgmenu__main-menu d-none d-lg-flex">
+										<ul class="navigation">
+											<li><a href="index.html">Inicio</a></li>
+											<li><a href="services-3.html">Sites Municipais</a></li>
+											<li><a href="services.html">Portal Transparencia</a></li>
+											<li><a href="services-5.html">Servicos</a></li>
+											<li><a href="galeria.html">Galeria</a></li>
+											<li><a href="blog.html">Noticias</a></li>
+											<li><a href="contact.html">Fale Conosco</a></li>
+										</ul>
+									</div>
+									<div class="tgmenu__action d-none d-md-block">
+										<ul class="list-wrap">
+											<li class="header-search">
+												<a href="javascript:void(0)" class="search-open-btn" aria-label="Abrir pesquisa">
+													<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none">
+														<path d="M19 19.0002L14.657 14.6572M14.657 14.6572C15.3999 13.9143 15.9892 13.0324 16.3912 12.0618C16.7933 11.0911 17.0002 10.0508 17.0002 9.00021C17.0002 7.9496 16.7933 6.90929 16.3913 5.93866C15.9892 4.96803 15.3999 4.08609 14.657 3.34321C13.9141 2.60032 13.0322 2.01103 12.0616 1.60898C11.0909 1.20693 10.0506 1 9.00002 1C7.94942 1 6.90911 1.20693 5.93848 1.60898C4.96785 2.01103 4.08591 2.60032 3.34302 3.34321C1.84269 4.84354 0.999817 6.87842 0.999817 9.00021C0.999817 11.122 1.84269 13.1569 3.34302 14.6572C4.84335 16.1575 6.87824 17.0004 9.00002 17.0004C11.1218 17.0004 13.1567 16.1575 14.657 14.6572Z" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+													</svg>
+												</a>
+											</li>
+										</ul>
+									</div>									<div class="mobile-nav-toggler">
+										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18" fill="none">
+											<path d="M0 2C0 0.895431 0.895431 0 2 0C3.10457 0 4 0.895431 4 2C4 3.10457 3.10457 4 2 4C0.895431 4 0 3.10457 0 2Z" fill="currentcolor" />
+											<path d="M0 9C0 7.89543 0.895431 7 2 7C3.10457 7 4 7.89543 4 9C4 10.1046 3.10457 11 2 11C0.895431 11 0 10.1046 0 9Z" fill="currentcolor" />
+											<path d="M0 16C0 14.8954 0.895431 14 2 14C3.10457 14 4 14.8954 4 16C4 17.1046 3.10457 18 2 18C0.895431 18 0 17.1046 0 16Z" fill="currentcolor" />
+											<path d="M7 2C7 0.895431 7.89543 0 9 0C10.1046 0 11 0.895431 11 2C11 3.10457 10.1046 4 9 4C7.89543 4 7 3.10457 7 2Z" fill="currentcolor" />
+											<path d="M7 9C7 7.89543 7.89543 7 9 7C10.1046 7 11 7.89543 11 9C11 10.1046 10.1046 11 9 11C7.89543 11 7 10.1046 7 9Z" fill="currentcolor" />
+											<path d="M7 16C7 14.8954 7.89543 14 9 14C10.1046 14 11 14.8954 11 16C11 17.1046 10.1046 18 9 18C7.89543 18 7 17.1046 7 16Z" fill="currentcolor" />
+											<path d="M14 2C14 0.895431 14.8954 0 16 0C17.1046 0 18 0.895431 18 2C18 3.10457 17.1046 4 16 4C14.8954 4 14 3.10457 14 2Z" fill="currentcolor" />
+											<path d="M14 9C14 7.89543 14.8954 7 16 7C17.1046 7 18 7.89543 18 9C18 10.1046 17.1046 11 16 11C14.8954 11 14 10.1046 14 9Z" fill="currentcolor" />
+											<path d="M14 16C14 14.8954 14.8954 14 16 14C17.1046 14 18 14.8954 18 16C18 17.1046 17.1046 18 16 18C14.8954 18 14 17.1046 14 16Z" fill="currentcolor" />
+										</svg>
+									</div>
+								</nav>
+							</div>
+							<div class="tgmobile__menu">
+								<nav class="tgmobile__menu-box">
+									<div class="close-btn"><i class="fas fa-times"></i></div>
+									<div class="nav-logo"><a href="index.html"><img src="assets/img/logo/logo.png" alt="Logo" /></a></div>
+									<div class="tgmobile__menu-outer"></div>
+								</nav>
+							</div>
+							<div class="tgmobile__menu-backdrop"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- header-search -->
+			<div class="search__popup">
+				<div class="container">
+					<div class="row">
+						<div class="col-12">
+							<div class="search__wrapper">
+								<div class="search__close">
+									<button type="button" class="search-close-btn" aria-label="Fechar pesquisa">
+										<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M17 1L1 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+											<path d="M1 1L17 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+										</svg>
+									</button>
+								</div>
+								<div class="search__form">
+									<form action="formulario.php" method="get">
+										<h2 class="search-advanced__title">Busca no portal</h2>
+										<div class="search__input">
+											<input class="search-input-field" type="text" name="q" placeholder="Digite o termo da consulta" />
+											<span class="search-focus-border"></span>
+											<button type="submit" aria-label="Pesquisar">
+												<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+													<path d="M9.55 18.1C14.272 18.1 18.1 14.272 18.1 9.55C18.1 4.82797 14.272 1 9.55 1C4.82797 1 1 4.82797 1 9.55C1 14.272 4.82797 18.1 9.55 18.1Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+													<path d="M19.0002 19.0002L17.2002 17.2002" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+												</svg>
+											</button>
+										</div>
+										<div class="search-advanced__message" aria-live="polite"></div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="search-popup-overlay"></div>
+			<!-- header-search-end -->		</header>
+
+		<main class="fix">
+			<section class="agenda-hero">
+				<div class="container">
+					<h1>Agenda de Eventos</h1>
+					<p>Compromissos publicos, eventos institucionais, audiencias, reunioes oficiais e atividades administrativas relevantes reunidos para consulta cidada.</p>
+				</div>
+			</section>
+
+			<section class="agenda-section">
+				<div class="container">
+					<form class="agenda-tools" id="agenda-filters">
+						<div class="agenda-field">
+							<label for="date-start">Data inicial</label>
+							<input type="date" id="date-start" />
+						</div>
+						<div class="agenda-field">
+							<label for="date-end">Data final</label>
+							<input type="date" id="date-end" />
+						</div>
+						<div class="agenda-field">
+							<label for="authority">Autoridade</label>
+							<select id="authority"></select>
+						</div>
+						<div class="agenda-field">
+							<label for="department">Orgao / Departamento</label>
+							<select id="department"></select>
+						</div>
+						<div class="agenda-field">
+							<label for="place">Local</label>
+							<select id="place"></select>
+						</div>
+						<div class="agenda-field">
+							<label for="event-type">Tipo de evento</label>
+							<select id="event-type"></select>
+						</div>
+						<div class="agenda-field">
+							<label for="status">Situacao</label>
+							<select id="status"></select>
+						</div>
+						<div class="agenda-field">
+							<label for="search">Busca</label>
+							<input type="search" id="search" placeholder="Titulo, descricao ou responsavel" />
+						</div>
+					</form>
+
+					<div class="agenda-actions">
+						<button class="agenda-button is-primary" type="button" id="clear-filters"><i class="fas fa-filter"></i> Limpar filtros</button>
+						<button class="agenda-button" type="button" data-export="csv"><i class="fas fa-file-csv"></i> CSV</button>
+						<button class="agenda-button" type="button" data-export="xls"><i class="fas fa-file-excel"></i> Excel</button>
+						<button class="agenda-button" type="button" data-export="pdf"><i class="fas fa-file-pdf"></i> PDF</button>
+						<div class="agenda-view-tabs">
+							<button class="agenda-button is-primary" type="button" data-view="list"><i class="fas fa-list"></i> Lista</button>
+							<button class="agenda-button" type="button" data-view="calendar"><i class="far fa-calendar-alt"></i> Calendario</button>
+						</div>
+					</div>
+
+					<div class="agenda-view is-active" id="agenda-view-list">
+						<div class="agenda-list" id="agenda-list"></div>
+					</div>
+					<div class="agenda-view" id="agenda-view-calendar">
+						<div class="agenda-calendar" id="agenda-calendar"></div>
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<div class="agenda-modal" id="agenda-modal" aria-hidden="true">
+			<div class="agenda-modal__box" role="dialog" aria-modal="true" aria-labelledby="agenda-modal-title">
+				<div class="agenda-modal__head">
+					<h2 id="agenda-modal-title">Detalhes do evento</h2>
+					<button class="agenda-modal__close" type="button" id="agenda-modal-close" aria-label="Fechar"><i class="fas fa-times"></i></button>
+				</div>
+				<div class="agenda-modal__body" id="agenda-modal-body"></div>
+			</div>
+		</div>
+
+		<script src="assets/js/vendor/jquery-3.6.0.min.js"></script>
+		<script src="assets/js/bootstrap.bundle.min.js"></script>
+		<script src="assets/js/jquery.magnific-popup.min.js"></script>
+		<script src="assets/js/jquery.odometer.min.js"></script>
+		<script src="assets/js/jquery.appear.js"></script>
+		<script src="assets/js/gsap.js"></script>
+		<script src="assets/js/ScrollTrigger.js"></script>
+		<script src="assets/js/SplitText.js"></script>
+		<script src="assets/js/gsap-animation.js"></script>
+		<script src="assets/js/jquery.parallaxScroll.min.js"></script>
+		<script src="assets/js/swiper-bundle.js"></script>
+		<script src="assets/js/ajax-form.js"></script>
+		<script src="assets/js/wow.min.js"></script>
+		<script src="assets/js/aos.js"></script>
+		<script src="assets/js/main.js"></script>
+		<script>
+			(function () {
+				var events = [
+					{
+						id: 1,
+						date: "2026-05-04",
+						time: "08:30",
+						title: "Reuniao de alinhamento administrativo",
+						description: "Encontro para acompanhamento de metas e demandas prioritarias da gestao municipal.",
+						fullDescription: "Reuniao oficial para avaliacao de indicadores, encaminhamento de demandas internas e definicao de prioridades da semana.",
+						authority: "Prefeito Municipal",
+						department: "Gabinete do Prefeito",
+						place: "Sala de Reunioes do Gabinete",
+						address: "Avenida Afonso Pena, 3297, Centro",
+						type: "Reuniao",
+						status: "Agendado",
+						participants: ["Prefeito Municipal", "Secretarios municipais", "Assessoria tecnica"],
+						attachments: ["Pauta da reuniao"],
+						links: ["Transmissao institucional"]
+					},
+					{
+						id: 2,
+						date: "2026-05-07",
+						time: "14:00",
+						title: "Audiencia publica sobre mobilidade urbana",
+						description: "Audiencia aberta para apresentacao de propostas e recebimento de contribuicoes da sociedade.",
+						fullDescription: "A audiencia publica apresenta estudos preliminares, coleta sugestoes dos cidadaos e registra encaminhamentos para o planejamento urbano.",
+						authority: "Secretario de Infraestrutura",
+						department: "Secretaria de Infraestrutura",
+						place: "Auditorio Municipal",
+						address: "Rua 14 de Julho, 400, Centro",
+						type: "Audiencia publica",
+						status: "Agendado",
+						participants: ["Secretario de Infraestrutura", "Equipe tecnica", "Representantes comunitarios"],
+						attachments: ["Convite oficial", "Apresentacao tecnica"],
+						links: ["Canal do YouTube"]
+					},
+					{
+						id: 3,
+						date: "2026-05-10",
+						time: "09:00",
+						title: "Visita tecnica a unidade de saude",
+						description: "Acompanhamento de obras, servicos e fluxos de atendimento ao cidadao.",
+						fullDescription: "Atividade administrativa de acompanhamento presencial para verificar infraestrutura, equipe disponivel e necessidades operacionais.",
+						authority: "Secretaria de Saude",
+						department: "Secretaria Municipal de Saude",
+						place: "Unidade de Saude da Familia",
+						address: "Rua das Palmeiras, 120, Bairro Jardim",
+						type: "Visita tecnica",
+						status: "Realizado",
+						participants: ["Secretaria de Saude", "Coordenacao da unidade", "Equipe administrativa"],
+						attachments: ["Relatorio de visita"],
+						links: []
+					},
+					{
+						id: 4,
+						date: "2026-05-16",
+						time: "16:30",
+						title: "Evento institucional de entrega de equipamentos",
+						description: "Cerimonia de entrega de novos equipamentos para atendimento municipal.",
+						fullDescription: "Evento institucional com apresentacao dos investimentos, demonstracao dos equipamentos e registro publico da entrega.",
+						authority: "Prefeito Municipal",
+						department: "Secretaria de Administracao",
+						place: "Patio da Prefeitura",
+						address: "Avenida Afonso Pena, 3297, Centro",
+						type: "Evento institucional",
+						status: "Agendado",
+						participants: ["Prefeito Municipal", "Secretario de Administracao", "Servidores"],
+						attachments: ["Convite"],
+						links: ["Galeria de fotos"]
+					},
+					{
+						id: 5,
+						date: "2026-05-18",
+						time: "10:00",
+						title: "Reuniao do comite de transparencia",
+						description: "Analise de melhorias no acesso a informacao e publicacao de dados abertos.",
+						fullDescription: "Reuniao para avaliacao de pendencias, priorizacao de bases de dados e definicao de cronograma de publicacoes.",
+						authority: "Controlador Geral",
+						department: "Controladoria Geral",
+						place: "Sala de Governanca",
+						address: "Rua Municipal, 55, Centro",
+						type: "Reuniao",
+						status: "Cancelado",
+						participants: ["Controlador Geral", "Ouvidoria", "Equipe de transparencia"],
+						attachments: ["Pauta preliminar"],
+						links: []
+					}
+				];
+
+				var filteredEvents = events.slice();
+				var fields = {
+					start: document.getElementById("date-start"),
+					end: document.getElementById("date-end"),
+					authority: document.getElementById("authority"),
+					department: document.getElementById("department"),
+					place: document.getElementById("place"),
+					type: document.getElementById("event-type"),
+					status: document.getElementById("status"),
+					search: document.getElementById("search")
+				};
+				var listEl = document.getElementById("agenda-list");
+				var calendarEl = document.getElementById("agenda-calendar");
+				var modal = document.getElementById("agenda-modal");
+				var modalTitle = document.getElementById("agenda-modal-title");
+				var modalBody = document.getElementById("agenda-modal-body");
+
+				function escapeHtml(value) {
+					return String(value || "")
+						.replace(/&/g, "&amp;")
+						.replace(/</g, "&lt;")
+						.replace(/>/g, "&gt;")
+						.replace(/"/g, "&quot;")
+						.replace(/'/g, "&#39;");
+				}
+
+				function formatDate(value) {
+					var parts = value.split("-");
+					return parts[2] + "/" + parts[1] + "/" + parts[0];
+				}
+
+				function uniqueValues(key) {
+					return events.map(function (event) { return event[key]; }).filter(function (value, index, arr) {
+						return value && arr.indexOf(value) === index;
+					}).sort();
+				}
+
+				function fillSelect(select, values, label) {
+					select.innerHTML = '<option value="">' + label + '</option>' + values.map(function (value) {
+						return '<option value="' + escapeHtml(value) + '">' + escapeHtml(value) + '</option>';
+					}).join("");
+				}
+
+				function statusClass(status) {
+					if (status === "Realizado") return " is-done";
+					if (status === "Cancelado") return " is-canceled";
+					return "";
+				}
+
+				function renderList() {
+					if (!filteredEvents.length) {
+						listEl.innerHTML = '<div class="agenda-empty">Nenhum evento encontrado para os filtros selecionados.</div>';
+						return;
+					}
+
+					listEl.innerHTML = filteredEvents.map(function (event) {
+						return '' +
+							'<article class="agenda-event">' +
+								'<div class="agenda-event__date">' + formatDate(event.date) + '<span>' + escapeHtml(event.time) + '</span></div>' +
+								'<div>' +
+									'<h2><button class="agenda-button" type="button" data-detail="' + event.id + '">' + escapeHtml(event.title) + '</button></h2>' +
+									'<p>' + escapeHtml(event.description) + '</p>' +
+									'<div class="agenda-meta">' +
+										'<span><i class="fas fa-user"></i> ' + escapeHtml(event.authority) + '</span>' +
+										'<span><i class="fas fa-building"></i> ' + escapeHtml(event.department) + '</span>' +
+										'<span><i class="fas fa-map-marker-alt"></i> ' + escapeHtml(event.place) + '</span>' +
+										'<span><i class="fas fa-tag"></i> ' + escapeHtml(event.type) + '</span>' +
+									'</div>' +
+								'</div>' +
+							'</article>';
+					}).join("");
+				}
+
+				function renderCalendar() {
+					var heads = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"].map(function (day) {
+						return '<div class="agenda-calendar__head">' + day + '</div>';
+					}).join("");
+					var current = new Date(2026, 4, 1);
+					var firstWeekDay = current.getDay();
+					var daysInMonth = new Date(2026, 5, 0).getDate();
+					var cells = [];
+
+					for (var blank = 0; blank < firstWeekDay; blank++) {
+						cells.push('<div class="agenda-calendar__day"></div>');
+					}
+
+					for (var day = 1; day <= daysInMonth; day++) {
+						var date = "2026-05-" + String(day).padStart(2, "0");
+						var dayEvents = filteredEvents.filter(function (event) { return event.date === date; });
+						cells.push('' +
+							'<div class="agenda-calendar__day">' +
+								'<span class="agenda-calendar__num">' + day + '</span>' +
+								dayEvents.map(function (event) {
+									return '<button class="agenda-calendar__item" type="button" data-detail="' + event.id + '">' + escapeHtml(event.time + " - " + event.title) + '</button>';
+								}).join("") +
+							'</div>');
+					}
+
+					calendarEl.innerHTML = heads + cells.join("");
+				}
+
+				function applyFilters() {
+					var text = fields.search.value.trim().toLowerCase();
+					filteredEvents = events.filter(function (event) {
+						if (fields.start.value && event.date < fields.start.value) return false;
+						if (fields.end.value && event.date > fields.end.value) return false;
+						if (fields.authority.value && event.authority !== fields.authority.value) return false;
+						if (fields.department.value && event.department !== fields.department.value) return false;
+						if (fields.place.value && event.place !== fields.place.value) return false;
+						if (fields.type.value && event.type !== fields.type.value) return false;
+						if (fields.status.value && event.status !== fields.status.value) return false;
+						if (text) {
+							var haystack = [event.title, event.description, event.authority, event.department, event.place, event.type].join(" ").toLowerCase();
+							if (haystack.indexOf(text) === -1) return false;
+						}
+						return true;
+					});
+					renderList();
+					renderCalendar();
+				}
+
+				function openDetails(id) {
+					var event = events.find(function (item) { return item.id === Number(id); });
+					if (!event) return;
+
+					modalTitle.textContent = event.title;
+					modalBody.innerHTML = '' +
+						'<p>' + escapeHtml(event.fullDescription) + '</p>' +
+						'<div class="agenda-detail-grid">' +
+							'<div class="agenda-detail"><strong>Data e hora</strong>' + formatDate(event.date) + ' as ' + escapeHtml(event.time) + '</div>' +
+							'<div class="agenda-detail"><strong>Situacao</strong>' + escapeHtml(event.status) + '</div>' +
+							'<div class="agenda-detail"><strong>Responsavel</strong>' + escapeHtml(event.authority) + '</div>' +
+							'<div class="agenda-detail"><strong>Orgao</strong>' + escapeHtml(event.department) + '</div>' +
+							'<div class="agenda-detail"><strong>Local</strong>' + escapeHtml(event.place) + '</div>' +
+							'<div class="agenda-detail"><strong>Endereco</strong>' + escapeHtml(event.address) + '</div>' +
+						'</div>' +
+						'<h3>Participantes</h3><ul class="agenda-links">' + event.participants.map(function (item) { return '<li>' + escapeHtml(item) + '</li>'; }).join("") + '</ul>' +
+						'<h3>Anexos</h3><ul class="agenda-links">' + (event.attachments.length ? event.attachments : ["Nenhum anexo publicado"]).map(function (item) { return '<li>' + escapeHtml(item) + '</li>'; }).join("") + '</ul>' +
+						'<h3>Links relacionados</h3><ul class="agenda-links">' + (event.links.length ? event.links : ["Nenhum link publicado"]).map(function (item) { return '<li>' + escapeHtml(item) + '</li>'; }).join("") + '</ul>';
+					modal.classList.add("is-open");
+					modal.setAttribute("aria-hidden", "false");
+				}
+
+				function download(filename, mime, content) {
+					var blob = new Blob([content], { type: mime });
+					var url = URL.createObjectURL(blob);
+					var link = document.createElement("a");
+					link.href = url;
+					link.download = filename;
+					document.body.appendChild(link);
+					link.click();
+					document.body.removeChild(link);
+					URL.revokeObjectURL(url);
+				}
+
+				function exportRows(type) {
+					var headers = ["Data", "Hora", "Titulo", "Descricao", "Local", "Responsavel", "Situacao", "Orgao", "Tipo"];
+					var rows = filteredEvents.map(function (event) {
+						return [formatDate(event.date), event.time, event.title, event.description, event.place, event.authority, event.status, event.department, event.type];
+					});
+
+					if (type === "pdf") {
+						window.print();
+						return;
+					}
+
+					if (type === "xls") {
+						var html = '<table><thead><tr>' + headers.map(function (head) { return '<th>' + escapeHtml(head) + '</th>'; }).join("") + '</tr></thead><tbody>' +
+							rows.map(function (row) { return '<tr>' + row.map(function (cell) { return '<td>' + escapeHtml(cell) + '</td>'; }).join("") + '</tr>'; }).join("") +
+							'</tbody></table>';
+						download("agenda-eventos.xls", "application/vnd.ms-excel;charset=utf-8", html);
+						return;
+					}
+
+					var csv = [headers].concat(rows).map(function (row) {
+						return row.map(function (cell) { return '"' + String(cell).replace(/"/g, '""') + '"'; }).join(";");
+					}).join("\n");
+					download("agenda-eventos.csv", "text/csv;charset=utf-8", csv);
+				}
+
+				fillSelect(fields.authority, uniqueValues("authority"), "Todas");
+				fillSelect(fields.department, uniqueValues("department"), "Todos");
+				fillSelect(fields.place, uniqueValues("place"), "Todos");
+				fillSelect(fields.type, uniqueValues("type"), "Todos");
+				fillSelect(fields.status, uniqueValues("status"), "Todas");
+
+				document.getElementById("agenda-filters").addEventListener("input", applyFilters);
+				document.getElementById("agenda-filters").addEventListener("change", applyFilters);
+				document.getElementById("clear-filters").addEventListener("click", function () {
+					Object.keys(fields).forEach(function (key) { fields[key].value = ""; });
+					applyFilters();
+				});
+				document.addEventListener("click", function (event) {
+					var detail = event.target.closest("[data-detail]");
+					var view = event.target.closest("[data-view]");
+					var exportButton = event.target.closest("[data-export]");
+					if (detail) openDetails(detail.getAttribute("data-detail"));
+					if (exportButton) exportRows(exportButton.getAttribute("data-export"));
+					if (view) {
+						document.querySelectorAll("[data-view]").forEach(function (button) { button.classList.remove("is-primary"); });
+						view.classList.add("is-primary");
+						document.querySelectorAll(".agenda-view").forEach(function (panel) { panel.classList.remove("is-active"); });
+						document.getElementById("agenda-view-" + view.getAttribute("data-view")).classList.add("is-active");
+					}
+				});
+				document.getElementById("agenda-modal-close").addEventListener("click", function () {
+					modal.classList.remove("is-open");
+					modal.setAttribute("aria-hidden", "true");
+				});
+				modal.addEventListener("click", function (event) {
+					if (event.target === modal) {
+						modal.classList.remove("is-open");
+						modal.setAttribute("aria-hidden", "true");
+					}
+				});
+
+				applyFilters();
+			})();
+		</script>
+	</body>
+</html>

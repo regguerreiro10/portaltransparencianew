@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html class="no-js" lang="pt-BR">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="x-ua-compatible" content="ie=edge" />
+		<title>LGPD</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png" />
+		<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="assets/css/animate.min.css" />
+		<link rel="stylesheet" href="assets/css/magnific-popup.css" />
+		<link rel="stylesheet" href="assets/css/fontawesome-all.min.css" />
+		<link rel="stylesheet" href="assets/css/flaticon.css" />
+		<link rel="stylesheet" href="assets/css/odometer.css" />
+		<link rel="stylesheet" href="assets/css/swiper-bundle.css" />
+		<link rel="stylesheet" href="assets/css/aos.css" />
+		<link rel="stylesheet" href="assets/css/default.css" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<style>
+			.lgpd-portal-area {
+				padding: 0 0 110px;
+				background: #f7f9fc;
+			}
+
+			.lgpd-portal-shell {
+				background: #fff;
+				border: 1px solid rgba(15, 23, 42, 0.08);
+				border-radius: 22px;
+				box-shadow: 0 24px 60px rgba(15, 23, 42, 0.1);
+				overflow: hidden;
+			}
+
+			.lgpd-portal-topbar {
+				padding: 10px 24px;
+				background: #0b5f93;
+				color: #fff;
+			}
+
+			.lgpd-portal-topbar__nav {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 16px;
+				font-size: 12px;
+				font-weight: 600;
+			}
+
+			.lgpd-portal-subnav {
+				padding: 10px 24px;
+				background: #ffd400;
+				border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+			}
+
+			.lgpd-portal-subnav__list {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 18px;
+				font-size: 12px;
+				font-weight: 600;
+				color: #17324d;
+			}
+
+			.lgpd-hero {
+				position: relative;
+				min-height: 320px;
+				padding: 48px 36px;
+				background:
+					linear-gradient(90deg, rgba(7, 35, 70, 0.8) 0%, rgba(7, 35, 70, 0.28) 55%, rgba(7, 35, 70, 0.12) 100%),
+					url('assets/img/bg/inner_services_bg02.jpg') center/cover no-repeat;
+				display: flex;
+				align-items: flex-end;
+			}
+
+			.lgpd-hero__title {
+				margin: 0;
+				font-size: clamp(56px, 10vw, 108px);
+				font-weight: 800;
+				letter-spacing: 0.04em;
+				text-transform: uppercase;
+				color: #fff;
+				line-height: 0.9;
+			}
+
+			.lgpd-content {
+				padding: 36px;
+			}
+
+			.lgpd-grid {
+				display: grid;
+				grid-template-columns: 1.2fr 1fr;
+				gap: 18px;
+				align-items: start;
+			}
+
+			.lgpd-side-grid {
+				display: grid;
+				gap: 18px;
+			}
+
+			.lgpd-card {
+				display: block;
+				border: 1px solid #dde7f1;
+				border-radius: 18px;
+				overflow: hidden;
+				background: #fff;
+				box-shadow: 0 16px 36px rgba(15, 23, 42, 0.08);
+				transition: transform 0.25s ease, box-shadow 0.25s ease;
+			}
+
+			.lgpd-card:hover,
+			.lgpd-card:focus {
+				transform: translateY(-4px);
+				box-shadow: 0 20px 44px rgba(15, 23, 42, 0.12);
+			}
+
+			.lgpd-card__media {
+				position: relative;
+				min-height: 230px;
+				padding: 24px;
+				background: linear-gradient(135deg, #103c67 0%, #0f6e9d 100%);
+				display: flex;
+				align-items: flex-end;
+			}
+
+			.lgpd-card--small .lgpd-card__media {
+				min-height: 106px;
+			}
+
+			.lgpd-card__media::before {
+				content: '';
+				position: absolute;
+				inset: 0;
+				background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(0,0,0,0.2));
+			}
+
+			.lgpd-card__media span {
+				position: relative;
+				z-index: 1;
+				color: #fff;
+				font-size: 34px;
+				font-weight: 700;
+				line-height: 1.1;
+				max-width: 70%;
+			}
+
+			.lgpd-card--small .lgpd-card__media span {
+				font-size: 22px;
+				max-width: 100%;
+			}
+
+			.lgpd-card__body {
+				padding: 20px 22px 24px;
+			}
+
+			.lgpd-card__title {
+				margin: 0 0 10px;
+				font-size: 14px;
+				font-weight: 800;
+				text-transform: uppercase;
+				color: #0f4c81;
+				text-align: center;
+			}
+
+			.lgpd-card__text {
+				margin: 0 0 18px;
+				font-size: 13px;
+				line-height: 1.7;
+				color: #5b7088;
+				text-align: center;
+			}
+
+			.lgpd-card__button {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				min-width: 118px;
+				height: 38px;
+				padding: 0 18px;
+				border-radius: 8px;
+				background: #0f4c81;
+				color: #fff;
+				font-size: 12px;
+				font-weight: 700;
+				text-transform: uppercase;
+			}
+
+			.lgpd-card__actions {
+				text-align: center;
+			}
+
+			@media (max-width: 991.98px) {
+				.lgpd-grid {
+					grid-template-columns: 1fr;
+				}
+			}
+
+			@media (max-width: 767.98px) {
+				.lgpd-portal-area {
+					padding-bottom: 90px;
+				}
+
+				.lgpd-hero,
+				.lgpd-content,
+				.lgpd-portal-topbar,
+				.lgpd-portal-subnav {
+					padding-left: 20px;
+					padding-right: 20px;
+				}
+
+				.lgpd-hero {
+					min-height: 240px;
+					padding-top: 36px;
+					padding-bottom: 28px;
+				}
+
+				.lgpd-card__media span {
+					max-width: 100%;
+					font-size: 26px;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<button class="scroll__top scroll-to-target" data-target="html"><i class="fas fa-angle-up"></i></button>
+		<header>
+			<div id="header-fixed-height"></div>
+			<div id="sticky-header" class="tg-header__area">
+				<div class="container custom-container">
+					<div class="row">
+						<div class="col-12">
+							<div class="tgmenu__wrap">
+								<nav class="tgmenu__nav">
+									<div class="logo"><a href="index.html"><img src="assets/img/logo/logo.png" alt="Logo" /></a></div>
+									<div class="tgmenu__navbar-wrap tgmenu__main-menu d-none d-lg-flex">
+										<ul class="navigation">
+											<li><a href="index.html">In&iacute;cio</a></li>
+											<li><a href="services-3.html">Sites Municipais</a></li>
+											<li><a href="services.html">Portal Transpar&ecirc;ncia</a></li>
+											<li><a href="services-5.html">Servi&ccedil;os</a></li>
+											<li><a href="blog.html">Not&iacute;cias</a></li>
+											<li><a href="contact.html">Fale Conosco</a></li>
+										</ul>
+									</div>
+									<div class="tgmenu__action d-none d-md-block">
+										<ul class="list-wrap">
+											<li class="header-search">
+												<a href="javascript:void(0)" class="search-open-btn" aria-label="Abrir pesquisa">
+													<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none">
+														<path d="M19 19.0002L14.657 14.6572M14.657 14.6572C15.3999 13.9143 15.9892 13.0324 16.3912 12.0618C16.7933 11.0911 17.0002 10.0508 17.0002 9.00021C17.0002 7.9496 16.7933 6.90929 16.3913 5.93866C15.9892 4.96803 15.3999 4.08609 14.657 3.34321C13.9141 2.60032 13.0322 2.01103 12.0616 1.60898C11.0909 1.20693 10.0506 1 9.00002 1C7.94942 1 6.90911 1.20693 5.93848 1.60898C4.96785 2.01103 4.08591 2.60032 3.34302 3.34321C1.84269 4.84354 0.999817 6.87842 0.999817 9.00021C0.999817 11.122 1.84269 13.1569 3.34302 14.6572C4.84335 16.1575 6.87824 17.0004 9.00002 17.0004C11.1218 17.0004 13.1567 16.1575 14.657 14.6572Z" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+													</svg>
+												</a>
+											</li>
+										</ul>
+									</div>									<div class="mobile-nav-toggler">
+										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18" fill="none">
+											<path d="M0 2C0 0.895431 0.895431 0 2 0C3.10457 0 4 0.895431 4 2C4 3.10457 3.10457 4 2 4C0.895431 4 0 3.10457 0 2Z" fill="currentcolor" />
+											<path d="M0 9C0 7.89543 0.895431 7 2 7C3.10457 7 4 7.89543 4 9C4 10.1046 3.10457 11 2 11C0.895431 11 0 10.1046 0 9Z" fill="currentcolor" />
+											<path d="M0 16C0 14.8954 0.895431 14 2 14C3.10457 14 4 14.8954 4 16C4 17.1046 3.10457 18 2 18C0.895431 18 0 17.1046 0 16Z" fill="currentcolor" />
+											<path d="M7 2C7 0.895431 7.89543 0 9 0C10.1046 0 11 0.895431 11 2C11 3.10457 10.1046 4 9 4C7.89543 4 7 3.10457 7 2Z" fill="currentcolor" />
+											<path d="M7 9C7 7.89543 7.89543 7 9 7C10.1046 7 11 7.89543 11 9C11 10.1046 10.1046 11 9 11C7.89543 11 7 10.1046 7 9Z" fill="currentcolor" />
+											<path d="M7 16C7 14.8954 7.89543 14 9 14C10.1046 14 11 14.8954 11 16C11 17.1046 10.1046 18 9 18C7.89543 18 7 17.1046 7 16Z" fill="currentcolor" />
+											<path d="M14 2C14 0.895431 14.8954 0 16 0C17.1046 0 18 0.895431 18 2C18 3.10457 17.1046 4 16 4C14.8954 4 14 3.10457 14 2Z" fill="currentcolor" />
+											<path d="M14 9C14 7.89543 14.8954 7 16 7C17.1046 7 18 7.89543 18 9C18 10.1046 17.1046 11 16 11C14.8954 11 14 10.1046 14 9Z" fill="currentcolor" />
+											<path d="M14 16C14 14.8954 14.8954 14 16 14C17.1046 14 18 14.8954 18 16C18 17.1046 17.1046 18 16 18C14.8954 18 14 17.1046 14 16Z" fill="currentcolor" />
+										</svg>
+									</div>
+								</nav>
+							</div>
+							<div class="tgmobile__menu">
+								<nav class="tgmobile__menu-box">
+									<div class="close-btn"><i class="fas fa-times"></i></div>
+									<div class="nav-logo"><a href="index.html"><img src="assets/img/logo/logo.png" alt="Logo" /></a></div>
+									<div class="tgmobile__menu-outer"></div>
+								</nav>
+							</div>
+							<div class="tgmobile__menu-backdrop"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- header-search -->
+			<div class="search__popup">
+				<div class="container">
+					<div class="row">
+						<div class="col-12">
+							<div class="search__wrapper">
+								<div class="search__close">
+									<button type="button" class="search-close-btn" aria-label="Fechar pesquisa">
+										<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M17 1L1 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+											<path d="M1 1L17 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+										</svg>
+									</button>
+								</div>
+								<div class="search__form">
+									<form action="formulario.php" method="get">
+										<h2 class="search-advanced__title">Busca no portal</h2>
+										<div class="search__input">
+											<input class="search-input-field" type="text" name="q" placeholder="Digite o termo da consulta" />
+											<span class="search-focus-border"></span>
+											<button type="submit" aria-label="Pesquisar">
+												<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+													<path d="M9.55 18.1C14.272 18.1 18.1 14.272 18.1 9.55C18.1 4.82797 14.272 1 9.55 1C4.82797 1 1 4.82797 1 9.55C1 14.272 4.82797 18.1 9.55 18.1Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+													<path d="M19.0002 19.0002L17.2002 17.2002" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+												</svg>
+											</button>
+										</div>
+										<div class="search-advanced__message" aria-live="polite"></div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="search-popup-overlay"></div>
+			<!-- header-search-end -->		</header>
+		<main class="fix">
+			<section class="lgpd-portal-area">
+				<div class="container">
+					<div class="lgpd-portal-shell">
+						<div class="lgpd-portal-topbar">
+							<div class="lgpd-portal-topbar__nav">
+								<span>Serv. ao municipio</span>
+								<span>Identidade visual</span>
+								<span>Saude e bem-estar</span>
+								<span>Noticias em geral</span>
+								<span>Leis e servicos</span>
+							</div>
+						</div>
+						<div class="lgpd-portal-subnav">
+							<div class="lgpd-portal-subnav__list">
+								<span>Inicio</span>
+								<span>Noticias</span>
+								<span>Transparencia</span>
+								<span>Privacidade de Dados Pessoais</span>
+								<span>LGPD</span>
+								<span>Conheca seus dados</span>
+								<span>Ajuda</span>
+							</div>
+						</div>
+						<div class="lgpd-hero">
+							<h1 class="lgpd-hero__title">Privacidade</h1>
+						</div>
+						<div class="lgpd-content">
+							<div class="lgpd-grid">
+								<a class="lgpd-card" href="javascript:void(0)">
+									<div class="lgpd-card__media">
+										<span>Conheca a LGPD</span>
+									</div>
+									<div class="lgpd-card__body">
+										<h2 class="lgpd-card__title">Como Funciona a LGPD</h2>
+										<p class="lgpd-card__text">A Lei Geral de Protecao de Dados Pessoais disciplina o tratamento de dados pessoais, inclusive nos meios digitais, por pessoa natural ou por pessoa juridica.</p>
+										<div class="lgpd-card__actions">
+											<span class="lgpd-card__button">Saiba Mais</span>
+										</div>
+									</div>
+								</a>
+								<div class="lgpd-side-grid">
+									<a class="lgpd-card lgpd-card--small" href="javascript:void(0)">
+										<div class="lgpd-card__media">
+											<span>Conheca seus dados</span>
+										</div>
+									</a>
+									<a class="lgpd-card lgpd-card--small" href="javascript:void(0)">
+										<div class="lgpd-card__media">
+											<span>Programa de Governanca em Privacidade</span>
+										</div>
+									</a>
+									<div class="lgpd-card__body">
+										<h2 class="lgpd-card__title">Entenda a Protecao de Dados</h2>
+										<p class="lgpd-card__text">Neste espaco voce encontra informacoes sobre principios, direitos do titular, bases legais e medidas adotadas pela administracao para adequacao a LGPD.</p>
+										<div class="lgpd-card__actions">
+											<span class="lgpd-card__button">Saiba Mais</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+		<footer>
+			<div class="footer__area-three">
+				<div class="footer__bottom-three">
+					<div class="container">
+						<div class="row align-items-center">
+							<div class="col-lg-6"><div class="copyright-text-two"><p>Copyright &copy; <a href="index.html">Ti-Genesis</a> | Todos os direitos reservados</p></div></div>
+							<div class="col-lg-6"><div class="footer__social-three"><ul class="list-wrap justify-content-center justify-content-lg-end"><li><a href="javascript:void(0)"><i class="fab fa-facebook-f"></i></a></li><li><a href="javascript:void(0)"><i class="fab fa-twitter"></i></a></li><li><a href="javascript:void(0)"><i class="fab fa-instagram"></i></a></li></ul></div></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+		<script src="assets/js/vendor/jquery-3.6.0.min.js"></script>
+		<script src="assets/js/bootstrap.bundle.min.js"></script>
+		<script src="assets/js/jquery.magnific-popup.min.js"></script>
+		<script src="assets/js/jquery.odometer.min.js"></script>
+		<script src="assets/js/jquery.appear.js"></script>
+		<script src="assets/js/gsap.js"></script>
+		<script src="assets/js/ScrollTrigger.js"></script>
+		<script src="assets/js/SplitText.js"></script>
+		<script src="assets/js/gsap-animation.js"></script>
+		<script src="assets/js/jquery.parallaxScroll.min.js"></script>
+		<script src="assets/js/swiper-bundle.js"></script>
+		<script src="assets/js/ajax-form.js"></script>
+		<script src="assets/js/wow.min.js"></script>
+		<script src="assets/js/aos.js"></script>
+		<script src="assets/js/main.js"></script>
+	</body>
+</html>

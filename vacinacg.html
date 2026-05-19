@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html class="no-js" lang="pt-BR">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="x-ua-compatible" content="ie=edge" />
+		<title>VacinaCG</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png" />
+		<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="assets/css/animate.min.css" />
+		<link rel="stylesheet" href="assets/css/magnific-popup.css" />
+		<link rel="stylesheet" href="assets/css/fontawesome-all.min.css" />
+		<link rel="stylesheet" href="assets/css/flaticon.css" />
+		<link rel="stylesheet" href="assets/css/odometer.css" />
+		<link rel="stylesheet" href="assets/css/swiper-bundle.css" />
+		<link rel="stylesheet" href="assets/css/aos.css" />
+		<link rel="stylesheet" href="assets/css/default.css" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<style>
+			.vcg-page { background: #16366f; color: #fff; }
+			.vcg-hero { padding: 8px 0 18px; background: linear-gradient(180deg, rgba(13, 31, 70, 0.28) 0%, rgba(13, 31, 70, 0.86) 100%), url("assets/img/bg/breadcrumb_bg.jpg") center/cover no-repeat; }
+			.vcg-crumbs { margin-bottom: 4px; font-size: 12px; font-weight: 800; color: #fff; }
+			.vcg-crumbs a { color: #fff; }
+			.vcg-logo { margin: 0 0 16px; line-height: 0.86; }
+			.vcg-logo__vacina { display: block; font-size: 62px; font-weight: 900; color: #fff; letter-spacing: -0.04em; }
+			.vcg-logo__vacina span { color: #f4c400; }
+			.vcg-logo__cg { display: block; margin-left: 18px; font-size: 28px; font-weight: 700; color: #fff; }
+			.vcg-tabs { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 12px; background: rgba(255, 255, 255, 0.18); }
+			.vcg-tabs a { display: inline-flex; align-items: center; justify-content: center; min-height: 34px; padding: 7px 16px; border-radius: 10px; font-size: 12px; font-weight: 700; color: #fff; }
+			.vcg-tabs a.is-active { background: #fff; color: #2449aa; }
+			.vcg-tabs i { margin-left: 5px; font-size: 9px; }
+			.vcg-shell { padding: 14px 0 22px; }
+			.vcg-layout { display: grid; grid-template-columns: 1.02fr 1fr; gap: 18px; }
+			.vcg-poster { position: relative; min-height: 366px; overflow: hidden; border-radius: 12px; background: #0e4ca0; }
+			.vcg-poster::before { content: ""; position: absolute; inset: 0; background:
+				radial-gradient(circle at 12% 18%, rgba(255,255,255,0.18) 0 2px, transparent 3px),
+				radial-gradient(circle at 36% 10%, rgba(255,255,255,0.18) 0 3px, transparent 4px),
+				radial-gradient(circle at 62% 20%, rgba(255,255,255,0.18) 0 2px, transparent 3px),
+				radial-gradient(circle at 78% 46%, rgba(255,255,255,0.18) 0 3px, transparent 4px),
+				radial-gradient(circle at 18% 70%, rgba(255,255,255,0.18) 0 3px, transparent 4px),
+				radial-gradient(circle at 54% 78%, rgba(255,255,255,0.18) 0 2px, transparent 3px),
+				radial-gradient(circle at 82% 80%, rgba(255,255,255,0.18) 0 3px, transparent 4px);
+				opacity: 0.95;
+			}
+			.vcg-bubble { position: absolute; left: 18px; top: 18px; width: 232px; padding: 22px 20px; border-radius: 22px; background: #fff; box-shadow: 0 12px 24px rgba(15, 25, 55, 0.18); color: #12325f; font-size: 22px; font-weight: 900; line-height: 1.15; text-transform: uppercase; }
+			.vcg-bubble::after { content: ""; position: absolute; left: 104px; bottom: -48px; width: 0; height: 0; border-top: 54px solid #fff; border-left: 30px solid transparent; border-right: 10px solid transparent; transform: rotate(18deg); }
+			.vcg-drop { position: absolute; right: 42px; bottom: 0; width: 170px; height: 228px; border-radius: 50% 50% 44% 44% / 62% 62% 32% 32%; background: linear-gradient(180deg, #ffffff 0%, #ece7dc 100%); box-shadow: 0 12px 26px rgba(0,0,0,0.18); }
+			.vcg-drop::before { content: ""; position: absolute; top: -54px; left: 50%; width: 0; height: 0; transform: translateX(-50%); border-left: 42px solid transparent; border-right: 42px solid transparent; border-bottom: 70px solid #ffffff; }
+			.vcg-drop__eyes { position: absolute; top: 88px; left: 50%; width: 72px; height: 20px; transform: translateX(-50%); }
+			.vcg-drop__eyes::before, .vcg-drop__eyes::after { content: ""; position: absolute; top: 0; width: 18px; height: 18px; border-radius: 50%; background: #fff; border: 2px solid #33515f; box-shadow: inset 0 0 0 4px #8fd8e3, inset 0 0 0 7px #1f2f42; }
+			.vcg-drop__eyes::before { left: 0; }
+			.vcg-drop__eyes::after { right: 0; }
+			.vcg-drop__smile { position: absolute; left: 50%; top: 140px; width: 54px; height: 28px; transform: translateX(-50%); border-bottom: 4px solid #83241c; border-radius: 0 0 40px 40px; }
+			.vcg-drop__cross { position: absolute; left: 50%; bottom: 18px; width: 42px; height: 42px; transform: translateX(-50%); }
+			.vcg-drop__cross::before, .vcg-drop__cross::after { content: ""; position: absolute; background: #0e7aa9; }
+			.vcg-drop__cross::before { top: 0; left: 14px; width: 14px; height: 42px; }
+			.vcg-drop__cross::after { top: 14px; left: 0; width: 42px; height: 14px; }
+			.vcg-drop__sword { position: absolute; left: -18px; bottom: 44px; width: 70px; height: 70px; border-radius: 50%; background: radial-gradient(circle at 26% 34%, #f2dfc8 0 16%, transparent 17%), transparent; }
+			.vcg-drop__sword::before { content: ""; position: absolute; left: 18px; top: 30px; width: 14px; height: 58px; border-radius: 10px; background: #f2dfc8; transform: rotate(-32deg); }
+			.vcg-drop__sword::after { content: ""; position: absolute; left: 38px; top: 10px; width: 34px; height: 12px; border-radius: 10px; background: #f2dfc8; transform: rotate(-32deg); }
+			.vcg-side { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; align-content: start; }
+			.vcg-card { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 132px; padding: 18px; border-radius: 12px; background: #244a97; color: #fff; text-align: center; }
+			.vcg-card__icon { margin-bottom: 12px; font-size: 34px; color: #fff; line-height: 1; }
+			.vcg-card__label { font-size: 16px; font-weight: 700; line-height: 1.2; color: #fff; }
+			.vcg-hotline { grid-column: 1 / -1; display: grid; grid-template-columns: 70px minmax(0, 1fr); gap: 18px; align-items: center; min-height: 82px; padding: 14px 20px; border-radius: 12px; background: #f4c400; color: #14325c; }
+			.vcg-hotline__icon { display: flex; align-items: center; justify-content: center; width: 50px; height: 50px; border-radius: 6px; background: #0f3b86; color: #f4c400; font-size: 26px; }
+			.vcg-hotline__text strong { display: block; font-size: 16px; font-weight: 700; }
+			.vcg-hotline__text span { display: block; font-size: 24px; font-weight: 900; letter-spacing: 0.02em; }
+			@media (max-width: 991.98px) {
+				.vcg-layout { grid-template-columns: 1fr; }
+			}
+			@media (max-width: 767.98px) {
+				.vcg-logo__vacina { font-size: 46px; }
+				.vcg-logo__cg { margin-left: 8px; font-size: 22px; }
+				.vcg-tabs a { width: 100%; justify-content: flex-start; }
+				.vcg-side { grid-template-columns: 1fr; }
+				.vcg-hotline { grid-template-columns: 1fr; text-align: center; }
+				.vcg-hotline__icon { margin: 0 auto; }
+				.vcg-bubble { position: relative; left: auto; top: auto; width: auto; margin: 18px 18px 0; }
+				.vcg-bubble::after { display: none; }
+			}
+		</style>
+	</head>
+	<body class="vcg-page">
+		<main class="fix">
+			<section class="vcg-hero">
+				<div class="container">
+					<div class="vcg-crumbs"><a href="index.html">Inicio</a> / <a href="services-3.html">Sites Municipais</a> / <a href="secretaria-municipal-saude.html">SESAU</a> / VacinaCG</div>
+					<div class="vcg-logo">
+						<span class="vcg-logo__vacina"><span>Va</span>Cina</span>
+						<span class="vcg-logo__cg">Campo Grande</span>
+					</div>
+					<div class="vcg-tabs">
+						<a href="secretaria-municipal-saude.html">Inicio</a>
+						<a href="javascript:void(0)" class="is-active">Vacinacao</a>
+						<a href="javascript:void(0)">Plantoes do Fim de Semana</a>
+						<a href="javascript:void(0)">Cronograma da BCG</a>
+						<a href="javascript:void(0)">Campanhas de Vacinacao <i class="fas fa-angle-down"></i></a>
+						<a href="contact.html">Fale Conosco</a>
+					</div>
+				</div>
+			</section>
+			<section class="vcg-shell">
+				<div class="container">
+					<div class="vcg-layout">
+						<div class="vcg-poster">
+							<div class="vcg-bubble">Selecione no menu o publico referente ao qual voce quer informacoes sobre vacinacao.</div>
+							<div class="vcg-drop">
+								<div class="vcg-drop__eyes"></div>
+								<div class="vcg-drop__smile"></div>
+								<div class="vcg-drop__cross"></div>
+								<div class="vcg-drop__sword"></div>
+							</div>
+						</div>
+						<div class="vcg-side">
+							<a class="vcg-card" href="javascript:void(0)"><div class="vcg-card__icon"><i class="far fa-grin"></i></div><div class="vcg-card__label">Bebes e Criancas</div></a>
+							<a class="vcg-card" href="javascript:void(0)"><div class="vcg-card__icon"><i class="fas fa-male"></i></div><div class="vcg-card__label">Adolescentes</div></a>
+							<a class="vcg-card" href="javascript:void(0)"><div class="vcg-card__icon"><i class="fas fa-walking"></i></div><div class="vcg-card__label">Adultos e Idosos</div></a>
+							<a class="vcg-card" href="javascript:void(0)"><div class="vcg-card__icon"><i class="fas fa-female"></i></div><div class="vcg-card__label">Gestantes</div></a>
+							<div class="vcg-hotline">
+								<div class="vcg-hotline__icon"><i class="fas fa-phone-alt"></i></div>
+								<div class="vcg-hotline__text"><strong>Mais informacoes</strong><span>3314-9955 | 2020-2170</span></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+		<script src="assets/js/vendor/jquery-3.6.0.min.js"></script>
+		<script src="assets/js/bootstrap.bundle.min.js"></script>
+		<script src="assets/js/jquery.magnific-popup.min.js"></script>
+		<script src="assets/js/jquery.odometer.min.js"></script>
+		<script src="assets/js/jquery.appear.js"></script>
+		<script src="assets/js/gsap.js"></script>
+		<script src="assets/js/ScrollTrigger.js"></script>
+		<script src="assets/js/SplitText.js"></script>
+		<script src="assets/js/gsap-animation.js"></script>
+		<script src="assets/js/jquery.parallaxScroll.min.js"></script>
+		<script src="assets/js/swiper-bundle.js"></script>
+		<script src="assets/js/ajax-form.js"></script>
+		<script src="assets/js/wow.min.js"></script>
+		<script src="assets/js/aos.js"></script>
+		<script src="assets/js/main.js"></script>
+	</body>
+</html>

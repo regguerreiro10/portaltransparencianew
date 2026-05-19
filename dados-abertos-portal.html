@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html class="no-js" lang="pt-BR">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="x-ua-compatible" content="ie=edge" />
+		<title>Dados Abertos | Portal da Transparencia</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png" />
+		<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="assets/css/animate.min.css" />
+		<link rel="stylesheet" href="assets/css/magnific-popup.css" />
+		<link rel="stylesheet" href="assets/css/fontawesome-all.min.css" />
+		<link rel="stylesheet" href="assets/css/flaticon.css" />
+		<link rel="stylesheet" href="assets/css/odometer.css" />
+		<link rel="stylesheet" href="assets/css/swiper-bundle.css" />
+		<link rel="stylesheet" href="assets/css/aos.css" />
+		<link rel="stylesheet" href="assets/css/default.css" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<style>
+			.dados-page { padding: 96px 0 110px; background: #f6f7fb; }
+			.dados-shell { background: #fff; border: 1px solid rgba(15, 23, 42, 0.08); border-radius: 24px; box-shadow: 0 24px 60px rgba(15, 23, 42, 0.1); overflow: hidden; }
+			.dados-brand { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 18px 26px 16px; background: #fff; border-bottom: 1px solid rgba(15, 23, 42, 0.08); }
+			.dados-brand__title { font-size: 18px; font-weight: 400; color: #1f4f88; letter-spacing: 0.01em; text-transform: uppercase; }
+			.dados-brand__title strong { font-weight: 800; }
+			.dados-brand__city { display: flex; align-items: center; gap: 10px; font-size: 12px; font-weight: 700; color: #1f4f88; text-transform: uppercase; }
+			.dados-brand__city img { width: 34px; height: auto; }
+			.dados-menu { display: grid; grid-template-columns: auto 190px; align-items: stretch; background: #ffd500; border-bottom: 1px solid rgba(15, 23, 42, 0.08); }
+			.dados-menu__nav { display: flex; flex-wrap: wrap; gap: 0; }
+			.dados-menu__nav a { display: inline-flex; align-items: center; min-height: 42px; padding: 10px 16px; border-right: 1px solid rgba(15, 23, 42, 0.08); font-size: 11px; font-weight: 700; color: #445364; text-transform: uppercase; }
+			.dados-menu__nav a.is-active { background: rgba(255, 255, 255, 0.26); color: #0f4c81; }
+			.dados-menu__side { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 0 14px; background: #6cd0e2; }
+			.dados-menu__search { font-size: 11px; color: rgba(255, 255, 255, 0.95); text-transform: uppercase; }
+			.dados-menu__help { display: inline-flex; align-items: center; gap: 6px; min-height: 28px; padding: 0 10px; border-radius: 4px; background: #3ab5cf; font-size: 11px; font-weight: 700; color: #fff; text-transform: uppercase; }
+			.dados-breadcrumb { padding: 10px 26px; font-size: 12px; color: #4b5563; background: #f8f8f8; border-bottom: 1px solid rgba(15, 23, 42, 0.08); }
+			.dados-shortcuts { padding: 14px 26px 12px; background: #fff; border-bottom: 1px solid rgba(15, 23, 42, 0.08); }
+			.dados-shortcuts__grid { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 14px 10px; }
+			.dados-shortcuts__item { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 58px; padding: 8px; border-radius: 10px; color: #3f6283; text-align: center; transition: 0.25s ease; }
+			.dados-shortcuts__item:hover, .dados-shortcuts__item:focus { background: #f4f8fc; }
+			.dados-shortcuts__item i { margin-bottom: 8px; font-size: 14px; color: #0f4c81; }
+			.dados-shortcuts__item span { font-size: 10px; font-weight: 700; line-height: 1.3; text-transform: uppercase; }
+			.dados-content { padding: 26px; }
+			.dados-intro { display: grid; grid-template-columns: minmax(320px, 1fr) minmax(0, 1.05fr); gap: 22px; align-items: stretch; padding-bottom: 24px; border-bottom: 1px solid #e7eaef; }
+			.dados-hero { position: relative; min-height: 250px; border-radius: 0; overflow: hidden; background: linear-gradient(135deg, #0b2f7c 0%, #133f96 40%, #0f58a9 100%); }
+			.dados-hero::before { content: ""; position: absolute; inset: 0; background:
+				radial-gradient(circle at 18% 16%, rgba(255,255,255,0.16) 0 3px, transparent 3px),
+				radial-gradient(circle at 36% 22%, rgba(255,255,255,0.18) 0 5px, transparent 5px),
+				radial-gradient(circle at 80% 18%, rgba(255,255,255,0.16) 0 3px, transparent 3px),
+				radial-gradient(circle at 72% 80%, rgba(255,255,255,0.12) 0 4px, transparent 4px);
+				background-size: 140px 140px; opacity: 0.8; }
+			.dados-hero__screen { position: absolute; left: 34px; bottom: 28px; width: 170px; height: 122px; border-radius: 8px; background: #f4f7fb; box-shadow: 0 22px 44px rgba(3, 19, 52, 0.35); }
+			.dados-hero__screen::before { content: ""; position: absolute; left: 14px; right: 14px; top: 16px; height: 10px; background: linear-gradient(90deg, #ff8b5e 0 42%, #8ed3ea 42% 78%, #d5e2ee 78%); border-radius: 999px; }
+			.dados-hero__screen::after { content: ""; position: absolute; left: 18px; top: 40px; width: 58px; height: 52px; border-radius: 6px; border: 2px solid #c7d5e7; box-shadow: 72px 0 0 -18px #dbe6f2, 72px 18px 0 -18px #dbe6f2, 0 62px 0 -20px #dbe6f2; }
+			.dados-hero__search { position: absolute; left: 136px; bottom: 82px; width: 58px; height: 58px; border: 6px solid #1178b5; border-radius: 50%; background: rgba(168, 234, 255, 0.5); box-shadow: 0 0 0 10px rgba(255,255,255,0.18); }
+			.dados-hero__search::after { content: ""; position: absolute; right: -14px; bottom: -14px; width: 28px; height: 9px; border-radius: 999px; background: #1178b5; transform: rotate(45deg); transform-origin: center; }
+			.dados-hero__hand--left, .dados-hero__hand--right { position: absolute; bottom: 24px; width: 82px; height: 18px; background: #ffc499; border-radius: 999px; }
+			.dados-hero__hand--left { left: -4px; transform: rotate(-28deg); }
+			.dados-hero__hand--right { right: -6px; transform: rotate(26deg); }
+			.dados-hero__title { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); font-size: 34px; font-weight: 800; line-height: 0.98; color: #fff; text-transform: uppercase; text-align: left; }
+			.dados-text h1 { margin: 6px 0 8px; font-size: 39px; line-height: 1.06; color: #0f4c81; text-transform: uppercase; }
+			.dados-text h2 { margin: 0 0 16px; font-size: 15px; font-weight: 700; color: #5e88ae; text-transform: uppercase; }
+			.dados-text p { margin: 0 0 14px; font-size: 14px; line-height: 1.72; color: #5b7088; }
+			.dados-text strong { color: #0f4c81; }
+			.dados-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 16px; max-width: 620px; margin: 26px auto 0; }
+			.dados-link { display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 56px; padding: 12px 18px; border-radius: 6px; background: #0f5f91; color: #ffe65a; font-size: 16px; font-weight: 700; text-transform: uppercase; box-shadow: 0 12px 24px rgba(15, 95, 145, 0.16); }
+			.dados-footer { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 24px; padding-top: 14px; border-top: 1px solid #e7eaef; font-size: 12px; color: #7b8794; }
+			.dados-footer a { color: #4a6fa0; font-weight: 700; }
+			@media (max-width: 1199.98px) {
+				.dados-shortcuts__grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+			}
+			@media (max-width: 991.98px) {
+				.dados-menu { grid-template-columns: 1fr; }
+				.dados-menu__side { min-height: 44px; }
+				.dados-intro { grid-template-columns: 1fr; }
+			}
+			@media (max-width: 767.98px) {
+				.dados-page { padding: 82px 0 90px; }
+				.dados-brand, .dados-breadcrumb, .dados-shortcuts, .dados-content { padding-left: 18px; padding-right: 18px; }
+				.dados-brand { flex-direction: column; align-items: flex-start; }
+				.dados-shortcuts__grid, .dados-links { grid-template-columns: 1fr; }
+				.dados-hero { min-height: 300px; }
+				.dados-hero__title { right: 18px; top: 26px; transform: none; font-size: 28px; }
+				.dados-hero__screen { left: 20px; bottom: 34px; transform: scale(0.9); transform-origin: left bottom; }
+				.dados-text h1 { font-size: 28px; }
+				.dados-footer { flex-direction: column; align-items: flex-start; }
+			}
+		</style>
+	</head>
+	<body>
+		<button class="scroll__top scroll-to-target" data-target="html"><i class="fas fa-angle-up"></i></button>
+		<main class="fix">
+			<section class="dados-page">
+				<div class="container">
+					<div class="dados-shell">
+						<div class="dados-brand">
+							<div class="dados-brand__title">Portal da <strong>Transparencia</strong></div>
+							<div class="dados-brand__city"><img src="assets/img/logo/logo.png" alt="Campo Grande" /><span>Campo Grande</span></div>
+						</div>
+						<div class="dados-menu">
+							<div class="dados-menu__nav">
+								<a href="javascript:void(0)">O Portal</a>
+								<a href="javascript:void(0)">Contas Publicas</a>
+								<a href="javascript:void(0)">Prestacao de Contas</a>
+								<a class="is-active" href="dados-abertos-portal.html">Dados Abertos</a>
+								<a href="javascript:void(0)">Boas Praticas</a>
+							</div>
+							<div class="dados-menu__side">
+								<span class="dados-menu__search">O que voce procura?</span>
+								<a class="dados-menu__help" href="contact.html"><i class="fas fa-question-circle"></i><span>Ajuda</span></a>
+							</div>
+						</div>
+						<div class="dados-breadcrumb">Prefeitura de Campo Grande &gt; Transparencia &gt; Dados Abertos</div>
+						<div class="dados-shortcuts">
+							<div class="dados-shortcuts__grid">
+								<a class="dados-shortcuts__item" href="lgpd-portal.html"><i class="fas fa-file-alt"></i><span>LGPD</span></a>
+								<a class="dados-shortcuts__item" href="obras-portal.html"><i class="fas fa-hammer"></i><span>Obras</span></a>
+								<a class="dados-shortcuts__item" href="contratos-portal.html"><i class="fas fa-file-contract"></i><span>Contratos</span></a>
+								<a class="dados-shortcuts__item" href="perguntas-frequentes.html"><i class="fas fa-question-circle"></i><span>Perguntas Frequentes</span></a>
+								<a class="dados-shortcuts__item" href="prestacao-contas.html"><i class="fas fa-clipboard-check"></i><span>Prestacao de Contas</span></a>
+								<a class="dados-shortcuts__item" href="convenios-portal.html"><i class="fas fa-handshake"></i><span>Convenios</span></a>
+								<a class="dados-shortcuts__item" href="orcamento.html"><i class="fas fa-wallet"></i><span>Orcamento</span></a>
+								<a class="dados-shortcuts__item" href="diarias-passagens-consulta.html"><i class="fas fa-plane-departure"></i><span>Ver Diarias e Passagens</span></a>
+							</div>
+						</div>
+						<div class="dados-content">
+							<div class="dados-intro">
+								<div class="dados-hero">
+									<div class="dados-hero__screen"></div>
+									<div class="dados-hero__search"></div>
+									<div class="dados-hero__hand--left"></div>
+									<div class="dados-hero__hand--right"></div>
+									<div class="dados-hero__title">Dados<br />Abertos</div>
+								</div>
+								<div class="dados-text">
+									<h1>O que sao "Dados Abertos"?</h1>
+									<h2>Entenda melhor o que sao os dados abertos</h2>
+									<p><strong>Dados abertos</strong> sao dados que qualquer pessoa pode livremente acessar, utilizar, modificar e compartilhar, desde que qualquer finalidade, sendo sujeito, no maximo, a exigencias que visem preservar sua proveniencia e sua abertura.</p>
+									<p>Os <strong>dados abertos</strong> da Prefeitura de Campo Grande trazem indicadores, estatisticas e outros dados acessiveis para qualquer cidadao, clique no botao abaixo e tenha acesso.</p>
+									<p>O Decreto n&deg; 15.545 institui a Politica de Dados Abertos no ambito do Poder Executivo Municipal.</p>
+									<p><strong>Decreto n. 15.545, de 17 de agosto de 2023</strong></p>
+								</div>
+							</div>
+							<div class="dados-links">
+								<a class="dados-link" href="receitas-consulta.html"><i class="fas fa-money-check-alt"></i><span>Receita</span></a>
+								<a class="dados-link" href="despesas-consulta.html"><i class="fas fa-money-bill-wave"></i><span>Despesa</span></a>
+								<a class="dados-link" href="diarias-passagens-consulta.html"><i class="fas fa-plane"></i><span>Diarias e Passagens</span></a>
+								<a class="dados-link" href="contratos-consulta.html"><i class="fas fa-file-alt"></i><span>Contratos</span></a>
+							</div>
+							<div style="margin-top: 24px;">
+								<a href="services.html" style="display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 0 20px; border-radius: 10px; background: #0f5f91; color: #fff; font-size: 14px; font-weight: 700; text-transform: uppercase;">Voltar ao Portal Transparencia</a>
+							</div>
+							<div class="dados-footer">
+								<div><a href="services.html">Voltar</a> a pagina inicial</div>
+								<div>Nao imprima, compartilhe</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+		<script src="assets/js/vendor/jquery-3.6.0.min.js"></script>
+		<script src="assets/js/bootstrap.bundle.min.js"></script>
+		<script src="assets/js/jquery.magnific-popup.min.js"></script>
+		<script src="assets/js/jquery.odometer.min.js"></script>
+		<script src="assets/js/jquery.appear.js"></script>
+		<script src="assets/js/gsap.js"></script>
+		<script src="assets/js/ScrollTrigger.js"></script>
+		<script src="assets/js/SplitText.js"></script>
+		<script src="assets/js/gsap-animation.js"></script>
+		<script src="assets/js/jquery.parallaxScroll.min.js"></script>
+		<script src="assets/js/swiper-bundle.js"></script>
+		<script src="assets/js/ajax-form.js"></script>
+		<script src="assets/js/wow.min.js"></script>
+		<script src="assets/js/aos.js"></script>
+		<script src="assets/js/main.js"></script>
+	</body>
+</html>

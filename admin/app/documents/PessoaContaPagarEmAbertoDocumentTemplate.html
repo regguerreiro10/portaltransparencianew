@@ -1,0 +1,238 @@
+<html>
+<head>
+<style>
+  /* ===== HEADER (logo + título + unidade) ===== */
+.hdr-unit-row td{
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.hdr{
+  width: 100%;
+  font-family: "Courier New", Courier, monospace;
+}
+
+.hdr-top{
+  width: 100%;
+  margin-bottom: 10px;
+  border-collapse: collapse;
+}
+
+.hdr-top td.hdr-logo{
+  padding: 0;
+}
+
+.hdr-logo{
+  width: 120px;
+  vertical-align: middle;
+}
+
+.hdr-logo img{
+  width: 110px;
+  height: auto;
+  display: block;
+}
+
+/* novo: centraliza título+unidade de verdade */
+.hdr-center{
+  text-align: center;
+  vertical-align: middle;
+}
+
+.hdr-title{
+  font-size: 24pt;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin: 0;
+  padding-right: 0 !important; /* remove compensação antiga */
+}
+
+.hdr-unit{
+  font-size: 12pt !important;
+  font-weight: normal;
+  letter-spacing: 0;
+  margin-top: 2px;
+  line-height: 1.2;
+  font-family: "Courier New", Courier, monospace;
+  padding-right: 0 !important; /* remove compensação antiga */
+}
+
+.hdr-info{
+  font-size: 12pt;
+  line-height: 1.25;
+}
+
+.hdr-info b{
+  font-weight: 700;
+}
+
+.hdr-sep{
+  margin: 10px 0 8px;
+  border: 0;
+  border-top: 1px solid #ccc;
+}
+
+.mono{
+  white-space: nowrap; /* evita quebrar "Banco: ... Agência: ..." feio */
+}
+
+/* ===== IMPRESSÃO / TABELA ===== */
+@page{
+  size: A4 landscape;
+  margin: 10mm;
+}
+
+table{
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table.extrato tbody tr:nth-child(odd){
+  background-color: #f5f5f5;
+}
+
+thead{ display: table-header-group; }  /* repete cabeçalho em cada página */
+tfoot{ display: table-footer-group; }
+
+tr{ page-break-inside: avoid; }        /* evita cortar linha no meio */
+
+td, th{
+  font-size: 10px;
+  padding: 4px;
+  border: 1px solid #ccc;
+}
+
+/* garante que o header não pegue borda */
+table.hdr-top td,
+table.hdr-top th{
+  border: 0 !important;
+}
+
+</style>
+</head>
+<body>
+<div class="hdr">
+  <table class="hdr-top">
+  <tr>
+    <td class="hdr-logo">
+      <img src="app/images/logo.png" alt="Logo" />
+    </td>
+
+    <td class="hdr-center">
+      <div class="hdr-title">EXTRATO DE CONTAS A PAGAR</div>
+      <div class="hdr-unit">{$unit_name}</div>
+    </td>
+
+    <!-- coluna “fantasma” só pra centralizar (mesma largura do logo) -->
+    <td class="hdr-logo"></td>
+  </tr>
+</table>
+
+  <div class="hdr-info">
+    <div><b>Fornecedor:</b> {$nome} &nbsp; <b>Endereço:</b> {$rua} &nbsp; <b>Bairro:</b> {$bairro} &nbsp; </div>
+    <div><b>Cep:</b> {$cep} <b>Cidade:</b> {$cidade} &nbsp; <b>Estado:</b> {$estado}</div>
+    <div class="mono"><b>Banco:</b> {$banco} &nbsp; <b>Agência:</b> {$agencia} &nbsp; <b>Conta:</b> {$conta} &nbsp; <b>Operação:</b> {$operacao}</div>
+    <div><b>Documento:</b> {$documento} &nbsp;&nbsp; <b>E-mail:</b> {$email}</div>
+    <div><b>Chave pix:</b> {$tipochavepix}-{$chavepix}</div>
+  </div>
+
+  <hr class="hdr-sep">
+</div>
+
+<table class="mce-table extrato" style="border-collapse: collapse; width: 100%; height: 101px; border-color: #929292; border-style: solid; margin-left: auto; margin-right: auto;" border="1" width="100%" cellspacing="0" cellpadding="3" data-detailmodel="Conta.pessoa_id">
+<thead>
+<tr style="height: 30px;">
+<th style="width: 100%; height: 30px;" colspan="24">
+<p style="margin: 1px 0;"><span style="font-size: 14pt;"><strong><span style="font-family: 'courier new', courier, monospace;">CONTAS A PAGAR EM ABERTO</span></strong></span></p>
+</th>
+</tr>
+
+ <tr>
+    <th colspan="4"  style="margin: 2px 0;"><span style="font-size: 9pt;"><strong><span style="font-family: 'courier new', courier, monospace;">Dados</span></strong></span></th>
+    <th colspan="1"  style="margin: 2px 0;"><span style="font-size: 9pt;"><strong><span style="font-family: 'courier new', courier, monospace;">Bruto</span></strong></span></th>
+    <th colspan="2"  style="margin: 2px 0;"><span style="font-size: 9pt;"><strong><span style="font-family: 'courier new', courier, monospace;">Taxa Contratual</span></strong></span></th>
+    <th colspan="6"  style="margin: 2px 0;"><span style="font-size: 9pt;"><strong><span style="font-family: 'courier new', courier, monospace;">Produto</span></strong></span></th>
+    <th colspan="7"  style="margin: 2px 0;"><span style="font-size: 9pt;"><strong><span style="font-family: 'courier new', courier, monospace;">Serviço</span></strong></span></th>
+    <th colspan="1"  style="margin: 4px 0;"><span style="font-size: 9pt;"><strong><span style="font-family: 'courier new', courier, monospace;">Produto Serviço</span></strong></span></th>
+    <th colspan="2"  style="margin: 2px 0;"><span style="font-size: 9pt;"><strong><span style="font-family: 'courier new', courier, monospace;">Taxa Adm + Ant</span></strong></span></th>
+    <th colspan="1"  style="margin: 2px 0;"><span style="font-size: 9pt;"><strong><span style="font-family: 'courier new', courier, monospace;">Total</span></strong></span></th>
+  </tr>
+
+<tr style="height: 48px;"> 
+<th style="width: 5%; text-align: center; height: 48px;"><span style="font-family: 'courier new', courier, monospace; font-size: 6pt;">Pedido</span></th>
+
+<th style="width: 10%; height: 48px;"><span style="font-family: 'courier new', courier, monospace; font-size: 6pt;">Aprovação</span></th>
+<th style="width: 10%; height: 48px;"><span style="font-family: 'courier new', courier, monospace; font-size: 6pt;">Vencimento</span></th>
+<th style="width: 10%; height: 48px;"><span style="font-family: 'courier new', courier, monospace; font-size: 6pt;">Departamento</span></th>
+
+<th style="width: 20%; text-align: center; height: 48px;"><span style="font-family: 'courier new', courier, monospace; font-size: 6pt;">Valor Bruto</span></th>
+<th style="width: 10%; text-align: right; height: 48px;"><span style="font-family: 'courier new', courier; font-size: 6pt;">Vl Taxa Contratual ({$taxa}%)  </span></th>
+<th style="width: 20%; text-align: right; height: 48px;"><span style="font-family: 'courier new', courier, monospace; font-size: 6pt;">Valor Liquido</span></th>
+
+<th style="width: 18%; text-align: right; height: 48px;"><span style="font-family: 'courier new', courier, monospace; font-size: 6pt;">Vl Produto</span></th>
+<th style="width: 5%; text-align: center; height: 48px;"><span style="font-family: 'courier new', courier, monospace; font-size: 6pt;">IR</span></th>
+<th style="width: 5%; text-align: center; height: 48px;"><span style="font-family: 'courier new', courier, monospace; font-size: 6pt;">CSLL</span></th>
+<th style="width: 5%; text-align: center; height: 48px;"><span style="font-family: 'courier new', courier, monospace; font-size: 6pt;">COFINS</span></th>
+<th style="width: 5%; text-align: center; height: 48px;"><span style="font-family: 'courier new', courier, monospace; font-size: 6pt;">PIS</span></th>
+<th style="width: 18%; text-align: right; height: 48px;"><span style="font-family: 'courier new', courier, monospace; font-size: 6pt;">Vl Liq. Produto</span></th>
+
+<th style="width: 18%; text-align: right; height: 48px;"><span style="font-family: 'courier new', courier, monospace; font-size: 6pt;">Vl Serviço</span></th>
+<th style="width: 5%; text-align: center; height: 48px;"><span style="font-family: 'courier new', courier, monospace; font-size: 6pt;">IR</span></th>
+<th style="width: 5%; text-align: center; height: 48px;"><span style="font-family: 'courier new', courier, monospace; font-size: 6pt;">CSLL</span></th>
+<th style="width: 5%; text-align: center; height: 48px;"><span style="font-family: 'courier new', courier, monospace; font-size: 6pt;">COFINS</span></th>
+<th style="width: 5%; text-align: center; height: 48px;"><span style="font-family: 'courier new', courier, monospace; font-size: 6pt;">PIS</span></th>
+<th style="width: 5%; text-align: center; height: 48px;"><span style="font-family: 'courier new', courier, monospace; font-size: 6pt;">ISS</span></th>
+<th style="width: 18%; text-align: right; height: 48px;"><span style="font-family: 'courier new', courier, monospace; font-size: 6pt;">Vl Liq. Serviço</span></th>
+<th style="width: 20%; text-align: right; height: 48px;"><span style="font-family: 'courier new', courier, monospace; font-size: 6pt;">Vl Liq. Produto & Serviço</span></th>
+
+<th style="width: 10%; text-align: right; height: 48px;"><span style="font-family: 'courier new', courier; font-size: 6pt;">Vl Taxa Adm. ({$taxaadministrativa}%) </span></th>
+<th style="width: 10%; text-align: right; height: 48px;"><span style="font-family: 'courier new', courier; font-size: 6pt;">Vl Taxa Ant. ({$taxaantecipacao}%) </span></th>
+
+<th style="width: 15%; text-align: right; height: 48px;"><span style="font-family: 'courier new', courier; font-size: 6pt;">Total Liq.</span></th>
+</tr>
+</thead>
+
+<tbody>
+<tr style="height: 23px;">
+<td style="width: 5%; text-align: center; height: 23px;"><span style="font-family: 'courier new', courier, monospace; font-size: 6pt;">{$pedido_venda_id}{$pedido_frotas_id}</span></td>
+
+<td style="width: 10%; text-align: center; height: 23px;"><span style="font-family: 'courier new', courier, monospace; font-size: 6pt;">{$dt_emissao}</span></td>
+<td style="width: 10%; text-align: center; height: 23px;"><span style="font-family: 'courier new', courier, monospace; font-size: 6pt;">{$dt_vencimento}</span></td>
+
+<td style="width: 16%; text-align: center; height: 23px;"><span style="font-family: 'courier new', courier, monospace; font-size: 5pt;">{$departamento_unit->name}</span></td>
+
+<td style="width: 20%; text-align: right; height: 23px;"><span style="font-family: 'courier new', courier, monospace; font-size: 6pt;">{$valor}<br /></span></td>
+<td style="width: 10%; text-align: right; height: 23px;"><span style="font-family: 'courier new', courier, monospace; font-size: 6pt;">{$valor_txcontrato}</span></td>
+<td style="width: 20%; text-align: right; height: 23px;"><span style="font-family: 'courier new', courier, monospace; font-size: 6pt;">{$valor_liquido}</span></td>
+
+<td style="width: 18%; text-align: right; height: 23px;"><span style="font-family: 'courier new', courier, monospace; font-size: 6pt;">{$valor_produto_c_desc_txc}</span></td>
+<td style="width: 5%; text-align: center; height: 23px;"><span style="font-family: 'courier new', courier, monospace; font-size: 6pt; font-style: italic;">{$ir}</span></td>
+<td style="width: 5%; text-align: center; height: 23px;"><span style="font-family: 'courier new', courier, monospace; font-size: 6pt; font-style: italic;">{$csll}</span></td>
+<td style="width: 5%; text-align: center; height: 23px;"><span style="font-family: 'courier new', courier, monospace; font-size: 6pt; font-style: italic;">{$cofins}</span></td>
+<td style="width: 5%; text-align: center; height: 23px;"><span style="font-family: 'courier new', courier, monospace; font-size: 6pt; font-style: italic;">{$pis}</span></td>
+<td style="width: 18%; text-align: right; height: 23px;"><span style="font-family: 'courier new', courier, monospace; font-size: 6pt;">{$valor_liqbase_prod_posimp}</span></td>
+
+<td style="width: 18%; text-align: right; height: 23px;"><span style="font-family: 'courier new', courier, monospace; font-size: 6pt;">{$valor_servico_c_desc_txc}</span></td>
+<td style="width: 5%; text-align: center; height: 23px;"><span style="font-family: 'courier new', courier, monospace; font-size: 6pt; font-style: italic;">{$ir_servico}</span></td>
+<td style="width: 5%; text-align: center; height: 23px;"><span style="font-family: 'courier new', courier, monospace; font-size: 6pt; font-style: italic;">{$csll_servico}</span></td>
+<td style="width: 5%; text-align: center; height: 23px;"><span style="font-family: 'courier new', courier, monospace; font-size: 6pt; font-style: italic;">{$cofins_servico}</span></td>
+<td style="width: 5%; text-align: center; height: 23px;"><span style="font-family: 'courier new', courier, monospace; font-size: 6pt; font-style: italic;">{$pis_servico}</span></td>
+<td style="width: 5%; text-align: center; height: 23px;"><span style="font-family: 'courier new', courier, monospace; font-size: 6pt; font-style: italic;">{$iss_servico}</span></td>
+<td style="width: 18%; text-align: right; height: 23px;"><span style="font-family: 'courier new', courier, monospace; font-size: 6pt;">{$valor_liqbase_serv_posimp}</span></td>
+<td style="width: 20%; text-align: right; height: 23px;"><span style="font-family: 'courier new', courier, monospace; font-size: 6pt;">{$valor_txc_imp_produto_servico}</span></td>
+
+<td style="width: 10%; text-align: right; height: 23px;"><span style="font-family: 'courier new', courier, monospace; font-size: 6pt;">{$valor_txadm}</span></td>
+<td style="width: 10%; text-align: right; height: 23px;"><span style="font-family: 'courier new', courier, monospace; font-size: 6pt;">{$valor_txantecipacao}</span></td>
+
+<td style="width: 15%; text-align: right; height: 23px;"><span style="font-family: 'courier new', courier, monospace; font-size: 6pt;">{$valor_total_liq_tx_conta}</span></td>
+</tr>
+</tbody>
+
+</table>
+<p style="margin: 1px 0px; text-align: right;"><span style="font-family: 'courier new', courier, monospace; font-size: 6pt;"><strong>Sub Total ...:</strong> {$total}</span></p>
+<p style="margin: 1px 0px; text-align: right;"><span style="font-family: 'courier new', courier, monospace; font-size: 6pt;"><strong>Taxa Bancária:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong> {$taxabancaria}</span></p>
+<!--<p style="margin: 1px 0px; text-align: right;"><span style="font-family: 'courier new', courier, monospace; font-size: 6pt;"><strong>Taxa Admin ..:&nbsp;&nbsp;&nbsp;</strong> {$taxaadm}</span></p>
+<p style="margin: 1px 0px; text-align: right;"><span style="font-family: 'courier new', courier, monospace; font-size: 6pt;"><strong>({$perctaxaadm}%) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></p>-->
+<p style="margin: 1px 0px; text-align: right;"><span style="font-family: 'courier new', courier, monospace; font-size: 6pt;"><strong>Total Geral...:</strong> {$subtotal}</span></p>
+</body>
+</html>

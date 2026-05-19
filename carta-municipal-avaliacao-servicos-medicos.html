@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html class="no-js" lang="pt-BR">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="x-ua-compatible" content="ie=edge" />
+		<title>Carta Municipal para Avaliacao dos Servicos Medicos</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png" />
+		<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="assets/css/animate.min.css" />
+		<link rel="stylesheet" href="assets/css/magnific-popup.css" />
+		<link rel="stylesheet" href="assets/css/fontawesome-all.min.css" />
+		<link rel="stylesheet" href="assets/css/flaticon.css" />
+		<link rel="stylesheet" href="assets/css/odometer.css" />
+		<link rel="stylesheet" href="assets/css/swiper-bundle.css" />
+		<link rel="stylesheet" href="assets/css/aos.css" />
+		<link rel="stylesheet" href="assets/css/default.css" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<style>
+			.cmav-page { background: #eef1f5; color: #23364a; }
+			.cmav-topbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 56px; padding: 0 18px; border-bottom: 1px solid #d7dde6; background: #f8fafc; }
+			.cmav-topbar__left { display: flex; align-items: center; gap: 12px; }
+			.cmav-logo { display: flex; align-items: center; justify-content: center; width: 24px; height: 24px; border: 2px solid #4b88ff; border-radius: 50%; color: #4b88ff; font-size: 12px; }
+			.cmav-title { font-size: 18px; font-weight: 500; color: #29384a; }
+			.cmav-topbar__right { display: flex; align-items: center; gap: 12px; }
+			.cmav-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 40px; padding: 0 18px; border: 1px solid #d6dde7; border-radius: 22px; background: #f4f6fa; font-size: 14px; color: #7a8898; }
+			.cmav-btn--share { background: linear-gradient(90deg, #e5f2ff 0%, #8cc8ff 100%); color: #13324d; font-weight: 700; }
+			.cmav-iconbtn { display: inline-flex; align-items: center; justify-content: center; width: 42px; height: 42px; border: 1px solid #8794a5; border-radius: 50%; color: #29384a; font-size: 18px; background: transparent; }
+			.cmav-sidebar { position: fixed; top: 56px; left: 0; width: 52px; height: calc(100vh - 56px); border-right: 1px solid #d7dde6; background: #f1f3f6; }
+			.cmav-step { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; margin: 26px auto 10px; border-radius: 50%; background: #cfe2ff; color: #2272ea; font-size: 30px; font-weight: 500; }
+			.cmav-step + .cmav-step-text { margin-top: 0; }
+			.cmav-step-text { text-align: center; font-size: 18px; color: #546170; }
+			.cmav-main { margin-left: 52px; padding: 22px 28px; }
+			.cmav-shell { max-width: 1204px; margin: 0 auto; padding: 18px 30px 26px; border: 1px solid #d4dce7; background: #fff; box-shadow: 0 2px 8px rgba(27, 54, 89, 0.08); }
+			.cmav-branding { display: flex; align-items: center; justify-content: center; gap: 34px; margin-bottom: 26px; }
+			.cmav-sesau { text-align: center; line-height: 1; }
+			.cmav-sesau strong { display: block; font-size: 26px; font-weight: 800; color: #2b46a0; }
+			.cmav-sesau span { display: block; font-size: 11px; font-weight: 700; color: #2b46a0; }
+			.cmav-pref { display: inline-flex; align-items: center; padding: 10px 18px; border: 4px solid #f4c400; border-radius: 0 12px 12px 0; background: #2d3fa5; font-size: 30px; font-weight: 900; color: #ffd100; line-height: 1; font-style: italic; }
+			.cmav-pref span { color: #fff; }
+			.cmav-filters { display: grid; grid-template-columns: 1.35fr 1fr 1.3fr 0.85fr; gap: 12px; margin-bottom: 42px; }
+			.cmav-select, .cmav-metric, .cmav-clear { min-height: 82px; border: 1px solid #2d86f4; border-radius: 16px; background: #fff; }
+			.cmav-select { display: flex; align-items: center; justify-content: space-between; padding: 0 24px; box-shadow: 0 4px 10px rgba(47, 100, 180, 0.18); font-size: 18px; color: #2b2f35; }
+			.cmav-metric { display: flex; flex-direction: column; justify-content: center; padding: 10px 24px; }
+			.cmav-metric__label { font-size: 24px; font-weight: 400; line-height: 1; color: #50565d; text-transform: uppercase; }
+			.cmav-metric__value { margin-top: 8px; font-size: 54px; font-weight: 400; line-height: 1; color: #000; text-align: center; }
+			.cmav-clear { display: flex; align-items: center; justify-content: center; background: linear-gradient(180deg, #36a1ff 0%, #2d86f4 100%); color: #fff; font-size: 24px; font-weight: 500; }
+			.cmav-charts { display: grid; grid-template-columns: 1fr 1.25fr; gap: 52px; align-items: start; }
+			.cmav-chart { min-height: 216px; padding: 18px; border: 1px solid #2d86f4; border-radius: 18px; background: #fff; }
+			.cmav-donut-wrap { display: flex; align-items: center; justify-content: center; gap: 42px; height: 100%; }
+			.cmav-donut { position: relative; width: 196px; height: 196px; border-radius: 50%; background: conic-gradient(#ef0098 0 59.3%, #16aec2 59.3% 100%); }
+			.cmav-donut::after { content: ""; position: absolute; inset: 46px; border-radius: 50%; background: #fff; }
+			.cmav-donut__label { position: absolute; z-index: 1; font-size: 18px; font-weight: 500; color: #000; }
+			.cmav-donut__label--left { left: 20px; top: 70px; }
+			.cmav-donut__label--right { right: 10px; bottom: 62px; }
+			.cmav-legend { display: grid; gap: 10px; }
+			.cmav-legend span { display: flex; align-items: center; gap: 8px; font-size: 18px; color: #20242a; }
+			.cmav-legend i { display: inline-block; width: 14px; height: 14px; border-radius: 50%; }
+			.cmav-bars__legend { display: inline-flex; align-items: center; gap: 8px; margin: 0 0 12px 46px; font-size: 18px; color: #222831; }
+			.cmav-bars__legend i { width: 24px; height: 12px; background: #1d73db; }
+			.cmav-bars { position: relative; height: 156px; margin: 0 14px 0 34px; border-left: 1px solid #aab6c4; border-bottom: 1px solid #2e3a49; }
+			.cmav-bars__line { position: absolute; left: 0; right: 0; border-top: 1px solid #d9dee4; }
+			.cmav-bars__line--1 { top: 28px; }
+			.cmav-bars__line--2 { top: 86px; }
+			.cmav-bars__line--3 { top: 116px; }
+			.cmav-bars__ylabel { position: absolute; left: -42px; font-size: 14px; color: #1f2937; }
+			.cmav-bars__ylabel--100 { top: 18px; }
+			.cmav-bars__ylabel--50 { top: 76px; }
+			.cmav-bars__ylabel--0 { bottom: -6px; }
+			.cmav-bars__cols { position: absolute; left: 14px; right: 14px; bottom: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; align-items: end; height: 140px; }
+			.cmav-bars__col { display: flex; flex-direction: column; align-items: center; justify-content: end; height: 100%; }
+			.cmav-bars__bar { width: 100%; max-width: 102px; background: #1d73db; }
+			.cmav-bars__bar--verde { height: 90px; }
+			.cmav-bars__bar--amarelo { height: 24px; }
+			.cmav-bars__bar--azul { height: 20px; }
+			.cmav-bars__bar--vermelho { height: 0; }
+			.cmav-bars__name { margin-top: 10px; font-size: 14px; color: #20242a; text-transform: uppercase; }
+			@media (max-width: 1199.98px) {
+				.cmav-filters { grid-template-columns: 1fr 1fr; }
+				.cmav-charts { grid-template-columns: 1fr; gap: 18px; }
+			}
+			@media (max-width: 767.98px) {
+				.cmav-sidebar { display: none; }
+				.cmav-main { margin-left: 0; padding: 16px; }
+				.cmav-shell { padding: 16px; }
+				.cmav-topbar { padding: 10px 12px; }
+				.cmav-topbar__right { gap: 8px; }
+				.cmav-btn { min-height: 36px; padding: 0 12px; font-size: 13px; }
+				.cmav-branding { flex-direction: column; gap: 14px; }
+				.cmav-filters { grid-template-columns: 1fr; }
+				.cmav-metric__label { font-size: 20px; }
+				.cmav-metric__value { font-size: 42px; }
+				.cmav-donut-wrap { flex-direction: column; gap: 20px; }
+			}
+		</style>
+	</head>
+	<body class="cmav-page">
+		<main class="fix">
+			<header class="cmav-topbar">
+				<div class="cmav-topbar__left">
+					<div class="cmav-logo"><i class="fas fa-circle-notch"></i></div>
+					<div class="cmav-title">SISREG</div>
+				</div>
+				<div class="cmav-topbar__right">
+					<div class="cmav-btn"><i class="fas fa-reply"></i>&nbsp; Reset</div>
+					<div class="cmav-btn cmav-btn--share"><i class="fas fa-user-plus"></i>&nbsp; Share</div>
+					<div class="cmav-iconbtn"><i class="fas fa-ellipsis-v"></i></div>
+				</div>
+			</header>
+
+			<aside class="cmav-sidebar">
+				<div class="cmav-step">1</div>
+				<div class="cmav-step-text">2</div>
+			</aside>
+
+			<section class="cmav-main">
+				<div class="cmav-shell">
+					<div class="cmav-branding">
+						<div class="cmav-sesau"><strong>SESAU</strong><span>Secretaria Municipal<br />de Saude</span></div>
+						<div class="cmav-pref">PREF<span>CG</span></div>
+					</div>
+
+					<div class="cmav-filters">
+						<div class="cmav-select"><span>PROCEDIMENTOS</span><i class="fas fa-caret-down"></i></div>
+						<div class="cmav-metric">
+							<div class="cmav-metric__label">MEDIA DIAS</div>
+							<div class="cmav-metric__value">115</div>
+						</div>
+						<div class="cmav-metric">
+							<div class="cmav-metric__label">TOTAL SOLICITACOES</div>
+							<div class="cmav-metric__value">113,885</div>
+						</div>
+						<div class="cmav-clear">Limpar Filtros</div>
+					</div>
+
+					<div class="cmav-charts">
+						<div class="cmav-chart">
+							<div class="cmav-donut-wrap">
+								<div class="cmav-donut">
+									<div class="cmav-donut__label cmav-donut__label--left">40.7%</div>
+									<div class="cmav-donut__label cmav-donut__label--right">59.3%</div>
+								</div>
+								<div class="cmav-legend">
+									<span><i style="background:#ef0098;"></i> FEMININO</span>
+									<span><i style="background:#16aec2;"></i> MASCULINO</span>
+								</div>
+							</div>
+						</div>
+
+						<div class="cmav-chart">
+							<div class="cmav-bars__legend"><i></i> CLASSIFICACAO</div>
+							<div class="cmav-bars">
+								<div class="cmav-bars__line cmav-bars__line--1"></div>
+								<div class="cmav-bars__line cmav-bars__line--2"></div>
+								<div class="cmav-bars__line cmav-bars__line--3"></div>
+								<div class="cmav-bars__ylabel cmav-bars__ylabel--100">100K</div>
+								<div class="cmav-bars__ylabel cmav-bars__ylabel--50">50K</div>
+								<div class="cmav-bars__ylabel cmav-bars__ylabel--0">0</div>
+								<div class="cmav-bars__cols">
+									<div class="cmav-bars__col"><div class="cmav-bars__bar cmav-bars__bar--verde"></div><div class="cmav-bars__name">VERDE</div></div>
+									<div class="cmav-bars__col"><div class="cmav-bars__bar cmav-bars__bar--amarelo"></div><div class="cmav-bars__name">AMARELO</div></div>
+									<div class="cmav-bars__col"><div class="cmav-bars__bar cmav-bars__bar--azul"></div><div class="cmav-bars__name">AZUL</div></div>
+									<div class="cmav-bars__col"><div class="cmav-bars__bar cmav-bars__bar--vermelho"></div><div class="cmav-bars__name">VERMELHO</div></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+		<script src="assets/js/vendor/jquery-3.6.0.min.js"></script>
+		<script src="assets/js/bootstrap.bundle.min.js"></script>
+		<script src="assets/js/jquery.magnific-popup.min.js"></script>
+		<script src="assets/js/jquery.odometer.min.js"></script>
+		<script src="assets/js/jquery.appear.js"></script>
+		<script src="assets/js/gsap.js"></script>
+		<script src="assets/js/ScrollTrigger.js"></script>
+		<script src="assets/js/SplitText.js"></script>
+		<script src="assets/js/gsap-animation.js"></script>
+		<script src="assets/js/jquery.parallaxScroll.min.js"></script>
+		<script src="assets/js/swiper-bundle.js"></script>
+		<script src="assets/js/ajax-form.js"></script>
+		<script src="assets/js/wow.min.js"></script>
+		<script src="assets/js/aos.js"></script>
+		<script src="assets/js/main.js"></script>
+	</body>
+</html>

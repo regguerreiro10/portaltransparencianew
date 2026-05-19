@@ -1,0 +1,1281 @@
+<!DOCTYPE html>
+<html class="no-js" lang="pt-BR">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="x-ua-compatible" content="ie=edge" />
+		<title>Modulo Financeiro | Transparencia</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png" />
+		<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="assets/css/animate.min.css" />
+		<link rel="stylesheet" href="assets/css/magnific-popup.css" />
+		<link rel="stylesheet" href="assets/css/fontawesome-all.min.css" />
+		<link rel="stylesheet" href="assets/css/flaticon.css" />
+		<link rel="stylesheet" href="assets/css/odometer.css" />
+		<link rel="stylesheet" href="assets/css/swiper-bundle.css" />
+		<link rel="stylesheet" href="assets/css/aos.css" />
+		<link rel="stylesheet" href="assets/css/default.css" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<style>
+			.financeiro-area {
+				padding: 110px 0 120px;
+				background:
+					linear-gradient(180deg, rgba(255, 212, 0, 0.14) 0%, rgba(255, 255, 255, 0) 180px),
+					#f8fbff;
+			}
+
+			.financeiro-shell {
+				background: #fff;
+				border-radius: 22px;
+				border: 1px solid rgba(15, 23, 42, 0.08);
+				box-shadow: 0 24px 60px rgba(15, 23, 42, 0.1);
+				overflow: hidden;
+			}
+
+			.financeiro-shell__top {
+				padding: 34px 36px 22px;
+				border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+				background: linear-gradient(90deg, #0f4c81 0%, #1f6aa5 100%);
+				color: #fff;
+			}
+
+			.financeiro-shell__top h1 {
+				margin: 0 0 10px;
+				font-size: 36px;
+				color: #fff;
+			}
+
+			.financeiro-shell__top p {
+				margin: 0;
+				max-width: 920px;
+				color: rgba(255, 255, 255, 0.88);
+				line-height: 1.7;
+			}
+
+			.financeiro-toolbar {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 12px;
+				padding: 18px 36px;
+				background: #ffd400;
+			}
+
+			.financeiro-chip {
+				padding: 8px 14px;
+				background: rgba(255, 255, 255, 0.9);
+				border-radius: 999px;
+				font-size: 13px;
+				font-weight: 600;
+				color: #17324d;
+			}
+
+			.financeiro-admin-btn {
+				display: inline-flex;
+				align-items: center;
+				gap: 8px;
+				padding: 9px 16px;
+				background: #0f4c81;
+				border-radius: 999px;
+				font-size: 13px;
+				font-weight: 700;
+				color: #fff;
+				transition: 0.2s ease;
+			}
+
+			.financeiro-admin-btn:hover,
+			.financeiro-admin-btn:focus {
+				background: #17324d;
+				color: #fff;
+			}
+
+			.financeiro-module {
+				padding: 26px 36px 12px;
+				background: #f3f6fa;
+				border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+			}
+
+			.financeiro-module__grid {
+				display: grid;
+				grid-template-columns: repeat(6, minmax(0, 1fr));
+				gap: 18px 14px;
+			}
+
+			.financeiro-module__item {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+				min-height: 96px;
+				padding: 16px 12px;
+				border-radius: 16px;
+				text-align: center;
+				color: #5b7088;
+				background: transparent;
+				border: 1px solid transparent;
+				transition: 0.25s ease;
+			}
+
+			.financeiro-module__item:hover,
+			.financeiro-module__item:focus,
+			.financeiro-module__item.is-active {
+				color: #17324d;
+				background: #fff;
+				border-color: #d8e2ee;
+				transform: translateY(-2px);
+				box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
+			}
+
+			.financeiro-module__item i {
+				margin-bottom: 10px;
+				font-size: 19px;
+				color: #6e7f93;
+			}
+
+			.financeiro-module__item.is-active i {
+				color: #0f4c81;
+			}
+
+			.financeiro-module__item span {
+				display: block;
+				font-size: 14px;
+				font-weight: 500;
+				line-height: 1.35;
+			}
+
+			.financeiro-content {
+				padding: 34px 36px 40px;
+			}
+
+			.financeiro-header {
+				display: flex;
+				flex-wrap: wrap;
+				align-items: center;
+				justify-content: space-between;
+				gap: 14px;
+				margin-bottom: 22px;
+			}
+
+			.financeiro-section-title {
+				margin: 0;
+				font-size: 30px;
+				color: #17324d;
+			}
+
+			.financeiro-advanced-toggle {
+				display: inline-flex;
+				align-items: center;
+				gap: 8px;
+				padding: 12px 16px;
+				border-radius: 10px;
+				border: 1px solid #d6e1ed;
+				background: #f5f9ff;
+				color: #17324d;
+				font-weight: 600;
+			}
+
+			.financeiro-filter-grid {
+				display: grid;
+				grid-template-columns: repeat(3, minmax(0, 1fr));
+				gap: 18px;
+				margin-bottom: 20px;
+			}
+
+			.financeiro-filter-grid--two {
+				grid-template-columns: repeat(2, minmax(0, 1fr));
+			}
+
+			.financeiro-filter-group label {
+				display: block;
+				margin-bottom: 8px;
+				font-size: 14px;
+				font-weight: 600;
+				color: #17324d;
+			}
+
+			.financeiro-filter-group input,
+			.financeiro-filter-group select {
+				width: 100%;
+				height: 48px;
+				border: 1px solid #cfd8e3;
+				border-radius: 10px;
+				padding: 0 14px;
+				background: #fff;
+				color: #17324d;
+			}
+
+			.financeiro-advanced-panel {
+				display: none;
+				margin-bottom: 22px;
+				padding: 22px;
+				border: 1px solid #dbe8f5;
+				border-radius: 16px;
+				background: #f7fbff;
+			}
+
+			.financeiro-advanced-panel.is-open {
+				display: block;
+			}
+
+			.financeiro-actions {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 12px;
+				margin-bottom: 20px;
+			}
+
+			.financeiro-actions .btn {
+				min-width: 138px;
+			}
+
+			.financeiro-resume {
+				display: grid;
+				grid-template-columns: repeat(3, minmax(0, 1fr));
+				gap: 16px;
+				margin-bottom: 26px;
+			}
+
+			.financeiro-kpi {
+				padding: 18px 20px;
+				border-radius: 14px;
+				background: #f5f9ff;
+				border: 1px solid #dbe8f5;
+			}
+
+			.financeiro-kpi span {
+				display: block;
+				margin-bottom: 6px;
+				font-size: 13px;
+				text-transform: uppercase;
+				letter-spacing: 0.04em;
+				color: #6a7c8f;
+			}
+
+			.financeiro-kpi strong {
+				font-size: 28px;
+				color: #17324d;
+			}
+
+			.financeiro-overview {
+				display: grid;
+				grid-template-columns: repeat(2, minmax(0, 1fr));
+				gap: 18px;
+				margin-bottom: 26px;
+			}
+
+			.financeiro-card {
+				padding: 24px;
+				border-radius: 18px;
+				border: 1px solid #dbe8f5;
+				background: linear-gradient(180deg, #ffffff 0%, #f7fbff 100%);
+			}
+
+			.financeiro-card--receber {
+				border-color: rgba(22, 160, 133, 0.22);
+				box-shadow: 0 18px 40px rgba(22, 160, 133, 0.08);
+			}
+
+			.financeiro-card--pagar {
+				border-color: rgba(211, 84, 0, 0.22);
+				box-shadow: 0 18px 40px rgba(211, 84, 0, 0.08);
+			}
+
+			.financeiro-card__eyebrow {
+				display: inline-flex;
+				align-items: center;
+				gap: 8px;
+				margin-bottom: 12px;
+				font-size: 12px;
+				font-weight: 700;
+				letter-spacing: 0.06em;
+				text-transform: uppercase;
+			}
+
+			.financeiro-card--receber .financeiro-card__eyebrow {
+				color: #12806a;
+			}
+
+			.financeiro-card--pagar .financeiro-card__eyebrow {
+				color: #b45309;
+			}
+
+			.financeiro-card h3 {
+				margin: 0 0 10px;
+				font-size: 24px;
+				color: #17324d;
+			}
+
+			.financeiro-card p {
+				margin: 0 0 18px;
+				color: #5b7088;
+				line-height: 1.7;
+			}
+
+			.financeiro-card__total {
+				display: block;
+				margin-bottom: 14px;
+				font-size: 30px;
+				font-weight: 800;
+				color: #17324d;
+			}
+
+			.financeiro-card__meta {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 10px;
+				margin-bottom: 18px;
+			}
+
+			.financeiro-card__meta span {
+				padding: 7px 12px;
+				border-radius: 999px;
+				background: #eef5fc;
+				font-size: 13px;
+				font-weight: 600;
+				color: #17324d;
+			}
+
+			.financeiro-table-wrap {
+				border: 1px solid #dde7f1;
+				border-radius: 16px;
+				overflow: hidden;
+				background: #fff;
+			}
+
+			.financeiro-table {
+				width: 100%;
+				margin: 0;
+			}
+
+			.financeiro-table thead th {
+				background: #eff6fd;
+				color: #17324d;
+				font-size: 13px;
+				text-transform: uppercase;
+				letter-spacing: 0.04em;
+				vertical-align: middle;
+			}
+
+			.financeiro-table tbody td {
+				color: #314960;
+				vertical-align: middle;
+			}
+
+			.financeiro-table tbody tr:nth-child(even) td {
+				background: #fbfdff;
+			}
+
+			.financeiro-item-title {
+				margin-bottom: 4px;
+				font-weight: 700;
+				color: #17324d;
+			}
+
+			.financeiro-small {
+				font-size: 13px;
+				color: #6a7c8f;
+			}
+
+			.financeiro-tag {
+				display: inline-flex;
+				align-items: center;
+				padding: 6px 10px;
+				border-radius: 999px;
+				background: #eef5fc;
+				color: #0f4c81;
+				font-size: 12px;
+				font-weight: 700;
+				text-transform: uppercase;
+			}
+
+			.financeiro-list {
+				margin: 0;
+				padding-left: 18px;
+			}
+
+			.financeiro-list li {
+				margin-bottom: 6px;
+			}
+
+			.financeiro-view-btn {
+				display: inline-flex;
+				align-items: center;
+				gap: 8px;
+				padding: 8px 12px;
+				border-radius: 10px;
+				border: 1px solid #d6e1ed;
+				background: #fff;
+				color: #17324d;
+				font-size: 13px;
+				font-weight: 600;
+			}
+
+			.financeiro-view-btn:hover,
+			.financeiro-view-btn:focus {
+				background: #f5f9ff;
+				color: #0f4c81;
+				border-color: #0f4c81;
+			}
+
+			.financeiro-table .text-end {
+				font-weight: 700;
+				color: #17324d;
+			}
+
+			.financeiro-pill {
+				display: inline-flex;
+				align-items: center;
+				padding: 6px 12px;
+				border-radius: 999px;
+				font-size: 12px;
+				font-weight: 800;
+				text-transform: uppercase;
+				letter-spacing: 0.04em;
+			}
+
+			.financeiro-pill--receber {
+				background: rgba(22, 160, 133, 0.12);
+				color: #12806a;
+			}
+
+			.financeiro-pill--pagar {
+				background: rgba(211, 84, 0, 0.12);
+				color: #b45309;
+			}
+
+			.financeiro-empty-state {
+				padding: 42px 20px;
+				text-align: center;
+				color: #5a6f86;
+			}
+
+			.financeiro-modal {
+				position: fixed;
+				inset: 0;
+				z-index: 9999;
+				display: none;
+				align-items: center;
+				justify-content: center;
+				padding: 24px;
+				background: rgba(15, 23, 42, 0.55);
+			}
+
+			.financeiro-modal.is-open {
+				display: flex;
+			}
+
+			.financeiro-modal__dialog {
+				width: min(720px, 100%);
+				max-height: 85vh;
+				overflow: hidden;
+				border-radius: 22px;
+				background: #fff;
+				box-shadow: 0 24px 60px rgba(15, 23, 42, 0.25);
+			}
+
+			.financeiro-modal__header {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 16px;
+				padding: 22px 24px;
+				border-bottom: 1px solid #e5edf5;
+			}
+
+			.financeiro-modal__title {
+				margin: 0;
+				font-size: 24px;
+				color: #17324d;
+			}
+
+			.financeiro-modal__close {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				width: 40px;
+				height: 40px;
+				border: 1px solid #d6e1ed;
+				border-radius: 999px;
+				background: #fff;
+				color: #17324d;
+			}
+
+			.financeiro-modal__body {
+				padding: 24px;
+				max-height: calc(85vh - 85px);
+				overflow: auto;
+			}
+
+			.financeiro-attachment-list {
+				display: grid;
+				gap: 14px;
+			}
+
+			.financeiro-attachment-item {
+				padding: 16px 18px;
+				border: 1px solid #dde7f1;
+				border-radius: 16px;
+				background: #f8fbff;
+			}
+
+			.financeiro-attachment-item strong {
+				display: block;
+				margin-bottom: 6px;
+				font-size: 16px;
+				color: #17324d;
+			}
+
+			.financeiro-attachment-item p {
+				margin: 0 0 12px;
+				color: #5b7088;
+			}
+
+			@media (max-width: 991.98px) {
+				.financeiro-module__grid,
+				.financeiro-filter-grid,
+				.financeiro-filter-grid--two,
+				.financeiro-resume,
+				.financeiro-overview {
+					grid-template-columns: repeat(2, minmax(0, 1fr));
+				}
+			}
+
+			@media (max-width: 767.98px) {
+				.financeiro-area {
+					padding: 90px 0;
+				}
+
+				.financeiro-shell__top,
+				.financeiro-toolbar,
+				.financeiro-module,
+				.financeiro-content {
+					padding-left: 20px;
+					padding-right: 20px;
+				}
+
+				.financeiro-shell__top h1 {
+					font-size: 28px;
+				}
+
+				.financeiro-module__grid,
+				.financeiro-filter-grid,
+				.financeiro-filter-grid--two,
+				.financeiro-resume,
+				.financeiro-overview {
+					grid-template-columns: 1fr;
+				}
+
+				.financeiro-header {
+					align-items: flex-start;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<button class="scroll__top scroll-to-target" data-target="html">
+			<i class="fas fa-angle-up"></i>
+		</button>
+
+		<header>
+			<div id="header-fixed-height"></div>
+			<div id="sticky-header" class="tg-header__area">
+				<div class="container custom-container">
+					<div class="row">
+						<div class="col-12">
+							<div class="tgmenu__wrap">
+								<nav class="tgmenu__nav">
+									<div class="logo">
+										<a href="index.html"><img src="assets/img/logo/logo.png" alt="Logo" /></a>
+									</div>
+									<div class="tgmenu__navbar-wrap tgmenu__main-menu d-none d-lg-flex">
+										<ul class="navigation">
+											<li><a href="index.html">In&iacute;cio</a></li>
+											<li><a href="services-3.html">Sites Municipais</a></li>
+											<li><a href="services.html">Portal Transpar&ecirc;ncia</a></li>
+											<li><a href="services-5.html">Servi&ccedil;os</a></li>
+											<li><a href="blog.html">Not&iacute;cias</a></li>
+											<li><a href="contact.html">Fale Conosco</a></li>
+										</ul>
+									</div>
+									<div class="tgmenu__action d-none d-md-block">
+										<ul class="list-wrap">
+											<li class="header-search">
+												<a href="javascript:void(0)" class="search-open-btn" aria-label="Abrir pesquisa">
+													<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none">
+														<path d="M19 19.0002L14.657 14.6572M14.657 14.6572C15.3999 13.9143 15.9892 13.0324 16.3912 12.0618C16.7933 11.0911 17.0002 10.0508 17.0002 9.00021C17.0002 7.9496 16.7933 6.90929 16.3913 5.93866C15.9892 4.96803 15.3999 4.08609 14.657 3.34321C13.9141 2.60032 13.0322 2.01103 12.0616 1.60898C11.0909 1.20693 10.0506 1 9.00002 1C7.94942 1 6.90911 1.20693 5.93848 1.60898C4.96785 2.01103 4.08591 2.60032 3.34302 3.34321C1.84269 4.84354 0.999817 6.87842 0.999817 9.00021C0.999817 11.122 1.84269 13.1569 3.34302 14.6572C4.84335 16.1575 6.87824 17.0004 9.00002 17.0004C11.1218 17.0004 13.1567 16.1575 14.657 14.6572Z" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+													</svg>
+												</a>
+											</li>
+										</ul>
+									</div>									<div class="mobile-nav-toggler">
+										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18" fill="none">
+											<path d="M0 2C0 0.895431 0.895431 0 2 0C3.10457 0 4 0.895431 4 2C4 3.10457 3.10457 4 2 4C0.895431 4 0 3.10457 0 2Z" fill="currentcolor" />
+											<path d="M0 9C0 7.89543 0.895431 7 2 7C3.10457 7 4 7.89543 4 9C4 10.1046 3.10457 11 2 11C0.895431 11 0 10.1046 0 9Z" fill="currentcolor" />
+											<path d="M0 16C0 14.8954 0.895431 14 2 14C3.10457 14 4 14.8954 4 16C4 17.1046 3.10457 18 2 18C0.895431 18 0 17.1046 0 16Z" fill="currentcolor" />
+											<path d="M7 2C7 0.895431 7.89543 0 9 0C10.1046 0 11 0.895431 11 2C11 3.10457 10.1046 4 9 4C7.89543 4 7 3.10457 7 2Z" fill="currentcolor" />
+											<path d="M7 9C7 7.89543 7.89543 7 9 7C10.1046 7 11 7.89543 11 9C11 10.1046 10.1046 11 9 11C7.89543 11 7 10.1046 7 9Z" fill="currentcolor" />
+											<path d="M7 16C7 14.8954 7.89543 14 9 14C10.1046 14 11 14.8954 11 16C11 17.1046 10.1046 18 9 18C7.89543 18 7 17.1046 7 16Z" fill="currentcolor" />
+											<path d="M14 2C14 0.895431 14.8954 0 16 0C17.1046 0 18 0.895431 18 2C18 3.10457 17.1046 4 16 4C14.8954 4 14 3.10457 14 2Z" fill="currentcolor" />
+											<path d="M14 9C14 7.89543 14.8954 7 16 7C17.1046 7 18 7.89543 18 9C18 10.1046 17.1046 11 16 11C14.8954 11 14 10.1046 14 9Z" fill="currentcolor" />
+											<path d="M14 16C14 14.8954 14.8954 14 16 14C17.1046 14 18 14.8954 18 16C18 17.1046 17.1046 18 16 18C14.8954 18 14 17.1046 14 16Z" fill="currentcolor" />
+										</svg>
+									</div>
+								</nav>
+							</div>
+							<div class="tgmobile__menu">
+								<nav class="tgmobile__menu-box">
+									<div class="close-btn"><i class="fas fa-times"></i></div>
+									<div class="nav-logo">
+										<a href="index.html"><img src="assets/img/logo/logo.png" alt="Logo" /></a>
+									</div>
+									<div class="tgmobile__menu-outer"></div>
+								</nav>
+							</div>
+							<div class="tgmobile__menu-backdrop"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- header-search -->
+			<div class="search__popup">
+				<div class="container">
+					<div class="row">
+						<div class="col-12">
+							<div class="search__wrapper">
+								<div class="search__close">
+									<button type="button" class="search-close-btn" aria-label="Fechar pesquisa">
+										<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M17 1L1 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+											<path d="M1 1L17 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+										</svg>
+									</button>
+								</div>
+								<div class="search__form">
+									<form action="formulario.php" method="get">
+										<h2 class="search-advanced__title">Busca no portal</h2>
+										<div class="search__input">
+											<input class="search-input-field" type="text" name="q" placeholder="Digite o termo da consulta" />
+											<span class="search-focus-border"></span>
+											<button type="submit" aria-label="Pesquisar">
+												<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+													<path d="M9.55 18.1C14.272 18.1 18.1 14.272 18.1 9.55C18.1 4.82797 14.272 1 9.55 1C4.82797 1 1 4.82797 1 9.55C1 14.272 4.82797 18.1 9.55 18.1Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+													<path d="M19.0002 19.0002L17.2002 17.2002" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+												</svg>
+											</button>
+										</div>
+										<div class="search-advanced__message" aria-live="polite"></div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="search-popup-overlay"></div>
+			<!-- header-search-end -->		</header>
+
+		<main class="fix">
+			<section class="financeiro-area">
+				<div class="container">
+					<div class="financeiro-shell">
+						<div class="financeiro-shell__top">
+							<h1>Modulo Financeiro</h1>
+							<p>
+								Acompanhe o movimento do ContaCaixa em um painel unico, com acesso rapido as contas a receber,
+								as contas a pagar e ao relatorio consolidado do caixa.
+							</p>
+						</div>
+						<div class="financeiro-toolbar">
+							<span class="financeiro-chip">ContaCaixa integrado</span>
+							<span class="financeiro-chip">Contas a receber</span>
+							<span class="financeiro-chip">Contas a pagar</span>
+							<span class="financeiro-chip">Resumo por categoria</span>
+							<span class="financeiro-chip">Consulta por periodo</span>
+							<a class="financeiro-admin-btn" href="admin/index.php?class=ContaCaixaReport">
+								<i class="fas fa-wallet"></i>
+								<span>Relatorio de Caixa</span>
+							</a>
+						</div>
+						<div class="financeiro-module">
+							<div class="financeiro-module__grid">
+								<a class="financeiro-module__item " href="gestao-documentos.html" aria-current="page">
+									<i class="fas fa-file-alt"></i>
+									<span>Gestão de Documentos</span>
+								</a>
+								<a class="financeiro-module__item is-active" href="modulo-financeiro.html" aria-current="page">
+									<i class="fas fa-wallet"></i>
+									<span>Modulo Financeiro</span>
+								</a>
+								<a class="financeiro-module__item" href="relatorios-modulo.html">
+									<i class="fas fa-chart-bar"></i>
+									<span>Modulo de Relatorios</span>
+								</a>
+								<a class="financeiro-module__item" href="legislacao-portal.html">
+									<i class="fas fa-balance-scale"></i>
+									<span>Legislacao</span>
+								</a>
+								<a class="financeiro-module__item" href="editais-licitacao-lista.html">
+									<i class="fas fa-file-signature"></i>
+									<span>Editais</span>
+								</a>
+								<a class="financeiro-module__item" href="licitacoes-portal.html">
+									<i class="fas fa-gavel"></i>
+									<span>Licitacoes</span>
+								</a>
+								<a class="financeiro-module__item" href="dados-abertos-portal.html">
+									<i class="fas fa-database"></i>
+									<span>Dados Abertos</span>
+								</a>
+								<a class="financeiro-module__item" href="e-sic-informacoes-cidadao.html">
+									<i class="fas fa-info-circle"></i>
+									<span>e-SIC</span>
+								</a>
+								<a class="financeiro-module__item" href="contratos-portal.html">
+									<i class="fas fa-file-contract"></i>
+									<span>Contratos</span>
+								</a>
+								<a class="financeiro-module__item" href="processo-administrativo.html">
+									<i class="fas fa-project-diagram"></i>
+									<span>Processo Administrativo</span>
+								</a>
+								<a class="financeiro-module__item" href="convenios-portal.html">
+									<i class="fas fa-handshake"></i>
+									<span>Convenios</span>
+								</a>
+								<a class="financeiro-module__item" href="prestacao-contas.html">
+									<i class="fas fa-clipboard-check"></i>
+									<span>Prestacao de Contas</span>
+								</a>
+								<a class="financeiro-module__item" href="legislacao-portal.html">
+									<i class="fas fa-book"></i>
+									<span>Biblioteca Legal</span>
+								</a>
+								<a class="financeiro-module__item" href="consulta-processo-proprietario.html">
+									<i class="fas fa-search"></i>
+									<span>Consulta Publica</span>
+								</a>
+								<a class="financeiro-module__item" href="services.html">
+									<i class="fas fa-arrow-left"></i>
+									<span>Voltar</span>
+								</a>
+							</div>
+						</div>
+						<div class="financeiro-content">
+							<div class="financeiro-header">
+								<h2 class="financeiro-section-title">ContaCaixa</h2>
+								<button class="financeiro-advanced-toggle" id="financeiro-advanced-toggle" type="button">
+									<i class="fas fa-sliders-h"></i>
+									Filtros avancados
+								</button>
+							</div>
+							<div class="financeiro-filter-grid">
+								<div class="financeiro-filter-group">
+									<label for="financeiro-periodo">Periodo</label>
+									<select id="financeiro-periodo">
+										<option value="">Carregando periodos...</option>
+									</select>
+								</div>
+								<div class="financeiro-filter-group">
+									<label for="financeiro-fluxo">Fluxo financeiro</label>
+									<select id="financeiro-fluxo">
+										<option value="">Todos</option>
+										<option value="receber">Contas a receber</option>
+										<option value="pagar">Contas a pagar</option>
+									</select>
+								</div>
+								<div class="financeiro-filter-group">
+									<label for="financeiro-categoria">Categoria</label>
+									<input type="text" id="financeiro-categoria" placeholder="Filtrar categoria do caixa" />
+								</div>
+							</div>
+							<div class="financeiro-advanced-panel" id="financeiro-advanced-panel">
+								<div class="financeiro-filter-grid">
+									<div class="financeiro-filter-group">
+										<label for="financeiro-minimo">Valor minimo</label>
+										<input type="number" id="financeiro-minimo" min="0" step="0.01" placeholder="0,00" />
+									</div>
+									<div class="financeiro-filter-group">
+										<label for="financeiro-ordenacao">Ordenar por</label>
+										<select id="financeiro-ordenacao">
+											<option value="valor">Maior valor</option>
+											<option value="categoria">Categoria</option>
+											<option value="fluxo">Fluxo</option>
+										</select>
+									</div>
+									<div class="financeiro-filter-group">
+										<label for="financeiro-acao">Atalho</label>
+										<select id="financeiro-acao">
+											<option value="">Todas as acoes</option>
+											<option value="list">Somente listagens</option>
+											<option value="create">Somente cadastros</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="financeiro-actions">
+								<button class="btn" id="financeiro-consultar" type="button">Consultar</button>
+								<button class="btn btn-two" id="financeiro-limpar" type="button">Limpar consulta</button>
+								<a class="btn btn-three" href="services.html">Voltar</a>
+							</div>
+							<div class="financeiro-resume">
+								<div class="financeiro-kpi">
+									<span>Total a receber</span>
+									<strong id="financeiro-total-receber">R$ 0,00</strong>
+								</div>
+								<div class="financeiro-kpi">
+									<span>Total a pagar</span>
+									<strong id="financeiro-total-pagar">R$ 0,00</strong>
+								</div>
+								<div class="financeiro-kpi">
+									<span>Saldo projetado</span>
+									<strong id="financeiro-saldo">R$ 0,00</strong>
+								</div>
+							</div>
+							<div class="financeiro-overview">
+								<div class="financeiro-card financeiro-card--receber">
+									<div class="financeiro-card__eyebrow">
+										<i class="fas fa-arrow-down"></i>
+										<span>ContaCaixa</span>
+									</div>
+									<h3>Contas a receber</h3>
+									<p>Valores agrupados por categoria com acesso direto a listagem e ao cadastro no modulo financeiro.</p>
+									<strong class="financeiro-card__total" id="financeiro-card-receber-total">R$ 0,00</strong>
+									<div class="financeiro-card__meta">
+										<span id="financeiro-card-receber-periodo">Periodo --/----</span>
+										<span id="financeiro-card-receber-itens">0 categorias</span>
+									</div>
+								</div>
+								<div class="financeiro-card financeiro-card--pagar">
+									<div class="financeiro-card__eyebrow">
+										<i class="fas fa-arrow-up"></i>
+										<span>ContaCaixa</span>
+									</div>
+									<h3>Contas a pagar</h3>
+									<p>Saidas consolidadas por categoria para facilitar a leitura do caixa e o acesso ao detalhamento.</p>
+									<strong class="financeiro-card__total" id="financeiro-card-pagar-total">R$ 0,00</strong>
+									<div class="financeiro-card__meta">
+										<span id="financeiro-card-pagar-periodo">Periodo --/----</span>
+										<span id="financeiro-card-pagar-itens">0 categorias</span>
+									</div>
+								</div>
+							</div>
+							<div class="financeiro-table-wrap">
+								<table class="table financeiro-table">
+									<thead>
+										<tr>
+											<th>Fluxo</th>
+											<th>Categoria</th>
+											<th>Periodo</th>
+											<th class="text-end">Total</th>
+											<th class="text-end">Participacao</th>
+											<th>Acoes</th>
+										</tr>
+									</thead>
+									<tbody id="financeiro-table-body">
+										<tr><td colspan="6" class="financeiro-empty-state">Carregando dados do ContaCaixa...</td></tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<footer>
+			<div class="footer__area-three">
+				<div class="footer__bottom-three">
+					<div class="container">
+						<div class="row align-items-center">
+							<div class="col-lg-6">
+								<div class="copyright-text-two">
+									<p>Copyright &copy; <a href="index.html">Ti-Genesis</a> | Todos os direitos reservados</p>
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div class="footer__social-three">
+									<ul class="list-wrap justify-content-center justify-content-lg-end">
+										<li><a href="javascript:void(0)"><i class="fab fa-facebook-f"></i></a></li>
+										<li><a href="javascript:void(0)"><i class="fab fa-twitter"></i></a></li>
+										<li><a href="javascript:void(0)"><i class="fab fa-instagram"></i></a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+		<div class="financeiro-modal" id="financeiro-anexos-modal" aria-hidden="true">
+			<div class="financeiro-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="financeiro-anexos-title">
+				<div class="financeiro-modal__header">
+					<h3 class="financeiro-modal__title" id="financeiro-anexos-title">Anexos da conta</h3>
+					<button class="financeiro-modal__close" id="financeiro-anexos-close" type="button" aria-label="Fechar">
+						<i class="fas fa-times"></i>
+					</button>
+				</div>
+				<div class="financeiro-modal__body" id="financeiro-anexos-body">
+					<div class="financeiro-empty-state">Carregando anexos...</div>
+				</div>
+			</div>
+		</div>
+
+		<script src="assets/js/vendor/jquery-3.6.0.min.js"></script>
+		<script src="assets/js/bootstrap.bundle.min.js"></script>
+		<script src="assets/js/jquery.magnific-popup.min.js"></script>
+		<script src="assets/js/jquery.odometer.min.js"></script>
+		<script src="assets/js/jquery.appear.js"></script>
+		<script src="assets/js/gsap.js"></script>
+		<script src="assets/js/ScrollTrigger.js"></script>
+		<script src="assets/js/SplitText.js"></script>
+		<script src="assets/js/gsap-animation.js"></script>
+		<script src="assets/js/jquery.parallaxScroll.min.js"></script>
+		<script src="assets/js/swiper-bundle.js"></script>
+		<script src="assets/js/ajax-form.js"></script>
+		<script src="assets/js/wow.min.js"></script>
+		<script src="assets/js/aos.js"></script>
+		<script src="assets/js/main.js"></script>
+		<script>
+			(function () {
+				const endpoints = {
+					receber: 'admin/public_receitas_data.php',
+					pagar: 'admin/public_despesas_empenhadas_data.php'
+				};
+				const advancedToggle = document.getElementById('financeiro-advanced-toggle');
+				const advancedPanel = document.getElementById('financeiro-advanced-panel');
+				const consultarButton = document.getElementById('financeiro-consultar');
+				const limparButton = document.getElementById('financeiro-limpar');
+				const periodoSelect = document.getElementById('financeiro-periodo');
+				const fluxoSelect = document.getElementById('financeiro-fluxo');
+				const categoriaSelect = document.getElementById('financeiro-categoria');
+				const minimoInput = document.getElementById('financeiro-minimo');
+				const ordenacaoSelect = document.getElementById('financeiro-ordenacao');
+				const acaoSelect = document.getElementById('financeiro-acao');
+				const tableBody = document.getElementById('financeiro-table-body');
+				const totalReceberElement = document.getElementById('financeiro-total-receber');
+				const totalPagarElement = document.getElementById('financeiro-total-pagar');
+				const saldoElement = document.getElementById('financeiro-saldo');
+				const cardReceberTotal = document.getElementById('financeiro-card-receber-total');
+				const cardPagarTotal = document.getElementById('financeiro-card-pagar-total');
+				const cardReceberPeriodo = document.getElementById('financeiro-card-receber-periodo');
+				const cardPagarPeriodo = document.getElementById('financeiro-card-pagar-periodo');
+				const cardReceberItens = document.getElementById('financeiro-card-receber-itens');
+				const cardPagarItens = document.getElementById('financeiro-card-pagar-itens');
+				const anexosModal = document.getElementById('financeiro-anexos-modal');
+				const anexosModalBody = document.getElementById('financeiro-anexos-body');
+				const anexosModalClose = document.getElementById('financeiro-anexos-close');
+				const fields = [
+					periodoSelect,
+					fluxoSelect,
+					categoriaSelect,
+					minimoInput,
+					ordenacaoSelect,
+					acaoSelect
+				];
+				let periodInitialized = false;
+
+				function populateSelect(select, items, defaultLabel) {
+					const currentValue = select.value;
+					const options = ['<option value="">' + defaultLabel + '</option>'].concat(
+						items.map(function (item) {
+							if (typeof item === 'string') {
+								return '<option value="' + item + '">' + item + '</option>';
+							}
+							return '<option value="' + item.value + '">' + item.label + '</option>';
+						})
+					);
+					select.innerHTML = options.join('');
+					if (currentValue && items.some(function (item) {
+						return (typeof item === 'string' ? item : item.value) === currentValue;
+					})) {
+						select.value = currentValue;
+					}
+				}
+
+				function formatCurrency(value) {
+					return new Intl.NumberFormat('pt-BR', {
+						style: 'currency',
+						currency: 'BRL'
+					}).format(Number(value || 0));
+				}
+
+				function formatPeriod(period) {
+					if (!period || period.indexOf('-') === -1) {
+						return 'Todos os periodos';
+					}
+					const parts = period.split('-');
+					return parts[1] + '/' + parts[0];
+				}
+
+				function updateSummary(receber, pagar) {
+					const totalReceber = Number(receber && receber.total ? receber.total : 0);
+					const totalPagar = Number(pagar && pagar.total ? pagar.total : 0);
+					const saldo = totalReceber - totalPagar;
+
+					totalReceberElement.textContent = formatCurrency(totalReceber);
+					totalPagarElement.textContent = formatCurrency(totalPagar);
+					saldoElement.textContent = formatCurrency(saldo);
+					cardReceberTotal.textContent = formatCurrency(totalReceber);
+					cardPagarTotal.textContent = formatCurrency(totalPagar);
+					cardReceberPeriodo.textContent = 'Periodo ' + formatPeriod(receber && receber.period);
+					cardPagarPeriodo.textContent = 'Periodo ' + formatPeriod(pagar && pagar.period);
+					cardReceberItens.textContent = (receber && receber.items ? receber.items.length : 0) + ' contas';
+					cardPagarItens.textContent = (pagar && pagar.items ? pagar.items.length : 0) + ' contas';
+				}
+
+				function buildRows(receber, pagar) {
+					const rows = [];
+
+					(receber && receber.items ? receber.items : []).forEach(function (item) {
+						rows.push({
+							id: item.id || null,
+							flow: 'receber',
+							label: 'Contas a receber',
+							title: item.label,
+							category: item.category || 'Sem categoria',
+							detail: item.client
+								? ('Cliente: ' + item.client + (item.due_date ? ' | Vencimento: ' + item.due_date : ''))
+								: (item.due_date ? 'Vencimento: ' + item.due_date : 'Origem: ContaCaixa'),
+							total: Number(item.value || 0),
+							percentage: Number(item.percentage || 0),
+							period: receber.period,
+							listUrl: receber.links && receber.links.list ? receber.links.list : 'admin/index.php?class=ContaReceberList',
+							createUrl: receber.links && receber.links.create ? receber.links.create : 'admin/index.php?class=ContaReceberForm'
+						});
+					});
+
+					(pagar && pagar.items ? pagar.items : []).forEach(function (item) {
+						rows.push({
+							id: item.id || null,
+							flow: 'pagar',
+							label: 'Contas a pagar',
+							title: item.label,
+							category: item.category || 'Sem categoria',
+							detail: item.supplier
+								? ('Fornecedor: ' + item.supplier + (item.due_date ? ' | Vencimento: ' + item.due_date : ''))
+								: (item.due_date ? 'Vencimento: ' + item.due_date : 'Origem: ContaCaixa'),
+							total: Number(item.value || 0),
+							percentage: Number(item.percentage || 0),
+							period: pagar.period,
+							listUrl: pagar.links && pagar.links.list ? pagar.links.list : 'admin/index.php?class=ContaPagarList',
+							createUrl: pagar.links && pagar.links.create ? pagar.links.create : 'admin/index.php?class=ContaPagarForm'
+						});
+					});
+
+					return rows;
+				}
+
+				function filterRows(rows) {
+					return rows.filter(function (item) {
+						const categoria = categoriaSelect.value.trim().toLowerCase();
+						const minimo = Number(minimoInput.value || 0);
+
+						if (fluxoSelect.value && item.flow !== fluxoSelect.value) {
+							return false;
+						}
+
+						if (categoria && item.category.toLowerCase().indexOf(categoria) === -1) {
+							return false;
+						}
+
+						if (item.total < minimo) {
+							return false;
+						}
+
+						return true;
+					}).sort(function (a, b) {
+						if (ordenacaoSelect.value === 'categoria') {
+							return a.category.localeCompare(b.category, 'pt-BR');
+						}
+						if (ordenacaoSelect.value === 'fluxo') {
+							return a.label.localeCompare(b.label, 'pt-BR') || b.total - a.total;
+						}
+						return b.total - a.total;
+					});
+				}
+
+				function renderTable(rows) {
+					if (!rows.length) {
+						tableBody.innerHTML = '<tr><td colspan="6" class="financeiro-empty-state">Nenhum lancamento do ContaCaixa encontrado para os filtros selecionados.</td></tr>';
+						return;
+					}
+
+					tableBody.innerHTML = rows.map(function (item) {
+						const pillClass = item.flow === 'receber' ? 'financeiro-pill--receber' : 'financeiro-pill--pagar';
+						const actions = [];
+
+						if (acaoSelect.value !== 'create') {
+							actions.push('<button class="financeiro-view-btn js-financeiro-anexos" type="button" data-conta-id="' + item.id + '"><i class="fas fa-paperclip"></i> Anexos</button>');
+						}
+						return [
+							'<tr>',
+								'<td><span class="financeiro-pill ' + pillClass + '">' + item.label + '</span></td>',
+								'<td><div class="financeiro-item-title">' + (item.title || item.category) + '</div><div class="financeiro-small">' + (item.detail || item.category) + '</div></td>',
+								'<td>' + formatPeriod(item.period) + '</td>',
+								'<td class="text-end">' + formatCurrency(item.total) + '</td>',
+								'<td class="text-end">' + item.percentage.toFixed(2).replace('.', ',') + '%</td>',
+								'<td><div style="display: flex; flex-wrap: wrap; gap: 8px;">' + actions.join('') + '</div></td>',
+							'</tr>'
+						].join('');
+					}).join('');
+				}
+
+				function openAnexosModal() {
+					anexosModal.classList.add('is-open');
+					anexosModal.setAttribute('aria-hidden', 'false');
+				}
+
+				function closeAnexosModal() {
+					anexosModal.classList.remove('is-open');
+					anexosModal.setAttribute('aria-hidden', 'true');
+				}
+
+				function renderAnexos(items) {
+					if (!items.length) {
+						anexosModalBody.innerHTML = '<div class="financeiro-empty-state">Nenhum anexo cadastrado para esta conta.</div>';
+						return;
+					}
+
+					anexosModalBody.innerHTML = '<div class="financeiro-attachment-list">' + items.map(function (item) {
+						const description = item.description && item.description.trim() !== '' ? item.description : 'Arquivo vinculado a esta conta.';
+						return [
+							'<div class="financeiro-attachment-item">',
+								'<strong>' + item.file_name + '</strong>',
+								'<p>' + description + '</p>',
+								'<a class="financeiro-view-btn" href="' + item.url + '" target="_blank" rel="noopener noreferrer"><i class="fas fa-eye"></i> Abrir anexo</a>',
+							'</div>'
+						].join('');
+					}).join('') + '</div>';
+				}
+
+				function loadAnexos(contaId) {
+					anexosModalBody.innerHTML = '<div class="financeiro-empty-state">Carregando anexos...</div>';
+					openAnexosModal();
+
+					fetch('admin/public_conta_anexos.php?conta_id=' + encodeURIComponent(contaId), { headers: { Accept: 'application/json' } })
+						.then(function (response) {
+							if (!response.ok) {
+								throw new Error('Nao foi possivel carregar os anexos desta conta.');
+							}
+							return response.json();
+						})
+						.then(function (payload) {
+							if (payload.error) {
+								throw new Error(payload.message || 'Erro ao consultar anexos.');
+							}
+							renderAnexos(payload.items || []);
+						})
+						.catch(function (error) {
+							anexosModalBody.innerHTML = '<div class="financeiro-empty-state">' + error.message + '</div>';
+						});
+				}
+
+				function buildQuery() {
+					const params = new URLSearchParams();
+					if (periodoSelect.value !== '') {
+						params.set('period', periodoSelect.value);
+					}
+					return params.toString();
+				}
+
+				function loadEndpoint(url) {
+					return fetch(url + (buildQuery() ? '?' + buildQuery() : ''), { headers: { Accept: 'application/json' } })
+						.then(function (response) {
+							if (!response.ok) {
+								throw new Error('Nao foi possivel carregar os dados do ContaCaixa.');
+							}
+							return response.json();
+						});
+				}
+
+				function syncPeriods(receber, pagar) {
+					const periodMap = {};
+
+					(receber.periods || []).concat(pagar.periods || []).forEach(function (item) {
+						if (item && item.value && !periodMap[item.value]) {
+							periodMap[item.value] = item;
+						}
+					});
+
+					const periods = Object.keys(periodMap).sort(function (a, b) {
+						return a < b ? 1 : -1;
+					}).map(function (key) {
+						return periodMap[key];
+					});
+
+					populateSelect(periodoSelect, periods, 'Todos os periodos');
+
+					if (!periodInitialized) {
+						periodInitialized = true;
+					}
+
+					return true;
+				}
+
+				function loadData() {
+					tableBody.innerHTML = '<tr><td colspan="6" class="financeiro-empty-state">Carregando dados do ContaCaixa...</td></tr>';
+
+					Promise.all([
+						loadEndpoint(endpoints.receber),
+						loadEndpoint(endpoints.pagar)
+					])
+						.then(function (payloads) {
+							const receber = payloads[0] || {};
+							const pagar = payloads[1] || {};
+
+							if (receber.error || pagar.error) {
+								throw new Error((receber.message || pagar.message) || 'Erro ao consultar dados financeiros.');
+							}
+
+							if (!syncPeriods(receber, pagar)) {
+								loadData();
+								return;
+							}
+
+							updateSummary(receber, pagar);
+							renderTable(filterRows(buildRows(receber, pagar)));
+						})
+						.catch(function (error) {
+							updateSummary({}, {});
+							tableBody.innerHTML = '<tr><td colspan="6" class="financeiro-empty-state">' + error.message + '</td></tr>';
+						});
+				}
+
+				advancedToggle.addEventListener('click', function () {
+					advancedPanel.classList.toggle('is-open');
+				});
+
+				anexosModalClose.addEventListener('click', closeAnexosModal);
+
+				anexosModal.addEventListener('click', function (event) {
+					if (event.target === anexosModal) {
+						closeAnexosModal();
+					}
+				});
+
+				document.addEventListener('click', function (event) {
+					const button = event.target.closest('.js-financeiro-anexos');
+					if (!button) {
+						return;
+					}
+
+					loadAnexos(button.getAttribute('data-conta-id'));
+				});
+
+				consultarButton.addEventListener('click', loadData);
+
+				limparButton.addEventListener('click', function () {
+					fields.forEach(function (field) {
+						field.value = '';
+					});
+					periodInitialized = false;
+					ordenacaoSelect.value = 'valor';
+					acaoSelect.value = '';
+					loadData();
+				});
+
+				loadData();
+			})();
+		</script>
+	</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html class="no-js" lang="pt-BR">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="x-ua-compatible" content="ie=edge" />
+		<title>Carta de Servicos da Saude</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png" />
+		<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="assets/css/animate.min.css" />
+		<link rel="stylesheet" href="assets/css/magnific-popup.css" />
+		<link rel="stylesheet" href="assets/css/fontawesome-all.min.css" />
+		<link rel="stylesheet" href="assets/css/flaticon.css" />
+		<link rel="stylesheet" href="assets/css/odometer.css" />
+		<link rel="stylesheet" href="assets/css/swiper-bundle.css" />
+		<link rel="stylesheet" href="assets/css/aos.css" />
+		<link rel="stylesheet" href="assets/css/default.css" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<style>
+			.cssa-page { background: #f7f7f7; color: #33526f; }
+			.cssa-topbar { background: #0a5a92; border-bottom: 3px solid #d5d900; }
+			.cssa-topbar__inner { display: flex; align-items: center; justify-content: space-between; min-height: 56px; }
+			.cssa-brand { display: flex; align-items: center; gap: 10px; color: #fff; }
+			.cssa-brand__mark { display: flex; align-items: center; justify-content: center; width: 26px; height: 34px; border: 1px solid rgba(255,255,255,0.75); border-radius: 4px; font-size: 13px; }
+			.cssa-brand__text { font-size: 14px; font-weight: 800; line-height: 1; text-transform: uppercase; }
+			.cssa-brand__sub { display: block; font-size: 8px; font-weight: 600; letter-spacing: 0.08em; }
+			.cssa-access { font-size: 11px; font-weight: 700; color: #fff; }
+			.cssa-head { padding: 30px 0 18px; background: #f6f7f9; }
+			.cssa-heading { display: flex; align-items: center; gap: 14px; }
+			.cssa-heading__icon { display: flex; align-items: center; justify-content: center; width: 46px; height: 46px; background: #2f6397; color: #fff; font-size: 20px; }
+			.cssa-title { margin: 0; font-size: 34px; font-weight: 800; line-height: 1; color: #1b5b95; text-transform: uppercase; }
+			.cssa-subtitle { margin: 4px 0 0; font-size: 14px; color: #5c6b79; }
+			.cssa-hero { padding: 22px 0 0; background: linear-gradient(180deg, rgba(27, 91, 149, 0) 0%, rgba(27, 91, 149, 0) 100%), radial-gradient(circle at 18% 22%, rgba(255, 82, 151, 0.55), transparent 18%), radial-gradient(circle at 35% 34%, rgba(245, 96, 167, 0.65), transparent 16%), radial-gradient(circle at 58% 28%, rgba(62, 162, 58, 0.48), transparent 24%), radial-gradient(circle at 82% 44%, rgba(52, 140, 46, 0.4), transparent 22%), linear-gradient(180deg, #7f9e59 0%, #55753f 100%); border-top: 3px solid #d5d900; border-bottom: 3px solid #d5d900; }
+			.cssa-nav { display: flex; flex-wrap: wrap; gap: 6px; padding: 10px 14px; background: rgba(255,255,255,0.95); }
+			.cssa-nav a { font-size: 11px; font-weight: 700; color: #3a5c79; text-transform: uppercase; }
+			.cssa-hero__spacer { height: 108px; }
+			.cssa-content { padding: 42px 0; }
+			.cssa-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+			.cssa-card { display: grid; grid-template-columns: 210px minmax(0, 1fr); gap: 22px; align-items: start; padding-bottom: 18px; border-bottom: 1px dashed #d4d8dc; }
+			.cssa-card__thumb { position: relative; min-height: 120px; background: linear-gradient(135deg, #366bb0 0%, #2f5fa0 60%, #5388d0 100%); overflow: hidden; }
+			.cssa-card__thumb::before { content: ""; position: absolute; left: 50%; top: 22px; width: 38px; height: 50px; transform: translateX(-50%); border: 2px solid rgba(255,255,255,0.9); border-radius: 4px; }
+			.cssa-card__thumb::after { content: "CAMPO GRANDE"; position: absolute; left: 50%; bottom: 18px; transform: translateX(-50%); font-size: 16px; font-weight: 800; color: #fff; }
+			.cssa-card__plus { position: absolute; left: 0; bottom: 0; width: 16px; height: 16px; background: #3b79c5; color: #fff; font-size: 18px; line-height: 14px; text-align: center; }
+			.cssa-card__eyebrow { margin: 4px 0 2px; font-size: 11px; color: #5c87b6; text-transform: uppercase; }
+			.cssa-card__title { margin: 0 0 8px; font-size: 17px; font-weight: 500; line-height: 1.15; color: #1b5b95; text-transform: uppercase; }
+			.cssa-card__text { margin: 0; font-size: 15px; line-height: 1.3; color: #6a727a; }
+			@media (max-width: 991.98px) {
+				.cssa-grid { grid-template-columns: 1fr; }
+			}
+			@media (max-width: 767.98px) {
+				.cssa-heading { align-items: flex-start; }
+				.cssa-title { font-size: 28px; }
+				.cssa-nav { gap: 10px; }
+				.cssa-card { grid-template-columns: 1fr; gap: 14px; }
+				.cssa-card__thumb { min-height: 140px; }
+			}
+		</style>
+	</head>
+	<body class="cssa-page">
+		<main class="fix">
+			<section class="cssa-topbar">
+				<div class="container-fluid">
+					<div class="cssa-topbar__inner">
+						<div class="cssa-brand">
+							<div class="cssa-brand__mark"><i class="fas fa-shield-alt"></i></div>
+							<div class="cssa-brand__text">Campo Grande<span class="cssa-brand__sub">Prefeitura</span></div>
+						</div>
+						<div class="cssa-access"><i class="fas fa-info-circle"></i> Acesso a Informacao</div>
+					</div>
+				</div>
+			</section>
+			<section class="cssa-head">
+				<div class="container-fluid">
+					<div class="cssa-heading">
+						<div class="cssa-heading__icon"><i class="fas fa-scroll"></i></div>
+						<div>
+							<h1 class="cssa-title">Carta de Servicos</h1>
+							<p class="cssa-subtitle">Carta de Servicos da Saude de Campo Grande MS | PMCG</p>
+						</div>
+					</div>
+				</div>
+			</section>
+			<section class="cssa-hero">
+				<div class="container-fluid">
+					<nav class="cssa-nav">
+						<a href="javascript:void(0)">Unidades de Saude</a>
+						<a href="javascript:void(0)">Acoes e Servicos</a>
+						<a href="javascript:void(0)">Cidadao</a>
+						<a href="javascript:void(0)">Controle Social</a>
+						<a href="javascript:void(0)">Memorias do SUS que da Certo</a>
+						<a href="javascript:void(0)">Promocao e Prevencao</a>
+						<a href="javascript:void(0)">Informacoes Periodicas</a>
+					</nav>
+					<div class="cssa-hero__spacer"></div>
+				</div>
+			</section>
+			<section class="cssa-content">
+				<div class="container-fluid">
+					<div class="cssa-grid">
+						<a class="cssa-card" href="javascript:void(0)">
+							<div class="cssa-card__thumb"><span class="cssa-card__plus">+</span></div>
+							<div>
+								<div class="cssa-card__eyebrow">Medicos da Rede</div>
+								<h2 class="cssa-card__title">Escala de Plantoes</h2>
+								<p class="cssa-card__text">Veja a lista de medicos de plantao</p>
+							</div>
+						</a>
+						<a class="cssa-card" href="javascript:void(0)">
+							<div class="cssa-card__thumb"><span class="cssa-card__plus">+</span></div>
+							<div>
+								<div class="cssa-card__eyebrow">UBS, UPA, CRS</div>
+								<h2 class="cssa-card__title">Unidades de Saude</h2>
+								<p class="cssa-card__text">Conheca as Unidades de Saude atendendo em Campo Grande</p>
+							</div>
+						</a>
+					</div>
+				</div>
+			</section>
+		</main>
+		<script src="assets/js/vendor/jquery-3.6.0.min.js"></script>
+		<script src="assets/js/bootstrap.bundle.min.js"></script>
+		<script src="assets/js/jquery.magnific-popup.min.js"></script>
+		<script src="assets/js/jquery.odometer.min.js"></script>
+		<script src="assets/js/jquery.appear.js"></script>
+		<script src="assets/js/gsap.js"></script>
+		<script src="assets/js/ScrollTrigger.js"></script>
+		<script src="assets/js/SplitText.js"></script>
+		<script src="assets/js/gsap-animation.js"></script>
+		<script src="assets/js/jquery.parallaxScroll.min.js"></script>
+		<script src="assets/js/swiper-bundle.js"></script>
+		<script src="assets/js/ajax-form.js"></script>
+		<script src="assets/js/wow.min.js"></script>
+		<script src="assets/js/aos.js"></script>
+		<script src="assets/js/main.js"></script>
+	</body>
+</html>

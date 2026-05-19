@@ -1,0 +1,579 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menu>
+  <menuitem label="Manutenção de Frotas">
+    <icon>fas:tools fa-fw</icon>
+    <menu>
+      <menuitem label="Pedido de Frotas">
+        <action>PedidoFrotasList#method=onShow</action>
+        <icon>fas:truck fa-fw</icon>
+      </menuitem>
+      <menuitem label="Propostas Excluir">
+        <action>PropostasExcluirList#method=onShow</action>
+        <icon>fas:tachometer-alt fa-fw</icon>
+      </menuitem>
+      <menuitem label="Dashboard">
+        <action>DashboardPedidoFrotas#method=onShow</action>
+        <icon>fas:tachometer-alt fa-fw</icon>
+      </menuitem>
+      <menuitem label="Kanban">
+        <action>PedidoFrotasKanbanFormView#method=onShow</action>
+        <icon>fas:columns fa-fw</icon>
+      </menuitem>
+      <menuitem label="Mapa">
+        <action>MapaPessoas#method=onShow</action>
+        <icon>fas:map fa-fw</icon>
+      </menuitem>
+      <menuitem label="Indicadores Estado Pedido">
+        <action>ViewIndicadoresstatuspedidofrotasList#method=onShow</action>
+        <icon>fas: fa-fw</icon>
+      </menuitem>
+      <menuitem label="Movimentações Dotação Orçamentária">
+        <action>ConsultaDotacaoSaldoDepartamentoFrotasList#method=onShow</action>
+        <icon>fas: fa-fw</icon>
+      </menuitem>
+      <menuitem label="Cadastro Dotação Orçamentária">
+        <action>DepartamentoUnitSimpleList</action>
+        <icon>fas:plus fa-fw</icon>
+      </menuitem>
+      <menuitem label="Manutenção Garantia">
+        <action>ManutencaoGarantiaRelatorioList#method=onShow</action>
+        <icon>fas: fa-fw</icon>
+      </menuitem>
+      <menuitem label="Comparar preços">
+        <action>ViewComparacaoprodutosList#method=onShow</action>
+        <icon>fas: fa-fw</icon>
+      </menuitem>
+      <menuitem label="Dashboard">
+        <action>Dashboard#method=onShow</action>
+        <icon>fas:tachometer-alt fa-fw</icon>
+      </menuitem>
+      <menuitem label="Configurações">
+        <icon>fas:cogs fa-fw</icon>
+        <menu>
+          <menuitem label="Aprovadores">
+            <action>AprovadorFrotasHeaderList#method=onShow</action>
+            <icon>fas:chevron-right fa-fw</icon>
+          </menuitem>
+          <menuitem label="Estado Pedido Frotas">
+            <action>EstadoPedidoFrotasHeaderList#method=onShow</action>
+            <icon>fas:chevron-right fa-fw</icon>
+          </menuitem>
+          <menuitem label="Tipo Manutenção">
+            <action>TipoManutencaoList#method=onShow</action>
+            <icon>fas:wrench fa-fw</icon>
+          </menuitem>
+          <menuitem label="Tipo Peças">
+            <action>TipoPecasList#method=onShow</action>
+            <icon>fas:wrench fa-fw</icon>
+          </menuitem>
+        </menu>
+      </menuitem>
+    </menu>
+  </menuitem>
+  <menuitem label="Memorandos">
+    <icon>fas:envelope-open-text fa-fw</icon>
+    <menu>
+      <menuitem label="Gerenciar">
+        <action>MemorandoList#method=onShow</action>
+        <icon>fas:caret-square-down fa-fw</icon>
+      </menuitem>
+    </menu>
+  </menuitem>
+  <menuitem label="Compras">
+    <icon>fas:ticket-alt fa-fw</icon>
+    <menu>
+      <menuitem label="Pedidos de compra">
+        <action>PedidoVendaList#method=onSetProject</action>
+        <icon>fas:chevron-right fa-fw</icon>
+      </menuitem>
+      <menuitem label="Dashboard">
+        <action>DashboardPedidoVenda#method=onShow</action>
+        <icon>fas:tachometer-alt fa-fw</icon>
+      </menuitem>
+      <menuitem label="Dashboard">
+        <action>Dashboard#method=onShow</action>
+        <icon>fas:tachometer-alt fa-fw</icon>
+      </menuitem>
+      <menuitem label="Dotação Orçamentária">
+        <action>ConsultaSaldoDepartamentoList#method=onShow</action>
+        <icon>fas: fa-fw</icon>
+      </menuitem>
+      <menuitem label="Kanban">
+        <action>PedidoVendaKanbanFormView#method=onShow</action>
+        <icon>fas:columns fa-fw</icon>
+      </menuitem>
+      <menuitem label="Configurações">
+        <icon>fas:cogs fa-fw</icon>
+        <menu>
+          <menuitem label="Aprovadores">
+            <action>AprovadorHeaderList#method=onShow</action>
+            <icon>fas:chevron-right fa-fw</icon>
+          </menuitem>
+          <menuitem label="Estados de pedido de compra">
+            <action>EstadoPedidoVendaHeaderList#method=onShow</action>
+            <icon>fas:chevron-right fa-fw</icon>
+          </menuitem>
+          <menuitem label="Centro de Custo">
+            <action>CentrocustoList#method=onShow</action>
+            <icon>fas:chevron-right fa-fw</icon>
+          </menuitem>
+        </menu>
+      </menuitem>
+    </menu>
+  </menuitem>
+  <menuitem label="Cotações compras">
+    <icon>fas:cash-register fa-fw</icon>
+    <menu>
+      <menuitem label="Cotações Disponiveis compras">
+        <action>CotacaoList#method=onShow</action>
+        <icon>fas:chevron-right fa-fw</icon>
+      </menuitem>
+      <menuitem label="Listagem das Faturas compras">
+        <action>FaturaReceber#method=onShow</action>
+        <icon>fas:chevron-right fa-fw</icon>
+      </menuitem>
+    </menu>
+  </menuitem>
+  <menuitem label="Propostas frotas">
+    <icon>fas:file-signature fa-fw</icon>
+    <menu>
+      <menuitem label="Propostas Disponiveis Frotas">
+        <action>PropostasDisponiveisList#method=onShow</action>
+        <icon>fas:chevron-right fa-fw</icon>
+      </menuitem>
+      <menuitem label="Listagem das Faturas Frotas">
+        <action>faturaReceberFrotasList#method=onShow</action>
+        <icon>fas:chevron-right fa-fw</icon>
+      </menuitem>
+    </menu>
+  </menuitem>
+  <menuitem label="Documentos Fiscais">
+    <icon>fas:file-invoice fa-fw</icon>
+    <menu>
+      <menuitem label="Documentos Fiscais">
+        <action>NotasSystemUnitList#method=onShow</action>
+        <icon>fas:chevron-right fa-fw</icon>
+      </menuitem>
+    </menu>
+  </menuitem>
+  <menuitem label="Estabelecimentos">
+    <icon>fas:store fa-fw</icon>
+    <menu>
+      <menuitem label="Cadastro de Estabelecimentos">
+        <action>PessoaList#method=onShow</action>
+        <icon>fas:chevron-right fa-fw</icon>
+      </menuitem>
+      <menuitem label="Consulta de Estabelecimentos">
+        <action>PessoaSimplesList#method=onShow</action>
+        <icon>fas:chevron-right fa-fw</icon>
+      </menuitem>
+      <menuitem label="Configurações">
+        <icon>fas:cogs fa-fw</icon>
+        <menu>
+          <menuitem label="Cidades">
+            <action>CidadeHeaderList#method=onShow</action>
+            <icon>fas:chevron-right fa-fw</icon>
+          </menuitem>
+          <menuitem label="Estados">
+            <action>EstadoHeaderList#method=onShow</action>
+            <icon>fas:chevron-right fa-fw</icon>
+          </menuitem>
+          <menuitem label="Tipo seguimento">
+            <action>SeguimentoList#method=onShow</action>
+            <icon>fas:chevron-right fa-fw</icon>
+          </menuitem>
+        </menu>
+      </menuitem>
+    </menu>
+  </menuitem>
+  <menuitem label="Condutores e Usuários de Dispositivos">
+    <icon>fas:user-tie fa-fw</icon>
+    <menu>
+      <menuitem label="Condutores e Usuários de Dispositivos">
+        <action>CondutorList#method=onShow</action>
+        <icon>fas:chevron-right fa-fw</icon>
+      </menuitem>
+      <menuitem label="Configurações">
+        <icon>fas:cogs fa-fw</icon>
+        <menu>
+          <menuitem label="Categoria CNH">
+            <action>CategoriaCnhList#method=onShow</action>
+            <icon>fas:chevron-right fa-fw</icon>
+          </menuitem>
+          <menuitem label="Tipo de Documento">
+            <action>TipoDocumentoList#method=onShow</action>
+            <icon>fas:chevron-right fa-fw</icon>
+          </menuitem>
+        </menu>
+      </menuitem>
+    </menu>
+  </menuitem>
+  <menuitem label="Produtos">
+    <icon>fas:boxes fa-fw</icon>
+    <menu>
+      <menuitem label="Produtos">
+        <action>ProdutoList#method=onShow</action>
+        <icon>fas:chevron-right fa-fw</icon>
+      </menuitem>
+      <menuitem label="Cards de Produtos">
+        <action>ProdutoCardList#method=onShow</action>
+        <icon>fas:chevron-right fa-fw</icon>
+      </menuitem>
+      <menuitem label="Reajuste de preço individual">
+        <action>ReajustePrecoProdutoList#method=onShow</action>
+        <icon>fas:chevron-right fa-fw</icon>
+      </menuitem>
+      <menuitem label="Reajuste de preço em lote">
+        <action>ReajustePrecoLoteProdutoList#method=onShow</action>
+        <icon>fas:chevron-right fa-fw</icon>
+      </menuitem>
+      <menuitem label="Configurações">
+        <icon>fas:cogs fa-fw</icon>
+        <menu>
+          <menuitem label="Família de produtos">
+            <action>FamiliaProdutoHeaderList#method=onShow</action>
+            <icon>fas:chevron-right fa-fw</icon>
+          </menuitem>
+          <menuitem label="Fabricantes">
+            <action>FabricanteHeaderList#method=onShow</action>
+            <icon>fas:chevron-right fa-fw</icon>
+          </menuitem>
+          <menuitem label="Tipos de produto">
+            <action>TipoProdutoHeaderList#method=onShow</action>
+            <icon>fas:chevron-right fa-fw</icon>
+          </menuitem>
+          <menuitem label="Unidades de medida">
+            <action>UnidadeMedidaHeaderList#method=onShow</action>
+            <icon>fas:chevron-right fa-fw</icon>
+          </menuitem>
+        </menu>
+      </menuitem>
+    </menu>
+  </menuitem>
+  <menuitem label="Financeiro">
+    <icon>fas:money-bill-alt fa-fw</icon>
+    <menu>
+      <menuitem label="Contas a pagar">
+        <action>ContaPagarList#method=onShow</action>
+        <icon>fas:chevron-right fa-fw</icon>
+      </menuitem>
+      <menuitem label="Faturas a Receber">
+        <action>FaturaList#method=onShow</action>
+        <icon>fas:chevron-right fa-fw</icon>
+      </menuitem>
+      <menuitem label="Configurações">
+        <icon>fas:cogs fa-fw</icon>
+        <menu>
+          <menuitem label="Tipo contas">
+            <action>TipoContaHeaderList#method=onShow</action>
+            <icon>far:circle fa-fw</icon>
+          </menuitem>
+          <menuitem label="Formas de pagamento">
+            <action>FormaPagamentoHeaderList#method=onShow</action>
+            <icon>far:circle fa-fw</icon>
+          </menuitem>
+          <menuitem label="Condições de pagamento">
+            <action>CondicaoPagamentoHeaderList#method=onShow</action>
+            <icon>far:circle fa-fw</icon>
+          </menuitem>
+          <menuitem label="Categorias">
+            <action>CategoriaHeaderList#method=onShow</action>
+            <icon>far:circle fa-fw</icon>
+          </menuitem>
+          <menuitem label="Tipos de anexo">
+            <action>TipoAnexoHeaderList#method=onShow</action>
+            <icon>far:circle fa-fw</icon>
+          </menuitem>
+        </menu>
+      </menuitem>
+    </menu>
+  </menuitem>
+  <menuitem label="SAC">
+    <icon>fas:bullhorn fa-fw</icon>
+    <menu>
+      <menuitem label="Ouvidorias">
+        <action>OuvidoriaList#method=onShow</action>
+        <icon>far:circle fa-fw</icon>
+      </menuitem>
+    </menu>
+  </menuitem>
+  <menuitem label="Veiculos, Aeronaves e/ou Equipamentos">
+    <icon>fas:car fa-fw fa-fw</icon>
+    <menu>
+      <menuitem label="Dashboard">
+        <action>DashboardVeiculos#method=onShow</action>
+        <icon>fas:tachometer-alt fa-fw</icon>
+      </menuitem>
+      <menuitem label="Tabela Fipe">
+        <action>TabelaFipeList#method=onShow</action>
+        <icon>fas:tachometer-alt fa-fw</icon>
+      </menuitem>
+      <menuitem label="Veiculos, Aeronaves e/ou Equipamentos">
+        <action>VeiculosList#method=onShow</action>
+        <icon>fas:truck-moving fa-fw fa-fw</icon>
+      </menuitem>
+      <menuitem label="Multas">
+        <icon>fas:file-invoice-dollar fa-fw</icon>
+        <menu>
+          <menuitem label="Multas">
+            <action>MultasList#method=onShow</action>
+            <icon>fas:chevron-right fa-fw</icon>
+          </menuitem>
+          <menuitem label="Status Multas">
+            <action>StatusMultasList#method=onShow#local=menu</action>
+            <icon>fas:chevron-right fa-fw</icon>
+          </menuitem>
+        </menu>
+      </menuitem>
+      <menuitem label="Configurações">
+        <icon>fas:cogs fa-fw</icon>
+        <menu>
+          <menuitem label="Marca">
+            <action>MarcaList#method=onShow</action>
+            <icon>fas:chevron-right fa-fw</icon>
+          </menuitem>
+          <menuitem label="Modelo">
+            <action>ModeloList#method=onShow#local=menu</action>
+            <icon>fas:chevron-right fa-fw</icon>
+          </menuitem>
+          <menuitem label="Cor">
+            <action>CorveiculoList#method=onShow</action>
+            <icon>fas:chevron-right fa-fw</icon>
+          </menuitem>
+          <menuitem label="Propriedade / Classificação">
+            <action>PropriedadeList#method=onShow</action>
+            <icon>fas:chevron-right fa-fw</icon>
+          </menuitem>
+          <menuitem label="Tipo">
+            <action>TipoVeiculoList#method=onShow</action>
+            <icon>fas:chevron-right fa-fw</icon>
+          </menuitem>
+          <menuitem label="Tipo de Combustível">
+            <action>TipoCombustivelList#method=onShow</action>
+            <icon>fas:chevron-right fa-fw</icon>
+          </menuitem>
+          <menuitem label="Status">
+            <action>StatusVeiculoList#method=onShow</action>
+            <icon>fas:chevron-right fa-fw</icon>
+          </menuitem>
+          <menuitem label="Espécie">
+            <action>EspecieList#method=onShow</action>
+            <icon>fas:chevron-right fa-fw</icon>
+          </menuitem>
+          <menuitem label="Familia">
+            <action>FamiliaList#method=onShow</action>
+            <icon>fas:chevron-right fa-fw</icon>
+          </menuitem>
+        </menu>
+      </menuitem>
+    </menu>
+  </menuitem>
+  <menuitem label="Cartões">
+    <icon>fas:credit-card fa-fw</icon>
+    <menu>
+      <menuitem label="TAG">
+        <icon>fas:gas-pump fa-fw</icon>
+        <menu>
+          <menuitem label="Pedido Frotas Abastecimento TAG">
+            <action>FrenteCaixaAbastecimentoTagList#method=onShow</action>
+            <icon>fas:chevron-right fa-fw</icon>
+          </menuitem>
+        </menu>
+      </menuitem>
+
+      <menuitem label="Cartão">
+        <icon>fas:credit-card fa-fw</icon>
+        <menu>
+          <menuitem label="Lançamento Cartão">
+            <action>FrenteCaixaCartaoLancamentoList#method=onShow</action>
+            <icon>fas:chevron-right fa-fw</icon>
+          </menuitem>
+          <menuitem label="Sincronizar Lojas Credenciadas">
+            <action>LojaCredenciadaSyncForm#method=onShow</action>
+            <icon>fas:chevron-right fa-fw</icon>
+          </menuitem>
+          <menuitem label="Sincronizar Usuarios Cartao">
+            <action>UsuarioCartaoSyncForm#method=onShow</action>
+            <icon>fas:chevron-right fa-fw</icon>
+          </menuitem>
+        </menu>
+      </menuitem>
+
+      <menuitem label="Dispotivos Solicitados">
+        <action>DispositivosSolicitadosList#method=onShow</action>
+        <icon>fas:retweet fa-fw</icon>
+      </menuitem>
+      
+      <menuitem label="Configurações">
+        <icon>fas:cogs fa-fw</icon>
+        <menu>
+          <menuitem label="Dispositivos">
+            <action>DispositivosList#method=onShow</action>
+            <icon>fas:tachometer-alt fa-fw</icon>
+          </menuitem>
+          <menuitem label="Status Dispositivos">
+            <action>StatusDispositivosList#method=onShow</action>
+            <icon>fas:check fa-fw</icon>
+          </menuitem>
+          <menuitem label="Finalidade">
+            <action>TipoFinalidadeList#method=onShow</action>
+            <icon>fas:spa fa-fw</icon>
+          </menuitem>
+        </menu>
+      </menuitem>
+    </menu>
+  </menuitem>
+  <menuitem label="Relatórios e Consultas">
+    <icon>fas:clipboard fa-fw</icon>
+    <menu>
+      <menuitem label="Relatórios de frotas">
+        <action>RelatorioPage#method=onShow</action>
+        <icon>fas:clipboard-list fa-fw</icon>
+      </menuitem>
+      <menuitem label="Relatórios de compras">
+        <action>RelatorioPageCompra#method=onShow</action>
+        <icon>fas:clipboard-list fa-fw</icon>
+      </menuitem>
+      <menuitem label="Consultas de frotas">
+        <action>RelatorioPageFinanceiro#method=onShow</action>
+        <icon>fas:clipboard-list fa-fw</icon>
+      </menuitem>
+    </menu>
+  </menuitem>
+  <menuitem label="_t{Administration}">
+    <icon>fas:home fa-fw</icon>
+    <menu>
+      <menuitem label="Dashboard">
+        <action>SystemAdministrationDashboard</action>
+        <icon>fas:tachometer-alt fa-fw</icon>
+      </menuitem>
+      <menuitem label="_t{Programs}">
+        <action>SystemProgramList</action>
+        <icon>far:file-code fa-fw</icon>
+      </menuitem>
+      <menuitem label="Alertas Programas">
+        <action>AlertaProgramList#method=onShow</action>
+        <icon>fas:exclamation-triangle fa-fw</icon>
+      </menuitem>
+      <menuitem label="_t{Groups}">
+        <action>SystemGroupList</action>
+        <icon>fas:users fa-fw</icon>
+      </menuitem>
+      <menuitem label="Entidade">
+        <icon>fas: fa-fw</icon>
+        <menu>
+          <menuitem label="Entidade">
+            <action>EntidadeList#method=onShow</action>
+            <icon>fas: fa-fw</icon>
+          </menuitem>
+          <menuitem label="Seguros">
+            <action>SegurosList#method=onShow</action>
+            <icon>far:circle fa-fw</icon>
+          </menuitem>
+          <menuitem label="Tipo de Seguros">
+            <action>TipoSeguroList#method=onShow</action>
+            <icon>far:circle fa-fw</icon>
+          </menuitem>
+        </menu>
+      </menuitem>
+      <menuitem label="Orgão / Unidades ">
+        <action>SystemUnitList</action>
+        <icon>fas:university fa-fw</icon>
+      </menuitem>
+      <menuitem label="_t{Users}">
+        <action>SystemUserList</action>
+        <icon>fas:user fa-fw</icon>
+      </menuitem>
+      <menuitem label="_t{Database explorer}">
+        <action>SystemDatabaseExplorer</action>
+        <icon>fas:database fa-fw</icon>
+      </menuitem>
+      <menuitem label="_t{SQL Panel}">
+        <action>SystemSQLPanel</action>
+        <icon>fas:table fa-fw</icon>
+      </menuitem>
+      <menuitem label="_t{Menu editor}">
+        <action>SystemMenuEditor</action>
+        <icon>far:edit fa-fw</icon>
+      </menuitem>
+      <menuitem label="_t{Files diff}">
+        <action>SystemFilesDiff</action>
+        <icon>fas:file-medical-alt fa-fw</icon>
+      </menuitem>
+      <menuitem label="PHP Info">
+        <action>SystemPHPInfoView</action>
+        <icon>fas:info-circle fa-fw</icon>
+      </menuitem>
+      <menuitem label="System Information">
+        <action>SystemInformationView</action>
+        <icon>fas:desktop fa-fw</icon>
+      </menuitem>
+      <menuitem label="Preferências">
+        <action>SystemPreferenceForm#method=onEdit</action>
+        <icon>fas:cog fa-fw</icon>
+      </menuitem>
+      <menuitem label="Modelos de Email">
+        <action>EmailTemplateHeaderList#method=onShow</action>
+        <icon>fas:envelope fa-fw</icon>
+      </menuitem>
+    </menu>
+  </menuitem>
+  <menuitem label="_t{Documents}">
+    <icon>far:file-alt fa-fw</icon>
+    <menu>
+      <menuitem label="_t{Send document}">
+        <action>SystemDocumentUploadForm</action>
+        <icon>fas:cloud-upload-alt fa-fw</icon>
+      </menuitem>
+      <menuitem label="_t{My documents}">
+        <action>SystemDocumentList</action>
+        <icon>fas:archive fa-fw</icon>
+      </menuitem>
+      <menuitem label="_t{Shared with me}">
+        <action>SystemSharedDocumentList</action>
+        <icon>fas:share-alt fa-fw</icon>
+      </menuitem>
+      <menuitem label="_t{Categories}">
+        <action>SystemDocumentCategoryFormList</action>
+        <icon>fas:th fa-fw</icon>
+      </menuitem>
+    </menu>
+  </menuitem>
+  <menuitem label="Logs">
+    <icon>fas:desktop fa-fw</icon>
+    <menu>
+      <menuitem label="Dashboard">
+        <action>SystemLogDashboard</action>
+        <icon>fas:tachometer-alt fa-fw</icon>
+      </menuitem>
+      <menuitem label="_t{Access Log}">
+        <action>SystemAccessLogList</action>
+        <icon>fas:key fa-fw</icon>
+      </menuitem>
+      <menuitem label="_t{Change Log}">
+        <action>SystemChangeLogView</action>
+        <icon>fas:film fa-fw</icon>
+      </menuitem>
+      <menuitem label="_t{SQL Log}">
+        <action>SystemSqlLogList</action>
+        <icon>fas:database fa-fw</icon>
+      </menuitem>
+      <menuitem label="_t{Request Log}">
+        <action>SystemRequestLogList</action>
+        <icon>fas:globe fa-fw</icon>
+      </menuitem>
+      <menuitem label="_t{PHP Log}">
+        <action>SystemPHPErrorLogView</action>
+        <icon>fas:exclamation-triangle fa-fw</icon>
+      </menuitem>
+      <menuitem label="Session dump">
+        <action>SystemSessionDumpView</action>
+        <icon>fas:code fa-fw</icon>
+      </menuitem>
+    </menu>
+  </menuitem>
+  <menuitem label="Logout">
+    <action>LoginForm#method=onLogout#static=1</action>
+    <icon>fas:sign-out-alt fa-fw</icon>
+  </menuitem>
+</menu>

@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang='pt-BR'>
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<title>Proposta 27285</title>
+<style>
+:root{
+  --bg:#f4f6f8;
+  --paper:#ffffff;
+  --line:#d8dee4;
+  --line-2:#e7ecf1;
+  --text:#1b2733;
+  --muted:#5f6f7f;
+  --head:#f1f4f7;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);font-family:Segoe UI,Arial,Helvetica,sans-serif;font-size:12px;color:var(--text)}
+.wrap{max-width:1280px;margin:14px auto;padding:0 10px}
+.no-print{text-align:right;margin-bottom:10px}
+.btn{display:inline-block;padding:7px 12px;border:1px solid var(--line);border-radius:6px;background:#fff;text-decoration:none;color:var(--text)}
+.report{background:var(--paper);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.top{display:flex;justify-content:space-between;gap:10px;padding:14px 16px;border-bottom:1px solid var(--line-2);background:linear-gradient(180deg,#fff,#f9fbfc)}
+.logo img{height:58px;max-width:240px;object-fit:contain}
+.meta{display:flex;flex-wrap:wrap;gap:8px;align-content:flex-start;justify-content:flex-end}
+.chip{border:1px solid var(--line);background:#fff;padding:6px 10px;border-radius:999px;white-space:nowrap}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;padding:12px 16px;border-bottom:1px solid var(--line-2)}
+.card{border:1px solid var(--line-2);background:#fff;border-radius:8px;padding:10px}
+.card b{display:block;font-size:11px;color:var(--muted);margin-bottom:3px}
+.section{padding:0 16px 14px 16px}
+.title{margin:14px 0 8px 0;padding:8px 10px;background:var(--head);border:1px solid var(--line-2);border-radius:6px;font-weight:700}
+.tbl{width:100%;border-collapse:collapse}
+.tbl th,.tbl td{padding:7px 8px;vertical-align:top;border-bottom:1px solid var(--line-2)}
+.tbl th{font-weight:700;color:#2d3b48;background:#fbfcfd;text-align:left}
+.tbl tr:last-child td{border-bottom:none}
+.tbl thead{display:table-header-group}
+.desc{white-space:pre-wrap;word-break:break-word}
+.num{text-align:right;white-space:nowrap}
+.cols-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.box{border:1px solid var(--line-2);border-radius:8px;padding:8px;background:#fff}
+.total-box{border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.total-box .tbl th{background:var(--head)}
+.accent{color:#c00000 !important;font-weight:700}
+.item-table tr{page-break-inside:avoid}
+.total-row td{font-weight:700;background:#fbfcfd}
+@media (max-width: 1024px){
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cols-2{grid-template-columns:1fr}
+}
+@media (max-width: 720px){
+  .top{flex-direction:column;align-items:flex-start}
+  .meta{justify-content:flex-start}
+  .grid{grid-template-columns:1fr}
+}
+@media print{
+  .no-print{display:none}
+  body{background:#fff}
+  .wrap{max-width:100%;margin:0;padding:0}
+  .report{border:none;border-radius:0;overflow:visible}
+  .card,.box,.title,.total-box{break-inside:avoid-page;page-break-inside:avoid}
+  .title{break-after:avoid-page;page-break-after:avoid}
+  .item-table thead{display:table-header-group}
+  .item-table tr{page-break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class='wrap'>
+  <div class='no-print'><a class='btn' href='javascript:window.print()'>Imprimir</a></div>
+  <div class='report'>
+    <div class='top'>
+      <div class='logo'><img src='app/images/logo.png' alt='logo'></div>
+      <div class='meta'>
+        <div class='chip'><strong>Pedido:</strong> 3735</div>
+        <div class='chip'><strong>Proposta:</strong> 27285</div>
+        <div class='chip'><strong>Status:</strong> Finalizado</div>
+        <div class='chip'><strong>Data:</strong> 05/03/2026</div>
+      </div>
+    </div>
+
+    <div class='grid'>
+      <div class='card'><b>Placa / Identificação</b>OHW-6C12</div>
+      <div class='card'><b>Unidade / Departamento</b>PREFEITURA DO MUNICIPIO DE JI PARANA</div>
+      <div class='card'><b>Retirado por</b>Jeisan Roni Costa Pereira</div>
+      <div class='card'><b>Pedido aberto por</b>Jeisan Roni costa Pereira<br><span style='color:var(--muted)'>Data: 22/01/2026 12:19</span></div>
+      <div class='card'><b>Aprovado por</b>Jeisan Roni costa Pereira<br><span style='color:var(--muted)'>Data: 26/01/2026 09:15</span></div>
+      <div class='card'><b>Responsável técnico</b>GIVANILDO<br><span style='color:var(--muted)'>Finalizado em: 27/01/2026</span></div>
+    </div>
+
+    <div class='section'>
+      <div class='cols-2'>
+        <div class='box'>
+          <div class='title'>Dados da Gerenciadora</div>
+          <table class='tbl'>
+            <tr><td width='62%'>NP3 CONSULTORIA E ACESSORIA EMPRESARIAL LTDA.</td><td>CNPJ: 01.667.155/0003-00</td></tr>
+            <tr><td>Endereço: R Parque General Borges Forte - Sala 118 Nº 400</td><td>Bairro: Jardim Goias</td></tr>
+            <tr><td>Cidade: </td><td>Email: np3gestao@gmail.com</td></tr>
+            <tr><td>Telefone: (65) 3359-8182</td><td></td></tr>
+          </table>
+        </div>
+        <div class='box'>
+          <div class='title'>Dados do Cliente Solicitante</div>
+          <table class='tbl'>
+            <tr><td width='62%'>Cliente: PREFEITURA DO MUNICIPIO DE JI PARANA</td><td>CPF/CNPJ: 04.092.672/0001-25</td></tr>
+            <tr><td>Endereço: Avenida Dois de Abril Nº 1701</td><td>Bairro: Urupá</td></tr>
+            <tr><td>Cidade/UF: Ji-Paraná</td><td>Email: clodoaldojose@hotmail.com</td></tr>
+            <tr><td>Telefone: (69)9932-3265</td><td></td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class='title'>Dados do Estabelecimento</div>
+      <table class='tbl'>
+        <tr><td width='50%'>Cliente: PORTAL PICKUP</td><td width='25%'>CPF/CNPJ: 52.993.381/0001-50</td><td width='25%'>Telefone: (69) 99919-293</td></tr>
+        <tr><td>Endereço: Rua Xapuri Nº 2478</td><td>Bairro: São Pedro</td><td>Cidade/UF: Ji-Paraná</td></tr>
+        <tr><td colspan='3'>Email: Rosrodriguess@gmail.com</td></tr>
+      </table>
+
+      <div class='title'>Dados do Orçamento</div>
+      <table class='tbl'>
+        <tr>
+          <td colspan='2'>Título man.: MANUTENCAO VEICULO</td>
+          <td>Ano Fab.: 2020</td>
+          <td>Ano Mod.: 2021</td>
+        </tr>
+        <tr>
+          <td>Tipo Ser.: Preventiva</td>
+          <td>Placa / Iden / Mat: OHW-6C12</td>
+          <td>Chassi: </td>
+          <td>Km/Horímetro: 4.000</td>
+        </tr>
+        <tr>
+          <td>Solicitante: PREFEITURA DO MUNICIPIO DE JI PARANA</td>
+          <td colspan='2'>Modelo: MASTER L3H2 MNPA</td>
+          <td>Combustível: Diesel</td>
+        </tr>
+        <tr><td colspan='4' class='desc'><strong>Obs:</strong> ar condicionado nao ta gelando
+interculler</td></tr>
+      </table>
+
+      <div class='title'>Justificativa</div>
+      <div class='box desc'>ambulancia aprovado com um so orcamento pois se trata de emergencia</div>
+
+      <div class='title'>Produto(s)</div>
+      <table class='tbl item-table'>
+        <thead><tr>
+          <th width='31%'>Descrição</th><th width='17%'>Tipo peça / Marca</th><th width='15%'>Garantia</th><th width='4%' class='num'>Qtd</th>
+          <th width='11%' class='num'>V. Unit.</th><th width='8%' class='num'>Sub-total</th><th width='6%' class='num'>Desconto</th><th width='9%' class='num'>V. Total</th>
+        </tr></thead>
+        <tbody>
+        <tr><td class="desc">INTERCOOLER</td><td>Original</td><td></td><td class="num">1</td><td class="num">R$ 4.819,50</td><td class="num">R$ 4.819,50</td><td class="num">R$ 1.373,56</td><td class="num">R$ 3.445,94</td></tr><tr><td class="desc">mangueira adimisao interculer</td><td>Original</td><td></td><td class="num">1</td><td class="num">R$ 1.996,00</td><td class="num">R$ 1.996,00</td><td class="num">R$ 568,86</td><td class="num">R$ 1.427,14</td></tr><tr><td class="desc">mangueira do interculer</td><td>Original</td><td></td><td class="num">1</td><td class="num">R$ 1.100,00</td><td class="num">R$ 1.100,00</td><td class="num">R$ 313,50</td><td class="num">R$ 786,50</td></tr><tr><td class="desc">abracadeira para mangueira do interculer</td><td>Original</td><td></td><td class="num">4</td><td class="num">R$ 96,00</td><td class="num">R$ 384,00</td><td class="num">R$ 109,44</td><td class="num">R$ 274,56</td></tr><tr><td class="desc">adtivo para radiador</td><td>Original</td><td></td><td class="num">10</td><td class="num">R$ 46,00</td><td class="num">R$ 460,00</td><td class="num">R$ 131,10</td><td class="num">R$ 328,90</td></tr><tr><td class="desc">compresor do ar condicionado</td><td>Original</td><td></td><td class="num">1</td><td class="num">R$ 5.580,00</td><td class="num">R$ 5.580,00</td><td class="num">R$ 1.590,30</td><td class="num">R$ 3.989,70</td></tr><tr><td class="desc">condenciador ar condicioinado</td><td>Original</td><td></td><td class="num">1</td><td class="num">R$ 2.100,00</td><td class="num">R$ 2.100,00</td><td class="num">R$ 598,50</td><td class="num">R$ 1.501,50</td></tr><tr><td class="desc">valvula de espensao</td><td>Original</td><td></td><td class="num">1</td><td class="num">R$ 560,00</td><td class="num">R$ 560,00</td><td class="num">R$ 159,60</td><td class="num">R$ 400,40</td></tr><tr><td class="desc">ELEMENTO DO FILTRO AR</td><td>Original</td><td></td><td class="num">1</td><td class="num">R$ 142,00</td><td class="num">R$ 142,00</td><td class="num">R$ 40,47</td><td class="num">R$ 101,53</td></tr>
+        <tr class='total-row'><td colspan='8' class='num'>Valor total dos Produtos R$ 12.256,17</td></tr>
+        </tbody>
+      </table>
+
+      <div class='title'>Serviço(s)</div>
+      <table class='tbl item-table'>
+        <thead><tr>
+          <th width='48%'>Descrição</th><th width='15%'>Garantia</th><th width='4%' class='num'>Qtd</th>
+          <th width='11%' class='num'>V. Unit.</th><th width='8%' class='num'>Sub-total</th><th width='6%' class='num'>Desconto</th><th width='9%' class='num'>V. Total</th>
+        </tr></thead>
+        <tbody>
+        <tr><td class="desc">carga de gas oleo</td><td></td><td class="num">2</td><td class="num">R$ 375,00</td><td class="num">R$ 750,00</td><td class="num">R$ 213,75</td><td class="num">R$ 536,25</td></tr><tr><td class="desc">limpeza quimica</td><td></td><td class="num">2</td><td class="num">R$ 380,00</td><td class="num">R$ 760,00</td><td class="num">R$ 216,60</td><td class="num">R$ 543,40</td></tr><tr><td class="desc">serviço mecanico</td><td></td><td class="num">5</td><td class="num">R$ 450,00</td><td class="num">R$ 2.250,00</td><td class="num">R$ 641,25</td><td class="num">R$ 1.608,75</td></tr><tr><td class="desc">trocar compressor de ar condicionado e comdessador</td><td></td><td class="num">4</td><td class="num">R$ 450,00</td><td class="num">R$ 1.800,00</td><td class="num">R$ 513,00</td><td class="num">R$ 1.287,00</td></tr>
+        <tr class='total-row'><td colspan='7' class='num'>Valor total dos Serviços R$ 3.975,40</td></tr>
+        </tbody>
+      </table>
+
+      <div class='title'>Fechamento da proposta</div>
+      <div class='total-box'>
+        <table class='tbl'>
+          <tr>
+            <th class='num'>Serviços sem descontos</th>
+            <th class='num'>Produtos sem descontos</th>
+            <th class='num'>Total geral sem descontos</th>
+          </tr>
+          <tr>
+            <td class='num'><strong>R$ 5.560,00</strong></td>
+            <td class='num'><strong>R$ 17.141,50</strong></td>
+            <td class='num'><strong>R$ 22.701,50</strong></td>
+          </tr>
+          <tr>
+            <th></th>
+            <th class='num accent'>Desconto contratual 28,50%</th>
+            <th class='num accent'>Total do desconto R$ 6.469,93</th>
+          </tr>
+          <tr>
+            <th class='num'>Serviços com desconto</th>
+            <th class='num'>Produtos com desconto</th>
+            <th class='num'>Total geral com desconto</th>
+          </tr>
+          <tr>
+            <td class='num'><strong>R$ 3.975,40</strong></td>
+            <td class='num'><strong>R$ 12.256,17</strong></td>
+            <td class='num'><strong>R$ 16.231,57</strong></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html class="no-js" lang="pt-BR">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="x-ua-compatible" content="ie=edge" />
+		<title>Extrato de Debito para o Portal</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png" />
+		<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="assets/css/fontawesome-all.min.css" />
+		<style>
+			.guias-page {
+				margin: 0;
+				background: #eef2f7;
+				font-family: Arial, sans-serif;
+				color: #2d3748;
+			}
+
+			.guias-top {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 18px;
+				padding: 2px 16px 0;
+				background: #fff;
+				border-bottom: 1px solid #d7dde7;
+			}
+
+			.guias-top__left,
+			.guias-top__right {
+				display: flex;
+				align-items: center;
+				gap: 14px;
+			}
+
+			.guias-badge {
+				display: flex;
+				align-items: center;
+				gap: 8px;
+				padding: 2px 8px;
+				background: #1c3f7b;
+				color: #ffd54a;
+				font-weight: 700;
+				font-size: 16px;
+			}
+
+			.guias-badge i {
+				color: #fff;
+			}
+
+			.guias-title {
+				font-size: 17px;
+				font-weight: 700;
+				color: #0f2d5c;
+			}
+
+			.guias-siat {
+				font-size: 34px;
+				font-weight: 800;
+				color: #214f58;
+				letter-spacing: 0.02em;
+			}
+
+			.guias-subbar {
+				display: flex;
+				align-items: flex-end;
+				gap: 14px;
+				padding: 0 20px;
+				background: linear-gradient(180deg, #cde0f8 0%, #dce9fb 100%);
+				border-bottom: 1px solid #c1d0e8;
+			}
+
+			.guias-menu {
+				margin-top: 10px;
+				padding: 6px 14px 4px;
+				border-radius: 10px 10px 0 0;
+				background: linear-gradient(180deg, #7aa6d4 0%, #5e86b8 100%);
+				box-shadow: inset 0 1px 0 rgba(255,255,255,0.5);
+				color: #fff;
+				text-align: center;
+			}
+
+			.guias-menu strong {
+				display: block;
+				font-size: 18px;
+				line-height: 1;
+			}
+
+			.guias-menu span {
+				display: block;
+				margin-top: 4px;
+				font-size: 11px;
+				opacity: 0.95;
+			}
+
+			.guias-wrap {
+				padding: 18px;
+			}
+
+			.guias-card {
+				background: #fff;
+				border: 1px solid #d0d8e4;
+			}
+
+			.guias-card__title {
+				padding: 10px 14px;
+				border-bottom: 2px solid #4f9be3;
+				font-size: 14px;
+				font-weight: 700;
+				color: #4b5563;
+				text-transform: uppercase;
+			}
+
+			.guias-toolbar {
+				display: flex;
+				gap: 8px;
+				padding: 10px 14px 0;
+			}
+
+			.guias-toolbar button {
+				height: 24px;
+				padding: 0 12px;
+				border: 1px solid #c7d0dc;
+				border-radius: 2px;
+				background: #fff;
+				font-size: 12px;
+				color: #4b5563;
+			}
+
+			.guias-toolbar .primary {
+				background: #4c9ae0;
+				border-color: #4c9ae0;
+				color: #fff;
+			}
+
+			.guias-form {
+				margin: 10px 14px;
+				padding: 8px;
+				border: 1px solid #d0d8e4;
+			}
+
+			.guias-form__row {
+				display: grid;
+				grid-template-columns: 1.1fr 0.8fr 1.4fr 300px;
+				gap: 8px;
+				align-items: end;
+				margin-bottom: 8px;
+			}
+
+			.guias-field label {
+				display: block;
+				margin-bottom: 2px;
+				font-size: 12px;
+				font-weight: 700;
+				color: #374151;
+			}
+
+			.guias-field input,
+			.guias-field select {
+				width: 100%;
+				height: 22px;
+				border: 1px solid #b7c2d1;
+				padding: 0 6px;
+				font-size: 12px;
+				background: #fff;
+			}
+
+			.guias-help {
+				padding: 8px 10px;
+				border: 1px solid #d0d8e4;
+				font-size: 11px;
+				color: #2563eb;
+			}
+
+			.guias-help div:first-child {
+				color: #f97316;
+				margin-bottom: 4px;
+			}
+
+			.guias-summary {
+				width: 495px;
+				margin: 10px 14px;
+				border: 1px solid #7f8ea3;
+				border-collapse: collapse;
+			}
+
+			.guias-summary th,
+			.guias-summary td {
+				padding: 4px 6px;
+				border: 1px solid #7f8ea3;
+				font-size: 12px;
+				text-align: center;
+			}
+
+			.guias-summary th {
+				color: #1d4ed8;
+				font-weight: 700;
+			}
+
+			.guias-summary td:first-child {
+				text-align: left;
+				font-weight: 700;
+			}
+
+			.guias-tabs {
+				display: flex;
+				gap: 2px;
+				margin: 10px 14px 0;
+			}
+
+			.guias-tab {
+				padding: 8px 12px 6px;
+				border: 1px solid #c8d1dc;
+				border-bottom: 0;
+				background: #f8fafc;
+				font-size: 12px;
+				color: #1d4ed8;
+			}
+
+			.guias-grid {
+				margin: 0 14px 14px;
+				border: 1px solid #c8d1dc;
+				padding: 4px 6px;
+			}
+
+			.guias-grid table {
+				width: 100%;
+				border-collapse: collapse;
+			}
+
+			.guias-grid th,
+			.guias-grid td {
+				padding: 5px 6px;
+				border: 1px solid #c8d1dc;
+				font-size: 12px;
+			}
+
+			.guias-grid th {
+				background: #f8fafc;
+				color: #4b5563;
+				font-weight: 700;
+				white-space: nowrap;
+			}
+
+			.guias-legend {
+				display: grid;
+				grid-template-columns: 70px repeat(14, minmax(0, 1fr));
+				margin: 0 14px 14px;
+				border: 1px solid #c8d1dc;
+			}
+
+			.guias-legend div {
+				min-height: 54px;
+				padding: 8px 6px;
+				border-right: 1px solid #c8d1dc;
+				text-align: center;
+				font-size: 11px;
+				line-height: 1.3;
+				background: #fff;
+			}
+
+			.guias-legend div:last-child {
+				border-right: 0;
+			}
+
+			.guias-legend .head {
+				color: #1d4ed8;
+				font-weight: 700;
+			}
+
+			.guias-bottom {
+				display: flex;
+				justify-content: flex-end;
+				padding: 8px 18px 0;
+				font-size: 12px;
+			}
+
+			.guias-bottom a {
+				color: #1d4ed8;
+				font-weight: 700;
+			}
+
+			@media (max-width: 991.98px) {
+				.guias-top {
+					flex-direction: column;
+					align-items: stretch;
+				}
+
+				.guias-top__left,
+				.guias-top__right {
+					justify-content: center;
+				}
+
+				.guias-form__row {
+					grid-template-columns: 1fr;
+				}
+
+				.guias-summary {
+					width: calc(100% - 28px);
+				}
+
+				.guias-grid,
+				.guias-legend {
+					overflow-x: auto;
+					display: block;
+				}
+			}
+		</style>
+	</head>
+	<body class="guias-page">
+		<div class="guias-top">
+			<div class="guias-top__left">
+				<div class="guias-badge"><i class="fas fa-landmark"></i><span>PREFCG</span></div>
+				<div class="guias-title">PORTAL DE SERVIÇOS EMITIR EXTRATO GUIA</div>
+			</div>
+			<div class="guias-top__right">
+				<div class="guias-siat">SIAT</div>
+			</div>
+		</div>
+
+		<div class="guias-subbar">
+			<div class="guias-menu">
+				<strong>SERVIÇOS</strong>
+				<span>Prestações de Serviços para a População</span>
+			</div>
+		</div>
+
+		<div class="guias-wrap">
+			<div class="guias-card">
+				<div class="guias-card__title">Extrato de Débito para o Portal</div>
+
+				<div class="guias-toolbar">
+					<button type="button">Limpar</button>
+					<button class="primary" type="button">F9-Pesquisar</button>
+				</div>
+
+				<div class="guias-form">
+					<div class="guias-form__row">
+						<div class="guias-field">
+							<label>Cadastro</label>
+							<select>
+								<option>Mobiliário - Empresa/Autônomo</option>
+							</select>
+						</div>
+						<div class="guias-field">
+							<label>Inscrição Municipal</label>
+							<input type="text" />
+						</div>
+						<div class="guias-field">
+							<label>Nome/razão social</label>
+							<input type="text" />
+						</div>
+						<div class="guias-help">
+							<div>* Itens Obrigatórios</div>
+							<div>● Pelo menos um destes itens deve ser preenchido</div>
+						</div>
+					</div>
+					<div class="guias-form__row" style="grid-template-columns: repeat(5, minmax(0, 1fr));">
+						<div class="guias-field">
+							<label>Exercício</label>
+							<input type="text" />
+						</div>
+						<div class="guias-field">
+							<label>Número auto infração</label>
+							<input type="text" />
+						</div>
+						<div class="guias-field">
+							<label>Lançamento</label>
+							<input type="text" />
+						</div>
+						<div class="guias-field">
+							<label>Número dívida</label>
+							<input type="text" />
+						</div>
+						<div class="guias-field">
+							<label>Número CDA</label>
+							<input type="text" />
+						</div>
+					</div>
+				</div>
+
+				<table class="guias-summary">
+					<thead>
+						<tr>
+							<th>Valores</th>
+							<th>Qtd. Guias</th>
+							<th>Emolumentos</th>
+							<th>Honorários</th>
+							<th>Lançado</th>
+							<th>Atualizado</th>
+							<th>Jrs/Mult/Des</th>
+							<th>Total</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Devidos</td>
+							<td>0</td>
+							<td>0,00</td>
+							<td>0,00</td>
+							<td>0,00</td>
+							<td>0,00</td>
+							<td>0,00</td>
+							<td>0,00</td>
+						</tr>
+						<tr>
+							<td>A Pagar</td>
+							<td>0</td>
+							<td>0,00</td>
+							<td>0,00</td>
+							<td>0,00</td>
+							<td>0,00</td>
+							<td>0,00</td>
+							<td>0,00</td>
+						</tr>
+					</tbody>
+				</table>
+
+				<div class="guias-tabs">
+					<div class="guias-tab">Itens Cálculo</div>
+				</div>
+
+				<div class="guias-grid">
+					<table>
+						<thead>
+							<tr>
+								<th>Cadastro</th>
+								<th>Exercício</th>
+								<th>Tributo</th>
+								<th>Parcela</th>
+								<th>Auto/Data lavratura</th>
+								<th>SE</th>
+								<th>Vencimento</th>
+								<th>Vlr Lançado</th>
+								<th>Vlr Atualizado</th>
+								<th>Jrs/Mul/Des</th>
+								<th>Vlr total</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td colspan="11">&nbsp;</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+				<div class="guias-legend">
+					<div class="head">LEGENDA<br />SE</div>
+					<div><strong>S</strong><br />Débito Suspenso</div>
+					<div><strong>R</strong><br />Prescrita tributária</div>
+					<div><strong>N</strong><br />Prescrita não tributária</div>
+					<div><strong>#</strong><br />Desistência execução fiscal</div>
+					<div><strong>W</strong><br />Débito Protesto Suspenso</div>
+					<div><strong>X</strong><br />Débito Negativado</div>
+					<div><strong>O</strong><br />Débito de Anos Anteriores</div>
+					<div><strong>*</strong><br />Débito Ativa CDA</div>
+					<div><strong>P</strong><br />Débito Parcelado</div>
+					<div><strong>A</strong><br />Débito Dívida Ativa</div>
+					<div><strong>C</strong><br />Débito Cobrança</div>
+					<div><strong>E</strong><br />Débito Ajuiz Exec Manual</div>
+					<div><strong>T</strong><br />Débito Protestado</div>
+					<div><strong>D</strong><br />Débito Ajuiz Exec Digital</div>
+					<div><strong>Z</strong><br />Débito Encaminhado a Protesto</div>
+				</div>
+			</div>
+
+			<div class="guias-bottom"><a href="secretaria-municipal-fazenda.html">VOLTAR PARA PÁGINA INICIAL</a></div>
+		</div>
+	</body>
+</html>

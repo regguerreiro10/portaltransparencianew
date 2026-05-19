@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html class="no-js" lang="pt-BR">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="x-ua-compatible" content="ie=edge" />
+		<title>Biblioteca de Legislacao</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png" />
+		<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="assets/css/fontawesome-all.min.css" />
+		<style>
+			.bl-page {
+				margin: 0;
+				background: #3c82b1;
+				font-family: Arial, sans-serif;
+				color: #fff;
+			}
+
+			.bl-header {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 24px;
+				padding: 10px 28px;
+				background: #fff;
+			}
+
+			.bl-brand {
+				display: flex;
+				align-items: center;
+				gap: 12px;
+				color: #0f6ead;
+				font-weight: 700;
+			}
+
+			.bl-brand__icon {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				width: 44px;
+				height: 44px;
+				border-radius: 50%;
+				background: #f3f6fb;
+				font-size: 20px;
+			}
+
+			.bl-brand__text strong {
+				display: block;
+				font-size: 14px;
+				line-height: 1;
+			}
+
+			.bl-brand__text span {
+				font-size: 11px;
+				color: #7b8794;
+			}
+
+			.bl-links {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 28px;
+				font-size: 12px;
+				font-weight: 400;
+			}
+
+			.bl-links a {
+				color: #8b96a4;
+			}
+
+			.bl-wrap {
+				max-width: 1060px;
+				margin: 0 auto;
+				padding: 14px 26px 34px;
+			}
+
+			.bl-title {
+				margin: 0;
+				font-size: 22px;
+				font-weight: 300;
+				letter-spacing: 0.02em;
+			}
+
+			.bl-title strong {
+				font-weight: 700;
+			}
+
+			.bl-divider {
+				width: 410px;
+				max-width: 100%;
+				height: 1px;
+				margin: 8px 0 6px;
+				background: rgba(255, 255, 255, 0.45);
+			}
+
+			.bl-subtitle {
+				margin: 0 0 24px;
+				font-size: 18px;
+				font-weight: 300;
+				color: rgba(255, 255, 255, 0.92);
+			}
+
+			.bl-content {
+				display: grid;
+				grid-template-columns: minmax(0, 1.4fr) minmax(300px, 0.9fr);
+				gap: 40px;
+				align-items: start;
+			}
+
+			.bl-section-title {
+				margin: 0 0 18px;
+				font-size: 22px;
+				font-weight: 300;
+				text-transform: uppercase;
+			}
+
+			.bl-form {
+				display: grid;
+				grid-template-columns: repeat(2, minmax(0, 1fr));
+				gap: 14px 24px;
+			}
+
+			.bl-field label {
+				display: block;
+				margin-bottom: 8px;
+				font-size: 13px;
+				font-weight: 700;
+				text-transform: uppercase;
+			}
+
+			.bl-field input,
+			.bl-field select {
+				width: 100%;
+				height: 32px;
+				border: 0;
+				border-radius: 3px;
+				padding: 0 12px;
+				background: #fff;
+				font-size: 12px;
+				color: #6b7280;
+			}
+
+			.bl-field--full {
+				grid-column: span 2;
+			}
+
+			.bl-date {
+				position: relative;
+			}
+
+			.bl-date i {
+				position: absolute;
+				right: 10px;
+				top: 38px;
+				color: #111827;
+				font-size: 14px;
+			}
+
+			.bl-actions {
+				display: flex;
+				gap: 12px;
+				justify-content: flex-end;
+				margin-top: 18px;
+			}
+
+			.bl-actions a,
+			.bl-actions button {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				gap: 8px;
+				min-width: 134px;
+				height: 30px;
+				border: 0;
+				border-radius: 3px;
+				font-size: 12px;
+				font-weight: 700;
+				color: #fff;
+			}
+
+			.bl-actions .secondary {
+				background: #73add6;
+			}
+
+			.bl-actions .primary {
+				background: #66b63e;
+			}
+
+			.bl-tip h3 {
+				margin: 52px 0 12px;
+				font-size: 18px;
+				font-weight: 300;
+				text-transform: uppercase;
+			}
+
+			.bl-tip h3 strong {
+				font-weight: 700;
+			}
+
+			.bl-tip p {
+				margin: 0 0 14px;
+				font-size: 13px;
+				line-height: 1.55;
+				color: rgba(255, 255, 255, 0.95);
+			}
+
+			.bl-footer-note {
+				margin-top: 34px;
+				font-size: 16px;
+				font-style: italic;
+				color: rgba(255, 255, 255, 0.96);
+			}
+
+			.bl-footer-note strong {
+				font-weight: 700;
+			}
+
+			@media (max-width: 991.98px) {
+				.bl-header {
+					flex-direction: column;
+					align-items: flex-start;
+				}
+
+				.bl-content {
+					grid-template-columns: 1fr;
+					gap: 20px;
+				}
+
+				.bl-tip h3 {
+					margin-top: 8px;
+				}
+			}
+
+			@media (max-width: 767.98px) {
+				.bl-wrap {
+					padding-left: 16px;
+					padding-right: 16px;
+				}
+
+				.bl-form {
+					grid-template-columns: 1fr;
+				}
+
+				.bl-field--full {
+					grid-column: span 1;
+				}
+
+				.bl-actions {
+					flex-direction: column;
+					align-items: stretch;
+				}
+			}
+		</style>
+	</head>
+	<body class="bl-page">
+		<header class="bl-header">
+			<div class="bl-brand">
+				<div class="bl-brand__icon"><i class="fas fa-landmark"></i></div>
+				<div class="bl-brand__text"><strong>CAMPO GRANDE</strong><span>PREFEITURA</span></div>
+			</div>
+			<nav class="bl-links">
+				<a href="javascript:void(0)">PORTAL PMCG</a>
+				<a href="javascript:void(0)">BIBLIOTECA FEDERAL</a>
+				<a href="javascript:void(0)">BIBLIOTECA ESTADUAL</a>
+				<a href="javascript:void(0)">LEI ORGÂNICA</a>
+				<a href="javascript:void(0)">ESTATUTO DO SERVIDOR</a>
+			</nav>
+		</header>
+
+		<main class="bl-wrap">
+			<h1 class="bl-title">BIBLIOTECA DE <strong>LEGISLAÇÃO</strong></h1>
+			<div class="bl-divider"></div>
+			<p class="bl-subtitle">Acervo Municipal de Leis, Decretos e outros Atos Normativos</p>
+
+			<div class="bl-content">
+				<section>
+					<h2 class="bl-section-title">Busca</h2>
+					<div class="bl-form">
+						<div class="bl-field">
+							<label>Tipo de legislação</label>
+							<select><option></option></select>
+						</div>
+						<div class="bl-field">
+							<label>Número</label>
+							<input type="text" placeholder="NÚMERO" />
+						</div>
+						<div class="bl-field">
+							<label>Ano</label>
+							<input type="text" placeholder="ANO" />
+						</div>
+						<div class="bl-field bl-date">
+							<label>Data inicial</label>
+							<input type="text" placeholder="dd/mm/aaaa" />
+							<i class="far fa-calendar-alt"></i>
+						</div>
+						<div class="bl-field bl-date">
+							<label>Data final</label>
+							<input type="text" placeholder="dd/mm/aaaa" />
+							<i class="far fa-calendar-alt"></i>
+						</div>
+						<div></div>
+						<div class="bl-field">
+							<label>Palavra-chave</label>
+							<input type="text" placeholder="PALAVRA-CHAVE" />
+						</div>
+						<div class="bl-field">
+							<label>Assunto</label>
+							<input type="text" placeholder="ASSUNTO" />
+						</div>
+						<div class="bl-field">
+							<label>Texto da legislação</label>
+							<input type="text" placeholder="TEXTO DA LEGISLAÇÃO" />
+						</div>
+						<div class="bl-field">
+							<label>Secretaria</label>
+							<select><option></option></select>
+						</div>
+					</div>
+
+					<div class="bl-actions">
+						<a href="secretaria-municipal-fazenda.html" class="secondary"><i class="far fa-file-alt"></i> LIMPAR</a>
+						<button type="button" class="primary"><i class="fas fa-search"></i> BUSCAR</button>
+					</div>
+
+					<div class="bl-footer-note"><strong>SEMADI</strong> - Secretaria Municipal de Administração e Inovação</div>
+				</section>
+
+				<aside class="bl-tip">
+					<h3><strong>Dica</strong> Importante</h3>
+					<p>Você pode utilizar os filtros para fazer uma busca avançada, selecionando, por exemplo, um intervalo de tempo ou tipo de legislação específica.</p>
+					<p>Selecione os filtros desejados e pressione o botão Buscar.</p>
+				</aside>
+			</div>
+			<div style="margin-top: 24px;">
+				<a href="services.html" style="display: inline-flex; align-items: center; justify-content: center; min-height: 40px; padding: 0 18px; border-radius: 4px; background: #0f6ead; color: #fff; font-size: 13px; font-weight: 700; text-transform: uppercase;">Voltar ao Portal Transparencia</a>
+			</div>
+		</main>
+	</body>
+</html>

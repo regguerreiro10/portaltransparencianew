@@ -1,0 +1,1319 @@
+<!DOCTYPE html>
+<html class="no-js" lang="pt-BR">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="x-ua-compatible" content="ie=edge" />
+		<title>Processo Administrativo | Transparencia</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png" />
+		<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="assets/css/animate.min.css" />
+		<link rel="stylesheet" href="assets/css/magnific-popup.css" />
+		<link rel="stylesheet" href="assets/css/fontawesome-all.min.css" />
+		<link rel="stylesheet" href="assets/css/flaticon.css" />
+		<link rel="stylesheet" href="assets/css/odometer.css" />
+		<link rel="stylesheet" href="assets/css/swiper-bundle.css" />
+		<link rel="stylesheet" href="assets/css/aos.css" />
+		<link rel="stylesheet" href="assets/css/default.css" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<style>
+			.processo-area {
+				padding: 110px 0 120px;
+				background:
+					linear-gradient(180deg, rgba(255, 212, 0, 0.14) 0%, rgba(255, 255, 255, 0) 180px),
+					#f8fbff;
+			}
+
+			.processo-shell {
+				background: #fff;
+				border-radius: 22px;
+				border: 1px solid rgba(15, 23, 42, 0.08);
+				box-shadow: 0 24px 60px rgba(15, 23, 42, 0.1);
+				overflow: hidden;
+			}
+
+			.processo-shell__top {
+				padding: 34px 36px 22px;
+				border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+				background: linear-gradient(90deg, #0f4c81 0%, #1f6aa5 100%);
+				color: #fff;
+			}
+
+			.processo-shell__top h1 {
+				margin: 0 0 10px;
+				font-size: 36px;
+				color: #fff;
+			}
+
+			.processo-shell__top p {
+				margin: 0;
+				max-width: 940px;
+				color: rgba(255, 255, 255, 0.88);
+				line-height: 1.7;
+			}
+
+			.processo-toolbar {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 12px;
+				padding: 18px 36px;
+				background: #ffd400;
+			}
+
+			.processo-chip,
+			.processo-toolbar-link {
+				display: inline-flex;
+				align-items: center;
+				gap: 8px;
+				padding: 8px 14px;
+				border-radius: 999px;
+				font-size: 13px;
+				font-weight: 700;
+				color: #17324d;
+				background: rgba(255, 255, 255, 0.88);
+				line-height: 1;
+			}
+
+			.processo-toolbar-link:hover,
+			.processo-toolbar-link:focus {
+				background: #0f4c81;
+				color: #fff;
+			}
+
+			.processo-module {
+				padding: 26px 36px 12px;
+				background: #f3f6fa;
+				border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+			}
+
+			.processo-module__grid {
+				display: grid;
+				grid-template-columns: repeat(6, minmax(0, 1fr));
+				gap: 18px 14px;
+			}
+
+			.processo-module__item {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+				min-height: 96px;
+				padding: 16px 12px;
+				border-radius: 16px;
+				text-align: center;
+				color: #5b7088;
+				background: transparent;
+				border: 1px solid transparent;
+				transition: 0.25s ease;
+			}
+
+			.processo-module__item:hover,
+			.processo-module__item:focus,
+			.processo-module__item.is-active {
+				color: #17324d;
+				background: #fff;
+				border-color: #d8e2ee;
+				transform: translateY(-2px);
+				box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
+			}
+
+			.processo-module__item i {
+				margin-bottom: 10px;
+				font-size: 19px;
+				color: #6e7f93;
+			}
+
+			.processo-module__item.is-active i {
+				color: #0f4c81;
+			}
+
+			.processo-module__item span {
+				display: block;
+				font-size: 14px;
+				font-weight: 500;
+				line-height: 1.35;
+			}
+
+			.processo-content {
+				padding: 34px 36px 40px;
+			}
+
+			.processo-header {
+				display: flex;
+				flex-wrap: wrap;
+				align-items: center;
+				justify-content: space-between;
+				gap: 14px;
+				margin-bottom: 22px;
+			}
+
+			.processo-section-title {
+				margin: 0;
+				font-size: 30px;
+				color: #17324d;
+			}
+
+			.processo-advanced-toggle {
+				display: inline-flex;
+				align-items: center;
+				gap: 8px;
+				padding: 12px 16px;
+				border-radius: 10px;
+				border: 1px solid #d6e1ed;
+				background: #f5f9ff;
+				color: #17324d;
+				font-weight: 600;
+			}
+
+			.processo-filter-grid {
+				display: grid;
+				grid-template-columns: repeat(3, minmax(0, 1fr));
+				gap: 18px;
+				margin-bottom: 20px;
+			}
+
+			.processo-filter-grid--two {
+				grid-template-columns: repeat(2, minmax(0, 1fr));
+			}
+
+			.processo-filter-group label {
+				display: block;
+				margin-bottom: 8px;
+				font-size: 14px;
+				font-weight: 600;
+				color: #17324d;
+			}
+
+			.processo-filter-group input,
+			.processo-filter-group select {
+				width: 100%;
+				height: 48px;
+				border: 1px solid #cfd8e3;
+				border-radius: 10px;
+				padding: 0 14px;
+				background: #fff;
+				color: #17324d;
+			}
+
+			.processo-advanced-panel {
+				display: none;
+				margin-bottom: 22px;
+				padding: 22px;
+				border: 1px solid #dbe8f5;
+				border-radius: 16px;
+				background: #f7fbff;
+			}
+
+			.processo-advanced-panel.is-open {
+				display: block;
+			}
+
+			.processo-actions {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 12px;
+				margin-bottom: 20px;
+			}
+
+			.processo-actions .btn {
+				min-width: 138px;
+			}
+
+			.processo-resume {
+				display: grid;
+				grid-template-columns: repeat(4, minmax(0, 1fr));
+				gap: 16px;
+				margin-bottom: 26px;
+			}
+
+			.processo-kpi {
+				padding: 18px 20px;
+				border-radius: 14px;
+				background: #f5f9ff;
+				border: 1px solid #dbe8f5;
+			}
+
+			.processo-kpi span {
+				display: block;
+				margin-bottom: 6px;
+				font-size: 13px;
+				text-transform: uppercase;
+				letter-spacing: 0.04em;
+				color: #6a7c8f;
+			}
+
+			.processo-kpi strong {
+				font-size: 28px;
+				color: #17324d;
+			}
+
+			.processo-overview {
+				display: grid;
+				grid-template-columns: repeat(2, minmax(0, 1fr));
+				gap: 16px;
+				margin-bottom: 26px;
+			}
+
+			.processo-card {
+				padding: 24px;
+				border-radius: 18px;
+				border: 1px solid #dde7f1;
+				background: #fff;
+			}
+
+			.processo-card--backend {
+				background: linear-gradient(180deg, #f5f9ff 0%, #ffffff 100%);
+				border-color: #cfe0f2;
+			}
+
+			.processo-card--frontend {
+				background: linear-gradient(180deg, #fffaf0 0%, #ffffff 100%);
+				border-color: #f2ddaa;
+			}
+
+			.processo-card__eyebrow {
+				display: inline-flex;
+				align-items: center;
+				gap: 8px;
+				margin-bottom: 14px;
+				padding: 8px 12px;
+				border-radius: 999px;
+				font-size: 12px;
+				font-weight: 700;
+				text-transform: uppercase;
+				letter-spacing: 0.06em;
+				color: #17324d;
+				background: rgba(15, 76, 129, 0.1);
+			}
+
+			.processo-card h3 {
+				margin: 0 0 10px;
+				font-size: 26px;
+				color: #17324d;
+			}
+
+			.processo-card p {
+				margin: 0 0 18px;
+				color: #5b7088;
+				line-height: 1.7;
+			}
+
+			.processo-card__list {
+				display: grid;
+				gap: 10px;
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+
+			.processo-card__list li {
+				display: flex;
+				align-items: center;
+				gap: 10px;
+				color: #17324d;
+				font-weight: 500;
+			}
+
+			.processo-card__list i {
+				color: #0f9d58;
+			}
+
+			.processo-table-wrap {
+				border: 1px solid #dde7f1;
+				border-radius: 16px;
+				overflow: hidden;
+				background: #fff;
+				margin-bottom: 26px;
+			}
+
+			.processo-table {
+				width: 100%;
+				margin: 0;
+			}
+
+			.processo-table thead th {
+				background: #eff6fd;
+				color: #17324d;
+				font-size: 13px;
+				text-transform: uppercase;
+				letter-spacing: 0.04em;
+			}
+
+			.processo-table tbody td {
+				color: #314960;
+				vertical-align: middle;
+			}
+
+			.processo-table tbody tr:nth-child(even) td {
+				background: #fbfdff;
+			}
+
+			.processo-badge {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				padding: 6px 10px;
+				border-radius: 999px;
+				font-size: 11px;
+				font-weight: 700;
+				text-transform: uppercase;
+				letter-spacing: 0.04em;
+			}
+
+			.processo-badge--publico {
+				background: #e7f5ed;
+				color: #127244;
+			}
+
+			.processo-badge--restrito {
+				background: #fff4db;
+				color: #946200;
+			}
+
+			.processo-badge--sigiloso {
+				background: #ffe8e8;
+				color: #b42318;
+			}
+
+			.processo-badge--andamento {
+				background: #e6f0fb;
+				color: #0f4c81;
+			}
+
+			.processo-badge--analise {
+				background: #fff4db;
+				color: #946200;
+			}
+
+			.processo-badge--concluido {
+				background: #e7f5ed;
+				color: #127244;
+			}
+
+			.processo-row-actions {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 8px;
+			}
+
+			.processo-view-btn {
+				display: inline-flex;
+				align-items: center;
+				gap: 6px;
+				padding: 8px 12px;
+				border-radius: 999px;
+				background: #0f4c81;
+				color: #fff;
+				font-size: 12px;
+				font-weight: 700;
+			}
+
+			.processo-view-btn:hover,
+			.processo-view-btn:focus {
+				background: #17324d;
+				color: #fff;
+			}
+
+			.processo-message {
+				display: none;
+				margin-bottom: 18px;
+				padding: 14px 16px;
+				border-radius: 10px;
+				background: #fff5f5;
+				color: #991b1b;
+				border: 1px solid #fecaca;
+			}
+
+			.processo-empty-state {
+				padding: 42px 20px;
+				text-align: center;
+				color: #5a6f86;
+			}
+
+			.processo-guides {
+				display: grid;
+				grid-template-columns: repeat(2, minmax(0, 1fr));
+				gap: 16px;
+			}
+
+			.processo-guide {
+				padding: 22px 24px;
+				border-radius: 18px;
+				background: #f8fbff;
+				border: 1px solid #dbe8f5;
+			}
+
+			.processo-guide h3 {
+				margin: 0 0 10px;
+				font-size: 22px;
+				color: #17324d;
+			}
+
+			.processo-guide p {
+				margin: 0 0 14px;
+				color: #5b7088;
+				line-height: 1.7;
+			}
+
+			.processo-guide ul {
+				margin: 0;
+				padding-left: 18px;
+				color: #17324d;
+			}
+
+			.processo-modal {
+				position: fixed;
+				inset: 0;
+				z-index: 9999;
+				display: none;
+				padding: 24px;
+				background: rgba(15, 23, 42, 0.62);
+			}
+
+			.processo-modal.is-open {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+
+			.processo-modal__dialog {
+				width: min(760px, 100%);
+				max-height: calc(100vh - 48px);
+				overflow: auto;
+				border-radius: 18px;
+				background: #fff;
+				box-shadow: 0 24px 60px rgba(15, 23, 42, 0.18);
+			}
+
+			.processo-modal__header {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 16px;
+				padding: 20px 24px;
+				border-bottom: 1px solid #dde7f1;
+			}
+
+			.processo-modal__title {
+				margin: 0;
+				font-size: 24px;
+				color: #17324d;
+			}
+
+			.processo-modal__close {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				width: 42px;
+				height: 42px;
+				border: 0;
+				border-radius: 50%;
+				background: #eff6fd;
+				color: #17324d;
+			}
+
+			.processo-modal__body {
+				padding: 24px;
+			}
+
+			.processo-timeline {
+				display: grid;
+				gap: 14px;
+			}
+
+			.processo-timeline__item {
+				padding: 18px 18px 18px 20px;
+				border-left: 4px solid #0f4c81;
+				border-radius: 0 14px 14px 0;
+				background: #f8fbff;
+			}
+
+			.processo-timeline__item strong,
+			.processo-attachment strong {
+				display: block;
+				margin-bottom: 4px;
+				color: #17324d;
+			}
+
+			.processo-timeline__item span,
+			.processo-attachment span {
+				display: block;
+				color: #5b7088;
+				line-height: 1.6;
+			}
+
+			.processo-attachment-list {
+				display: grid;
+				gap: 12px;
+			}
+
+			.processo-attachment {
+				display: flex;
+				flex-wrap: wrap;
+				align-items: center;
+				justify-content: space-between;
+				gap: 12px;
+				padding: 16px 18px;
+				border-radius: 14px;
+				border: 1px solid #dde7f1;
+				background: #f8fbff;
+			}
+
+			@media (max-width: 991.98px) {
+				.processo-module__grid,
+				.processo-filter-grid,
+				.processo-filter-grid--two,
+				.processo-resume,
+				.processo-overview,
+				.processo-guides {
+					grid-template-columns: repeat(2, minmax(0, 1fr));
+				}
+			}
+
+			@media (max-width: 767.98px) {
+				.processo-area {
+					padding: 90px 0;
+				}
+
+				.processo-shell__top,
+				.processo-toolbar,
+				.processo-module,
+				.processo-content {
+					padding-left: 20px;
+					padding-right: 20px;
+				}
+
+				.processo-shell__top h1 {
+					font-size: 28px;
+				}
+
+				.processo-module__grid,
+				.processo-filter-grid,
+				.processo-filter-grid--two,
+				.processo-resume,
+				.processo-overview,
+				.processo-guides {
+					grid-template-columns: 1fr;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<button class="scroll__top scroll-to-target" data-target="html">
+			<i class="fas fa-angle-up"></i>
+		</button>
+
+		<header>
+			<div id="header-fixed-height"></div>
+			<div id="sticky-header" class="tg-header__area">
+				<div class="container custom-container">
+					<div class="row">
+						<div class="col-12">
+							<div class="tgmenu__wrap">
+								<nav class="tgmenu__nav">
+									<div class="logo">
+										<a href="index.html"><img src="assets/img/logo/logo.png" alt="Logo" /></a>
+									</div>
+									<div class="tgmenu__navbar-wrap tgmenu__main-menu d-none d-lg-flex">
+										<ul class="navigation">
+											<li><a href="index.html">Inicio</a></li>
+											<li><a href="services-3.html">Sites Municipais</a></li>
+											<li><a href="services.html">Portal Transparencia</a></li>
+											<li><a href="services-5.html">Servicos</a></li>
+											<li><a href="blog.html">Noticias</a></li>
+											<li><a href="contact.html">Fale Conosco</a></li>
+										</ul>
+									</div>
+									<div class="tgmenu__action d-none d-md-block">
+										<ul class="list-wrap">
+											<li class="header-search">
+												<a href="javascript:void(0)" class="search-open-btn" aria-label="Abrir pesquisa">
+													<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none">
+														<path d="M19 19.0002L14.657 14.6572M14.657 14.6572C15.3999 13.9143 15.9892 13.0324 16.3912 12.0618C16.7933 11.0911 17.0002 10.0508 17.0002 9.00021C17.0002 7.9496 16.7933 6.90929 16.3913 5.93866C15.9892 4.96803 15.3999 4.08609 14.657 3.34321C13.9141 2.60032 13.0322 2.01103 12.0616 1.60898C11.0909 1.20693 10.0506 1 9.00002 1C7.94942 1 6.90911 1.20693 5.93848 1.60898C4.96785 2.01103 4.08591 2.60032 3.34302 3.34321C1.84269 4.84354 0.999817 6.87842 0.999817 9.00021C0.999817 11.122 1.84269 13.1569 3.34302 14.6572C4.84335 16.1575 6.87824 17.0004 9.00002 17.0004C11.1218 17.0004 13.1567 16.1575 14.657 14.6572Z" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+													</svg>
+												</a>
+											</li>
+										</ul>
+									</div>									<div class="mobile-nav-toggler">
+										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18" fill="none">
+											<path d="M0 2C0 0.895431 0.895431 0 2 0C3.10457 0 4 0.895431 4 2C4 3.10457 3.10457 4 2 4C0.895431 4 0 3.10457 0 2Z" fill="currentcolor" />
+											<path d="M0 9C0 7.89543 0.895431 7 2 7C3.10457 7 4 7.89543 4 9C4 10.1046 3.10457 11 2 11C0.895431 11 0 10.1046 0 9Z" fill="currentcolor" />
+											<path d="M0 16C0 14.8954 0.895431 14 2 14C3.10457 14 4 14.8954 4 16C4 17.1046 3.10457 18 2 18C0.895431 18 0 17.1046 0 16Z" fill="currentcolor" />
+											<path d="M7 2C7 0.895431 7.89543 0 9 0C10.1046 0 11 0.895431 11 2C11 3.10457 10.1046 4 9 4C7.89543 4 7 3.10457 7 2Z" fill="currentcolor" />
+											<path d="M7 9C7 7.89543 7.89543 7 9 7C10.1046 7 11 7.89543 11 9C11 10.1046 10.1046 11 9 11C7.89543 11 7 10.1046 7 9Z" fill="currentcolor" />
+											<path d="M7 16C7 14.8954 7.89543 14 9 14C10.1046 14 11 14.8954 11 16C11 17.1046 10.1046 18 9 18C7.89543 18 7 17.1046 7 16Z" fill="currentcolor" />
+											<path d="M14 2C14 0.895431 14.8954 0 16 0C17.1046 0 18 0.895431 18 2C18 3.10457 17.1046 4 16 4C14.8954 4 14 3.10457 14 2Z" fill="currentcolor" />
+											<path d="M14 9C14 7.89543 14.8954 7 16 7C17.1046 7 18 7.89543 18 9C18 10.1046 17.1046 11 16 11C14.8954 11 14 10.1046 14 9Z" fill="currentcolor" />
+											<path d="M14 16C14 14.8954 14.8954 14 16 14C17.1046 14 18 14.8954 18 16C18 17.1046 17.1046 18 16 18C14.8954 18 14 17.1046 14 16Z" fill="currentcolor" />
+										</svg>
+									</div>
+								</nav>
+							</div>
+							<div class="tgmobile__menu">
+								<nav class="tgmobile__menu-box">
+									<div class="close-btn"><i class="fas fa-times"></i></div>
+									<div class="nav-logo">
+										<a href="index.html"><img src="assets/img/logo/logo.png" alt="Logo" /></a>
+									</div>
+									<div class="tgmobile__menu-outer"></div>
+								</nav>
+							</div>
+							<div class="tgmobile__menu-backdrop"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- header-search -->
+			<div class="search__popup">
+				<div class="container">
+					<div class="row">
+						<div class="col-12">
+							<div class="search__wrapper">
+								<div class="search__close">
+									<button type="button" class="search-close-btn" aria-label="Fechar pesquisa">
+										<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M17 1L1 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+											<path d="M1 1L17 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+										</svg>
+									</button>
+								</div>
+								<div class="search__form">
+									<form action="formulario.php" method="get">
+										<h2 class="search-advanced__title">Busca no portal</h2>
+										<div class="search__input">
+											<input class="search-input-field" type="text" name="q" placeholder="Digite o termo da consulta" />
+											<span class="search-focus-border"></span>
+											<button type="submit" aria-label="Pesquisar">
+												<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+													<path d="M9.55 18.1C14.272 18.1 18.1 14.272 18.1 9.55C18.1 4.82797 14.272 1 9.55 1C4.82797 1 1 4.82797 1 9.55C1 14.272 4.82797 18.1 9.55 18.1Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+													<path d="M19.0002 19.0002L17.2002 17.2002" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+												</svg>
+											</button>
+										</div>
+										<div class="search-advanced__message" aria-live="polite"></div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="search-popup-overlay"></div>
+			<!-- header-search-end -->		</header>
+
+		<main class="fix">
+			<section class="processo-area">
+				<div class="container">
+					<div class="processo-shell">
+						<div class="processo-shell__top">
+							<h1>Processo Administrativo</h1>
+							<p>
+								Painel unificado para criar processos, controlar tramitacoes entre usuarios e departamentos,
+								vincular anexos, manter historico completo e aplicar regras de sigilo e permissao.
+							</p>
+						</div>
+						<div class="processo-toolbar">
+							<span class="processo-chip">Criacao de processos</span>
+							<span class="processo-chip">Tramitacao entre setores</span>
+							<span class="processo-chip">Historico completo</span>
+							<a class="processo-toolbar-link" href="#processo-visao-geral"><i class="fas fa-layer-group"></i><span>Visao geral</span></a>
+							<a class="processo-toolbar-link" href="#processo-tabela"><i class="fas fa-folder-open"></i><span>Consulta de processos</span></a>
+							<a class="processo-toolbar-link" href="#processo-camadas"><i class="fas fa-sitemap"></i><span>Camadas do modulo</span></a>
+						</div>
+						<div class="processo-module">
+							<div class="processo-module__grid">
+								<a class="processo-module__item" href="gestao-documentos.html">
+									<i class="fas fa-file-alt"></i>
+									<span>Gestao de Documentos</span>
+								</a>
+								<a class="processo-module__item" href="modulo-financeiro.html">
+									<i class="fas fa-wallet"></i>
+									<span>Modulo Financeiro</span>
+								</a>
+								<a class="processo-module__item" href="relatorios-modulo.html">
+									<i class="fas fa-chart-bar"></i>
+									<span>Modulo de Relatorios</span>
+								</a>
+								<a class="processo-module__item" href="legislacao-portal.html">
+									<i class="fas fa-balance-scale"></i>
+									<span>Legislacao</span>
+								</a>
+								<a class="processo-module__item" href="licitacoes-portal.html">
+									<i class="fas fa-gavel"></i>
+									<span>Licitacoes</span>
+								</a>
+								<a class="processo-module__item" href="contratos-portal.html">
+									<i class="fas fa-file-contract"></i>
+									<span>Contratos</span>
+								</a>
+								<a class="processo-module__item is-active" href="processo-administrativo.html" aria-current="page">
+									<i class="fas fa-project-diagram"></i>
+									<span>Processo Administrativo</span>
+								</a>
+								<a class="processo-module__item" href="dados-abertos-portal.html">
+									<i class="fas fa-database"></i>
+									<span>Dados Abertos</span>
+								</a>
+								<a class="processo-module__item" href="e-sic-informacoes-cidadao.html">
+									<i class="fas fa-info-circle"></i>
+									<span>e-SIC</span>
+								</a>
+								<a class="processo-module__item" href="convenios-portal.html">
+									<i class="fas fa-handshake"></i>
+									<span>Convenios</span>
+								</a>
+								<a class="processo-module__item" href="prestacao-contas.html">
+									<i class="fas fa-clipboard-check"></i>
+									<span>Prestacao de Contas</span>
+								</a>
+								<a class="processo-module__item" href="consulta-processo-proprietario.html">
+									<i class="fas fa-search"></i>
+									<span>Consulta Publica</span>
+								</a>
+								<a class="processo-module__item" href="services.html">
+									<i class="fas fa-arrow-left"></i>
+									<span>Voltar</span>
+								</a>
+							</div>
+						</div>
+						<div class="processo-content">
+							<div class="processo-header" id="processo-visao-geral">
+								<h2 class="processo-section-title">Painel do Processo</h2>
+								<button class="processo-advanced-toggle" id="processo-advanced-toggle" type="button">
+									<i class="fas fa-sliders-h"></i>
+									Filtros avancados
+								</button>
+							</div>
+							<div class="processo-filter-grid">
+								<div class="processo-filter-group">
+									<label for="processo-periodo">Periodo</label>
+									<select id="processo-periodo">
+										<option value="">Todos os periodos</option>
+									</select>
+								</div>
+								<div class="processo-filter-group">
+									<label for="processo-status">Status</label>
+									<select id="processo-status">
+										<option value="">Todos</option>
+									</select>
+								</div>
+								<div class="processo-filter-group">
+									<label for="processo-sigilo">Nivel de sigilo</label>
+									<select id="processo-sigilo">
+										<option value="">Todos</option>
+									</select>
+								</div>
+							</div>
+							<div class="processo-filter-grid processo-filter-grid--two">
+								<div class="processo-filter-group">
+									<label for="processo-numero">Número</label>
+									<input type="text" id="processo-numero" placeholder="Digite o número do processo" />
+								</div>
+								<div class="processo-filter-group">
+									<label for="processo-texto">Texto</label>
+									<input type="text" id="processo-texto" placeholder="Digite assunto, descrição ou termo" />
+								</div>
+							</div>
+							<div class="processo-advanced-panel" id="processo-advanced-panel">
+								<div class="processo-filter-grid">
+									<div class="processo-filter-group">
+										<label for="processo-conteudo-arquivo">Conteúdo de arquivo</label>
+										<input type="text" id="processo-conteudo-arquivo" placeholder="Digite nome ou conteúdo do arquivo" />
+									</div>
+									<div class="processo-filter-group">
+										<label for="processo-responsavel">Responsavel</label>
+										<select id="processo-responsavel">
+											<option value="">Todos</option>
+										</select>
+									</div>
+									<div class="processo-filter-group">
+										<label for="processo-permissao">Permissao exigida</label>
+										<select id="processo-permissao">
+											<option value="">Todas</option>
+										</select>
+									</div>
+									<div class="processo-filter-group">
+										<label for="processo-departamento">Departamento responsavel</label>
+										<select id="processo-departamento">
+											<option value="">Todos</option>
+										</select>
+									</div>
+									<div class="processo-filter-group">
+										<label for="processo-anexo">Possui anexos</label>
+										<select id="processo-anexo">
+											<option value="">Todos</option>
+											<option value="sim">Com anexos</option>
+											<option value="nao">Sem anexos</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="processo-actions">
+								<button class="btn" id="processo-consultar" type="button">Consultar</button>
+								<button class="btn btn-two" id="processo-limpar" type="button">Limpar consulta</button>
+								<a class="btn btn-three" href="services.html">Voltar</a>
+							</div>
+							<div class="processo-message" id="processo-message"></div>
+							<div class="processo-resume">
+								<div class="processo-kpi">
+									<span>Total de processos</span>
+									<strong id="processo-total">0</strong>
+								</div>
+								<div class="processo-kpi">
+									<span>Em andamento</span>
+									<strong id="processo-andamento">0</strong>
+								</div>
+								<div class="processo-kpi">
+									<span>Sigilosos ou restritos</span>
+									<strong id="processo-restritos">0</strong>
+								</div>
+								<div class="processo-kpi">
+									<span>Anexos vinculados</span>
+									<strong id="processo-anexos-total">0</strong>
+								</div>
+							</div>
+							<div class="processo-overview" id="processo-camadas">
+								<div class="processo-card processo-card--backend">
+									<div class="processo-card__eyebrow">
+										<i class="fas fa-server"></i>
+										<span>Back-end essencial</span>
+									</div>
+									<h3>Regra de negocio critica</h3>
+									<p>
+										Essa camada garante a aderencia ao edital: sem criacao, historico, tramitacao,
+										sigilo, anexos e protocolo, o modulo nao entrega o que a licitacao exige.
+									</p>
+									<ul class="processo-card__list">
+										<li><i class="fas fa-check-circle"></i><span>Criacao do processo com numero de protocolo</span></li>
+										<li><i class="fas fa-check-circle"></i><span>Controle de envio e recebimento entre setores</span></li>
+										<li><i class="fas fa-check-circle"></i><span>Historico completo com logs de eventos</span></li>
+										<li><i class="fas fa-check-circle"></i><span>Controle de sigilo e permissao por grupo e usuario</span></li>
+										<li><i class="fas fa-check-circle"></i><span>Upload e vinculo de anexos</span></li>
+									</ul>
+								</div>
+								<div class="processo-card processo-card--frontend">
+									<div class="processo-card__eyebrow">
+										<i class="fas fa-desktop"></i>
+										<span>Front-end de apoio</span>
+									</div>
+									<h3>Interface para operacao</h3>
+									<p>
+										A interface precisa traduzir a regra de negocio em fluxo claro: cadastro, busca,
+										tramitacao, anexos e historico visivel para quem tem permissao.
+									</p>
+									<ul class="processo-card__list">
+										<li><i class="fas fa-check-circle"></i><span>Formulario de cadastro do processo</span></li>
+										<li><i class="fas fa-check-circle"></i><span>Painel de tramitacao entre departamentos</span></li>
+										<li><i class="fas fa-check-circle"></i><span>Upload de anexos com classificacao</span></li>
+										<li><i class="fas fa-check-circle"></i><span>Historico visual de movimentacoes</span></li>
+										<li><i class="fas fa-check-circle"></i><span>Filtros, busca e destaque para sigilo</span></li>
+									</ul>
+								</div>
+							</div>
+							<div class="processo-table-wrap" id="processo-tabela">
+								<table class="table processo-table">
+									<thead>
+										<tr>
+											<th>Processo</th>
+											<th>Departamento</th>
+											<th>Status</th>
+											<th>Sigilo</th>
+											<th>Responsavel</th>
+											<th class="text-end">Anexos</th>
+											<th>Acoes</th>
+										</tr>
+									</thead>
+									<tbody id="processo-table-body">
+										<tr><td colspan="7" class="processo-empty-state">Carregando processos...</td></tr>
+									</tbody>
+								</table>
+							</div>
+							
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<footer>
+			<div class="footer__area-three">
+				<div class="footer__bottom-three">
+					<div class="container">
+						<div class="row align-items-center">
+							<div class="col-lg-6">
+								<div class="copyright-text-two">
+									<p>Copyright &copy; <a href="index.html">Ti-Genesis</a> | Todos os direitos reservados</p>
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div class="footer__social-three">
+									<ul class="list-wrap justify-content-center justify-content-lg-end">
+										<li><a href="javascript:void(0)"><i class="fab fa-facebook-f"></i></a></li>
+										<li><a href="javascript:void(0)"><i class="fab fa-twitter"></i></a></li>
+										<li><a href="javascript:void(0)"><i class="fab fa-instagram"></i></a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+		<div class="processo-modal" id="processo-modal" aria-hidden="true">
+			<div class="processo-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="processo-modal-title">
+				<div class="processo-modal__header">
+					<h3 class="processo-modal__title" id="processo-modal-title">Detalhes do processo</h3>
+					<button class="processo-modal__close" id="processo-modal-close" type="button" aria-label="Fechar">
+						<i class="fas fa-times"></i>
+					</button>
+				</div>
+				<div class="processo-modal__body" id="processo-modal-body">
+					<div class="processo-empty-state">Carregando detalhes...</div>
+				</div>
+			</div>
+		</div>
+
+		<script src="assets/js/vendor/jquery-3.6.0.min.js"></script>
+		<script src="assets/js/bootstrap.bundle.min.js"></script>
+		<script src="assets/js/jquery.magnific-popup.min.js"></script>
+		<script src="assets/js/jquery.odometer.min.js"></script>
+		<script src="assets/js/jquery.appear.js"></script>
+		<script src="assets/js/gsap.js"></script>
+		<script src="assets/js/ScrollTrigger.js"></script>
+		<script src="assets/js/SplitText.js"></script>
+		<script src="assets/js/gsap-animation.js"></script>
+		<script src="assets/js/jquery.parallaxScroll.min.js"></script>
+		<script src="assets/js/swiper-bundle.js"></script>
+		<script src="assets/js/ajax-form.js"></script>
+		<script src="assets/js/wow.min.js"></script>
+		<script src="assets/js/aos.js"></script>
+		<script src="assets/js/main.js"></script>
+		<script>
+			(function () {
+				const endpoint = 'admin/public_processos_administrativos_consulta.php';
+				let dataset = [];
+
+				const periodSelect = document.getElementById('processo-periodo');
+				const statusSelect = document.getElementById('processo-status');
+				const sigiloSelect = document.getElementById('processo-sigilo');
+				const numberInput = document.getElementById('processo-numero');
+				const textInput = document.getElementById('processo-texto');
+				const fileContentInput = document.getElementById('processo-conteudo-arquivo');
+				const departmentSelect = document.getElementById('processo-departamento');
+				const responsibleSelect = document.getElementById('processo-responsavel');
+				const permissionSelect = document.getElementById('processo-permissao');
+				const attachmentSelect = document.getElementById('processo-anexo');
+				const buttonConsultar = document.getElementById('processo-consultar');
+				const buttonLimpar = document.getElementById('processo-limpar');
+				const buttonToggle = document.getElementById('processo-advanced-toggle');
+				const advancedPanel = document.getElementById('processo-advanced-panel');
+				const tableBody = document.getElementById('processo-table-body');
+				const messageElement = document.getElementById('processo-message');
+				const totalElement = document.getElementById('processo-total');
+				const andamentoElement = document.getElementById('processo-andamento');
+				const restritosElement = document.getElementById('processo-restritos');
+				const anexosElement = document.getElementById('processo-anexos-total');
+				const modal = document.getElementById('processo-modal');
+				const modalBody = document.getElementById('processo-modal-body');
+				const modalTitle = document.getElementById('processo-modal-title');
+				const modalClose = document.getElementById('processo-modal-close');
+
+				function fillSelect(selectElement, items, label) {
+					const options = ['<option value="">' + label + '</option>'];
+					items.forEach(function (item) {
+						if (typeof item === 'object' && item !== null) {
+							options.push('<option value="' + escapeHtml(item.value) + '">' + escapeHtml(item.label) + '</option>');
+							return;
+						}
+
+						options.push('<option value="' + escapeHtml(item) + '">' + escapeHtml(item) + '</option>');
+					});
+					selectElement.innerHTML = options.join('');
+				}
+
+				function escapeHtml(value) {
+					return String(value)
+						.replace(/&/g, '&amp;')
+						.replace(/</g, '&lt;')
+						.replace(/>/g, '&gt;')
+						.replace(/"/g, '&quot;')
+						.replace(/'/g, '&#39;');
+				}
+
+				function statusClass(status) {
+					if (status === 'Em andamento') return 'processo-badge processo-badge--andamento';
+					if (status === 'Em analise') return 'processo-badge processo-badge--analise';
+					return 'processo-badge processo-badge--concluido';
+				}
+
+				function sigiloClass(sigilo) {
+					if (sigilo === 'Publico') return 'processo-badge processo-badge--publico';
+					if (sigilo === 'Restrito') return 'processo-badge processo-badge--restrito';
+					return 'processo-badge processo-badge--sigiloso';
+				}
+
+				function showMessage(message) {
+					messageElement.textContent = message;
+					messageElement.style.display = 'block';
+				}
+
+				function hideMessage() {
+					messageElement.textContent = '';
+					messageElement.style.display = 'none';
+				}
+
+				function formatDateTime(value) {
+					if (!value) return 'Nao informado';
+
+					const parsed = new Date(value.replace(' ', 'T'));
+					if (!Number.isNaN(parsed.getTime())) {
+						return parsed.toLocaleString('pt-BR');
+					}
+
+					return value;
+				}
+
+				function readFilters() {
+					return {
+						periodo: periodSelect.value,
+						status: statusSelect.value,
+						sigilo: sigiloSelect.value,
+						numero: numberInput.value.trim(),
+						texto: textInput.value.trim(),
+						conteudoArquivo: fileContentInput.value.trim(),
+						departamento: departmentSelect.value,
+						responsavel: responsibleSelect.value,
+						permissao: permissionSelect.value,
+						anexo: attachmentSelect.value
+					};
+				}
+
+				function buildQueryString() {
+					const filters = readFilters();
+					const params = new URLSearchParams();
+
+					if (filters.periodo) params.set('period', filters.periodo);
+					if (filters.status) params.set('status', filters.status);
+					if (filters.sigilo) params.set('sigilo', filters.sigilo);
+					if (filters.numero) params.set('numero_processo', filters.numero);
+					if (filters.texto) params.set('texto_busca', filters.texto);
+					if (filters.conteudoArquivo) params.set('conteudo_arquivo', filters.conteudoArquivo);
+					if (filters.departamento) params.set('department', filters.departamento);
+					if (filters.responsavel) params.set('responsible', filters.responsavel);
+					if (filters.permissao) params.set('permission', filters.permissao);
+					if (filters.anexo) params.set('has_attachments', filters.anexo);
+
+					return params.toString();
+				}
+
+				function renderSummary(summary) {
+					totalElement.textContent = String(summary.records || 0);
+					andamentoElement.textContent = String(summary.in_progress || 0);
+					restritosElement.textContent = String(summary.restricted || 0);
+					anexosElement.textContent = String(summary.attachments || 0);
+				}
+
+				function normalizeItem(item) {
+					return {
+						id: item.id,
+						processo: item.process_number || 'Nao informado',
+						protocolo: item.protocol_number || 'Sem protocolo',
+						assunto: item.subject || item.description || 'Sem assunto',
+						status: item.status || 'Nao informado',
+						sigilo: item.sigilo || 'Nao informado',
+						departamento: item.department || 'Nao informado',
+						responsavel: item.responsible || 'Nao informado',
+						permissao: item.permission || 'Nao informado',
+						anexos: Number(item.attachments_count || 0),
+						historico: Array.isArray(item.history) ? item.history : [],
+						arquivos: Array.isArray(item.attachments) ? item.attachments : []
+					};
+				}
+
+				function populateFilters(filters) {
+					fillSelect(periodSelect, filters.periods || [], 'Todos os periodos');
+					fillSelect(statusSelect, filters.statuses || [], 'Todos');
+					fillSelect(sigiloSelect, filters.sigilos || [], 'Todos');
+					fillSelect(departmentSelect, filters.departments || [], 'Todos');
+					fillSelect(responsibleSelect, filters.responsibles || [], 'Todos');
+					fillSelect(permissionSelect, filters.permissions || [], 'Todas');
+
+					periodSelect.value = filters.period || '';
+					statusSelect.value = filters.status || '';
+					sigiloSelect.value = filters.sigilo || '';
+					numberInput.value = filters.numero_processo || '';
+					textInput.value = filters.texto_busca || filters.keyword || '';
+					fileContentInput.value = filters.conteudo_arquivo || '';
+					departmentSelect.value = filters.department || '';
+					responsibleSelect.value = filters.responsible || '';
+					permissionSelect.value = filters.permission || '';
+					attachmentSelect.value = filters.has_attachments || '';
+				}
+
+				async function loadProcessos() {
+					showMessage('Carregando processos cadastrados...');
+
+					try {
+						const queryString = buildQueryString();
+						const response = await fetch(endpoint + (queryString ? '?' + queryString : ''), {
+							headers: {
+								'Accept': 'application/json'
+							}
+						});
+
+						if (!response.ok) {
+							throw new Error('Falha ao consultar os processos cadastrados.');
+						}
+
+						const payload = await response.json();
+
+						if (payload.error) {
+							throw new Error(payload.message || 'Nao foi possivel carregar os processos.');
+						}
+
+						dataset = Array.isArray(payload.rows) ? payload.rows.map(normalizeItem) : [];
+						populateFilters(payload.filters || {});
+						renderSummary(payload.summary || {});
+						renderTable(dataset);
+					} catch (error) {
+						dataset = [];
+						renderSummary({});
+						tableBody.innerHTML = '<tr><td colspan="7" class="processo-empty-state">Nao foi possivel carregar os processos cadastrados.</td></tr>';
+						showMessage(error.message || 'Nao foi possivel carregar os processos cadastrados.');
+					}
+				}
+
+				function renderTable(items) {
+					if (!items.length) {
+						tableBody.innerHTML = '<tr><td colspan="7" class="processo-empty-state">Nenhum processo cadastrado foi encontrado para os filtros informados.</td></tr>';
+						showMessage('Nenhum processo cadastrado corresponde aos filtros atuais.');
+						return;
+					}
+
+					hideMessage();
+					tableBody.innerHTML = items.map(function (item) {
+						return [
+							'<tr>',
+							'<td><strong>' + escapeHtml(item.processo) + '</strong><br /><span>' + escapeHtml(item.assunto) + '</span><br /><small>' + escapeHtml(item.protocolo) + '</small></td>',
+							'<td>' + escapeHtml(item.departamento) + '</td>',
+							'<td><span class="' + statusClass(item.status) + '">' + escapeHtml(item.status) + '</span></td>',
+							'<td><span class="' + sigiloClass(item.sigilo) + '">' + escapeHtml(item.sigilo) + '</span></td>',
+							'<td>' + escapeHtml(item.responsavel) + '<br /><small>' + escapeHtml(item.permissao) + '</small></td>',
+							'<td class="text-end">' + escapeHtml(String(item.anexos)) + '</td>',
+							'<td><div class="processo-row-actions"><button class="processo-view-btn js-processo-historico" type="button" data-id="' + item.id + '"><i class="fas fa-history"></i> Historico</button><button class="processo-view-btn js-processo-anexos" type="button" data-id="' + item.id + '"><i class="fas fa-paperclip"></i> Anexos</button></div></td>',
+							'</tr>'
+						].join('');
+					}).join('');
+				}
+
+				function openModal(title, html) {
+					modalTitle.textContent = title;
+					modalBody.innerHTML = html;
+					modal.classList.add('is-open');
+					modal.setAttribute('aria-hidden', 'false');
+				}
+
+				function closeModal() {
+					modal.classList.remove('is-open');
+					modal.setAttribute('aria-hidden', 'true');
+				}
+
+				function findItemById(id) {
+					return dataset.find(function (item) { return item.id === id; });
+				}
+
+				function renderHistorico(item) {
+					if (!item) return;
+
+					if (!item.historico.length) {
+						openModal('Historico do ' + item.processo, '<div class="processo-empty-state">Nenhum historico cadastrado para este processo.</div>');
+						return;
+					}
+
+					openModal(
+						'Historico do ' + item.processo,
+						'<div class="processo-timeline">' + item.historico.map(function (entry) {
+							const detalhe = [entry.note, entry.from_department && ('Origem: ' + entry.from_department), entry.to_department && ('Destino: ' + entry.to_department), entry.responsible && ('Responsavel: ' + entry.responsible)]
+								.filter(Boolean)
+								.join(' | ');
+
+							return '<div class="processo-timeline__item"><strong>' + escapeHtml(entry.event || 'Evento') + '</strong><span>' + escapeHtml(formatDateTime(entry.date)) + '</span><span>' + escapeHtml(detalhe || 'Sem detalhes adicionais.') + '</span></div>';
+						}).join('') + '</div>'
+					);
+				}
+
+				function renderAnexos(item) {
+					if (!item) return;
+
+					if (!item.arquivos.length) {
+						openModal('Anexos do ' + item.processo, '<div class="processo-empty-state">Nenhum anexo cadastrado para este processo.</div>');
+						return;
+					}
+
+					openModal(
+						'Anexos do ' + item.processo,
+						'<div class="processo-attachment-list">' + item.arquivos.map(function (file) {
+							return '<div class="processo-attachment"><div><strong>' + escapeHtml(file.name || 'Arquivo') + '</strong><span>Anexo vinculado ao processo</span></div><a class="processo-view-btn" href="' + escapeHtml(file.download_url || '#') + '" target="_blank" rel="noopener">Visualizar</a></div>';
+						}).join('') + '</div>'
+					);
+				}
+
+				function applyInitialUrlFilters() {
+					const params = new URLSearchParams(window.location.search);
+
+					numberInput.value = params.get('numero_processo') || '';
+					textInput.value = params.get('texto_busca') || params.get('keyword') || '';
+					fileContentInput.value = params.get('conteudo_arquivo') || '';
+
+					if (fileContentInput.value) {
+						advancedPanel.classList.add('is-open');
+					}
+				}
+
+				applyInitialUrlFilters();
+				loadProcessos();
+
+				buttonConsultar.addEventListener('click', loadProcessos);
+				buttonLimpar.addEventListener('click', function () {
+					periodSelect.value = '';
+					statusSelect.value = '';
+					sigiloSelect.value = '';
+					numberInput.value = '';
+					textInput.value = '';
+					fileContentInput.value = '';
+					departmentSelect.value = '';
+					responsibleSelect.value = '';
+					permissionSelect.value = '';
+					attachmentSelect.value = '';
+					hideMessage();
+					loadProcessos();
+				});
+
+				buttonToggle.addEventListener('click', function () {
+					advancedPanel.classList.toggle('is-open');
+				});
+
+				tableBody.addEventListener('click', function (event) {
+					const historicoButton = event.target.closest('.js-processo-historico');
+					const anexosButton = event.target.closest('.js-processo-anexos');
+
+					if (historicoButton) {
+						renderHistorico(findItemById(Number(historicoButton.getAttribute('data-id'))));
+					}
+
+					if (anexosButton) {
+						renderAnexos(findItemById(Number(anexosButton.getAttribute('data-id'))));
+					}
+				});
+
+				modalClose.addEventListener('click', closeModal);
+				modal.addEventListener('click', function (event) {
+					if (event.target === modal) {
+						closeModal();
+					}
+				});
+			})();
+		</script>
+	</body>
+</html>
