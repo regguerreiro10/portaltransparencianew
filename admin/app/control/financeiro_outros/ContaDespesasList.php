@@ -44,7 +44,7 @@ class ContaDespesasList extends TPage
 
         $filterVar = GrupoPessoa::FORNECEDOR;
         $criteria_pessoa_id->add(new TFilter('id', 'in', "(SELECT pessoa_id FROM pessoa_grupo WHERE grupo_pessoa_id = '{$filterVar}')")); 
-        $filterVar = TipoConta::PAGAR;
+        $filterVar = TipoConta::DESPESA;
         $criteria_categoria_id->add(new TFilter('tipo_conta_id', '=', $filterVar)); 
 
         $id = new TEntry('id');
@@ -103,7 +103,7 @@ class ContaDespesasList extends TPage
         $this->datagrid = new BootstrapDatagridWrapper($this->datagrid);
         $this->filter_criteria = new TCriteria;
 
-        $filterVar = TipoConta::PAGAR;
+        $filterVar = TipoConta::DESPESA;
         $this->filter_criteria->add(new TFilter('tipo_conta_id', '=', $filterVar));
 
         $this->datagrid->style = 'width: 100%';

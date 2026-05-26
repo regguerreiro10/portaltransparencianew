@@ -119,21 +119,31 @@
           </menuitem>
         </menu>
       </menuitem>
+       <menuitem label="Cotações">
+          <icon>fas:cash-register fa-fw</icon>
+          <menu>
+            <menuitem label="Cotações Disponiveis compras">
+              <action>CotacaoList#method=onShow</action>
+              <icon>fas:chevron-right fa-fw</icon>
+            </menuitem>
+            <menuitem label="Listagem das Faturas compras">
+              <action>FaturaReceber#method=onShow</action>
+              <icon>fas:chevron-right fa-fw</icon>
+            </menuitem>
+          </menu>
+        </menuitem>
+        <menuitem label="Documentos Fiscais">
+          <icon>fas:file-invoice fa-fw</icon>
+          <menu>
+                <menuitem label="Documentos Fiscais">
+                  <action>NotasSystemUnitList#method=onShow</action>
+                  <icon>fas:chevron-right fa-fw</icon>
+                </menuitem>
+          </menu>
+        </menuitem>
     </menu>
   </menuitem>
-  <menuitem label="Cotações compras">
-    <icon>fas:cash-register fa-fw</icon>
-    <menu>
-      <menuitem label="Cotações Disponiveis compras">
-        <action>CotacaoList#method=onShow</action>
-        <icon>fas:chevron-right fa-fw</icon>
-      </menuitem>
-      <menuitem label="Listagem das Faturas compras">
-        <action>FaturaReceber#method=onShow</action>
-        <icon>fas:chevron-right fa-fw</icon>
-      </menuitem>
-    </menu>
-  </menuitem>
+  
  <!-- <menuitem label="Propostas frotas">
     <icon>fas:file-signature fa-fw</icon>
     <menu>
@@ -147,15 +157,7 @@
       </menuitem>
     </menu>
   </menuitem>-->
-  <menuitem label="Documentos Fiscais">
-    <icon>fas:file-invoice fa-fw</icon>
-    <menu>
-      <menuitem label="Documentos Fiscais">
-        <action>NotasSystemUnitList#method=onShow</action>
-        <icon>fas:chevron-right fa-fw</icon>
-      </menuitem>
-    </menu>
-  </menuitem>
+
   <menuitem label="Gestão de documentos">
     <icon>fas:copy fa-fw</icon>
     <menu>

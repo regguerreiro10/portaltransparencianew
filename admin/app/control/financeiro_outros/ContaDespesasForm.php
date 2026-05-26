@@ -37,7 +37,7 @@ class ContaDespesasForm extends TPage
 
         $filterVar = GrupoPessoa::FORNECEDOR;
         $criteria_pessoa_id->add(new TFilter('id', 'in', "(SELECT pessoa_id FROM pessoa_grupo WHERE grupo_pessoa_id = '{$filterVar}')")); 
-        $filterVar = TipoConta::PAGAR;
+        $filterVar = TipoConta::DESPESA;
         $criteria_categoria_id->add(new TFilter('tipo_conta_id', '=', $filterVar)); 
 
         $id = new TEntry('id');
@@ -145,7 +145,7 @@ class ContaDespesasForm extends TPage
             $data = $this->form->getData(); // get form data as array
             $object->fromArray( (array) $data); // load the object with data
 
-            $object->tipo_conta_id = TipoConta::PAGAR;
+            $object->tipo_conta_id = TipoConta::DESPESA;
 
             $object->store(); // save the object 
 

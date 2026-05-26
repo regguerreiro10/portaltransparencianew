@@ -37,7 +37,7 @@ class ContaReceitasForm extends TPage
 
         $filterVar = GrupoPessoa::CLIENTE;
         $criteria_pessoa_id->add(new TFilter('id', 'in', "(SELECT pessoa_id FROM pessoa_grupo WHERE grupo_pessoa_id = '{$filterVar}')")); 
-        $filterVar = TipoConta::RECEBER;
+        $filterVar = TipoConta::RECEITA;
         $criteria_categoria_id->add(new TFilter('tipo_conta_id', '=', $filterVar)); 
 
         $id = new TEntry('id');
@@ -145,7 +145,7 @@ class ContaReceitasForm extends TPage
             $data = $this->form->getData(); // get form data as array
             $object->fromArray( (array) $data); // load the object with data
 
-            $object->tipo_conta_id = TipoConta::RECEBER;
+            $object->tipo_conta_id = TipoConta::RECEITA;
 
             $object->store(); // save the object 
 

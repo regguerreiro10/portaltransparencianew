@@ -8,7 +8,8 @@ class TipoConta extends TRecord
 
     const RECEBER = '1';
     const PAGAR = '2';
-
+    const RECEITA = '3';
+    const DESPESA = '4';
     
 
     /**
