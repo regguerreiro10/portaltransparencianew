@@ -6,6 +6,8 @@ class ContaDespesasForm extends TPage
 {
     protected BootstrapFormBuilder $form;
     private $formFields = [];
+    private TFieldList $fieldListContaAnexos;
+    private stdClass $defaultContaAnexoItem;
     private static $database = 'minierp';
     private static $activeRecord = 'Conta';
     private static $primaryKey = 'id';
@@ -50,7 +52,30 @@ class ContaDespesasForm extends TPage
         $valor = new TNumeric('valor', '2', ',', '.' );
         $parcela = new TSpinner('parcela');
         $obs = new TText('obs');
-        $arquivo = new TFile('arquivo');
+        $conta_anexo_id = new THidden('conta_anexo_id[]');
+        $conta_anexo_arquivo_atual = new THidden('conta_anexo_arquivo_atual[]');
+        $conta_anexo_tipo_anexo_id = new TDBCombo('conta_anexo_tipo_anexo_id[]', 'minierp', 'TipoAnexo', 'id', '{nome}', 'nome asc');
+        $conta_anexo_arquivo = new TFile('conta_anexo_arquivo[]');
+        $this->fieldListContaAnexos = new TFieldList();
+
+        $this->fieldListContaAnexos->addField(null, $conta_anexo_id, []);
+        $this->fieldListContaAnexos->addField(null, $conta_anexo_arquivo_atual, []);
+        $this->fieldListContaAnexos->addField(new TLabel("Tipo", null, '14px', null), $conta_anexo_tipo_anexo_id, ['width' => '30%']);
+        $this->fieldListContaAnexos->addField(new TLabel("Arquivo", null, '14px', null), $conta_anexo_arquivo, ['width' => '70%']);
+
+        $this->fieldListContaAnexos->width = '100%';
+        $this->fieldListContaAnexos->class .= ' conta-despesas-anexos-list';
+        $this->fieldListContaAnexos->setFieldPrefix('conta_anexo');
+        $this->fieldListContaAnexos->name = 'fieldListContaAnexos';
+        $this->fieldListContaAnexos->setRemoveAction(null, 'fas:times #dd5a43', "Excluir");
+        $this->fieldListContaAnexos->addButtonFunction('contaDespesasAbrirAnexo(this)', 'fas:external-link-alt #0d6efd', 'Abrir anexo');
+
+        $this->defaultContaAnexoItem = new stdClass();
+
+        $this->form->addField($conta_anexo_id);
+        $this->form->addField($conta_anexo_arquivo_atual);
+        $this->form->addField($conta_anexo_tipo_anexo_id);
+        $this->form->addField($conta_anexo_arquivo);
 
         $pessoa_id->addValidation("Pessoa", new TRequiredValidator()); 
         $categoria_id->addValidation("Categoria", new TRequiredValidator()); 
@@ -61,7 +86,7 @@ class ContaDespesasForm extends TPage
         $pessoa_id->enableSearch();
         $categoria_id->enableSearch();
         $forma_pagamento_id->enableSearch();
-        $arquivo->enableFileHandling();
+        $conta_anexo_arquivo->enableFileHandling();
 
         $dt_emissao->setMask('dd/mm/yyyy');
         $dt_pagamento->setMask('dd/mm/yyyy');
@@ -81,7 +106,8 @@ class ContaDespesasForm extends TPage
         $dt_vencimento->setSize(110);
         $categoria_id->setSize('100%');
         $forma_pagamento_id->setSize('100%');
-        $arquivo->setSize('100%');
+        $conta_anexo_tipo_anexo_id->setSize('100%');
+        $conta_anexo_arquivo->setSize('100%');
 
         $row1 = $this->form->addFields([new TLabel("Id:", null, '14px', null, '100%'),$id],[]);
         $row1->layout = ['col-sm-6','col-sm-6'];
@@ -101,7 +127,7 @@ class ContaDespesasForm extends TPage
         $row6 = $this->form->addFields([new TLabel("Obs:", null, '14px', null, '100%'),$obs]);
         $row6->layout = [' col-sm-12'];
 
-        $row7 = $this->form->addFields([new TLabel("Upload de arquivo:", null, '14px', null, '100%'),$arquivo]);
+        $row7 = $this->form->addFields([new TLabel("Anexos:", null, '14px', null, '100%'),$this->fieldListContaAnexos]);
         $row7->layout = [' col-sm-12'];
 
         // create the form actions
@@ -128,6 +154,106 @@ class ContaDespesasForm extends TPage
 
         parent::add($this->form);
 
+        TScript::create("
+            if (!document.getElementById('conta-despesas-anexos-style')) {
+                var style = document.createElement('style');
+                style.id = 'conta-despesas-anexos-style';
+                style.textContent = `
+                    .conta-despesas-anexos-list {
+                        table-layout: auto;
+                        width: 100%;
+                    }
+
+                    .conta-despesas-anexos-list th,
+                    .conta-despesas-anexos-list td {
+                        vertical-align: middle;
+                        white-space: nowrap;
+                    }
+
+                    .conta-despesas-anexos-list td.field {
+                        overflow: hidden;
+                    }
+
+                    .conta-despesas-anexos-list tbody tr td.field:nth-child(3) {
+                        width: 220px;
+                        min-width: 220px;
+                        max-width: 220px;
+                    }
+
+                    .conta-despesas-anexos-list tbody tr td.field:nth-child(4) {
+                        width: auto;
+                        min-width: 420px;
+                        max-width: 520px;
+                    }
+
+                    .conta-despesas-anexos-list tbody tr td:nth-last-child(1),
+                    .conta-despesas-anexos-list tbody tr td:nth-last-child(2) {
+                        width: 42px;
+                        min-width: 42px;
+                        max-width: 42px;
+                        padding-left: 4px;
+                        padding-right: 4px;
+                        text-align: center;
+                        overflow: visible;
+                    }
+
+                    .conta-despesas-anexos-list .div_file {
+                        display: flex !important;
+                        align-items: center;
+                        gap: 8px;
+                        width: 100% !important;
+                        max-width: 100%;
+                        overflow: hidden;
+                    }
+
+                    .conta-despesas-anexos-list .div_file input[type='file'] {
+                        flex: 0 0 170px;
+                        width: 170px;
+                        min-width: 170px;
+                        max-width: 170px;
+                        box-sizing: border-box;
+                    }
+
+                    .conta-despesas-anexos-list .div_file a {
+                        display: block !important;
+                        flex: 1 1 auto;
+                        min-width: 0;
+                        width: auto;
+                        max-width: 100%;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        margin: 0 !important;
+                    }
+
+                    .conta-despesas-anexos-list .btn {
+                        display: inline-flex;
+                        align-items: center;
+                        justify-content: center;
+                        width: 34px;
+                        min-width: 34px;
+                        height: 34px;
+                        padding: 0;
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+        ");
+
+        TScript::create("
+            function contaDespesasAbrirAnexo(button) {
+                var data = tfieldlist_get_row_data(button);
+                var file = data.conta_anexo_arquivo_atual || '';
+
+                if (!file) {
+                    __adianti_message('Aviso', 'Esta linha ainda nao possui anexo salvo.');
+                    return;
+                }
+
+                file = file.replace(/^\\/+/, '');
+                window.open('download.php?file=' + encodeURIComponent(file), '_blank');
+            }
+        ");
     }
 
     public function onSave($param = null) 
@@ -149,20 +275,7 @@ class ContaDespesasForm extends TPage
 
             $object->store(); // save the object 
 
-            $hasAttachmentData = !empty($data->arquivo);
-            if ($hasAttachmentData)
-            {
-                if (empty($data->arquivo))
-                {
-                    throw new Exception('Selecione um arquivo para salvar o anexo.');
-                }
-
-                $anexo = new ContaAnexo();
-                $anexo->conta_id = $object->id;
-                $anexo->store();
-
-                $this->saveFile($anexo, $data, 'arquivo', 'app/anexos');
-            }
+            $this->storeContaAnexos($object);
 
             $loadPageParam = [];
 
@@ -203,6 +316,8 @@ class ContaDespesasForm extends TPage
 
                 $object = new Conta($key); // instantiates the Active Record 
 
+                $this->loadContaAnexos($object);
+
                 $this->form->setData($object); // fill the form 
 
                 TTransaction::close(); // close the transaction 
@@ -226,11 +341,13 @@ class ContaDespesasForm extends TPage
     public function onClear( $param )
     {
         $this->form->clear(true);
+        $this->loadContaAnexos();
 
     }
 
     public function onShow($param = null)
     {
+        $this->loadContaAnexos();
 
     } 
 
@@ -261,6 +378,134 @@ class ContaDespesasForm extends TPage
         {
             new TMessage('error', $e->getMessage());    
         }
+    }
+
+    private function loadContaAnexos(?Conta $conta = null): void
+    {
+        $this->fieldListContaAnexos->addHeader();
+
+        if ($conta && !empty($conta->id))
+        {
+            $criteria = new TCriteria();
+            $criteria->add(new TFilter('conta_id', '=', $conta->id));
+            $criteria->add(new TFilter('deleted_at', 'is', null));
+
+            $items = ContaAnexo::getObjects($criteria);
+
+            if ($items)
+            {
+                foreach ($items as $item)
+                {
+                    $detail = new stdClass();
+                    $detail->conta_anexo_id = $item->id;
+                    $detail->conta_anexo_tipo_anexo_id = $item->tipo_anexo_id;
+                    $detail->conta_anexo_arquivo_atual = $item->arquivo;
+                    $detail->conta_anexo_arquivo = $this->encodeFileValue($item->arquivo, $item->id);
+
+                    $this->fieldListContaAnexos->addDetail($detail);
+                }
+
+                $this->fieldListContaAnexos->addCloneAction(null, 'fas:plus #69aa46', "Adicionar");
+                return;
+            }
+        }
+
+        $this->fieldListContaAnexos->addDetail($this->defaultContaAnexoItem);
+        $this->fieldListContaAnexos->addCloneAction(null, 'fas:plus #69aa46', "Adicionar");
+    }
+
+    private function storeContaAnexos(Conta $conta): void
+    {
+        $rows = $this->fieldListContaAnexos->getPostData();
+        $submittedIds = [];
+
+        foreach ($rows as $row)
+        {
+            $id = !empty($row->id) ? (int) $row->id : null;
+            $tipoAnexoId = !empty($row->tipo_anexo_id) ? (int) $row->tipo_anexo_id : null;
+            $arquivo = $row->arquivo ?? null;
+            $arquivoAtual = $row->arquivo_atual ?? null;
+
+            if (!$id && !$tipoAnexoId && !$arquivo)
+            {
+                continue;
+            }
+
+            if (!$tipoAnexoId)
+            {
+                throw new Exception('Informe o tipo do anexo.');
+            }
+
+            if (!$id && !$arquivo)
+            {
+                throw new Exception('Selecione um arquivo para o novo anexo.');
+            }
+
+            if ($id && !$arquivo && !$arquivoAtual)
+            {
+                throw new Exception('Selecione um arquivo para o anexo.');
+            }
+
+            if ($id)
+            {
+                $anexo = new ContaAnexo($id);
+                $submittedIds[] = $id;
+            }
+            else
+            {
+                $anexo = new ContaAnexo();
+                $anexo->conta_id = $conta->id;
+            }
+
+            $anexo->conta_id = $conta->id;
+            $anexo->tipo_anexo_id = $tipoAnexoId;
+
+            if ($arquivo)
+            {
+                $anexo->store();
+
+                $dataFile = new stdClass();
+                $dataFile->arquivo = $arquivo;
+                $this->saveFile($anexo, $dataFile, 'arquivo', 'app/anexos');
+            }
+            else
+            {
+                $anexo->arquivo = $arquivoAtual;
+                $anexo->store();
+            }
+
+            if (!$id)
+            {
+                $submittedIds[] = (int) $anexo->id;
+            }
+        }
+
+        $criteria = new TCriteria();
+        $criteria->add(new TFilter('conta_id', '=', $conta->id));
+        $existingItems = ContaAnexo::getObjects($criteria);
+
+        foreach ($existingItems as $existing)
+        {
+            if (!in_array((int) $existing->id, $submittedIds, true))
+            {
+                $existing->delete();
+            }
+        }
+    }
+
+    private function encodeFileValue(?string $file, ?int $id = null): ?string
+    {
+        if (empty($file))
+        {
+            return null;
+        }
+
+        return urlencode(json_encode([
+            'fileName' => $file,
+            'idFile' => $id,
+            'newFile' => false,
+            'delFile' => false,
+        ]));
     }
 
 }

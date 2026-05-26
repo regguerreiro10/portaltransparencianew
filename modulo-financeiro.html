@@ -680,14 +680,14 @@
 						<div class="financeiro-shell__top">
 							<h1>Modulo Financeiro</h1>
 							<p>
-								Acompanhe o movimento do ContaCaixa em um painel unico, com acesso rapido as contas a receber,
-								as contas a pagar e ao relatorio consolidado do caixa.
+								Acompanhe o movimento do ContaCaixa em um painel unico, com acesso rapido as receitas,
+								as despesas e ao relatorio consolidado do caixa.
 							</p>
 						</div>
 						<div class="financeiro-toolbar">
 							<span class="financeiro-chip">ContaCaixa integrado</span>
-							<span class="financeiro-chip">Contas a receber</span>
-							<span class="financeiro-chip">Contas a pagar</span>
+							<span class="financeiro-chip">Receitas</span>
+							<span class="financeiro-chip">Despesas</span>
 							<span class="financeiro-chip">Resumo por categoria</span>
 							<span class="financeiro-chip">Consulta por periodo</span>
 							<a class="financeiro-admin-btn" href="admin/index.php?class=ContaCaixaReport">
@@ -778,8 +778,8 @@
 									<label for="financeiro-fluxo">Fluxo financeiro</label>
 									<select id="financeiro-fluxo">
 										<option value="">Todos</option>
-										<option value="receber">Contas a receber</option>
-										<option value="pagar">Contas a pagar</option>
+										<option value="receber">Receitas</option>
+										<option value="pagar">Despesas</option>
 									</select>
 								</div>
 								<div class="financeiro-filter-group">
@@ -818,11 +818,11 @@
 							</div>
 							<div class="financeiro-resume">
 								<div class="financeiro-kpi">
-									<span>Total a receber</span>
+									<span>Total de receitas</span>
 									<strong id="financeiro-total-receber">R$ 0,00</strong>
 								</div>
 								<div class="financeiro-kpi">
-									<span>Total a pagar</span>
+									<span>Total de despesas</span>
 									<strong id="financeiro-total-pagar">R$ 0,00</strong>
 								</div>
 								<div class="financeiro-kpi">
@@ -836,7 +836,7 @@
 										<i class="fas fa-arrow-down"></i>
 										<span>ContaCaixa</span>
 									</div>
-									<h3>Contas a receber</h3>
+									<h3>Receitas</h3>
 									<p>Valores agrupados por categoria com acesso direto a listagem e ao cadastro no modulo financeiro.</p>
 									<strong class="financeiro-card__total" id="financeiro-card-receber-total">R$ 0,00</strong>
 									<div class="financeiro-card__meta">
@@ -849,7 +849,7 @@
 										<i class="fas fa-arrow-up"></i>
 										<span>ContaCaixa</span>
 									</div>
-									<h3>Contas a pagar</h3>
+									<h3>Despesas</h3>
 									<p>Saidas consolidadas por categoria para facilitar a leitura do caixa e o acesso ao detalhamento.</p>
 									<strong class="financeiro-card__total" id="financeiro-card-pagar-total">R$ 0,00</strong>
 									<div class="financeiro-card__meta">
@@ -938,8 +938,8 @@
 		<script>
 			(function () {
 				const endpoints = {
-					receber: 'admin/public_receitas_data.php',
-					pagar: 'admin/public_despesas_empenhadas_data.php'
+					receber: 'admin/public_receitas_data.php?tipo_conta_id=3',
+					pagar: 'admin/public_despesas_empenhadas_data.php?tipo_conta_id=4'
 				};
 				const advancedToggle = document.getElementById('financeiro-advanced-toggle');
 				const advancedPanel = document.getElementById('financeiro-advanced-panel');
@@ -1030,7 +1030,7 @@
 						rows.push({
 							id: item.id || null,
 							flow: 'receber',
-							label: 'Contas a receber',
+							label: 'Receitas',
 							title: item.label,
 							category: item.category || 'Sem categoria',
 							detail: item.client
@@ -1048,7 +1048,7 @@
 						rows.push({
 							id: item.id || null,
 							flow: 'pagar',
-							label: 'Contas a pagar',
+							label: 'Despesas',
 							title: item.label,
 							category: item.category || 'Sem categoria',
 							detail: item.supplier
@@ -1179,7 +1179,9 @@
 				}
 
 				function loadEndpoint(url) {
-					return fetch(url + (buildQuery() ? '?' + buildQuery() : ''), { headers: { Accept: 'application/json' } })
+					const query = buildQuery();
+					const separator = url.indexOf('?') === -1 ? '?' : '&';
+					return fetch(url + (query ? separator + query : ''), { headers: { Accept: 'application/json' } })
 						.then(function (response) {
 							if (!response.ok) {
 								throw new Error('Nao foi possivel carregar os dados do ContaCaixa.');

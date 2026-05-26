@@ -44,7 +44,7 @@ class ContaReceitasList extends TPage
 
         $filterVar = GrupoPessoa::CLIENTE;
         $criteria_pessoa_id->add(new TFilter('id', 'in', "(SELECT pessoa_id FROM pessoa_grupo WHERE grupo_pessoa_id = '{$filterVar}')")); 
-        $filterVar = TipoConta::RECEBER;
+        $filterVar = TipoConta::RECEITA;
         $criteria_categoria_id->add(new TFilter('tipo_conta_id', '=', $filterVar)); 
 
         $id = new TEntry('id');
@@ -104,7 +104,7 @@ class ContaReceitasList extends TPage
         $this->datagrid = new BootstrapDatagridWrapper($this->datagrid);
         $this->filter_criteria = new TCriteria;
 
-        $filterVar = TipoConta::RECEBER;
+        $filterVar = TipoConta::RECEITA;
         $this->filter_criteria->add(new TFilter('tipo_conta_id', '=', $filterVar));
 
         $this->datagrid->style = 'width: 100%';

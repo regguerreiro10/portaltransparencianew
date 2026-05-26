@@ -56,11 +56,11 @@ class ContaDespesasFormView extends TPage
         $text10 = new TTextDisplay($conta->parcela, '', '16px', '');
         $label24 = new TLabel("Obs:", '', '14px', 'B', '100%');
         $text13 = new TTextDisplay($conta->obs, '', '16px', '');
-        $anexos = new BPageContainer();
+        //$anexos = new BPageContainer();
 
-        $anexos->setSize('100%');
-        $anexos->setAction(new TAction(['ContaAnexoHeaderList', 'onShow'], ['conta_id' => $conta->id]));
-        $anexos->setId('b62ec540014569');
+        //$anexos->setSize('100%');
+       // $anexos->setAction(new TAction(['ContaAnexoHeaderList', 'onShow'], ['conta_id' => $conta->id]));
+       // $anexos->setId('b62ec540014569');
 
         $loadingContainer = new TElement('div');
         $loadingContainer->style = 'text-align:center; padding:50px';
@@ -71,7 +71,7 @@ class ContaDespesasFormView extends TPage
         $loadingContainer->add($icon);
         $loadingContainer->add('<br>Carregando');
 
-        $anexos->add($loadingContainer);
+     //   $anexos->add($loadingContainer);
 
 
         $row1 = $this->form->addFields([$label2,$text1],[$label16,$text14],[$label18,$text11]);
@@ -86,8 +86,8 @@ class ContaDespesasFormView extends TPage
         $row4 = $this->form->addFields([$label20,$text9],[$label22,$text10],[$label24,$text13]);
         $row4->layout = [' col-sm-4',' col-sm-4',' col-sm-4'];
 
-        $row5 = $this->form->addFields([$anexos]);
-        $row5->layout = [' col-sm-12'];
+       // $row5 = $this->form->addFields([$anexos]);
+       // $row5->layout = [' col-sm-12'];
 
         parent::setTargetContainer('adianti_right_panel');
 

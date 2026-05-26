@@ -1,7 +1,7 @@
 <?php 
 return[
     'host' => "localhost",
-    'name' => "dbportaltransparencia2",
+    'name' => "dbportaltransparencia-novo",
     'user' => "root",
     'pass' => "",
     'type' => "mysql",
