@@ -24,26 +24,23 @@ class DocumentoPublicoForm extends TPage
         $this->form = new BootstrapFormBuilder(self::$formName);
         $this->form->setFormTitle('Cadastro de documentos publicos');
 
+        $criteria_unit = new TCriteria;
+        $unitId = $this->getSessionUnitId();
+        if ($unitId) {
+            $criteria_unit->add(new TFilter('system_unit_id', '=', $unitId));
+        }
+        $criteria_tipo = new TCriteria;
+        $criteria_tipo->add(new TFilter('tabela_id', '=', 1));
+
         $id = new TEntry('id');
         $numero_documento = new TEntry('numero_documento');
-        $tipo = new TCombo('tipo');
+        $documento_publico_tipo_id = new TDBCombo('documento_publico_tipo_id', self::$database, 'TabelaDeTabela', 'id', '{descricao}', 'descricao asc', $criteria_tipo);
         $data_documento = new TDate('data_documento');
         $assunto = new TEntry('assunto');
-        $nome = new TEntry('nome');
-        $orgao = new TEntry('orgao');
+        $system_users_id = new TDBCombo('system_users_id', self::$database, 'SystemUsers', 'id', '{name}', 'name asc', $criteria_unit);
+        $departamento_unit_id = new TDBCombo('departamento_unit_id', self::$database, 'DepartamentoUnit', 'id', '{name}', 'name asc', $criteria_unit);
         $status = new TCombo('status');
         $anexos = new TMultiFile('anexos');
-
-        $tipo->addItems([
-            'Lei' => 'Lei',
-            'Edital' => 'Edital',
-            'Portaria' => 'Portaria',
-            'Decreto' => 'Decreto',
-            'Ata' => 'Ata',
-            'Resolucao' => 'Resolucao',
-            'Instrucao Normativa' => 'Instrucao Normativa',
-            'Outro' => 'Outro',
-        ]);
 
         $status->addItems([
             'published' => 'Publicado',
@@ -51,27 +48,31 @@ class DocumentoPublicoForm extends TPage
         ]);
 
         $numero_documento->addValidation('Numero do documento', new TRequiredValidator());
-        $tipo->addValidation('Tipo', new TRequiredValidator());
+        $documento_publico_tipo_id->addValidation('Tipo', new TRequiredValidator());
         $data_documento->addValidation('Data', new TRequiredValidator());
         $assunto->addValidation('Assunto', new TRequiredValidator());
-        $nome->addValidation('Nome', new TRequiredValidator());
-        $orgao->addValidation('Orgao', new TRequiredValidator());
+        $system_users_id->addValidation('Nome', new TRequiredValidator());
+        $departamento_unit_id->addValidation('Orgao', new TRequiredValidator());
         $status->addValidation('Status', new TRequiredValidator());
 
         $id->setEditable(false);
         $status->setValue('published');
-        $tipo->enableSearch();
+        $system_users_id->setValue($this->getSessionUserId());
+        $departamento_unit_id->setValue($this->getDefaultDepartamentoUnitId());
+        $documento_publico_tipo_id->enableSearch();
+        $system_users_id->enableSearch();
+        $departamento_unit_id->enableSearch();
         $status->enableSearch();
         $anexos->enableFileHandling();
         $anexos->setAllowedExtensions(['pdf', 'doc', 'docx', 'png', 'jpg', 'jpeg', 'gif', 'webp']);
 
         $id->setSize('100%');
         $numero_documento->setSize('100%');
-        $tipo->setSize('100%');
+        $documento_publico_tipo_id->setSize('100%');
         $data_documento->setSize('100%');
         $assunto->setSize('100%');
-        $nome->setSize('100%');
-        $orgao->setSize('100%');
+        $system_users_id->setSize('100%');
+        $departamento_unit_id->setSize('100%');
         $status->setSize('100%');
         $anexos->setSize('100%');
 
@@ -85,15 +86,15 @@ class DocumentoPublicoForm extends TPage
         $row1->layout = ['col-sm-2', 'col-sm-10'];
 
         $row2 = $this->form->addFields(
-            [new TLabel('Tipo:', '#ff0000', '14px', null, '100%'), $tipo],
+            [new TLabel('Tipo:', '#ff0000', '14px', null, '100%'), $documento_publico_tipo_id],
             [new TLabel('Data:', '#ff0000', '14px', null, '100%'), $data_documento],
             [new TLabel('Status:', '#ff0000', '14px', null, '100%'), $status]
         );
         $row2->layout = ['col-sm-4', 'col-sm-4', 'col-sm-4'];
 
         $row3 = $this->form->addFields(
-            [new TLabel('Nome:', '#ff0000', '14px', null, '100%'), $nome],
-            [new TLabel('Orgao responsavel:', '#ff0000', '14px', null, '100%'), $orgao]
+            [new TLabel('Nome:', '#ff0000', '14px', null, '100%'), $system_users_id],
+            [new TLabel('Orgao responsavel:', '#ff0000', '14px', null, '100%'), $departamento_unit_id]
         );
         $row3->layout = ['col-sm-6', 'col-sm-6'];
 
@@ -137,6 +138,14 @@ class DocumentoPublicoForm extends TPage
             $object = !empty($data->id) ? new DocumentoPublico((int) $data->id) : new DocumentoPublico();
 
             $object->fromArray((array) $data);
+            $object->documento_publico_tipo_id = $data->documento_publico_tipo_id ?? null;
+            $object->system_unit_id = $this->getSessionUnitId();
+            $object->entidade_id = $this->getSessionEntidadeId();
+            $object->system_users_id = $data->system_users_id ?: $this->getSessionUserId();
+            $object->departamento_unit_id = $data->departamento_unit_id ?: $this->getDefaultDepartamentoUnitId();
+            $object->nome = $this->getSystemUserName($object->system_users_id);
+            $object->orgao = $this->getDepartamentoUnitName($object->departamento_unit_id);
+            $object->tipo = $this->getDocumentoPublicoTipoDescricao($object->documento_publico_tipo_id);
             $object->downloads = isset($object->downloads) ? (int) $object->downloads : 0;
 
             $now = date('Y-m-d H:i:s');
@@ -203,6 +212,11 @@ class DocumentoPublicoForm extends TPage
 
     public function onShow($param = null)
     {
+        $data = new stdClass;
+        $data->status = 'published';
+        $data->system_users_id = $this->getSessionUserId();
+        $data->departamento_unit_id = $this->getDefaultDepartamentoUnitId();
+        $this->form->setData($data);
     }
 
     private function updateAttachmentMetadata(array $attachments): void
@@ -220,5 +234,95 @@ class DocumentoPublicoForm extends TPage
 
             $attachment->store();
         }
+    }
+
+    private function getSessionUserId()
+    {
+        return TSession::getValue('userid') ?: TSession::getValue('iduser');
+    }
+
+    private function getDefaultDepartamentoUnitId()
+    {
+        $userId = $this->getSessionUserId();
+        $openedTransaction = false;
+
+        try {
+            if (!TTransaction::get()) {
+                TTransaction::open(self::$database);
+                DocumentoPublicoSchemaHelper::ensureSchema();
+                $openedTransaction = true;
+            }
+        } catch (Exception $e) {
+            TTransaction::open(self::$database);
+            DocumentoPublicoSchemaHelper::ensureSchema();
+            $openedTransaction = true;
+        }
+
+        if ($userId && class_exists('SystemUserDepartamentoUnit')) {
+            $userDepartment = SystemUserDepartamentoUnit::where('system_users_id', '=', $userId)->first();
+            if ($userDepartment) {
+                if ($openedTransaction) {
+                    TTransaction::close();
+                }
+                return $userDepartment->departamento_unit_id;
+            }
+        }
+
+        $unitId = $this->getSessionUnitId();
+        if ($unitId) {
+            $department = DepartamentoUnit::where('system_unit_id', '=', $unitId)->first();
+            if ($department) {
+                if ($openedTransaction) {
+                    TTransaction::close();
+                }
+                return $department->id;
+            }
+        }
+
+        if ($openedTransaction) {
+            TTransaction::close();
+        }
+
+        return null;
+    }
+
+    private function getSystemUserName($userId): string
+    {
+        if (!$userId) {
+            return '';
+        }
+
+        $user = new SystemUsers((int) $userId);
+        return (string) $user->name;
+    }
+
+    private function getSessionUnitId()
+    {
+        return TSession::getValue('idunit') ?: TSession::getValue('userunitid');
+    }
+
+    private function getSessionEntidadeId()
+    {
+        return TSession::getValue('entidade_id') ?: TSession::getValue('entidade');
+    }
+
+    private function getDepartamentoUnitName($departmentId): string
+    {
+        if (!$departmentId) {
+            return '';
+        }
+
+        $department = new DepartamentoUnit((int) $departmentId);
+        return (string) $department->name;
+    }
+
+    private function getDocumentoPublicoTipoDescricao($tipoId): string
+    {
+        if (!$tipoId) {
+            return '';
+        }
+
+        $tipo = new TabelaDeTabela((int) $tipoId);
+        return (string) $tipo->descricao;
     }
 }

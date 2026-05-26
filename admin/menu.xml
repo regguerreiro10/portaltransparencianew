@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <menu>
-  <menuitem label="Manutenção de Frotas">
+  <!--<menuitem label="Manutenção de Frotas">
     <icon>fas:tools fa-fw</icon>
     <menu>
       <menuitem label="Pedido de Frotas">
@@ -69,7 +69,7 @@
         </menu>
       </menuitem>
     </menu>
-  </menuitem>
+  </menuitem>-->
   <menuitem label="Memorandos">
     <icon>fas:envelope-open-text fa-fw</icon>
     <menu>
@@ -134,7 +134,7 @@
       </menuitem>
     </menu>
   </menuitem>
-  <menuitem label="Propostas frotas">
+ <!-- <menuitem label="Propostas frotas">
     <icon>fas:file-signature fa-fw</icon>
     <menu>
       <menuitem label="Propostas Disponiveis Frotas">
@@ -146,13 +146,30 @@
         <icon>fas:chevron-right fa-fw</icon>
       </menuitem>
     </menu>
-  </menuitem>
+  </menuitem>-->
   <menuitem label="Documentos Fiscais">
     <icon>fas:file-invoice fa-fw</icon>
     <menu>
       <menuitem label="Documentos Fiscais">
         <action>NotasSystemUnitList#method=onShow</action>
         <icon>fas:chevron-right fa-fw</icon>
+      </menuitem>
+    </menu>
+  </menuitem>
+  <menuitem label="Gestão de documentos">
+    <icon>fas:copy fa-fw</icon>
+    <menu>
+      <menuitem label="Cadastro">
+        <action>DocumentoPublicoList</action>
+        <icon>fas:align-center fa-fw</icon>
+      </menuitem>
+      <menuitem label="Tabelas">
+        <action>TabelaList#method=onShow</action>
+        <icon>fas:table fa-fw</icon>
+      </menuitem>
+      <menuitem label="Tabela de tabela">
+        <action>TabelaDeTabelaList#method=onShow</action>
+        <icon>fas:list fa-fw</icon>
       </menuitem>
     </menu>
   </menuitem>
@@ -253,13 +270,31 @@
   <menuitem label="Financeiro">
     <icon>fas:money-bill-alt fa-fw</icon>
     <menu>
-      <menuitem label="Contas a pagar">
-        <action>ContaPagarList#method=onShow</action>
-        <icon>fas:chevron-right fa-fw</icon>
+      <menuitem label="Pagar/Receber">
+        <icon>fas:exchange-alt fa-fw</icon>
+        <menu>
+          <menuitem label="Contas a pagar">
+            <action>ContaPagarList#method=onShow</action>
+            <icon>fas:chevron-right fa-fw</icon>
+          </menuitem>
+          <menuitem label="Faturas a Receber">
+            <action>FaturaList#method=onShow</action>
+            <icon>fas:chevron-right fa-fw</icon>
+          </menuitem>
+        </menu>
       </menuitem>
-      <menuitem label="Faturas a Receber">
-        <action>FaturaList#method=onShow</action>
-        <icon>fas:chevron-right fa-fw</icon>
+      <menuitem label="Despesas/Receitas">
+        <icon>fas:balance-scale fa-fw</icon>
+        <menu>
+          <menuitem label="Contas despesas">
+            <action>ContaDespesasList#method=onShow</action>
+            <icon>fas:file-invoice-dollar fa-fw</icon>
+          </menuitem>
+          <menuitem label="Contas receitas">
+            <action>ContaReceitasList#method=onShow</action>
+            <icon>fas:hand-holding-usd fa-fw</icon>
+          </menuitem>
+        </menu>
       </menuitem>
       <menuitem label="Configurações">
         <icon>fas:cogs fa-fw</icon>
@@ -297,7 +332,7 @@
       </menuitem>
     </menu>
   </menuitem>
-  <menuitem label="Veiculos, Aeronaves e/ou Equipamentos">
+ <!-- <menuitem label="Veiculos, Aeronaves e/ou Equipamentos">
     <icon>fas:car fa-fw fa-fw</icon>
     <menu>
       <menuitem label="Dashboard">
@@ -367,8 +402,8 @@
         </menu>
       </menuitem>
     </menu>
-  </menuitem>
-  <menuitem label="Cartões">
+  </menuitem>-->
+  <!--<menuitem label="Cartões">
     <icon>fas:credit-card fa-fw</icon>
     <menu>
       <menuitem label="TAG">
@@ -422,8 +457,8 @@
         </menu>
       </menuitem>
     </menu>
-  </menuitem>
-  <menuitem label="Relatórios e Consultas">
+  </menuitem>-->
+  <!--<menuitem label="Relatórios e Consultas">
     <icon>fas:clipboard fa-fw</icon>
     <menu>
       <menuitem label="Relatórios de frotas">
@@ -439,7 +474,7 @@
         <icon>fas:clipboard-list fa-fw</icon>
       </menuitem>
     </menu>
-  </menuitem>
+  </menuitem>-->
   <menuitem label="_t{Administration}">
     <icon>fas:home fa-fw</icon>
     <menu>

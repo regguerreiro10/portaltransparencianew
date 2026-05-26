@@ -25,6 +25,7 @@ class DocumentoPublicoAnexoList extends TPage
         $nome->setExitAction(new TAction([$this, 'onSearch'], ['static' => '1']));
 
         $this->datagrid = new BootstrapDatagridWrapper(new TDataGrid);
+        $this->datagrid->disableHtmlConversion();
         $this->datagrid->setId(__CLASS__ . '_datagrid');
         $this->datagrid->style = 'width: 100%';
         $this->datagrid->setHeight(320);
@@ -45,6 +46,17 @@ class DocumentoPublicoAnexoList extends TPage
         $column_nome = new TDataGridColumn('nome', 'Nome do anexo', 'left');
         $column_arquivo = new TDataGridColumn('arquivo', 'Arquivo', 'left', '35%');
         $column_ordem = new TDataGridColumn('ordem', 'Ordem', 'center', '10%');
+
+        $column_arquivo->setTransformer(function ($value) {
+            if (empty($value)) {
+                return '';
+            }
+
+            $href = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
+            $label = htmlspecialchars(basename($value), ENT_QUOTES, 'UTF-8');
+
+            return "<a href=\"{$href}\" target=\"_blank\"><i class=\"fas fa-external-link-alt\"></i> {$label}</a>";
+        });
 
         $this->datagrid->addColumn($column_nome);
         $this->datagrid->addColumn($column_arquivo);

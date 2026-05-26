@@ -2,13 +2,18 @@
 
 class DocumentoPublicoList extends TPage
 {
+    private $form;
     private $datagrid;
     private $pageNavigation;
     private $loaded;
+    private $filter_criteria;
+    private $tipoDescricaoMap = [];
+    private $usuarioNomeMap = [];
+    private $departamentoNomeMap = [];
     private static $database = 'minierp';
     private static $activeRecord = 'DocumentoPublico';
     private static $primaryKey = 'id';
-    private static $formName = 'formList_DocumentoPublico';
+    private static $formName = 'form_DocumentoPublicoList';
     private $limit = 20;
 
     public function __construct($param = null)
@@ -19,9 +24,21 @@ class DocumentoPublicoList extends TPage
             $this->adianti_target_container = $param['target_container'];
         }
 
+        $this->form = new BootstrapFormBuilder(self::$formName);
+        $this->form->setFormTitle('Listagem de documentos publicos');
+
+        $unitId = $this->getSessionUnitId();
+        $criteria_unit = new TCriteria;
+        if ($unitId) {
+            $criteria_unit->add(new TFilter('system_unit_id', '=', $unitId));
+        }
+        $criteria_tipo = new TCriteria;
+        $criteria_tipo->add(new TFilter('tabela_id', '=', 1));
+
         $numero_documento = new TEntry('numero_documento');
-        $tipo = new TEntry('tipo');
-        $nome = new TEntry('nome');
+        $documento_publico_tipo_id = new TDBCombo('documento_publico_tipo_id', self::$database, 'TabelaDeTabela', 'id', '{descricao}', 'descricao asc', $criteria_tipo);
+        $system_users_id = new TDBCombo('system_users_id', self::$database, 'SystemUsers', 'id', '{name}', 'name asc', $criteria_unit);
+        $departamento_unit_id = new TDBCombo('departamento_unit_id', self::$database, 'DepartamentoUnit', 'id', '{name}', 'name asc', $criteria_unit);
         $status = new TCombo('status');
         $status->addItems([
             '' => 'Todos',
@@ -30,30 +47,68 @@ class DocumentoPublicoList extends TPage
         ]);
 
         $numero_documento->setSize('100%');
-        $tipo->setSize('100%');
-        $nome->setSize('100%');
+        $documento_publico_tipo_id->setSize('100%');
+        $system_users_id->setSize('100%');
+        $departamento_unit_id->setSize('100%');
         $status->setSize('100%');
+        $documento_publico_tipo_id->enableSearch();
+        $system_users_id->enableSearch();
+        $departamento_unit_id->enableSearch();
+        $status->enableSearch();
 
-        $numero_documento->setExitAction(new TAction([$this, 'onSearch'], ['static' => '1']));
-        $tipo->setExitAction(new TAction([$this, 'onSearch'], ['static' => '1']));
-        $nome->setExitAction(new TAction([$this, 'onSearch'], ['static' => '1']));
-        $status->setChangeAction(new TAction([$this, 'onSearch'], ['static' => '1']));
+        $row1 = $this->form->addFields(
+            [new TLabel('Numero:', null, '14px', null, '100%'), $numero_documento],
+            [new TLabel('Tipo:', null, '14px', null, '100%'), $documento_publico_tipo_id],
+            [new TLabel('Status:', null, '14px', null, '100%'), $status]
+        );
+        $row1->layout = ['col-sm-4', 'col-sm-4', 'col-sm-4'];
+
+        $row2 = $this->form->addFields(
+            [new TLabel('Nome:', null, '14px', null, '100%'), $system_users_id],
+            [new TLabel('Orgao:', null, '14px', null, '100%'), $departamento_unit_id]
+        );
+        $row2->layout = ['col-sm-6', 'col-sm-6'];
+
+        $this->form->setData(TSession::getValue(__CLASS__ . '_filter_data'));
+        TSession::setValue(__CLASS__ . '_filters', null);
+
+        $btnBuscar = $this->form->addAction('Buscar', new TAction([$this, 'onSearch']), 'fas:search #ffffff');
+        $btnBuscar->addStyleClass('btn-primary');
+        $this->form->addAction('Cadastrar', new TAction(['DocumentoPublicoForm', 'onShow']), 'fas:plus #69aa46');
 
         $this->datagrid = new BootstrapDatagridWrapper(new TDataGrid);
         $this->datagrid->setId(__CLASS__ . '_datagrid');
         $this->datagrid->style = 'width: 100%';
         $this->datagrid->setHeight(320);
 
+        $this->filter_criteria = new TCriteria;
+        $this->filter_criteria->add(new TFilter('deleted_at', 'is', null));
+        if ($unitId) {
+            $this->filter_criteria->add(new TFilter('system_unit_id', '=', $unitId));
+        }
+
         $column_id = new TDataGridColumn('id', 'Id', 'center', '60px');
         $column_numero = new TDataGridColumn('numero_documento', 'Numero', 'left', '15%');
-        $column_tipo = new TDataGridColumn('tipo', 'Tipo', 'left', '12%');
-        $column_nome = new TDataGridColumn('nome', 'Nome', 'left');
-        $column_orgao = new TDataGridColumn('orgao', 'Orgao', 'left', '20%');
+        $column_tipo = new TDataGridColumn('documento_publico_tipo_id', 'Tipo', 'left', '12%');
+        $column_nome = new TDataGridColumn('system_users_id', 'Nome', 'left');
+        $column_orgao = new TDataGridColumn('departamento_unit_id', 'Orgao', 'left', '20%');
         $column_data = new TDataGridColumn('data_documento', 'Data', 'center', '12%');
         $column_status = new TDataGridColumn('status', 'Status', 'center', '10%');
 
         $column_data->setTransformer(function ($value) {
             return TDate::convertToMask($value, 'yyyy-mm-dd', 'dd/mm/yyyy');
+        });
+
+        $column_tipo->setTransformer(function ($value, $object) {
+            return $this->tipoDescricaoMap[(int) $value] ?? $object->tipo ?? '';
+        });
+
+        $column_nome->setTransformer(function ($value, $object) {
+            return $this->usuarioNomeMap[(int) $value] ?? $object->nome ?? '';
+        });
+
+        $column_orgao->setTransformer(function ($value, $object) {
+            return $this->departamentoNomeMap[(int) $value] ?? $object->orgao ?? '';
         });
 
         $column_status->setTransformer(function ($value) {
@@ -95,26 +150,8 @@ class DocumentoPublicoList extends TPage
 
         $this->datagrid->createModel();
 
-        $this->datagrid_form = new TForm(self::$formName);
+        $this->datagrid_form = new TForm('datagrid_' . self::$formName);
         $this->datagrid_form->onsubmit = 'return false';
-        $this->datagrid_form->addField($numero_documento);
-        $this->datagrid_form->addField($tipo);
-        $this->datagrid_form->addField($nome);
-        $this->datagrid_form->addField($status);
-        $this->datagrid_form->setData(TSession::getValue(__CLASS__ . '_filter_data'));
-
-        $tr = new TElement('tr');
-        $tr->id = 'datagrid-header-filter-row';
-        $this->datagrid->prependRow($tr);
-        $tr->add(TElement::tag('td', ''));
-        $tr->add(TElement::tag('td', ''));
-        $tr->add(TElement::tag('td', ''));
-        $tr->add(TElement::tag('td', $numero_documento));
-        $tr->add(TElement::tag('td', $tipo));
-        $tr->add(TElement::tag('td', $nome));
-        $tr->add(TElement::tag('td', ''));
-        $tr->add(TElement::tag('td', $status));
-        $tr->add(TElement::tag('td', ''));
 
         $this->pageNavigation = new TPageNavigation;
         $this->pageNavigation->enableCounters();
@@ -126,22 +163,6 @@ class DocumentoPublicoList extends TPage
         $panel->getBody()->class .= ' table-responsive';
         $panel->addFooter($this->pageNavigation);
 
-        $headerActions = new TElement('div');
-        $headerActions->class = ' datagrid-header-actions ';
-        $headLeft = new TElement('div');
-        $headLeft->class = ' datagrid-header-actions-left-actions ';
-        $headRight = new TElement('div');
-        $headRight->class = ' datagrid-header-actions-left-actions ';
-        $headerActions->add($headLeft);
-        $headerActions->add($headRight);
-        $this->datagrid_form->add($headerActions);
-
-        $buttonCadastrar = new TButton('button_cadastrar_documento_publico');
-        $buttonCadastrar->setAction(new TAction(['DocumentoPublicoForm', 'onShow']), 'Cadastrar');
-        $buttonCadastrar->setImage('fas:plus #69aa46');
-        $this->datagrid_form->addField($buttonCadastrar);
-        $headLeft->add($buttonCadastrar);
-
         $panel->add($this->datagrid_form);
         $this->datagrid_form->add($this->datagrid);
 
@@ -150,15 +171,19 @@ class DocumentoPublicoList extends TPage
         if (empty($param['target_container'])) {
             $container->add(TBreadCrumb::create(['Comunicacao', 'Documentos publicos']));
         }
+        $container->add($this->form);
         $container->add($panel);
 
         parent::add($container);
+        $this->onReload($param ?? []);
     }
 
     public function onSearch($param = null)
     {
-        $data = $this->datagrid_form->getData();
+        $data = $this->form->getData();
         TSession::setValue(__CLASS__ . '_filter_data', $data);
+        TSession::setValue(__CLASS__ . '_filters', null);
+        $this->form->setData($data);
         $this->onReload(['offset' => 0, 'first_page' => 1]);
     }
 
@@ -169,28 +194,38 @@ class DocumentoPublicoList extends TPage
             DocumentoPublicoSchemaHelper::ensureSchema();
 
             $repository = new TRepository(self::$activeRecord);
-            $criteria = new TCriteria;
+            $criteria = clone $this->filter_criteria;
+
+            if (empty($param['order'])) {
+                $param['order'] = 'data_documento';
+            }
+
+            if (empty($param['direction'])) {
+                $param['direction'] = 'desc';
+            }
 
             $criteria->setProperties($param);
-            $criteria->setProperty('order', $param['order'] ?? 'data_documento');
-            $criteria->setProperty('direction', $param['direction'] ?? 'desc');
             $criteria->setProperty('limit', $this->limit);
 
             $data = TSession::getValue(__CLASS__ . '_filter_data');
             if (!empty($data->numero_documento)) {
                 $criteria->add(new TFilter('numero_documento', 'like', "%{$data->numero_documento}%"));
             }
-            if (!empty($data->tipo)) {
-                $criteria->add(new TFilter('tipo', 'like', "%{$data->tipo}%"));
+            if (!empty($data->documento_publico_tipo_id)) {
+                $criteria->add(new TFilter('documento_publico_tipo_id', '=', (int) $data->documento_publico_tipo_id));
             }
-            if (!empty($data->nome)) {
-                $criteria->add(new TFilter('nome', 'like', "%{$data->nome}%"));
+            if (!empty($data->system_users_id)) {
+                $criteria->add(new TFilter('system_users_id', '=', (int) $data->system_users_id));
+            }
+            if (!empty($data->departamento_unit_id)) {
+                $criteria->add(new TFilter('departamento_unit_id', '=', (int) $data->departamento_unit_id));
             }
             if (!empty($data->status)) {
                 $criteria->add(new TFilter('status', '=', $data->status));
             }
 
             $objects = $repository->load($criteria, false);
+            $this->loadColumnMaps($objects ?: []);
             $this->datagrid->clear();
 
             if ($objects) {
@@ -245,5 +280,33 @@ class DocumentoPublicoList extends TPage
         if (!$this->loaded) {
             $this->onReload(func_get_arg(0));
         }
+    }
+
+    private function getSessionUnitId()
+    {
+        return TSession::getValue('idunit') ?: TSession::getValue('userunitid');
+    }
+
+    private function loadColumnMaps(array $objects): void
+    {
+        $tipoIds = [];
+        $usuarioIds = [];
+        $departamentoIds = [];
+
+        foreach ($objects as $object) {
+            if (!empty($object->documento_publico_tipo_id)) {
+                $tipoIds[] = (int) $object->documento_publico_tipo_id;
+            }
+            if (!empty($object->system_users_id)) {
+                $usuarioIds[] = (int) $object->system_users_id;
+            }
+            if (!empty($object->departamento_unit_id)) {
+                $departamentoIds[] = (int) $object->departamento_unit_id;
+            }
+        }
+
+        $this->tipoDescricaoMap = $tipoIds ? TabelaDeTabela::where('id', 'in', array_unique($tipoIds))->getIndexedArray('id', 'descricao') : [];
+        $this->usuarioNomeMap = $usuarioIds ? SystemUsers::where('id', 'in', array_unique($usuarioIds))->getIndexedArray('id', 'name') : [];
+        $this->departamentoNomeMap = $departamentoIds ? DepartamentoUnit::where('id', 'in', array_unique($departamentoIds))->getIndexedArray('id', 'name') : [];
     }
 }

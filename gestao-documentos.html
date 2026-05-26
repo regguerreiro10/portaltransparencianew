@@ -672,6 +672,8 @@
 										<tr>
 											<th>Documento</th>
 											<th>Tipo</th>
+											<th>Nome</th>
+											<th>Orgao</th>
 											<th>Data</th>
 											<th>Assunto</th>
 											<th>Anexos por documento</th>
@@ -680,7 +682,7 @@
 									</thead>
 									<tbody id="document-table-body">
 										<tr>
-											<td colspan="6" class="documentos-empty-state">Carregando documentos...</td>
+											<td colspan="8" class="documentos-empty-state">Carregando documentos...</td>
 										</tr>
 									</tbody>
 								</table>
@@ -757,10 +759,24 @@
 				function populateSelect(select, items, label) {
 					const options = ['<option value="">' + label + '</option>'].concat(
 						items.map(function (item) {
-							return '<option value="' + item + '">' + item + '</option>';
+							const value = typeof item === 'object' ? item.value : item;
+							const text = typeof item === 'object' ? item.label : item;
+							return '<option value="' + escapeHtml(value || text || '') + '">' + escapeHtml(text || '') + '</option>';
 						})
 					);
 					select.innerHTML = options.join('');
+				}
+
+				function escapeHtml(value) {
+					return String(value == null ? '' : value).replace(/[&<>"']/g, function (char) {
+						return {
+							'&': '&amp;',
+							'<': '&lt;',
+							'>': '&gt;',
+							'"': '&quot;',
+							"'": '&#039;'
+						}[char];
+					});
 				}
 
 				function buildAttachmentButtons(documentItem) {
@@ -770,9 +786,9 @@
 
 					return '<div class="documentos-attachments">' + documentItem.attachments.map(function (attachment) {
 						return [
-							'<a class="documentos-attachment-btn" href="' + attachment.download_url + '" target="_blank" rel="noopener noreferrer">',
+							'<a class="documentos-attachment-btn" href="' + escapeHtml(attachment.download_url) + '" target="_blank" rel="noopener noreferrer">',
 								'<i class="fas fa-paperclip"></i>',
-								'<span>' + attachment.name + '</span>',
+								'<span>' + escapeHtml(attachment.name) + '</span>',
 							'</a>'
 						].join('');
 					}).join('') + '</div>';
@@ -780,7 +796,7 @@
 
 				function renderTable(rows) {
 					if (!rows.length) {
-						tableBody.innerHTML = '<tr><td colspan="6" class="documentos-empty-state">Nenhum documento encontrado para os filtros selecionados.</td></tr>';
+						tableBody.innerHTML = '<tr><td colspan="8" class="documentos-empty-state">Nenhum documento encontrado para os filtros selecionados.</td></tr>';
 						return;
 					}
 
@@ -788,15 +804,16 @@
 						return [
 							'<tr>',
 								'<td>',
-									'<div class="documentos-doc-title">' + item.name + '</div>',
-									'<div class="documentos-doc-meta">' + item.number + '</div>',
-									'<div class="documentos-small">' + item.office + '</div>',
+									'<div class="documentos-doc-title">' + escapeHtml(item.number) + '</div>',
+									'<div class="documentos-doc-meta">ID ' + escapeHtml(item.id) + '</div>',
 								'</td>',
-								'<td><span class="documentos-tag">' + item.type + '</span></td>',
-								'<td>' + item.date.split('-').reverse().join('/') + '</td>',
-								'<td>' + item.subject + '</td>',
+								'<td><span class="documentos-tag">' + escapeHtml(item.type) + '</span></td>',
+								'<td>' + escapeHtml(item.name) + '</td>',
+								'<td>' + escapeHtml(item.office) + '</td>',
+								'<td>' + escapeHtml(item.date.split('-').reverse().join('/')) + '</td>',
+								'<td>' + escapeHtml(item.subject) + '</td>',
 								'<td>' + buildAttachmentButtons(item) + '</td>',
-								'<td><span class="documentos-downloads">' + item.downloads + '</span></td>',
+								'<td><span class="documentos-downloads">' + escapeHtml(item.downloads) + '</span></td>',
 							'</tr>'
 						].join('');
 					}).join('');
@@ -842,7 +859,7 @@
 				}
 
 				async function loadDocuments(resetFilters) {
-					tableBody.innerHTML = '<tr><td colspan="6" class="documentos-empty-state">Carregando documentos...</td></tr>';
+					tableBody.innerHTML = '<tr><td colspan="8" class="documentos-empty-state">Carregando documentos...</td></tr>';
 
 					if (resetFilters && initialFilters) {
 						applyFilters(initialFilters);
@@ -865,7 +882,7 @@
 						renderTable(payload.rows || []);
 						updateSummary(payload.summary || {});
 					} catch (error) {
-						tableBody.innerHTML = '<tr><td colspan="6" class="documentos-empty-state">Falha ao carregar os documentos.</td></tr>';
+						tableBody.innerHTML = '<tr><td colspan="8" class="documentos-empty-state">Falha ao carregar os documentos.</td></tr>';
 						updateSummary({ records: 0, attachments: 0, downloads: 0 });
 					}
 				}
